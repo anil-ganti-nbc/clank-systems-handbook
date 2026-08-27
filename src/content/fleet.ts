@@ -5,7 +5,19 @@ import type { FleetClank } from "../lib/handbook/schema.ts";
  * Archaeology inventory was current through 2026-08-22; capability matrix
  * is a later evidence snapshot. Live host SHA/backup cells remain UNKNOWN
  * unless a later artefact re-verified them.
+ *
+ * Three SHA columns are the teaching point:
+ *   inventorySha  = fleet.yaml deployed_commit_sha as_of 2026-08-22T22:30:00Z
+ *   repoHead      = GitHub default-branch HEAD as of this teaching capture
+ *   liveDeployedSha = always UNKNOWN until a live host probe
+ * GitHub HEAD is not production. Do not fill liveDeployedSha from repoHead.
  */
+const INVENTORY_AS_OF = "2026-08-22T22:30:00Z";
+const REPO_HEAD_AS_OF = "2026-08-27T18:00Z";
+const LIVE_UNKNOWN = "UNKNOWN";
+const HEAD_NOTE =
+  "GitHub default-branch HEAD captured 2026-08-27 via the GitHub API for this teaching pass. Not a host checkout. Not a running image. Not production.";
+
 export const FLEET: FleetClank[] = [
   {
     id: "watch-clank",
@@ -21,7 +33,15 @@ export const FLEET: FleetClank[] = [
     motherclank: "Observer-tier. QC dispositions ingested. scheduler_trace supported_unconfigured.",
     asOf: "2026-08-26 (QC notes) / 2026-08-22 (inventory)",
     confidence: "verified",
-    staleNote: "Inspected archaeology head e982527 was not necessarily the deployed revision (inventory said f0b327a). Repo HEAD 2026-08-27 d4fda37 (exclude EXPERIMENTAL from Run All) is newer than ee3f34d QC race recovery. Re-probe host SHA before claiming current deploy. Neither commit is production evidence.",
+    staleNote:
+      "Inspected archaeology head e982527 was not necessarily the deployed revision (inventory said f0b327a). Repo HEAD 2026-08-27 9d812ed (Windows frozen-exe project_root) is newer than d4fda37 and ee3f34d. Re-probe host SHA before claiming current deploy. Neither commit is production evidence.",
+    inventorySha: "f0b327acc9970221de230c68d4bc03480d853a46",
+    inventoryAsOf: INVENTORY_AS_OF,
+    inventoryNote: "fleet.yaml instance watch-hetzner-user-timers-01, environment production, image watch-clank:f0b327a. Database path UNKNOWN-host-path-under-anilganti.",
+    repoHead: "9d812ed4e4cb2acdd01b0107cd9558be18e1346a",
+    repoHeadAsOf: REPO_HEAD_AS_OF,
+    repoHeadNote: HEAD_NOTE,
+    liveDeployedSha: LIVE_UNKNOWN,
   },
   {
     id: "smartwatch-clank",
@@ -37,7 +57,16 @@ export const FLEET: FleetClank[] = [
     motherclank: "Observer. INTENTIONALLY_DORMANT must not be inferred — this lane is PERIODIC.",
     asOf: "2026-08-24 (ACT-011) / 2026-08-22 (inventory)",
     confidence: "verified",
-    staleNote: "Capability matrix lists baseline/run-kind unsupported_by_policy for this lane.",
+    staleNote:
+      "Capability matrix lists baseline/run-kind unsupported_by_policy for this lane. Repo HEAD a717977 is a Windows PyInstaller spec — not evidence the restored volume is still on the host.",
+    inventorySha: "d987b66ad3b6f96575ddf1c04f8a76833a837026",
+    inventoryAsOf: INVENTORY_AS_OF,
+    inventoryNote:
+      "Cron lane RUNNING staging at d987b66. A second inventory row (smartwatch-hetzner-soak-timer-retired) shares that SHA and is DISABLED — Law 5 remnant, not a second live authority.",
+    repoHead: "a717977074ac2697155e4eed2c57f0d78231d6b6",
+    repoHeadAsOf: REPO_HEAD_AS_OF,
+    repoHeadNote: HEAD_NOTE,
+    liveDeployedSha: LIVE_UNKNOWN,
   },
   {
     id: "smartphone-clank",
@@ -54,6 +83,13 @@ export const FLEET: FleetClank[] = [
     asOf: "2026-08-22 inventory + 2026-08-22 DEF-M1.5 closure",
     confidence: "verified",
     staleNote: "Production SHA vs repo HEAD disagreement recorded in archaeology; treat deployed SHA as UNKNOWN until re-probed.",
+    inventorySha: "b8b89885e5229cb36dbc47e78cd1ef4fd1b32937",
+    inventoryAsOf: INVENTORY_AS_OF,
+    inventoryNote: "fleet.yaml instance smartphone-hetzner-opt-timers-01, environment production, detached-at-PR3-merge, path /opt/smartphone-clank.",
+    repoHead: "97886d778f97b37aada9abefc6f18c239d602573",
+    repoHeadAsOf: REPO_HEAD_AS_OF,
+    repoHeadNote: HEAD_NOTE,
+    liveDeployedSha: LIVE_UNKNOWN,
   },
   {
     id: "feature-phone-clank",
@@ -69,6 +105,14 @@ export const FLEET: FleetClank[] = [
     motherclank: "Observer. Continuity active (fpc-epoch-2).",
     asOf: "2026-08-24 (ACT-011); repo last push 2026-08-27",
     confidence: "verified",
+    inventorySha: "c749df33c11b1d8283a3fe48026c6bac6ca4da7e",
+    inventoryAsOf: INVENTORY_AS_OF,
+    inventoryNote:
+      "Production instance fpc-hetzner-prod-cron-01 at c749df3 (main-pinned-pre-phase0). Experimental lane fpc-hetzner-experimental-cron-01 is a different SHA 49eab2570fad4b92092c56c8fc5b9a635a5d107d on expansion/itel-lava — do not collapse the two.",
+    repoHead: "43ceb6d51b7c65cc3226a254030e5a124abba355",
+    repoHeadAsOf: REPO_HEAD_AS_OF,
+    repoHeadNote: HEAD_NOTE,
+    liveDeployedSha: LIVE_UNKNOWN,
   },
   {
     id: "tablet-clank",
@@ -84,7 +128,15 @@ export const FLEET: FleetClank[] = [
     motherclank: "Observer only if registered. Policy=RETIRED in expectations seed.",
     asOf: "2026-08-27 (repo QC/Windows launcher) / 2026-08-24 (impact-map Tablet correction)",
     confidence: "verified",
-    staleNote: "Repo HEAD 2026-08-27 (a41d1e7) adds QC archive, Windows launcher, honor_uk_tablets experimental. 2026-08-22 inventory still said disabled/INTENTIONALLY_DORMANT. Live host membership UNKNOWN — do not treat HEAD as production.",
+    staleNote:
+      "Repo HEAD 2026-08-27 (4611307 Windows PyInstaller spec) is newer than a41d1e7 QC archive. 2026-08-22 inventory still said disabled/INTENTIONALLY_DORMANT at 1d3509b. Live host membership UNKNOWN — do not treat HEAD as production.",
+    inventorySha: "1d3509b3cd042b0b55701d072512f5255f62a7df",
+    inventoryAsOf: INVENTORY_AS_OF,
+    inventoryNote: "fleet.yaml instance tablet-hetzner-idle-checkout-01, deployment_state DISABLED, environment experimental. Soak unit installed disabled+inactive.",
+    repoHead: "46113079f520e79d54413ef4e2df8d83e9245c54",
+    repoHeadAsOf: REPO_HEAD_AS_OF,
+    repoHeadNote: HEAD_NOTE,
+    liveDeployedSha: LIVE_UNKNOWN,
   },
   {
     id: "korean-tech-wire",
@@ -101,6 +153,13 @@ export const FLEET: FleetClank[] = [
     asOf: "2026-08-22 inventory + Law 8 reference; repo last push 2026-08-27",
     confidence: "verified",
     staleNote: "Deployed SHA vs main: do not assume convergence without host evidence.",
+    inventorySha: "262c36dc7eae2d9e8ba3fdfeabc3a002e5cb5577",
+    inventoryAsOf: INVENTORY_AS_OF,
+    inventoryNote: "fleet.yaml RUNNING staging at 262c36d. SK hynix HOST-BLOCKED is a source gap, not a healthy zero.",
+    repoHead: "cc06a1a0ca8cfefc80804614aca22b31669a09c3",
+    repoHeadAsOf: REPO_HEAD_AS_OF,
+    repoHeadNote: HEAD_NOTE,
+    liveDeployedSha: LIVE_UNKNOWN,
   },
   {
     id: "chinese-tech-wire",
@@ -117,6 +176,13 @@ export const FLEET: FleetClank[] = [
     asOf: "2026-08-25 (ONBOARDING.md cross-check commit); repo last push 2026-08-27",
     confidence: "verified",
     staleNote: "Scheduler authority step scored LIVE_EVIDENCE_REQUIRED — do not claim a verified live cron without host probe.",
+    inventorySha: "c1b3a415a07bc5b58f4237268aff03ee2fb82ff1",
+    inventoryAsOf: INVENTORY_AS_OF,
+    inventoryNote: "fleet.yaml RUNNING staging at c1b3a41. Refresh-path guess is a Law 6 specimen, not a live SHA.",
+    repoHead: "1a47220c69e6bb91f2899a0508508c42254c9d5b",
+    repoHeadAsOf: REPO_HEAD_AS_OF,
+    repoHeadNote: HEAD_NOTE,
+    liveDeployedSha: LIVE_UNKNOWN,
   },
   {
     id: "oem-radar",
@@ -132,6 +198,14 @@ export const FLEET: FleetClank[] = [
     motherclank: "Observer. Reference for snapshots/outbox, not a shared library.",
     asOf: "2026-08-22 inventory + 2026-08-24 continuity (CONTIGUOUS)",
     confidence: "verified",
+    inventorySha: "410313b64b41e430e408c344382720c2e8a04f47",
+    inventoryAsOf: INVENTORY_AS_OF,
+    inventoryNote:
+      "Staging instance oem-radar-hetzner-staging-cron-01 at 410313b (BANKAI merge). Experimental BANKAI soak timer is a different SHA 31fc46be895664865ab23bcc6b10a370559b766a — isolated lane, not the staging authority.",
+    repoHead: "d720e0635894ddcc9a39f116e2aa4a1768090042",
+    repoHeadAsOf: REPO_HEAD_AS_OF,
+    repoHeadNote: HEAD_NOTE,
+    liveDeployedSha: LIVE_UNKNOWN,
   },
   {
     id: "free-game-tracker",
@@ -148,6 +222,13 @@ export const FLEET: FleetClank[] = [
     asOf: "2026-08-21 last push / 2026-08-24 capability matrix",
     confidence: "verified",
     staleNote: "Pushed_at 2026-08-21 — older than several other Clanks. Re-verify before claiming current production behaviour.",
+    inventorySha: "cec034695d52affc284701fe93966dd7c59c5bcd",
+    inventoryAsOf: INVENTORY_AS_OF,
+    inventoryNote: "fleet.yaml RUNNING production at cec0346. Checkout newsroom.db is documented STALE; container volume is the production claim — still not a 2026-08-27 live probe.",
+    repoHead: "45b47a5af3680c800ebf535d0764afcb7d263ce6",
+    repoHeadAsOf: REPO_HEAD_AS_OF,
+    repoHeadNote: HEAD_NOTE,
+    liveDeployedSha: LIVE_UNKNOWN,
   },
   {
     id: "semiconductor-intelligence",
@@ -163,7 +244,14 @@ export const FLEET: FleetClank[] = [
     motherclank: "Observer. Distinct subject model (claims), not article events.",
     asOf: "2026-08-25 SI dogfood / 2026-08-22 inventory",
     confidence: "verified",
-    staleNote: "Last push 2026-08-22. Live scheduler path requires host corroboration.",
+    staleNote: "Last inventory SHA 9dbf06d. Repo HEAD 8a356a3 adds human QC for Radar candidates — not host evidence.",
+    inventorySha: "9dbf06d11cff23961fb11f240b2f2ea94c728777",
+    inventoryAsOf: INVENTORY_AS_OF,
+    inventoryNote: "fleet.yaml RUNNING staging at 9dbf06d. OperationalScheduler vs hourly cron residual is a Law 5 question for the host probe.",
+    repoHead: "8a356a3bc87bea0f0d95e66c072c8e8a629156d5",
+    repoHeadAsOf: REPO_HEAD_AS_OF,
+    repoHeadNote: HEAD_NOTE,
+    liveDeployedSha: LIVE_UNKNOWN,
   },
   {
     id: "motherclank",
@@ -179,6 +267,14 @@ export const FLEET: FleetClank[] = [
     motherclank: "This row is the supervisor.",
     asOf: "2026-08-26 closeout inputs / 2026-08-26 last push",
     confidence: "verified",
+    inventorySha: "UNKNOWN",
+    inventoryAsOf: INVENTORY_AS_OF,
+    inventoryNote:
+      "fleet.yaml deployment_facts rows at the end of the inventory leave instance_id, host, and deployed_commit_sha UNKNOWN — likely Diagnostic/Motherclank themselves. Do not invent a SHA for the camera.",
+    repoHead: "7cee2f89c4e84fdad3eb337a7eb4cbcc5dce8e04",
+    repoHeadAsOf: REPO_HEAD_AS_OF,
+    repoHeadNote: HEAD_NOTE,
+    liveDeployedSha: LIVE_UNKNOWN,
   },
   {
     id: "diagnostic-clank",
@@ -195,5 +291,14 @@ export const FLEET: FleetClank[] = [
     asOf: "2026-08-26",
     confidence: "verified",
     staleNote: "README status banner may lag the adapter work on the 2026-08 branch.",
+    inventorySha: "UNKNOWN",
+    inventoryAsOf: INVENTORY_AS_OF,
+    inventoryNote:
+      "fleet.yaml lists diagnostic-clank as SUPPORTING_SYSTEM with deployment_state UNKNOWN. The 2026-08-22 inventory does not pin a Diagnostic deploy SHA.",
+    repoHead: "3667af02c8dd33503ce75461ec2974d42f2f1d4c",
+    repoHeadAsOf: REPO_HEAD_AS_OF,
+    repoHeadNote:
+      "HEAD of default branch diagnostic-clank-2026-08 (not main). 3667af0 is the Tablet observer adapter. Control-plane commit, not Tablet production membership.",
+    liveDeployedSha: LIVE_UNKNOWN,
   },
 ];

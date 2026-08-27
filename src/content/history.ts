@@ -17,6 +17,18 @@ export const PHASES: HistoryPhase[] = [
     fleetSupervision: "None. Local dashboards and operator memory.",
     whyThisLayer:
       "The newsroom needed sensors for OEM hardware, free games, watches, phones, and regional tech wires. Independent Python collectors were the fastest way to start. Unification was not yet a problem because there was not yet a fleet.",
+    before:
+      "No hosted Git identity for the fleet. No collectors. The newsroom had no automated sensors.",
+    failurePressure:
+      "Editors needed OEM, free-game, watch, phone, and regional-wire coverage that a human refresh could not keep up with. Unification was hoped for (unified-clank-platform) before it was earned.",
+    newAbstraction:
+      "One independent Python collector per domain, each with its own SQLite notebook. clank-architecture is a governance notebook, not a runtime.",
+    newRule:
+      "None fleet-wide. Each Clank owns its collection, storage, and optional Discord path. There is no supervisor and no shared database.",
+    resultingArchitecture:
+      "A bag of sensors. Account anil-ganti-nbc appears 2026-08-03. OEM Radar, Free Game Tracker, unified-clank-platform, and clank-architecture land 4 August; consumer Clanks and wires follow 8–10 August.",
+    unresolvedLimitations:
+      "No fleet inventory, no shared health language, no host identity, no single clock. A collector that only runs when a laptop is open is not yet a newsroom sensor.",
     confidence: "verified",
   },
   {
@@ -35,6 +47,18 @@ export const PHASES: HistoryPhase[] = [
     fleetSupervision: "Still none. Field-test launchers become an acceptance gate.",
     whyThisLayer:
       "A collector that only runs when the laptop is open cannot be a newsroom sensor. Portability created the first real deployment identity problems: which SHA is running, which database is production, which scheduler is live.",
+    before:
+      "Collectors ran from a workstation. Local checkout databases were the only copies. Scheduling was a laptop habit (Windows Task Scheduler, one-shot CLIs).",
+    failurePressure:
+      "A newsroom sensor that sleeps when the laptop lid closes is not a sensor. Docker images, NAS lore, and a Hetzner host appear so collection can outlive the operator's session.",
+    newAbstraction:
+      "Container images, named volumes, host-specific working directories, backup/restore scripts in some repos. Each Clank becomes a separate runtime with local state.",
+    newRule:
+      "None codified yet. Dual-host delivery (Hetzner webhook plus leftover Windows tasks) becomes a real risk rather than a written law.",
+    resultingArchitecture:
+      "Same parsers, new addresses. Data lives in container volumes and host paths. Local checkout databases start to go stale. Duplicate scheduler authorities start to appear.",
+    unresolvedLimitations:
+      "Which SHA is running, which database is production, and which scheduler is live are now real questions. Backup scripts existing in git is not proof they are scheduled. Human review still flags this phase for possible over-read of 'portability' as a completed migration.",
     confidence: "verified",
   },
   {
@@ -53,6 +77,18 @@ export const PHASES: HistoryPhase[] = [
     fleetSupervision: "Diagnostic Clank inventories the fleet; it does not supervise runtime.",
     whyThisLayer:
       "Coverage pressure produced the failure classes the later laws exist to name: FIRST_SEEN ≠ new, HTTP 200 ≠ useful, first fire ≠ cadence, green tests ≠ mission recall.",
+    before:
+      "Few sources per Clank. Failure was still anecdotal. Membership of the fleet was a folder listing and operator memory.",
+    failurePressure:
+      "Source sets explode. False novelty, empty catalogues, 403s, dual schedulers, and 'green build ≠ owner can launch' show up as named failures. A directory sweep will later omit Tablet (L-FLEET-001).",
+    newAbstraction:
+      "Diagnostic Clank (17 Aug) as a read-only control-plane prototype: inventory and adapters, not a collector and not a supervisor.",
+    newRule:
+      "None fleet-wide yet. Per-Clank scars accumulate (BANKAI soaks, Watch FIRST_SEEN, SK hynix host-block) without a shared law text.",
+    resultingArchitecture:
+      "More sources, same SQLite notebooks. Diagnostic Clank inventories the fleet; it does not supervise runtime. Tablet exists as a repo and can still vanish from a folder listing.",
+    unresolvedLimitations:
+      "FIRST_SEEN ≠ new, HTTP 200 ≠ useful, first fire ≠ cadence, green tests ≠ recall. No camera, no freeze, no promotion record requirement.",
     confidence: "verified",
   },
   {
@@ -71,6 +107,18 @@ export const PHASES: HistoryPhase[] = [
     fleetSupervision: "Still missing — laws without a harvester.",
     whyThisLayer:
       "The audit showed the same lies in ten dialects. Writing them down as testable invariants was cheaper than rewriting every collector.",
+    before:
+      "Same failure classes in ten dialects. Promotion still possible. Inventory and governance lived in the same informal operator memory.",
+    failurePressure:
+      "Hostile-audit specimens (FGT fresh-DB burst, Timex FIRST_SEEN, dual scheduler lanes, HTTP 200+0, dashboard lock bypass) made another silent promotion too expensive.",
+    newAbstraction:
+      "Fleet Laws as named, testable invariants. Governance assigned to clank-architecture; inventory assigned to diagnostic-clank. Hermetic conformance suite (test_fleet_laws.py).",
+    newRule:
+      "Eight binding laws (d046d54, 2026-08-21). Law 9 deferred — default branch trailing production needs inventory machinery that did not exist at codification. Promotion frozen (NO_PROMOTION_POLICY.md).",
+    resultingArchitecture:
+      "A written constitution without a camera. Collectors unchanged. Events, health, novelty, and delivery named as different planes. Still no fleet-wide harvester.",
+    unresolvedLimitations:
+      "Laws without a harvester can be ignored on the host. Live SHA, scheduler authority, and backup state remain unenforced until someone can read them without guessing.",
     confidence: "verified",
   },
   {
@@ -89,6 +137,18 @@ export const PHASES: HistoryPhase[] = [
     fleetSupervision: "First fleet-wide single view. M5 mutation is explicitly forbidden.",
     whyThisLayer:
       "Local dashboards could not be trusted: timers that fired without starting, 200-with-zero, dual schedulers, soaks with no promotion record. A camera was needed that could not also hold the keys.",
+    before:
+      "Fleet Laws on paper. Local dashboards and operator memory as the only fleet picture. Diagnostic Clank owns adapters but nothing harvests them on a clock.",
+    failurePressure:
+      "Timers that fired without starting, HTTP 200 with zero items, dual schedulers, soaks with no promotion record. A supervisor that can write would be a second Clank with blast radius over the whole fleet.",
+    newAbstraction:
+      "Motherclank (ADR-0002, b341b0f, 2026-08-22): a separate read-only supervisory layer. Adapters stay on Diagnostic Clank. Snapshots are derived JSONL + Markdown. Clank SQLite stays authoritative.",
+    newRule:
+      "Observe, synthesize, detect, recommend, learn. Never remediate in M0–M4. One fixed-clock user timer. Dual timers per lane would violate Law 5. M5 mutation forbidden until a future ADR.",
+    resultingArchitecture:
+      "Clanks write notebooks. Diagnostic Clank translates. Motherclank photocopies. Operators read proposals. Rollback = disable timer and delete var/.",
+    unresolvedLimitations:
+      "Cannot see what adapters cannot read. Live timer enablement UNKNOWN. Host var/ batches for 22–23 Aug were not recovered. Repo HEAD 7cee2f8 is not proof the harvest is healthy.",
     confidence: "verified",
   },
   {
@@ -107,6 +167,18 @@ export const PHASES: HistoryPhase[] = [
     fleetSupervision: "Motherclank could not yet name MATERIALIZATION_GAP; STALE_RUN inference was the wrong shape.",
     whyThisLayer:
       "These two days produced continuity, survivability, liveness, and runtime-state-separation ADRs. The architecture after 24 August is a scar map.",
+    before:
+      "Fired timer meant ran. Empty volume looked like a crash. A restore looked like a rewind of the world. Motherclank could not yet name MATERIALIZATION_GAP.",
+    failurePressure:
+      "Two incident families in one window: stash -u recreated root-owned logs/ and collectors never started (~36h), then a destructive operator error deleted live volumes. Smartwatch restored with a gap; feature-phone began a new epoch.",
+    newAbstraction:
+      "MATERIALIZATION_GAP as an execution-plane fact. RESTORED_HISTORY + GAP_KNOWN versus NEW_EPOCH. Continuity seeds rather than reconstructed syslog.",
+    newRule:
+      "Organic recovery narratives are forbidden. Invocation is not execution. Cron elapsed during the gap; that is not collector regression. UNKNOWN, not zero, when QC is unmeasurable.",
+    resultingArchitecture:
+      "A scar map that the next day's ADRs will name. Motherclank continuity seeds (INC-20260822-23, INC-20260823) exist in git. Host syslog and var/ batches from the window do not.",
+    unresolvedLimitations:
+      "Syslog/journal for 22–23 Aug unavailable from current artefacts. Motherclank live var/ batches BLOCKED. FPC pre-epoch-2 state irrecoverable. Do not reconstruct those as fact.",
     confidence: "verified",
   },
   {
@@ -125,6 +197,18 @@ export const PHASES: HistoryPhase[] = [
     fleetSupervision: "Observer contract v0.2. Capability is a six-state vocabulary, not a boolean.",
     whyThisLayer:
       "Without these names, a restored database looks like a rewind, an empty new epoch looks like a market crash, and a fired timer looks like a healthy collector.",
+    before:
+      "Collapsed words: fired=ran, restore=rewind, empty=crash, backup-script-exists=survivable, INTENTIONALLY_DORMANT confused with MISSING_RUN.",
+    failurePressure:
+      "22–23 August destroyed those collapses. ACT-011 had to prove a restore, not a rumour. Tablet's stale soak unit had to yield dormant, not missing.",
+    newAbstraction:
+      "ADR-0006 epochs, 0007 destructive safety, 0008 six-stage execution liveness, 0009 runtime state vs source tree. Golden incidents GIC-01–25. Capability as a six-state vocabulary, not a boolean.",
+    newRule:
+      "Absence of evidence is UNKNOWN, never NO. INTENTIONALLY_DORMANT is not MISSING_RUN. A backup never restored is a rumour. Durable off-host copies remain OPEN — ACT-011 scratch is not Layer C.",
+    resultingArchitecture:
+      "Append-only ContinuityEvent registry. Derived claims carry epoch identity. Observer contract v0.2. Two lanes have restore-verified recovery points on temporary_scratch only.",
+    unresolvedLimitations:
+      "Whether scratch files still exist today: UNKNOWN. Layer C off-host backup: DESIGNED ONLY. Scheduler-trace: supported_unconfigured fleet-wide.",
     confidence: "verified",
   },
   {
@@ -143,6 +227,18 @@ export const PHASES: HistoryPhase[] = [
     fleetSupervision: "v0.3 frozen 2026-08-25: no speculative core redesign until a real participant proves the contract insufficient.",
     whyThisLayer:
       "Onboarding is how the architecture is tested. Dogfooding the playbook on CTW caught a guessed refresh path that review could not see.",
+    before:
+      "Observer contract v0.2 untested on a real new Clank. Catalogue-pass could still be inferred from output size. Motherclank risked growing Clank-name conditionals.",
+    failurePressure:
+      "Watch QC flood: validation runs counted as catalogue passes (639 / 580 / 41). CTW and Semiconductor Intelligence needed to join as observers without rewriting Motherclank.",
+    newAbstraction:
+      "Typed EvidenceEnvelope (ADR-0014). Participant-native confidence preserved verbatim. ONBOARDING.md scorecard. Catalogue-pass is an invocation fact (max_items), never inferred from how many items came back.",
+    newRule:
+      "v0.3 frozen 2026-08-25: no speculative core redesign until a real participant proves the contract insufficient. Guessed refresh paths are forbidden (7f977d6 after CTW dogfood).",
+    resultingArchitecture:
+      "Watch QC live. CTW and SI onboarded as observers. FGT registry filename drift caught during the same dogfood. Architecture freeze is a test, not a claim of health.",
+    unresolvedLimitations:
+      "Scheduler-trace remains supported_unconfigured. CTW live cron scored LIVE_EVIDENCE_REQUIRED. Survivability still unproven except two recovery points on scratch.",
     confidence: "verified",
   },
   {
@@ -161,6 +257,18 @@ export const PHASES: HistoryPhase[] = [
     fleetSupervision: "Motherclank M0–M4. M5 still requires a future ADR.",
     whyThisLayer:
       "This is not a finished platform. It is a fleet that can admit UNKNOWN, that remembers some of its scars as fixtures, and that still cannot survive another volume deletion on most lanes.",
+    before:
+      "Architecture still moving. Operator could not yet explain the process without collapsing it into 'I pasted one AI output into another.' Live host cells still un-probed.",
+    failurePressure:
+      "Repo HEADs keep moving (Windows launchers, QC writers, flock repairs) while the last fleet inventory stays 2026-08-22. Teaching GitHub=production would be a new Law 6 violation.",
+    newAbstraction:
+      "Clank Systems Handbook as historical evidence, not SRS. DAU retains mastery/SRS. Practice-shaped labs here do not write mastery. Fleet teaching snapshot shows inventory SHA vs repo HEAD vs live UNKNOWN as three columns.",
+    newRule:
+      "Promotion remains frozen. UNKNOWN stays UNKNOWN. GitHub HEAD is not production. ACT-011 scratch is not Layer C. This Handbook must not fold into DAU.",
+    resultingArchitecture:
+      "A heterogeneous, law-bound, observer-supervised fleet plus a literacy app. M0–M4 implemented in git. M5 still requires a future ADR.",
+    unresolvedLimitations:
+      "Every live Law 6 cell remains UNKNOWN. Durable off-host backups OPEN. Watch production DB path UNKNOWN. Whether 06:15 UTC Motherclank timer is enabled: UNKNOWN. cpu-memory SME sign-off on DAU Worlds is a separate repo's pending item, not a fleet fact.",
     confidence: "verified",
   },
 ];

@@ -190,7 +190,7 @@ export const EXPLAIN_PROMPTS: ExplainPrompt[] = [
     id: "ex-ai",
     prompt: "How did AI agents participate in the development process? What was your role?",
     modelAnswer:
-      "I used multiple AI agents in a staged engineering workflow. One would implement (ox-alpha drafting ADRs 0006–0014; Claude co-authoring collector repairs), another would audit or review (AGENT_RULES.md: no silent conflict resolution, UNKNOWN is not healthy, no auto-promote), and I acted as the operator and decision-maker. I carried requirements between them, checked evidence, decided whether fixes matched the actual mission, froze promotion, executed ACT-011, and directed testing and deployment. I did not become a programmer; I did not collapse the process into paste.",
+      "I used multiple AI agents in a staged engineering workflow. One would implement (ox-alpha drafting ADRs 0006–0014; Claude co-authoring collector repairs), another would audit or review (AGENT_RULES.md: no silent conflict resolution, UNKNOWN is not healthy, no auto-promote), others researched (archaeology/impact maps) or generated tests (Fleet Laws suite, G1–G8), and I acted as the operator and decision-maker. I carried requirements between them, checked evidence, decided whether fixes matched the actual mission, froze promotion, executed ACT-011, and directed testing and deployment. I did not become a programmer; I did not collapse the process into paste.",
     checklist: [
       "Named implementation vs reviewer vs operator",
       "Did not overstate coding",
@@ -198,5 +198,69 @@ export const EXPLAIN_PROMPTS: ExplainPrompt[] = [
       "Tied to a real artefact (ADR, dogfood, ACT-011)",
     ],
     conceptIds: ["implementation-agent", "reviewer-agent", "operator-role"],
+  },
+  {
+    id: "ex-mother-stages",
+    prompt: "Walk Motherclank's stages. What does each stage do, and what does the whole camera still not prove?",
+    modelAnswer:
+      "M0 harvests Diagnostic adapters into hash-chained JSONL (live timer enablement UNKNOWN). M1 synthesizes UNKNOWN-honest health; DEF-M1.5 never-upgrade is the self-dogfood. M2 detects named gaps including MATERIALIZATION_GAP; host var/ for 22–23 Aug was not recovered. M3 recommends into an inbox (ADR-0003), never remediates. M4 may ingest QC dispositions read-only. M5 is forbidden. The camera does not prove collectors are running, that 7cee2f8 is deployed, or that a backup exists. Clank SQLite stays authoritative.",
+    checklist: [
+      "Named M0–M4 without inventing M5",
+      "Read-only / no remediation",
+      "Called out at least one UNKNOWN (timer, var/, live SHA)",
+      "Did not treat repo HEAD as healthy harvest",
+    ],
+    conceptIds: ["motherclank", "execution-liveness", "derived-state"],
+  },
+  {
+    id: "ex-diagnostic-vs-mother",
+    prompt: "How is Diagnostic Clank different from Motherclank? Why did the fleet need both?",
+    modelAnswer:
+      "Diagnostic Clank is the membership book and the translation plane: fleet.yaml plus adapters, DiagnosticBench, Agent Inbox. Motherclank is the reader of that language on a clock — a camera that cannot hold the keys. A directory sweep omitted Tablet (L-FLEET-001), so membership had to become a registry. Motherclank growing Clank-name conditionals would eat the architecture. The 3667af0 Tablet adapter is a control-plane commit, not Tablet production. Live Diagnostic deploy SHA is UNKNOWN.",
+    checklist: [
+      "Inventory/adapters vs harvest",
+      "Not the same system",
+      "Registry not filesystem",
+      "Did not treat Tablet adapter as production",
+    ],
+    conceptIds: ["diagnostic-clank", "motherclank", "source-adapter"],
+  },
+  {
+    id: "ex-ai-roles",
+    prompt: "Name the AI roles that actually existed, and the decisions that stayed with the human.",
+    modelAnswer:
+      "Implementation agents drafted code and ADRs. Reviewer/auditor agents checked evidence under AGENT_RULES.md. Research agents produced archaeology and impact maps and were allowed to say BLOCKED. Test-generator agents encoded scars as fixtures. Architecture-critic artefacts (v0.3 freeze, deferred Law 9, rejected guessed refresh path) sent drawings back. The operator defined goals, carried requirements across sessions, rejected bad abstractions, requested evidence, compared outputs, chose acceptance criteria, directed deploy, decided when the mission succeeded, and decided when to stop.",
+    checklist: [
+      "At least three agent roles named",
+      "Operator decisions listed, not 'I typed the code'",
+      "Neither paste nor hand-coded extreme",
+    ],
+    conceptIds: ["implementation-agent", "reviewer-agent", "research-agent", "test-generator", "architecture-critic", "operator-role"],
+  },
+  {
+    id: "ex-three-shas",
+    prompt: "A Clank card shows an inventory SHA, a repo HEAD, and live UNKNOWN. What is each, and why must you not pick one?",
+    modelAnswer:
+      "Inventory SHA is what fleet.yaml recorded as deployed_commit_sha on 2026-08-22T22:30:00Z — a dated document, already stale relative to later GitHub pushes. Repo HEAD is what GitHub's default branch points at today; Watch 9d812ed and OEM Radar d720e06 are newer than inventory and still not production. Live deployed SHA is whatever the host process actually loaded, and it stays UNKNOWN until a live probe. Law 6: do not fill live from GitHub. Showing both inventory and HEAD, plus UNKNOWN, is the lesson.",
+    checklist: [
+      "Three different objects",
+      "Inventory is dated",
+      "HEAD is not production",
+      "UNKNOWN left visible",
+    ],
+    conceptIds: ["head-vs-deployed", "provenance", "sha"],
+  },
+  {
+    id: "ex-arch-evolution",
+    prompt: "Pick one architectural phase and explain it as before → pressure → new abstraction → new rule → result → still unsolved.",
+    modelAnswer:
+      "Example: Motherclank birth. Before: Fleet Laws on paper, local dashboards as the picture. Pressure: timers firing without starting, 200-with-zero, dual schedulers. Abstraction: a read-only harvester consuming Diagnostic adapters (ADR-0002). Rule: observe/reason/propose, never remediate; Clank SQLite authoritative; M5 forbidden. Result: M0–M4 camera in git. Still unsolved: live timer UNKNOWN, var/ unrecovered, 7cee2f8 is not a health claim. Other valid picks: volume loss → epochs; Phase 0 freeze → laws without a camera; QC flood → catalogue-pass as invocation fact.",
+    checklist: [
+      "Used the six-part shape",
+      "Did not present the layer as fully formed on day one",
+      "Left an unresolved limitation",
+      "Cited a real artefact or incident",
+    ],
+    conceptIds: ["motherclank", "fleet-law", "lifecycle"],
   },
 ];

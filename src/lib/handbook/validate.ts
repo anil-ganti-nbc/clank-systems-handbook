@@ -124,6 +124,17 @@ export function validateHandbook(input: {
     if (phaseIds.has(phase.id)) issues.push({ code: "duplicate", message: `duplicate phase ${phase.id}` });
     phaseIds.add(phase.id);
     if (!phase.confidence) issues.push({ code: "epistemic", message: `phase ${phase.id} missing confidence` });
+    const evolution = [
+      phase.before,
+      phase.failurePressure,
+      phase.newAbstraction,
+      phase.newRule,
+      phase.resultingArchitecture,
+      phase.unresolvedLimitations,
+    ];
+    if (evolution.some((f) => !f || f.trim().length < 20)) {
+      issues.push({ code: "malformed", message: `phase ${phase.id} missing architecture-evolution fields` });
+    }
   }
 
   let lastDate = "";
@@ -228,6 +239,18 @@ export function validateHandbook(input: {
     const p = fleetClankSchema.safeParse(cl);
     if (!p.success) issues.push({ code: "schema", message: `fleet ${cl.id}: ${p.error.message}` });
     if (!cl.confidence) issues.push({ code: "epistemic", message: `fleet ${cl.id} missing confidence` });
+    if (cl.liveDeployedSha && !/UNKNOWN/i.test(cl.liveDeployedSha)) {
+      issues.push({
+        code: "overread",
+        message: `fleet ${cl.id} filled liveDeployedSha from something other than a live probe; keep UNKNOWN`,
+      });
+    }
+    if (cl.repoHead && cl.liveDeployedSha && cl.repoHead === cl.liveDeployedSha && !/UNKNOWN/i.test(cl.liveDeployedSha)) {
+      issues.push({
+        code: "overread",
+        message: `fleet ${cl.id} copied repo HEAD into live deployed SHA`,
+      });
+    }
   }
 
   const artefactIds = new Set<string>();
