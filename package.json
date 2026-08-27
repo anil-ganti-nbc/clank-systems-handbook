@@ -1,0 +1,18 @@
+{
+  "name": "clank-systems-handbook",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Interactive, evidence-backed engineering literacy for the Clank ecosystem.",
+  "scripts": {
+    "test": "node --experimental-strip-types --test src/lib/handbook/validate.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "@types/node": "^22.16.5"
+  },
+  "dependencies": {
+    "zod": "^4.4.0"
+  }
+}
