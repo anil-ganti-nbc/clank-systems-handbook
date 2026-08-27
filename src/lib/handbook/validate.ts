@@ -1,23 +1,33 @@
 import type {
   Concept,
+  EvidenceArtefact,
+  EvidenceGap,
   ExplainPrompt,
   FleetClank,
   FleetLaw,
   HistoryEntry,
   HistoryPhase,
   Incident,
+  LedgerReview,
   Module,
+  NextStep,
+  ProvenanceCell,
   TimelineEvent,
 } from "./schema.ts";
 import {
   conceptSchema,
+  evidenceArtefactSchema,
+  evidenceGapSchema,
   explainPromptSchema,
   fleetClankSchema,
   fleetLawSchema,
   historyEntrySchema,
   historyPhaseSchema,
   incidentSchema,
+  ledgerReviewSchema,
   moduleSchema,
+  nextStepSchema,
+  provenanceCellSchema,
   timelineEventSchema,
 } from "./schema.ts";
 
@@ -36,6 +46,11 @@ export function validateHandbook(input: {
   history?: HistoryEntry[];
   laws?: FleetLaw[];
   fleet?: FleetClank[];
+  artefacts?: EvidenceArtefact[];
+  gaps?: EvidenceGap[];
+  provenance?: ProvenanceCell[];
+  reviews?: LedgerReview[];
+  nextSteps?: NextStep[];
 }): ValidationIssue[] {
   const issues: ValidationIssue[] = [];
   const conceptIds = new Set<string>();
@@ -55,9 +70,6 @@ export function validateHandbook(input: {
     const prev = terms.get(key);
     if (prev && prev !== c.id) issues.push({ code: "duplicate", message: `duplicate glossary term "${c.term}" (${prev}, ${c.id})` });
     terms.set(key, c.id);
-    for (const rel of c.related) {
-      // related may point at concepts added later in the same array; check after the loop
-    }
   }
   for (const c of input.concepts) {
     for (const rel of c.related) {
@@ -216,6 +228,101 @@ export function validateHandbook(input: {
     const p = fleetClankSchema.safeParse(cl);
     if (!p.success) issues.push({ code: "schema", message: `fleet ${cl.id}: ${p.error.message}` });
     if (!cl.confidence) issues.push({ code: "epistemic", message: `fleet ${cl.id} missing confidence` });
+  }
+
+  const artefactIds = new Set<string>();
+  for (const a of input.artefacts ?? []) {
+    const p = evidenceArtefactSchema.safeParse(a);
+    if (!p.success) issues.push({ code: "schema", message: `artefact ${a.id}: ${p.error.message}` });
+    if (artefactIds.has(a.id)) issues.push({ code: "duplicate", message: `duplicate artefact ${a.id}` });
+    artefactIds.add(a.id);
+    if (!a.verification) issues.push({ code: "epistemic", message: `artefact ${a.id} missing verification` });
+    if (!a.sourceLocation || !a.preservedLocation || !a.artefactType || !a.captureAt) {
+      issues.push({ code: "malformed", message: `artefact ${a.id} missing required evidence field` });
+    }
+    if (a.hash && !/^[0-9a-f]{64}$/.test(a.hash)) {
+      issues.push({ code: "malformed", message: `artefact ${a.id} hash is not sha256 hex` });
+    }
+    for (const id of a.relatedIncidentIds) {
+      if (incidentIds.size && !incidentIds.has(id)) issues.push({ code: "dangling", message: `artefact ${a.id} unknown incident ${id}` });
+    }
+    for (const id of a.relatedLawIds) {
+      if (lawIds.size && !lawIds.has(id)) issues.push({ code: "dangling", message: `artefact ${a.id} unknown law ${id}` });
+    }
+  }
+
+  const gapIds = new Set<string>();
+  for (const g of input.gaps ?? []) {
+    const p = evidenceGapSchema.safeParse(g);
+    if (!p.success) issues.push({ code: "schema", message: `gap ${g.id}: ${p.error.message}` });
+    if (gapIds.has(g.id)) issues.push({ code: "duplicate", message: `duplicate gap ${g.id}` });
+    gapIds.add(g.id);
+    if (!g.status) issues.push({ code: "epistemic", message: `gap ${g.id} missing status` });
+    for (const id of g.relatedHistoryIds) {
+      if (historyIds.size && !historyIds.has(id)) issues.push({ code: "dangling", message: `gap ${g.id} unknown history ${id}` });
+    }
+    for (const id of g.relatedIncidentIds) {
+      if (incidentIds.size && !incidentIds.has(id)) issues.push({ code: "dangling", message: `gap ${g.id} unknown incident ${id}` });
+    }
+    for (const id of g.relatedLawIds) {
+      if (lawIds.size && !lawIds.has(id)) issues.push({ code: "dangling", message: `gap ${g.id} unknown law ${id}` });
+    }
+  }
+
+  const provIds = new Set<string>();
+  const liveSystems = new Set([
+    "watch-clank",
+    "smartwatch-clank",
+    "smartphone-clank",
+    "feature-phone-clank",
+    "tablet-clank",
+    "oem-radar",
+    "free-game-tracker",
+    "chinese-tech-wire",
+    "korean-tech-wire",
+    "semiconductor-intelligence",
+    "diagnostic-clank",
+    "motherclank",
+  ]);
+  for (const cell of input.provenance ?? []) {
+    const p = provenanceCellSchema.safeParse(cell);
+    if (!p.success) issues.push({ code: "schema", message: `provenance ${cell.id}: ${p.error.message}` });
+    if (provIds.has(cell.id)) issues.push({ code: "duplicate", message: `duplicate provenance ${cell.id}` });
+    provIds.add(cell.id);
+    if (!cell.confidence) issues.push({ code: "epistemic", message: `provenance ${cell.id} missing confidence` });
+    if (liveSystems.has(cell.system) && cell.confidence === "verified" && /UNKNOWN/i.test(cell.deployedSha) === false) {
+      issues.push({
+        code: "overread",
+        message: `provenance ${cell.id} claims a deployed SHA while this campaign cannot live-probe; keep UNKNOWN`,
+      });
+    }
+  }
+
+  const reviewIds = new Set<string>();
+  for (const rv of input.reviews ?? []) {
+    const p = ledgerReviewSchema.safeParse(rv);
+    if (!p.success) issues.push({ code: "schema", message: `review ${rv.historyId}: ${p.error.message}` });
+    if (reviewIds.has(rv.historyId)) issues.push({ code: "duplicate", message: `duplicate review ${rv.historyId}` });
+    reviewIds.add(rv.historyId);
+    if (historyIds.size && !historyIds.has(rv.historyId)) {
+      issues.push({ code: "dangling", message: `review unknown history ${rv.historyId}` });
+    }
+    if (!rv.currentConfidence || !rv.recommendedConfidence) {
+      issues.push({ code: "epistemic", message: `review ${rv.historyId} missing confidence` });
+    }
+  }
+  if (input.reviews && input.reviews.length && historyIds.size) {
+    for (const id of historyIds) {
+      if (!reviewIds.has(id)) issues.push({ code: "dangling", message: `history ${id} missing ledger review` });
+    }
+  }
+
+  const stepIds = new Set<string>();
+  for (const s of input.nextSteps ?? []) {
+    const p = nextStepSchema.safeParse(s);
+    if (!p.success) issues.push({ code: "schema", message: `next-step ${s.id}: ${p.error.message}` });
+    if (stepIds.has(s.id)) issues.push({ code: "duplicate", message: `duplicate next-step ${s.id}` });
+    stepIds.add(s.id);
   }
 
   return issues;

@@ -116,4 +116,20 @@ test.describe("Clank Systems Handbook", () => {
     await expect(page.getByText(/HTTP 200 without useful output/i).first()).toBeVisible();
     await expect(page.getByText(/candidate, not binding/i)).toBeVisible();
   });
+
+  test("confidence audit exposes gaps and keeps live UNKNOWN", async ({ page }) => {
+    await gotoHydrated(page, "/evidence");
+    await expect(page.getByRole("heading", { name: "Confidence audit", exact: true })).toBeVisible();
+    await expect(page.getByText(/Live host re-probe this campaign/i)).toBeVisible();
+    await expect(page.getByText("INCOMPLETE").first()).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Unresolved evidence gaps" })).toBeVisible();
+    await expect(page.getByText(/No SSH to Hetzner/i)).toBeVisible();
+
+    await page.getByRole("button", { name: "incomplete", exact: true }).click();
+    await expect(page.getByText(/Law 6 forbids filling deployed SHA/i)).toBeVisible();
+
+    await page.getByRole("navigation").getByRole("link", { name: "History" }).click();
+    await expect(page.getByRole("heading", { name: "Historical ledger" })).toBeVisible();
+    await expect(page.getByLabel("Search ledger")).toBeVisible();
+  });
 });
