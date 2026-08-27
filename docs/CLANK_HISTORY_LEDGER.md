@@ -583,19 +583,19 @@ Count: **27**. Confidence: **27 verified**, **0 inferred**, **0 incomplete**.
 
 **Incidents.** `inc-health-honesty`
 
-### 2026-08-22 — INC-20260822-A: scheduler fired, process never started. ~36 hours of silence.
+### 2026-08-22 — Materialization gap: scheduler activity without a running process.
 
 - **Id:** `h-materialization`
 - **Period:** 2026-08-22 to 2026-08-24
 - **Phase:** `p-scars`
 - **Systems:** oem-radar; smartwatch-clank; feature-phone-clank; cron
-- **Confidence:** VERIFIED
+- **Confidence:** VERIFIED (mechanism) / INCOMPLETE (raw host chronology)
 
-**Event.** INC-20260822-A: scheduler fired, process never started. ~36 hours of silence.
+**Event.** A scheduled Clank outage exposed a materialization gap: scheduler activity was visible, but the collector never successfully became a running process.
 
 **Before.** Health checks that watched the calendar treated elapsed timers as successful work.
 
-**Change.** root git stash -u / stash pop recreated untracked logs/ as root:root. Cron redirects failed pre-exec. Diagnostic incident 62b03383…. Codified MATERIALIZATION_GAP (ADR-0008). OEM Radar lost no DB data.
+**Change.** Preserved decision/architecture records (DECISION_LEDGER INC-20260822-A, ADR-0008) attribute this to a pre-exec logging/permission failure: stash -u recreated untracked logs/ as root:root, so cron redirects failed before the collector started. Codified as MATERIALIZATION_GAP. OEM Radar lost no DB data. The impact map records a ~09:59–10:06Z window and ~36h silence — those host-level timestamps are operator-addendum in that document, not recovered syslog.
 
 **Why.** Untracked runtime directories lived inside source checkouts, so a Git hygiene command became a production outage.
 
@@ -605,16 +605,16 @@ Count: **27**. Confidence: **27 verified**, **0 inferred**, **0 incomplete**.
 
 **Fix.** Directory ownership; six-stage liveness model; GIC-04; ADR-0009 runtime-state/source-tree separation.
 
-**Verification.** Decision ledger + ADR-0008 implementation cited motherclank @3558fab + G1–G8 fixtures. Raw syslog not in Handbook checkout.
+**Verification.** Incident class and mechanism: VERIFIED from DECISION_LEDGER.md, ADR-0008, G1–G8 fixtures (motherclank @3558fab). Exact host chronology and raw syslog: INCOMPLETE — not recovered this campaign, not in the Handbook checkout.
 
-**Residual risk.** Any future redirect, permission, or missing binary reproduces MATERIALIZATION_GAP.
+**Residual risk.** Any future redirect, permission, or missing binary reproduces MATERIALIZATION_GAP. Do not re-promote impact-map timestamps as independently re-read journalctl.
 
 **Later consequence.** Law 3's invocation≠commit becomes a first-class detection, not a slogan.
 
 **Evidence.**
 
-- `ev-inc-a` (doc, VERIFIED) anil-ganti-nbc/clank-architecture DECISION_LEDGER.md — INC-20260822-A recorded 2026-08-24.
-- `ev-impact-a` (report, VERIFIED) anil-ganti-nbc/clank-architecture audits/INCIDENT_IMPACT_MAP_2026-08-23.md — Family A: 2026-08-22 ~09:59–10:06Z stash -u; silent ~36h.
+- `ev-inc-a` (doc, VERIFIED) anil-ganti-nbc/clank-architecture DECISION_LEDGER.md — INC-20260822-A recorded 2026-08-24. Mechanism: stash -u, logs/ root:root, pre-exec failure. Named MATERIALIZATION_GAP.
+- `ev-impact-a` (report, INCOMPLETE) anil-ganti-nbc/clank-architecture audits/INCIDENT_IMPACT_MAP_2026-08-23.md — Family A as recorded in the impact map. Host timestamps (~09:59–10:06Z, ~36h) are not independently recovered syslog.
 
 **Commit(s).**
 

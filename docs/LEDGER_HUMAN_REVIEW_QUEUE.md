@@ -22,7 +22,7 @@ UI: Handbook **Evidence → Rows awaiting human review**.
 | h-portability | await-host-probe | FGT/Watch deployment SHAs are archaeology, not live |
 | h-dual-scheduler | await-host-probe | 2026-08-21T21:06Z retirement is law text, not 2026-08-27 journal |
 | h-motherclank-born | await-host-probe | timer installer ≠ enabled |
-| h-materialization | split | syslog not recovered; keep the git/ledger facts |
+| h-materialization | keep (split applied in-row) | Owner walk 2026-08-27: mechanism VERIFIED; host timestamps/syslog INCOMPLETE |
 | h-volume-loss | await-host-probe | Motherclank var/ still BLOCKED |
 | h-ctw-dogfood | await-host-probe | live volume name as of 27 Aug unknown |
 | h-watch-qc | await-human | queue counts are a snapshot; no commit SHA on the row |
@@ -35,7 +35,7 @@ All other original rows: **keep**, with residual notes. None recommended for del
 ## Owner checklist
 
 - [ ] Walk flagged rows first
-- [ ] Decide whether to split h-materialization host timestamps into an incomplete child claim
+- [x] Decide whether to split h-materialization host timestamps into an incomplete child claim — **in-row split, no new id.** Mechanism verified; chronology incomplete.
 - [ ] Attach a SHA to h-watch-qc if teaching 639/580/41
 - [ ] After operator-reprobe.sh, only then consider upgrading any await-host-probe row
 - [ ] Do not upgrade UNKNOWN to healthy because several docs repeat it

@@ -668,10 +668,11 @@ export const HISTORY: HistoryEntry[] = [
     period: "2026-08-22 to 2026-08-24",
     phaseId: "p-scars",
     systems: ["oem-radar", "smartwatch-clank", "feature-phone-clank", "cron"],
-    event: "INC-20260822-A: scheduler fired, process never started. ~36 hours of silence.",
+    event:
+      "A scheduled Clank outage exposed a materialization gap: scheduler activity was visible, but the collector never successfully became a running process.",
     before: "Health checks that watched the calendar treated elapsed timers as successful work.",
     change:
-      "root git stash -u / stash pop recreated untracked logs/ as root:root. Cron redirects failed pre-exec. Diagnostic incident 62b03383…. Codified MATERIALIZATION_GAP (ADR-0008). OEM Radar lost no DB data.",
+      "Preserved decision/architecture records (DECISION_LEDGER INC-20260822-A, ADR-0008) attribute this to a pre-exec logging/permission failure: stash -u recreated untracked logs/ as root:root, so cron redirects failed before the collector started. Codified as MATERIALIZATION_GAP. OEM Radar lost no DB data. The impact map records a ~09:59–10:06Z window and ~36h silence — those host-level timestamps are operator-addendum in that document, not recovered syslog.",
     why: "Untracked runtime directories lived inside source checkouts, so a Git hygiene command became a production outage.",
     evidence: [
       {
@@ -679,7 +680,7 @@ export const HISTORY: HistoryEntry[] = [
         kind: "doc",
         repo: "anil-ganti-nbc/clank-architecture",
         path: "DECISION_LEDGER.md",
-        note: "INC-20260822-A recorded 2026-08-24.",
+        note: "INC-20260822-A recorded 2026-08-24. Mechanism: stash -u, logs/ root:root, pre-exec failure. Named MATERIALIZATION_GAP.",
         status: "verified",
       },
       {
@@ -687,8 +688,8 @@ export const HISTORY: HistoryEntry[] = [
         kind: "report",
         repo: "anil-ganti-nbc/clank-architecture",
         path: "audits/INCIDENT_IMPACT_MAP_2026-08-23.md",
-        note: "Family A: 2026-08-22 ~09:59–10:06Z stash -u; silent ~36h.",
-        status: "verified",
+        note: "Family A as recorded in the impact map. Host timestamps (~09:59–10:06Z, ~36h) are not independently recovered syslog.",
+        status: "incomplete",
       },
     ],
     commits: [{ repo: "anil-ganti-nbc/clank-architecture", sha: "cd276689a4055436cd974beb1d3272465e3b4145", note: "ADR-0008 + ADR-0009" }],
@@ -698,8 +699,10 @@ export const HISTORY: HistoryEntry[] = [
     whatFailed: "Collectors never became processes. Dashboards that watched invocation stayed calm.",
     diagnosis: "Pre-exec redirect failure, not a collector regression, not a legitimate zero.",
     fix: "Directory ownership; six-stage liveness model; GIC-04; ADR-0009 runtime-state/source-tree separation.",
-    verification: "Decision ledger + ADR-0008 implementation cited motherclank @3558fab + G1–G8 fixtures. Raw syslog not in Handbook checkout.",
-    residualRisk: "Any future redirect, permission, or missing binary reproduces MATERIALIZATION_GAP.",
+    verification:
+      "Incident class and mechanism: VERIFIED from DECISION_LEDGER.md, ADR-0008, G1–G8 fixtures (motherclank @3558fab). Exact host chronology and raw syslog: INCOMPLETE — not recovered this campaign, not in the Handbook checkout.",
+    residualRisk:
+      "Any future redirect, permission, or missing binary reproduces MATERIALIZATION_GAP. Do not re-promote impact-map timestamps as independently re-read journalctl.",
     laterConsequence: "Law 3's invocation≠commit becomes a first-class detection, not a slogan.",
     confidence: "verified",
   }),

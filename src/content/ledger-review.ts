@@ -142,11 +142,16 @@ export const LEDGER_REVIEWS: LedgerReview[] = [
     historyId: "h-materialization",
     currentConfidence: "verified",
     supportingArtefacts: ["DECISION_LEDGER INC-20260822-A", "INCIDENT_IMPACT_MAP Family A", "ADR-0008", "continuity seed INC-20260822-23"],
-    verifiedClaims: ["The incident is documented as stash -u → root:root logs/ → cron pre-exec failure → ~36h silence. OEM Radar lost no DB data (ledger)."],
+    verifiedClaims: [
+      "Incident class MATERIALIZATION_GAP: scheduler activity visible, collector never became a running process.",
+      "Preserved records attribute this to a pre-exec logging/permission failure (stash -u → logs/ root:root → cron redirect).",
+      "OEM Radar lost no DB data (ledger). ADR-0008 + G1–G8 fixtures exist.",
+    ],
     inferredClaims: ["Exact 09:59–10:06Z window and the ~36h duration as lived on the host."],
-    overreadRisk: "Raw syslog is NOT in git and was not recovered this campaign. Verification currently cites the ledger, not journalctl. Host-facing timestamps are operator-verified in Pass 2 addendum — do not invent extra log lines.",
+    overreadRisk:
+      "Owner walk 2026-08-27: in-row split applied. Mechanism stays VERIFIED from git-resident decision/architecture records. Host timestamps/syslog remain INCOMPLETE. Do not re-promote ~09:59–10:06Z or ~36h as independently recovered.",
     openQuestions: ["Does journalctl still contain 2026-08-22 cron failures, or has it rotated?"],
-    recommendedAction: "split",
+    recommendedAction: "keep",
     recommendedConfidence: "verified",
   }),
   r({

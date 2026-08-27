@@ -78,7 +78,7 @@ export const TIMELINE: TimelineEvent[] = [
     id: "t-materialization",
     date: "2026-08-22",
     title: "INC-20260822-A: scheduler fired, process never started",
-    body: "stash -u recreated logs/ as root:root; cron redirects failed pre-exec; ~36h silence. Later named MATERIALIZATION_GAP (ADR-0008).",
+    body: "Decision/architecture records: stash -u recreated logs/ as root:root; cron redirects failed pre-exec. Named MATERIALIZATION_GAP (ADR-0008). Raw syslog and exact host timing not recovered.",
     status: "verified",
     conceptIds: ["materialization-gap", "scheduler", "untracked"],
     evidenceIds: ["ev-inc-a", "ev-gic-04"],

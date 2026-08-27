@@ -11,7 +11,7 @@ export const INCIDENTS: Incident[] = [
     context:
       "Several Clanks are supposed to run on a host schedule (cron or systemd timers). Operators believed 'the timer fired' meant 'the collector ran'. Golden incident GIC-04 exists specifically for this class.",
     symptom:
-      "About 36 hours of silence on oem-radar, smartwatch, and feature-phone even though scheduling still looked populated. Diagnostic incident id 62b03383… is cited in the decision ledger.",
+      "Scheduling still looked populated while collectors produced no work. Diagnostic incident id 62b03383… is cited in the decision ledger. Duration (~36h) is recorded there; raw syslog is not in this Handbook.",
     competingHypotheses: [
       "The collectors ran and found nothing (legitimate NO_WORK_DUE / ZERO_ITEMS).",
       "The timer unit is disabled — scheduling is the root cause.",
@@ -32,7 +32,7 @@ export const INCIDENTS: Incident[] = [
       "logs/ reappeared as root:root.",
       "cron redirect could not write; command failed before exec of the collector.",
       "Timers still elapsed, so dashboards that watched the calendar stayed calm.",
-      "No useful work for ~36 hours.",
+      "No useful work for a multi-hour window (ledger records ~36h; syslog not recovered).",
     ],
     blastRadius:
       "oem-radar, smartwatch-clank, and feature-phone-clank on that host. Not a logic bug inside any one collector.",
