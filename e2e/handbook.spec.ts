@@ -107,6 +107,9 @@ test.describe("Clank Systems Handbook", () => {
     await expect(page.getByRole("heading", { name: "Current fleet" })).toBeVisible();
     await expect(page.getByText(/UNKNOWN is left visible/i)).toBeVisible();
     await expect(page.getByText(/INTENTIONALLY_DORMANT/i).first()).toBeVisible();
+    await expect(page.getByText("Inventory SHA (2026-08-22)")).toBeVisible();
+    await expect(page.getByText("Live deployed").first()).toBeVisible();
+    await expect(page.getByText("UNKNOWN", { exact: true }).first()).toBeVisible();
   });
 
   test("architecture law lineage maps a scar to a fleet law", async ({ page }) => {
@@ -115,6 +118,10 @@ test.describe("Clank Systems Handbook", () => {
     await expect(page.getByRole("heading", { name: /Law 3/ })).toBeVisible();
     await expect(page.getByText(/HTTP 200 without useful output/i).first()).toBeVisible();
     await expect(page.getByText(/candidate, not binding/i)).toBeVisible();
+    await expect(page.getByRole("heading", { name: /Evolution — before, pressure, rule, leftover/i })).toBeVisible();
+    await expect(page.getByText("Failure / pressure").first()).toBeVisible();
+    await expect(page.getByText("Still unsolved").first()).toBeVisible();
+    await expect(page.getByRole("heading", { name: /Motherclank M0–M4/i })).toBeVisible();
   });
 
   test("confidence audit exposes gaps and keeps live UNKNOWN", async ({ page }) => {
@@ -131,5 +138,7 @@ test.describe("Clank Systems Handbook", () => {
     await page.getByRole("navigation").getByRole("link", { name: "History" }).click();
     await expect(page.getByRole("heading", { name: "Historical ledger" })).toBeVisible();
     await expect(page.getByLabel("Search ledger")).toBeVisible();
+    await expect(page.getByLabel("Epistemic status")).toBeVisible();
+    await expect(page.getByLabel("Failure class")).toBeVisible();
   });
 });
