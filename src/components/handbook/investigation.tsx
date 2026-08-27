@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import type { Incident } from "@/lib/handbook/schema";
-import { ConceptList, Epistemic } from "./concept-link";
+import { ConceptList, Epistemic, LawLink } from "./concept-link";
 import { completeLab } from "@/lib/handbook/state";
 import { emitPracticeResult } from "@/lib/handbook/practice";
 
@@ -130,6 +130,9 @@ export function InvestigationLab({ incident }: { incident: Incident }) {
               <strong>Contributing.</strong> {incident.contributingCauses.join(" ")}
             </p>
             <p>
+              <strong>Causal chain.</strong> {incident.causalChain.join(" → ")}
+            </p>
+            <p>
               <strong>Repair.</strong> {incident.remediation}
             </p>
             <p>
@@ -155,6 +158,22 @@ export function InvestigationLab({ incident }: { incident: Incident }) {
                 </li>
               ))}
             </ul>
+            {incident.lawIds && incident.lawIds.length > 0 && (
+              <p className="mt-3 flex flex-wrap gap-2 text-sm">
+                {incident.lawIds.map((id) => (
+                  <LawLink key={id} id={id} />
+                ))}
+              </p>
+            )}
+            {incident.historyIds && incident.historyIds.length > 0 && (
+              <p className="mt-2 flex flex-wrap gap-2 text-sm">
+                {incident.historyIds.map((id) => (
+                  <a key={id} href={`/history#${id}`} className="rounded-sm bg-bg px-1.5 py-0.5 font-mono text-xs text-accent no-underline hover:underline">
+                    {id}
+                  </a>
+                ))}
+              </p>
+            )}
             <ConceptList ids={incident.conceptIds} />
           </div>
         </section>

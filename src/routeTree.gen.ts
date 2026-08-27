@@ -14,7 +14,9 @@ import { Route as ArchitectureRouteImport } from './routes/architecture'
 import { Route as BasicsRouteImport } from './routes/basics'
 import { Route as BuiltRouteImport } from './routes/built'
 import { Route as ExplainRouteImport } from './routes/explain'
+import { Route as FleetRouteImport } from './routes/fleet'
 import { Route as GlossaryRouteImport } from './routes/glossary'
+import { Route as HistoryRouteImport } from './routes/history'
 import { Route as IncidentsRouteImport } from './routes/incidents'
 import { Route as LabsRouteImport } from './routes/labs'
 import { Route as SystemsRouteImport } from './routes/systems'
@@ -46,9 +48,19 @@ const ExplainRoute = ExplainRouteImport.update({
   path: '/explain',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FleetRoute = FleetRouteImport.update({
+  id: '/fleet',
+  path: '/fleet',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GlossaryRoute = GlossaryRouteImport.update({
   id: '/glossary',
   path: '/glossary',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HistoryRoute = HistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IncidentsRoute = IncidentsRouteImport.update({
@@ -83,7 +95,9 @@ export interface FileRoutesByFullPath {
   '/basics': typeof BasicsRoute
   '/built': typeof BuiltRoute
   '/explain': typeof ExplainRoute
+  '/fleet': typeof FleetRoute
   '/glossary': typeof GlossaryRoute
+  '/history': typeof HistoryRoute
   '/incidents': typeof IncidentsRoute
   '/labs': typeof LabsRouteWithChildren
   '/systems': typeof SystemsRoute
@@ -96,7 +110,9 @@ export interface FileRoutesByTo {
   '/basics': typeof BasicsRoute
   '/built': typeof BuiltRoute
   '/explain': typeof ExplainRoute
+  '/fleet': typeof FleetRoute
   '/glossary': typeof GlossaryRoute
+  '/history': typeof HistoryRoute
   '/incidents': typeof IncidentsRoute
   '/systems': typeof SystemsRoute
   '/labs/$incidentId': typeof LabsIncidentIdRoute
@@ -109,7 +125,9 @@ export interface FileRoutesById {
   '/basics': typeof BasicsRoute
   '/built': typeof BuiltRoute
   '/explain': typeof ExplainRoute
+  '/fleet': typeof FleetRoute
   '/glossary': typeof GlossaryRoute
+  '/history': typeof HistoryRoute
   '/incidents': typeof IncidentsRoute
   '/labs': typeof LabsRouteWithChildren
   '/systems': typeof SystemsRoute
@@ -124,7 +142,9 @@ export interface FileRouteTypes {
     | '/basics'
     | '/built'
     | '/explain'
+    | '/fleet'
     | '/glossary'
+    | '/history'
     | '/incidents'
     | '/labs'
     | '/systems'
@@ -137,7 +157,9 @@ export interface FileRouteTypes {
     | '/basics'
     | '/built'
     | '/explain'
+    | '/fleet'
     | '/glossary'
+    | '/history'
     | '/incidents'
     | '/systems'
     | '/labs/$incidentId'
@@ -149,7 +171,9 @@ export interface FileRouteTypes {
     | '/basics'
     | '/built'
     | '/explain'
+    | '/fleet'
     | '/glossary'
+    | '/history'
     | '/incidents'
     | '/labs'
     | '/systems'
@@ -163,7 +187,9 @@ export interface RootRouteChildren {
   BasicsRoute: typeof BasicsRoute
   BuiltRoute: typeof BuiltRoute
   ExplainRoute: typeof ExplainRoute
+  FleetRoute: typeof FleetRoute
   GlossaryRoute: typeof GlossaryRoute
+  HistoryRoute: typeof HistoryRoute
   IncidentsRoute: typeof IncidentsRoute
   LabsRoute: typeof LabsRouteWithChildren
   SystemsRoute: typeof SystemsRoute
@@ -206,11 +232,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExplainRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/fleet': {
+      id: '/fleet'
+      path: '/fleet'
+      fullPath: '/fleet'
+      preLoaderRoute: typeof FleetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/glossary': {
       id: '/glossary'
       path: '/glossary'
       fullPath: '/glossary'
       preLoaderRoute: typeof GlossaryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/history': {
+      id: '/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof HistoryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/incidents': {
@@ -269,7 +309,9 @@ const rootRouteChildren: RootRouteChildren = {
   BasicsRoute: BasicsRoute,
   BuiltRoute: BuiltRoute,
   ExplainRoute: ExplainRoute,
+  FleetRoute: FleetRoute,
   GlossaryRoute: GlossaryRoute,
+  HistoryRoute: HistoryRoute,
   IncidentsRoute: IncidentsRoute,
   LabsRoute: LabsRouteWithChildren,
   SystemsRoute: SystemsRoute,
