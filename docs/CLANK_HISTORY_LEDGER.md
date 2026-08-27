@@ -833,29 +833,33 @@ Count: **27**. Confidence: **27 verified**, **0 inferred**, **0 incomplete**.
 
 **Incidents.** `inc-materialization`
 
-### 2026-08-25 — Watch QC flood: validation runs counted as catalogue passes; weak FIRST_SEEN filled the FIFO.
+### 2026-08-25 — Watch QC flood: smoke counted as catalogue pass; dated snapshot 639/580/41.
 
 - **Id:** `h-watch-qc`
 - **Period:** 2026-08-25 to 2026-08-26
 - **Phase:** `p-qc-onboard`
 - **Systems:** watch-clank; human QC queue
-- **Confidence:** VERIFIED
+- **Confidence:** VERIFIED (mechanism) / snapshot-dated counts / live queue UNKNOWN
 
-**Event.** Watch QC flood: validation runs counted as catalogue passes; weak FIRST_SEEN filled the FIFO.
+**Event.** Watch QC filled with low-value first-sightings because qualification treated smoke/validation runs as real catalogue passes.
 
 **Before.** Qualification inferred 'real pass' from successful-run count, then from discovered_count > 1.
 
-**Change.** ARCHITECTURE_NOTES_QC_VOLUME.md 2026-08-26: catalogue-pass is invocation fact (persisted max_items). Queue 639 raw / 580 default / 41 after repair. Weak FIRST_SEEN (score ≤ 15) auto-deprioritized; useful FS in history scored ≥ 25.
+**Change.** watch-clank `5de5329` (2026-08-26T02:01:27Z) and `ARCHITECTURE_NOTES_QC_VOLUME.md`: catalogue-pass is an invocation fact (persisted max_items), never inferred from output size. Weak FIRST_SEEN (score ≤ 15) auto-deprioritized; useful FS in history scored ≥ 25. Queue accounting in that 2026-08-26 snapshot was 639 raw unreviewed / 580 default FIFO before repair replay / 41 after. Those counts are the incident values in the notes, not a live queue.
 
 **Why.** Human attention is the scarce resource. A filter that treats smoke as harvest hides launches.
 
-**Later consequence.** L-WATCH-009: execution provenance is part of data provenance.
+**Later consequence.** L-WATCH-009: execution provenance is part of data provenance. Later Watch HEADs are a different story and not this incident.
+
+**Residual risk.** Live Watch QC queue size remains UNKNOWN. Do not teach 639/580/41 as current.
 
 **Evidence.**
 
-- `ev-qc-vol-h` (doc, VERIFIED) anil-ganti-nbc/watch-clank ARCHITECTURE_NOTES_QC_VOLUME.md — Incident-driven clarifications 2026-08-26.
+- `ev-qc-vol-h` (commit, VERIFIED) anil-ganti-nbc/watch-clank `ARCHITECTURE_NOTES_QC_VOLUME.md` @ `5de5329f43adc3fdad0ee797f0e691427f802641` — 2026-08-26 notes + repair. Snapshot 639/580/41 is in this commit, not a live dashboard.
 
-**Commit(s).** None recorded on this row (the evidence may still be a repo creation timestamp or a document without a pinned SHA).
+**Commit(s).**
+
+- `anil-ganti-nbc/watch-clank` `5de5329f43adc3fdad0ee797f0e691427f802641` — QC-volume notes and repair, 2026-08-26T02:01:27Z
 
 **Concepts taught.** `qc-flood`, `runtime-provenance`, `first-seen`, `initial-fill`, `editorial-eligibility`
 

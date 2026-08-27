@@ -121,7 +121,7 @@ export const TIMELINE: TimelineEvent[] = [
     id: "t-qc",
     date: "2026-08-25",
     title: "Watch QC flood, unwired collectors, v0.3 freeze",
-    body: "Validation runs counted as catalogue passes (639/580/41). Tissot/Timex UK existed in registry but not in the production invocation chain (e7eeb3f). Architecture v0.3 frozen: no speculative core redesign.",
+    body: "Validation runs counted as catalogue passes. 2026-08-26 snapshot at watch-clank 5de5329: 639/580/41 (not live). Tissot/Timex UK existed in registry but not in the production invocation chain (e7eeb3f). Architecture v0.3 frozen: no speculative core redesign.",
     status: "verified",
     conceptIds: ["qc-flood", "runtime-provenance", "head-vs-deployed", "contract"],
     evidenceIds: ["ev-qc-vol", "ev-watch-unwired", "ev-freeze"],

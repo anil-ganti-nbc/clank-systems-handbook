@@ -223,12 +223,18 @@ export const LEDGER_REVIEWS: LedgerReview[] = [
   r({
     historyId: "h-watch-qc",
     currentConfidence: "verified",
-    supportingArtefacts: ["ARCHITECTURE_NOTES_QC_VOLUME.md"],
-    verifiedClaims: ["Notes dated 2026-08-26: catalogue-pass is invocation fact; 639 / 580 / 41."],
+    supportingArtefacts: ["ARCHITECTURE_NOTES_QC_VOLUME.md", "watch-clank@5de5329"],
+    verifiedClaims: [
+      "Catalogue-pass is an invocation fact (persisted max_items), never inferred from output cardinality.",
+      "FIRST_SEEN_BY_CLANK is not novelty; weak FS (≤ 15) auto-deprioritized.",
+      "Queue tiers are distinct: raw unreviewed ≠ default FIFO ≠ background.",
+      "2026-08-26 snapshot values 639 / 580 / 41 are recorded in 5de5329 and the notes.",
+    ],
     inferredClaims: ["Those queue counts are still the live queue."],
-    overreadRisk: "No commit SHA on the history row. Counts are a snapshot, not a live dashboard. Recommend attaching a SHA if teaching the numbers.",
-    openQuestions: ["Which commit introduced ARCHITECTURE_NOTES_QC_VOLUME.md? Live queue size?"],
-    recommendedAction: "await-human",
+    overreadRisk:
+      "Owner walk 2026-08-27: SHA pinned, numbers dated. Do not re-promote 639/580/41 as a live dashboard. Later Watch HEADs (ee3f34d, d4fda37, 9d812ed) are out of this incident narrative. Live queue UNKNOWN.",
+    openQuestions: ["Live queue size on the host?"],
+    recommendedAction: "keep",
     recommendedConfidence: "verified",
   }),
   r({

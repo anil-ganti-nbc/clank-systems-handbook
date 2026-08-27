@@ -25,7 +25,7 @@ UI: Handbook **Evidence → Rows awaiting human review**.
 | h-materialization | keep (split applied in-row) | Owner walk 2026-08-27: mechanism VERIFIED; host timestamps/syslog INCOMPLETE |
 | h-volume-loss | await-host-probe | Motherclank var/ still BLOCKED |
 | h-ctw-dogfood | await-host-probe | live volume name as of 27 Aug unknown |
-| h-watch-qc | await-human | queue counts are a snapshot; no commit SHA on the row |
+| h-watch-qc | keep (SHA pinned, counts dated) | Owner walk 2026-08-27: 5de5329; 639/580/41 are 26 Aug snapshot, not live |
 | h-watch-qc-race | await-host-probe | ee3f34d/d4fda37 are repo HEAD |
 
 All other original rows: **keep**, with residual notes. None recommended for deletion. None mass-downgraded.
@@ -36,6 +36,6 @@ All other original rows: **keep**, with residual notes. None recommended for del
 
 - [ ] Walk flagged rows first
 - [x] Decide whether to split h-materialization host timestamps into an incomplete child claim — **in-row split, no new id.** Mechanism verified; chronology incomplete.
-- [ ] Attach a SHA to h-watch-qc if teaching 639/580/41
+- [x] Attach a SHA to h-watch-qc if teaching 639/580/41 — **pinned 5de5329; numbers dated as 2026-08-26 snapshot. Live queue UNKNOWN.**
 - [ ] After operator-reprobe.sh, only then consider upgrading any await-host-probe row
 - [ ] Do not upgrade UNKNOWN to healthy because several docs repeat it
