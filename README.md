@@ -49,3 +49,11 @@ The polished GUI currently runs as the Grok App Builder preview of this campaign
 - Three investigations: MATERIALIZATION_GAP, Watch QC flood, BANKAI zero-recall
 - Explain-it-back with freeze → reveal + self-rating
 - Searchable glossary
+
+## GUI
+
+The interactive handbook UI (TanStack Router pages under `src/routes`,
+investigation freeze/reveal, explain-it-back) lives in this tree. In the
+App Builder workspace it serves as the live preview. A production host should
+serve the same routes with the project's React stack; browser-local state key
+is `clank-handbook-v1`.
