@@ -30,6 +30,7 @@ function Home() {
       </section>
       <section className="grid gap-4 md:grid-cols-2">
         <Card to="/history" title="Read the historical ledger" body="Phases, dates, artefacts, SHAs. Why each architectural layer appeared. UNKNOWN stays visible." />
+        <Card to="/evidence" title="Confidence audit" body="Filter by verified, inferred, incomplete. Gaps, missing artefacts, rows awaiting a human, live UNKNOWNs." />
         <Card to="/labs" title="Investigate a real incident" body="Freeze a hypothesis before the archive speaks. Start with the materialization gap — a timer that rang while nobody got out of bed." />
         <Card to="/architecture" title="Law lineage" body="Each Fleet Law mapped to the scar that wrote it. What it prevents, and what it cannot." />
         <Card to="/fleet" title="Current fleet map" body="Purpose, host, limitation, unresolved failure class. Stale notes are the honest part." />

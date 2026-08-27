@@ -21,7 +21,7 @@ export const FLEET: FleetClank[] = [
     motherclank: "Observer-tier. QC dispositions ingested. scheduler_trace supported_unconfigured.",
     asOf: "2026-08-26 (QC notes) / 2026-08-22 (inventory)",
     confidence: "verified",
-    staleNote: "Inspected archaeology head e982527 was not necessarily the deployed revision (inventory said f0b327a). Repo HEAD 2026-08-27 (ee3f34d) adds QC double-submit race recovery. Re-probe host SHA before claiming current deploy.",
+    staleNote: "Inspected archaeology head e982527 was not necessarily the deployed revision (inventory said f0b327a). Repo HEAD 2026-08-27 d4fda37 (exclude EXPERIMENTAL from Run All) is newer than ee3f34d QC race recovery. Re-probe host SHA before claiming current deploy. Neither commit is production evidence.",
   },
   {
     id: "smartwatch-clank",

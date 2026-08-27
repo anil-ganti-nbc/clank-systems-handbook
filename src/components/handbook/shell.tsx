@@ -6,6 +6,7 @@ const NAV = [
   { to: "/", label: "Overview", exact: true },
   { to: "/built", label: "How we built it" },
   { to: "/history", label: "History" },
+  { to: "/evidence", label: "Evidence" },
   { to: "/basics", label: "Development" },
   { to: "/systems", label: "Systems" },
   { to: "/architecture", label: "Architecture" },
@@ -48,7 +49,7 @@ export function HandbookShell({ children }: { children: ReactNode }) {
           })}
         </nav>
       </header>
-      <main className="mx-auto max-w-6xl px-4 py-8 sm:py-12">{children}</main>
+      <main className="mx-auto min-w-0 max-w-6xl overflow-x-hidden px-4 py-8 sm:py-12">{children}</main>
     </div>
   );
 }
