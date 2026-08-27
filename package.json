@@ -5,14 +5,36 @@
   "type": "module",
   "description": "Interactive, evidence-backed engineering literacy for the Clank ecosystem.",
   "scripts": {
+    "dev": "vite dev --host 0.0.0.0 --port 5173",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 4173",
+    "typecheck": "tsc --noEmit",
     "test": "node --experimental-strip-types --test src/lib/handbook/validate.test.ts",
-    "typecheck": "tsc --noEmit"
-  },
-  "devDependencies": {
-    "typescript": "^5.7.0",
-    "@types/node": "^22.16.5"
+    "e2e": "playwright test"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.3.0",
+    "@tanstack/react-router": "^1.170.0",
+    "@tanstack/react-start": "^1.168.0",
+    "@tanstack/router-plugin": "^1.168.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tailwindcss": "^4.3.0",
+    "tw-animate-css": "^1.3.4",
     "zod": "^4.4.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.0",
+    "@types/node": "^22.16.5",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^5.2.0",
+    "nitro": "3.0.260610-beta",
+    "playwright": "^1.62.0",
+    "typescript": "^5.7.0",
+    "vite": "^8.2.0"
+  },
+  "overrides": {
+    "nf3": "0.3.17"
   }
 }

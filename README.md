@@ -30,15 +30,21 @@ mastery, SRS, proficiency, or course completion.
 Native DAU Worlds (`idle-time-learning-doodad` `src/worlds`) are simulated causal
 systems. This Handbook’s labs use **historical evidence**, not generated physics.
 
-## Verify
+## Run
 
 ```bash
 npm install
-npm test        # content schema, unique ids, dangling-link checks
+npm run dev         # Vite / TanStack Start at http://localhost:5173
+npm test            # content schema, unique ids, dangling-link checks
+npm run typecheck
+npm run build
+npx playwright install chromium
+npm run e2e         # lesson nav, freeze→reveal, evidence, Explain It Back
 ```
 
-The polished GUI currently runs as the Grok App Builder preview of this campaign
-(TanStack Start shell). Source of truth for curriculum/evidence is this repository.
+Browser-local state key is `clank-handbook-v1`. The Handbook GUI is this
+repository; it does not depend on Grok App Builder auth, preview bridges, or
+`/__grok` chrome.
 
 ## Vertical slice (shipped)
 
@@ -49,11 +55,3 @@ The polished GUI currently runs as the Grok App Builder preview of this campaign
 - Three investigations: MATERIALIZATION_GAP, Watch QC flood, BANKAI zero-recall
 - Explain-it-back with freeze → reveal + self-rating
 - Searchable glossary
-
-## GUI
-
-The interactive handbook UI (TanStack Router pages under `src/routes`,
-investigation freeze/reveal, explain-it-back) lives in this tree. In the
-App Builder workspace it serves as the live preview. A production host should
-serve the same routes with the project's React stack; browser-local state key
-is `clank-handbook-v1`.
