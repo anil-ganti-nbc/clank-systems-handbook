@@ -522,17 +522,21 @@ Count: **27**. Confidence: **27 verified**, **0 inferred**, **0 incomplete**.
 - **Period:** 2026-08-22
 - **Phase:** `p-motherclank`
 - **Systems:** motherclank; diagnostic-clank; clank-architecture
-- **Confidence:** VERIFIED
+- **Confidence:** VERIFIED (architectural birth) / live SHA, process, timer, var/ UNKNOWN
 
 **Event.** ADR-0002 and the motherclank repository: a camera, not a janitor.
 
 **Before.** Laws existed. Nobody harvested fleet evidence without taking locks or trusting dashboards.
 
-**Change.** ADR-0002 committed b341b0f 2026-08-22T05:52:04Z. motherclank repo created 2026-08-22T06:02:49Z. Stages M0–M4 observe/synthesize/detect/recommend/learn; M5 mutation deferred.
+**Change.** ADR-0002 (b341b0f, 2026-08-22T05:52:04Z) and creation of the motherclank repository shortly afterward established the design for a read-only supervisory layer over the Clank fleet. The ADR defines Motherclank as an observer/reasoner that may recommend but must not mutate production state; M5 mutation is explicitly deferred. The repository itself was initially described as M0, a read-only fleet harvester. That proves the supervisory architecture was created, not that live supervision was already active: Git-resident installer/unit templates do not prove timer enablement, successful harvests, host var/ snapshots, or a deployed SHA. Those runtime facts remain UNKNOWN.
 
 **Why.** A supervisor that can write is a second Clank with blast radius over the whole fleet.
 
 **Later consequence.** ADR-0003 (same day) authorises M3 recommendations into Diagnostic Clank Agent Inbox — still no execution.
+
+**Verification.** Architectural birth (ADR-0002, repo created_at, read-only intent, M5 deferred): VERIFIED. Do not present M1–M4 as proven live stages on 22 Aug. Live Motherclank SHA, process, timer enablement, harvests, and host var/: UNKNOWN.
+
+**Residual risk.** Live Motherclank SHA, process, timer, and host var/ remain UNKNOWN. Git-resident installer/unit templates do not prove enablement. Later repo HEAD (7cee2f8) is not a deployed SHA.
 
 **Evidence.**
 

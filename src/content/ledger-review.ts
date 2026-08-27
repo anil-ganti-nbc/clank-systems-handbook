@@ -120,11 +120,19 @@ export const LEDGER_REVIEWS: LedgerReview[] = [
     historyId: "h-motherclank-born",
     currentConfidence: "verified",
     supportingArtefacts: ["ADR-0002 @ b341b0f", "motherclank created_at 2026-08-22T06:02:49Z", "install-user-timer.sh preserved"],
-    verifiedClaims: ["ADR and repo exist. M5 forbidden in ADR-0002."],
-    inferredClaims: ["A harvest timer is installed and firing on the host."],
-    overreadRisk: "Timer installer is a template. Live enablement UNKNOWN.",
-    openQuestions: ["Is motherclank-harvest.timer enabled? Last harvest timestamp?"],
-    recommendedAction: "await-host-probe",
+    verifiedClaims: [
+      "ADR-0002 (b341b0f, 2026-08-22T05:52:04Z) established read-only supervisory design; M5 mutation deferred.",
+      "motherclank repository created 2026-08-22T06:02:49Z, initially described as M0 read-only fleet harvester.",
+    ],
+    inferredClaims: [
+      "A harvest timer is installed and firing on the host.",
+      "M1–M4 were live stages on 22 Aug.",
+      "Later repo HEAD is the deployed harvest SHA.",
+    ],
+    overreadRisk:
+      "Owner walk 2026-08-28: in-row split applied. Architectural birth stays VERIFIED. Created ≠ actively supervising. Installer/unit templates ≠ timer enablement. Repo HEAD ≠ deployed SHA. Live SHA, process, timer, and host var/ remain UNKNOWN. Do not present M1–M4 as proven live on the birth date.",
+    openQuestions: ["Is motherclank-harvest.timer enabled? Last harvest timestamp? Deployed Motherclank SHA?"],
+    recommendedAction: "keep",
     recommendedConfidence: "verified",
   }),
   r({
