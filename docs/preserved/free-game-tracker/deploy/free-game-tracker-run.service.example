@@ -1,0 +1,10 @@
+[Unit]
+Description=Free Game Tracker one-shot run
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/free-game-tracker
+EnvironmentFile=/opt/free-game-tracker/.env
+ExecStart=/opt/free-game-tracker/deploy/run.sh

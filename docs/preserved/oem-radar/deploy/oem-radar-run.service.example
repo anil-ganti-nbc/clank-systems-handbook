@@ -1,0 +1,28 @@
+# systemd oneshot unit — invoke one catch-up crawl.
+# Pair with oem-radar-run.timer.example for unattended cadence.
+#
+# Install (example):
+#   sudo cp deploy/oem-radar-run.service.example /etc/systemd/system/oem-radar-run.service
+#   sudo cp deploy/oem-radar-run.timer.example  /etc/systemd/system/oem-radar-run.timer
+#   # Edit WorkingDirectory and ExecStart paths first.
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now oem-radar-run.timer
+#
+# This deliberately does NOT run a long-lived daemon (ADR-1).
+
+[Unit]
+Description=OEM Radar one-shot crawl
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/oem-radar
+# Prefer a venv interpreter if you use one:
+ExecStart=/usr/bin/python3 -m oem_radar.cli --config /opt/oem-radar/config run
+# Environment=OEM_RADAR_DISCORD_WEBHOOK=  # optional; prefer a file under config/
+Nice=10
+TimeoutStartSec=3600
+
+[Install]
+WantedBy=multi-user.target

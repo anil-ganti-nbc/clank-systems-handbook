@@ -1,0 +1,33 @@
+# OEM Radar — Tier C: portability + investigation ONLY. NOT a production
+# deployment. No public ports, no Docker socket, one-shot job (restart: "no").
+services:
+  oem-radar:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # Full Git SHA the image is built from (see Dockerfile). Distinct from
+        # IMAGE_TAG below, which may be a short SHA used only for the local
+        # image tag/filename -- GIT_REVISION is the authoritative full SHA
+        # baked into org.opencontainers.image.revision and oem-radar identity.
+        GIT_REVISION: ${GIT_REVISION:-unknown}
+    image: oem-radar:${IMAGE_TAG:?set IMAGE_TAG to a commit SHA}
+    container_name: oem-radar-portability
+    restart: "no"
+    environment:
+      OEM_RADAR_OPEN_BROWSER: "0"
+      OEM_RADAR_DATA_DIR: /app/data
+      OEM_RADAR_RELEASE_CHANNEL: experimental
+      OEM_RADAR_DISCORD_WEBHOOK: ${OEM_RADAR_DISCORD_WEBHOOK:-}
+    volumes:
+      - oem_radar_data:/app/data
+    healthcheck:
+      test: ["CMD", "oem-radar", "health"]
+      interval: 60s
+      timeout: 15s
+      retries: 3
+      start_period: 20s
+
+volumes:
+  oem_radar_data:
+    name: oem_radar_portability_data

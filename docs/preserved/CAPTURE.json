@@ -1,0 +1,875 @@
+{
+  "capture_utc": "2026-08-27T08:14:00Z",
+  "capture_environment": "grok-app-builder-sandbox",
+  "live_host_probe": "INCOMPLETE \u2014 no SSH to Hetzner; Google Drive empty of Clank dumps",
+  "heads": {
+    "chinese-tech-wire": {
+      "sha": "1a47220c69e6bb91f2899a0508508c42254c9d5b",
+      "branch": "main"
+    },
+    "clank-architecture": {
+      "sha": "e9c4a2b77f0a484171b01980469eee34971f8ee5",
+      "branch": "main"
+    },
+    "clank-systems-handbook": {
+      "sha": "8c267dea6617eb63adef6aa1bcdb841e48ae94fb",
+      "branch": "main"
+    },
+    "diagnostic-clank": {
+      "sha": "3667af02c8dd33503ce75461ec2974d42f2f1d4c",
+      "branch": "diagnostic-clank-2026-08"
+    },
+    "feature-phone-clank": {
+      "sha": "c173beae757a1142279687e2740b37f95456f2b6",
+      "branch": "main"
+    },
+    "free-game-tracker": {
+      "sha": "45b47a5af3680c800ebf535d0764afcb7d263ce6",
+      "branch": "main"
+    },
+    "korean-tech-wire": {
+      "sha": "ad11b0f5cb3cff793be989089ef652fdeba073c3",
+      "branch": "main"
+    },
+    "motherclank": {
+      "sha": "7cee2f89c4e84fdad3eb337a7eb4cbcc5dce8e04",
+      "branch": "main"
+    },
+    "oem-radar": {
+      "sha": "44ce1ac5538ed9f2ddf9b204d9241eaaa571ee18",
+      "branch": "main"
+    },
+    "semiconductor-intelligence": {
+      "sha": "ece4b001c60dd156c2a05cb92cf0ea335e0532c6",
+      "branch": "main"
+    },
+    "smartphone-clank": {
+      "sha": "10906e6813781389ddb862368104b8cd5c61a5f2",
+      "branch": "main"
+    },
+    "smartwatch-clank": {
+      "sha": "7ed4d74291deb54306c970bf3d5c8553ba558232",
+      "branch": "main"
+    },
+    "tablet-clank": {
+      "sha": "a41d1e7fa58f81cb9f8662d0357e8746f4b192dc",
+      "branch": "main"
+    },
+    "watch-clank": {
+      "sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c",
+      "branch": "main"
+    }
+  },
+  "copied": [
+    {
+      "repo": "diagnostic-clank",
+      "source_path": "clank-fleet/inventories/fleet.yaml",
+      "preserved_path": "docs/preserved/diagnostic-clank/clank-fleet/inventories/fleet.yaml",
+      "sha256": "9d8d950b53cdc72ed61cdd477690d938b939a3787b8aeea0023ed53240d71ca5",
+      "bytes": 27059,
+      "git_sha": "3667af02c8dd33503ce75461ec2974d42f2f1d4c",
+      "git_branch": "diagnostic-clank-2026-08",
+      "redacted": false
+    },
+    {
+      "repo": "clank-architecture",
+      "source_path": "DATA_SURVIVABILITY.md",
+      "preserved_path": "docs/preserved/clank-architecture/DATA_SURVIVABILITY.md",
+      "sha256": "d9198715cfd302a484888b094d28285bccc03526c1ffbaba184688d3c68c8a12",
+      "bytes": 17799,
+      "git_sha": "e9c4a2b77f0a484171b01980469eee34971f8ee5",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "clank-architecture",
+      "source_path": "audits/INCIDENT_IMPACT_MAP_2026-08-23.md",
+      "preserved_path": "docs/preserved/clank-architecture/audits/INCIDENT_IMPACT_MAP_2026-08-23.md",
+      "sha256": "29589fe4c946171ca589dd263941330afe5d4843bc3d0fe50fd3f23a7ae4a83e",
+      "bytes": 6330,
+      "git_sha": "e9c4a2b77f0a484171b01980469eee34971f8ee5",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "clank-architecture",
+      "source_path": "audits/CLANK_FLEET_ARCHAEOLOGY_REPORT_2026-08-24.md",
+      "preserved_path": "docs/preserved/clank-architecture/audits/CLANK_FLEET_ARCHAEOLOGY_REPORT_2026-08-24.md",
+      "sha256": "726c8b8e4638f72777c30780808de68d86ff21c5285d445b3e92ffa167116d9a",
+      "bytes": 29307,
+      "git_sha": "e9c4a2b77f0a484171b01980469eee34971f8ee5",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "clank-architecture",
+      "source_path": "FLEET_LAWS.md",
+      "preserved_path": "docs/preserved/clank-architecture/FLEET_LAWS.md",
+      "sha256": "77d2abf2c975054e6338cc425e33ad7ba954bc5d0f751e7a33d7d1ca7c6eb0d0",
+      "bytes": 7531,
+      "git_sha": "e9c4a2b77f0a484171b01980469eee34971f8ee5",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "motherclank",
+      "source_path": "scripts/install-user-timer.sh",
+      "preserved_path": "docs/preserved/motherclank/scripts/install-user-timer.sh",
+      "sha256": "9f8b49105bca9ad5facfba76a56b90763f484d1f218c9c69b0ea6d6c849a54e4",
+      "bytes": 732,
+      "git_sha": "7cee2f89c4e84fdad3eb337a7eb4cbcc5dce8e04",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "motherclank",
+      "source_path": "continuity/seeds/INC-20260822-23-fleet-outage-and-volume-loss.jsonl",
+      "preserved_path": "docs/preserved/motherclank/continuity/seeds/INC-20260822-23-fleet-outage-and-volume-loss.jsonl",
+      "sha256": "c4777eabf36a933d9fa51a81aec7fd01797764ee5787e2b9c79cb1d4386dd23b",
+      "bytes": 4929,
+      "git_sha": "7cee2f89c4e84fdad3eb337a7eb4cbcc5dce8e04",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "motherclank",
+      "source_path": "continuity/seeds/INC-20260823-volume-loss.jsonl",
+      "preserved_path": "docs/preserved/motherclank/continuity/seeds/INC-20260823-volume-loss.jsonl",
+      "sha256": "665a662bf1cdc87fa0e43356465df4024356326db49b0ca68a89736365f4e0d4",
+      "bytes": 3498,
+      "git_sha": "7cee2f89c4e84fdad3eb337a7eb4cbcc5dce8e04",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "motherclank",
+      "source_path": "continuity/seeds/survivability-ACT011-verified-live.jsonl",
+      "preserved_path": "docs/preserved/motherclank/continuity/seeds/survivability-ACT011-verified-live.jsonl",
+      "sha256": "84149d7c3adccec602a9aa8b5ad46ef200d356a2efc0410322fe1ed29ac897c1",
+      "bytes": 6548,
+      "git_sha": "7cee2f89c4e84fdad3eb337a7eb4cbcc5dce8e04",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "motherclank",
+      "source_path": "continuity/seeds/execution-expectations-seed-v1.jsonl",
+      "preserved_path": "docs/preserved/motherclank/continuity/seeds/execution-expectations-seed-v1.jsonl",
+      "sha256": "c0fedbdf2c20b435c58100ebd244f0de5cfc7abad0e8bf06fb28e5809a22c126",
+      "bytes": 7757,
+      "git_sha": "7cee2f89c4e84fdad3eb337a7eb4cbcc5dce8e04",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "oem-radar",
+      "source_path": "deploy/oem-radar-run.service.example",
+      "preserved_path": "docs/preserved/oem-radar/deploy/oem-radar-run.service.example",
+      "sha256": "4381cc5c1c8f8ac0a04099377cb2ce01c8d3ffb4e2ca53388e50d47406e285e2",
+      "bytes": 953,
+      "git_sha": "44ce1ac5538ed9f2ddf9b204d9241eaaa571ee18",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "oem-radar",
+      "source_path": "deploy/oem-radar-run.timer.example",
+      "preserved_path": "docs/preserved/oem-radar/deploy/oem-radar-run.timer.example",
+      "sha256": "34ce866a9348f6cf000b631689b92a51406f8dec0f38d17458656610ac0872c3",
+      "bytes": 410,
+      "git_sha": "44ce1ac5538ed9f2ddf9b204d9241eaaa571ee18",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "oem-radar",
+      "source_path": "deploy/crontab.example",
+      "preserved_path": "docs/preserved/oem-radar/deploy/crontab.example",
+      "sha256": "68474cf9d9a343f6a1d9eede0847b3db3d91c5a594320eee526edd91d92ab9b8",
+      "bytes": 292,
+      "git_sha": "44ce1ac5538ed9f2ddf9b204d9241eaaa571ee18",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "oem-radar",
+      "source_path": "scripts/backup.py",
+      "preserved_path": "docs/preserved/oem-radar/scripts/backup.py",
+      "sha256": "c1b58171e1afd4218a7d0ac2787fd3c60ffa39990b1db93238cb907907ba0a81",
+      "bytes": 2706,
+      "git_sha": "44ce1ac5538ed9f2ddf9b204d9241eaaa571ee18",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "oem-radar",
+      "source_path": "scripts/restore.py",
+      "preserved_path": "docs/preserved/oem-radar/scripts/restore.py",
+      "sha256": "eb18faf40584e9af72aa24d653a15426379fd8c9868d04fcae776aa96d2fceb8",
+      "bytes": 2605,
+      "git_sha": "44ce1ac5538ed9f2ddf9b204d9241eaaa571ee18",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "oem-radar",
+      "source_path": "docker-compose.yml",
+      "preserved_path": "docs/preserved/oem-radar/docker-compose.yml",
+      "sha256": "37a5392c4112a6472950c855f6f83ab82d0670a3afda16cb09c9e819eb871d29",
+      "bytes": 1175,
+      "git_sha": "44ce1ac5538ed9f2ddf9b204d9241eaaa571ee18",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "free-game-tracker",
+      "source_path": "deploy/free-game-tracker-run.service.example",
+      "preserved_path": "docs/preserved/free-game-tracker/deploy/free-game-tracker-run.service.example",
+      "sha256": "9e273b5365e680d07c139021129a056805b8412ed61938c1facdda84b1cd4f0b",
+      "bytes": 250,
+      "git_sha": "45b47a5af3680c800ebf535d0764afcb7d263ce6",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "free-game-tracker",
+      "source_path": "deploy/free-game-tracker-run.timer.example",
+      "preserved_path": "docs/preserved/free-game-tracker/deploy/free-game-tracker-run.timer.example",
+      "sha256": "ffbf69b85f849c47dab76a2bc3add923a463e136ab1fb944599014afdb493602",
+      "bytes": 385,
+      "git_sha": "45b47a5af3680c800ebf535d0764afcb7d263ce6",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "free-game-tracker",
+      "source_path": "deploy/crontab.example",
+      "preserved_path": "docs/preserved/free-game-tracker/deploy/crontab.example",
+      "sha256": "b52ca919771d2c5b920418315763cb91dfd6c88ef7eaf71cfe3cf2cfeaa8daa8",
+      "bytes": 540,
+      "git_sha": "45b47a5af3680c800ebf535d0764afcb7d263ce6",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "free-game-tracker",
+      "source_path": "scripts/backup.py",
+      "preserved_path": "docs/preserved/free-game-tracker/scripts/backup.py",
+      "sha256": "fb84047195cc4524817e0e03b0764886fe8764ad5161b136685504b08ff6b2f5",
+      "bytes": 2412,
+      "git_sha": "45b47a5af3680c800ebf535d0764afcb7d263ce6",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "free-game-tracker",
+      "source_path": "scripts/restore.py",
+      "preserved_path": "docs/preserved/free-game-tracker/scripts/restore.py",
+      "sha256": "1ceb9cc1e5b96c17a26407688e803da472244083b59bd88c595858658ee27214",
+      "bytes": 3465,
+      "git_sha": "45b47a5af3680c800ebf535d0764afcb7d263ce6",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "free-game-tracker",
+      "source_path": "docker-compose.yml",
+      "preserved_path": "docs/preserved/free-game-tracker/docker-compose.yml",
+      "sha256": "3adcfe6e3b057dda996afe1ebe8d103c6ce478f41152bbd915d1b3b5cbccadb8",
+      "bytes": 1938,
+      "git_sha": "45b47a5af3680c800ebf535d0764afcb7d263ce6",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank.service",
+      "preserved_path": "docs/preserved/watch-clank/scripts/systemd/watch-clank.service",
+      "sha256": "9cd627eb2e21a8561837d939818e463ed103767621956ec14fcd4025c0e55e58",
+      "bytes": 609,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank.timer",
+      "preserved_path": "docs/preserved/watch-clank/scripts/systemd/watch-clank.timer",
+      "sha256": "0544be10f427c19e6651211bae361ca4f873f00c36529e29d5aa34118233c753",
+      "bytes": 408,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/README.md",
+      "preserved_path": "docs/preserved/watch-clank/scripts/systemd/README.md",
+      "sha256": "a0841f9d6916c74eb02cf64805a2cefac4b6ead6b3f2ec63601fa74ab092d8f9",
+      "bytes": 12152,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/docker/watch-clank-docker.service.template",
+      "preserved_path": "docs/preserved/watch-clank/scripts/systemd/docker/watch-clank-docker.service.template",
+      "sha256": "7a46309c6f0f6ac494ca87b79c6fe98fb9ec964fd5fd6e017f38d723fcb141d1",
+      "bytes": 691,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/docker/watch-clank-docker.timer.template",
+      "preserved_path": "docs/preserved/watch-clank/scripts/systemd/docker/watch-clank-docker.timer.template",
+      "sha256": "d8fa155d76c70ef4fd039109ef725b9538edf868c5ba63bdb92fcff17d85dedb",
+      "bytes": 178,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/db_backup.py",
+      "preserved_path": "docs/preserved/watch-clank/scripts/db_backup.py",
+      "sha256": "c9560edbd63a936b1675fbe8da560addb34ff1aee82a323f200bd70052f8196d",
+      "bytes": 2305,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "docker-compose.staging.yml",
+      "preserved_path": "docs/preserved/watch-clank/docker-compose.staging.yml",
+      "sha256": "8061b8756482aba8c923884da14a441220e168e059f2ba21358e436b8b92fed8",
+      "bytes": 1929,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "smartwatch-clank",
+      "source_path": "deploy/smartwatch-clank-soak.service.example",
+      "preserved_path": "docs/preserved/smartwatch-clank/deploy/smartwatch-clank-soak.service.example",
+      "sha256": "0fe41998176d06d801259eef5ecfd5750dcd9c7aedeb1d9266f59fd5f45bf701",
+      "bytes": 1404,
+      "git_sha": "7ed4d74291deb54306c970bf3d5c8553ba558232",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "smartwatch-clank",
+      "source_path": "deploy/smartwatch-clank-soak.timer.example",
+      "preserved_path": "docs/preserved/smartwatch-clank/deploy/smartwatch-clank-soak.timer.example",
+      "sha256": "17f4245cd2a0e562a9ff0406c5f9aea47972eb4e752daf77a720087554e20943",
+      "bytes": 1329,
+      "git_sha": "7ed4d74291deb54306c970bf3d5c8553ba558232",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "smartwatch-clank",
+      "source_path": "deploy/crontab.example",
+      "preserved_path": "docs/preserved/smartwatch-clank/deploy/crontab.example",
+      "sha256": "f440826cff515f0a199e6c02a11ba9f2391e4387f74890ef4df961c8a92a8a39",
+      "bytes": 937,
+      "git_sha": "7ed4d74291deb54306c970bf3d5c8553ba558232",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "smartwatch-clank",
+      "source_path": "docker-compose.staging.yml",
+      "preserved_path": "docs/preserved/smartwatch-clank/docker-compose.staging.yml",
+      "sha256": "5ef47de5fd7f674a57948a6949693710005f2685909832e49230008c86027778",
+      "bytes": 1452,
+      "git_sha": "7ed4d74291deb54306c970bf3d5c8553ba558232",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "smartphone-clank",
+      "source_path": "deploy/systemd/smartphone-clank-source@.service",
+      "preserved_path": "docs/preserved/smartphone-clank/deploy/systemd/smartphone-clank-source@.service",
+      "sha256": "4ce75d4b828b99950fbad9053a3427e449abf78c1fbda93b621a8a3bf996fa22",
+      "bytes": 343,
+      "git_sha": "10906e6813781389ddb862368104b8cd5c61a5f2",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "smartphone-clank",
+      "source_path": "deploy/systemd/smartphone-clank-soak@.service",
+      "preserved_path": "docs/preserved/smartphone-clank/deploy/systemd/smartphone-clank-soak@.service",
+      "sha256": "e712afca3eae2aa07f96c89f65c2a47ba6f96dc2000358a3b130fc6bbe7be9f1",
+      "bytes": 818,
+      "git_sha": "10906e6813781389ddb862368104b8cd5c61a5f2",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "smartphone-clank",
+      "source_path": "deploy/systemd/README.md",
+      "preserved_path": "docs/preserved/smartphone-clank/deploy/systemd/README.md",
+      "sha256": "e4954a9e5080f61dd075212fc9cb7cdf611a3e2ced062e4274f68b553cbf94ba",
+      "bytes": 4666,
+      "git_sha": "10906e6813781389ddb862368104b8cd5c61a5f2",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "smartphone-clank",
+      "source_path": "deploy/systemd/smartphone-clank-samsung_us_support_sitemap.timer",
+      "preserved_path": "docs/preserved/smartphone-clank/deploy/systemd/smartphone-clank-samsung_us_support_sitemap.timer",
+      "sha256": "81fc6294c2b335ee05da2ccd296473afa40b5182373bb021e94c06a71cf0a05f",
+      "bytes": 217,
+      "git_sha": "10906e6813781389ddb862368104b8cd5c61a5f2",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "feature-phone-clank",
+      "source_path": "docker-compose.staging.yml",
+      "preserved_path": "docs/preserved/feature-phone-clank/docker-compose.staging.yml",
+      "sha256": "266d2ac5ffbe498005dd9376d7175d0a9f363bf9f7d3bae753ad566fd016a573",
+      "bytes": 1445,
+      "git_sha": "c173beae757a1142279687e2740b37f95456f2b6",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "feature-phone-clank",
+      "source_path": "Dockerfile",
+      "preserved_path": "docs/preserved/feature-phone-clank/Dockerfile",
+      "sha256": "68a12469fc276e71498224140c807c9a47a7a8c6502e834bf09a03ff9083bfd3",
+      "bytes": 1557,
+      "git_sha": "c173beae757a1142279687e2740b37f95456f2b6",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "tablet-clank",
+      "source_path": "deploy/systemd/tablet-clank-production.service.example",
+      "preserved_path": "docs/preserved/tablet-clank/deploy/systemd/tablet-clank-production.service.example",
+      "sha256": "e86d25ea909a82dcf8884af5b0d7fa386a8c25056f7f2f2350347a2beff90e38",
+      "bytes": 432,
+      "git_sha": "a41d1e7fa58f81cb9f8662d0357e8746f4b192dc",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "tablet-clank",
+      "source_path": "deploy/systemd/tablet-clank-production.timer.example",
+      "preserved_path": "docs/preserved/tablet-clank/deploy/systemd/tablet-clank-production.timer.example",
+      "sha256": "dbee99b8bbe1574e7327c6e5afb286588ffb451ca0e713c6b974daeafa8fe213",
+      "bytes": 341,
+      "git_sha": "a41d1e7fa58f81cb9f8662d0357e8746f4b192dc",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "korean-tech-wire",
+      "source_path": "deploy/systemd/korean-tech-wire-soak.service",
+      "preserved_path": "docs/preserved/korean-tech-wire/deploy/systemd/korean-tech-wire-soak.service",
+      "sha256": "4b97e8c6f2dc55a85327867884b463389b5e613b2b4c22bb06dddd6dc5a7d444",
+      "bytes": 468,
+      "git_sha": "ad11b0f5cb3cff793be989089ef652fdeba073c3",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "korean-tech-wire",
+      "source_path": "deploy/systemd/korean-tech-wire-soak.timer",
+      "preserved_path": "docs/preserved/korean-tech-wire/deploy/systemd/korean-tech-wire-soak.timer",
+      "sha256": "cd5a4ba772dcbd87d03e4aa93127873512c26ea9f7965439d1f4b56ddf2ec853",
+      "bytes": 161,
+      "git_sha": "ad11b0f5cb3cff793be989089ef652fdeba073c3",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "chinese-tech-wire",
+      "source_path": "scripts/backup.py",
+      "preserved_path": "docs/preserved/chinese-tech-wire/scripts/backup.py",
+      "sha256": "e4dbabac9f898006a3b406561e9075e0868acdf8c23ca437272dcf759246b382",
+      "bytes": 1784,
+      "git_sha": "1a47220c69e6bb91f2899a0508508c42254c9d5b",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "chinese-tech-wire",
+      "source_path": "scripts/restore.py",
+      "preserved_path": "docs/preserved/chinese-tech-wire/scripts/restore.py",
+      "sha256": "f3440802d57cd36fddbadcd3217314d849dc6676bc24ccd571ec1002f3f45580",
+      "bytes": 3596,
+      "git_sha": "1a47220c69e6bb91f2899a0508508c42254c9d5b",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "chinese-tech-wire",
+      "source_path": "docker-compose.staging.yml",
+      "preserved_path": "docs/preserved/chinese-tech-wire/docker-compose.staging.yml",
+      "sha256": "5e84a7f261f845d220c210bb5fb91d5853debb351b0276f3a93ba0db1453be37",
+      "bytes": 1409,
+      "git_sha": "1a47220c69e6bb91f2899a0508508c42254c9d5b",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "semiconductor-intelligence",
+      "source_path": "deploy/crontab.example",
+      "preserved_path": "docs/preserved/semiconductor-intelligence/deploy/crontab.example",
+      "sha256": "0b7985db42da8cb21794f9c8360fb7e81f994764621010eb37dc57c24db63a90",
+      "bytes": 516,
+      "git_sha": "ece4b001c60dd156c2a05cb92cf0ea335e0532c6",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "semiconductor-intelligence",
+      "source_path": "semi_intel/operations/backup.py",
+      "preserved_path": "docs/preserved/semiconductor-intelligence/semi_intel/operations/backup.py",
+      "sha256": "dad85d319cdbba0016bf96e1d81c1873e78da16ee0a885914e21637fcaeefe62",
+      "bytes": 15104,
+      "git_sha": "ece4b001c60dd156c2a05cb92cf0ea335e0532c6",
+      "git_branch": "main",
+      "redacted": false
+    },
+    {
+      "repo": "diagnostic-clank",
+      "source_path": "operations/phase0/deployment-instance.template.yaml",
+      "preserved_path": "docs/preserved/diagnostic-clank/operations/phase0/deployment-instance.template.yaml",
+      "sha256": "be1d70acb2958ff7a2363797d7f5bc21fcc17547e59e8dc84e8debb190e645d7",
+      "bytes": 1222,
+      "git_sha": "3667af02c8dd33503ce75461ec2974d42f2f1d4c",
+      "git_branch": "diagnostic-clank-2026-08",
+      "redacted": false
+    },
+    {
+      "repo": "diagnostic-clank",
+      "source_path": "docker-compose.yml",
+      "preserved_path": "docs/preserved/diagnostic-clank/docker-compose.yml",
+      "sha256": "61e550a64525f7cf68331a877bcdd8a0253638361dcaf30a90766ba5853b0f12",
+      "bytes": 1429,
+      "git_sha": "3667af02c8dd33503ce75461ec2974d42f2f1d4c",
+      "git_branch": "diagnostic-clank-2026-08",
+      "redacted": false
+    }
+  ],
+  "hashed_units": [
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-casio-uk-sitemap.service",
+      "sha256": "ee13271872d9319282e12a49421b1fa60fa47991cbbf375c1a5350e73c1285cd",
+      "bytes": 296,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-casioblog.service",
+      "sha256": "a0aae7079ee8f2d11996ad15d9d5e681f8c35baadd30bfef592aab378b755819",
+      "bytes": 493,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-citizen-news.service",
+      "sha256": "b23d3c14b8669b72b8e33c1c2b6354e6ef156a093296225aec0494c655736367",
+      "bytes": 501,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-citizen-products.service",
+      "sha256": "9b8203f99d18131cd2c2a8ae4a26fd055ed29fb4a5b0e3c8e804ebf79af46b15",
+      "bytes": 298,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-deployant.service",
+      "sha256": "7f5a8d58dab059f613f7d8df21ed96815c16a86231d88ead19f574bee3a5c108",
+      "bytes": 305,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-fratello.service",
+      "sha256": "09f9c123f30460b9365b7e56c44dd53fdef3c28c1ff5662972087a34c700b585",
+      "bytes": 303,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-gcentral.service",
+      "sha256": "da3f75020b9a3507c0ae773d1a9c997041d28dcf1bd48cffba3d5383da070828",
+      "bytes": 304,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-monochrome.service",
+      "sha256": "911caf7f4451b7e97da8f6ab498ddc692410d3afbe779c583b7a34ceec9dde03",
+      "bytes": 307,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-plus9time.service",
+      "sha256": "e4d7bbcc7e3abd1cca88040c5317702deb4f700797e39ebe12e261860b7e059d",
+      "bytes": 305,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-seiko-jp-products.service",
+      "sha256": "a0b1c16d82d6d29df4587bab44102ac31daaef2bd51c936f4eefd33a08a8bc88",
+      "bytes": 306,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-seiko-news.service",
+      "sha256": "2de90c826f9944b5477146617dca61489d00c59941be97c158acdb3bd186a631",
+      "bytes": 310,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-seiko-products.service",
+      "sha256": "3d11b06a45b14aabac608cdebec83d459111897e4c0e7fd59bfae04971ace1fe",
+      "bytes": 294,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-timex-news.service",
+      "sha256": "15c0d6db165aca25b58b9786284f13900b2a0b3294bdb8f315ff89cef7159fbd",
+      "bytes": 277,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-timex-products.service",
+      "sha256": "f12d418c813693d182db9759cbea3f08d52ea8e96ffc5e2ff6663c73f5ce3dc6",
+      "bytes": 287,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-watchtime.service",
+      "sha256": "9af34c3f45ed15453c33b0aee3f60c28f6c41fb62e692ce84ce0f50b863a044a",
+      "bytes": 305,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank.service",
+      "sha256": "9cd627eb2e21a8561837d939818e463ed103767621956ec14fcd4025c0e55e58",
+      "bytes": 609,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-casio-uk-sitemap.timer",
+      "sha256": "e4d40e9c98135c15c686784e18c0f3a9ad2f1b29e938148900ab580b47e2b1f3",
+      "bytes": 404,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-casioblog.timer",
+      "sha256": "9a17925911274f7f70eed8f247b4b5c3450c6f11593091a9f646aee6be6b2567",
+      "bytes": 416,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-citizen-news.timer",
+      "sha256": "8bca8c74112d50bbbb56e0c079ec9746b14b1a51159fb809a6e4a37bff92e316",
+      "bytes": 383,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-citizen-products.timer",
+      "sha256": "d1192a60188d9f9424c6e955d42b3d48b2bc621f5c35d1e7132c98d6704a48f4",
+      "bytes": 555,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-deployant.timer",
+      "sha256": "a765c99f490a663c49ec998e98f053353aa1918b71365e8b1fed892bdcd8a84c",
+      "bytes": 190,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-fratello.timer",
+      "sha256": "7fc1bda8c29cdd79cf13e403fa3647b5e17ccf8b7f26e7115fac64f59fcb63d2",
+      "bytes": 189,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-gcentral.timer",
+      "sha256": "41a2cc55bc775488731e670e478dce60b8e6a71bfa388e49a870d6287695a57a",
+      "bytes": 327,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-monochrome.timer",
+      "sha256": "f5d8d3686354749d684e446265975568c8aae7b3e9ea0e8c61ffe5f20cf7b997",
+      "bytes": 191,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-plus9time.timer",
+      "sha256": "be56d29d7753904102185057f89dc18d33df88d55b26b6c0ce6a76b53cf5c098",
+      "bytes": 324,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-seiko-jp-products.timer",
+      "sha256": "c3e58df09b0cdf6bd1d012efa33694d0cb97c83d0f03469fecd607ecdf8a7134",
+      "bytes": 382,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-seiko-news.timer",
+      "sha256": "6668aafcd91c79298faf9fc30bd4249704abf8c291b57aedf08445b619fe90b4",
+      "bytes": 179,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-seiko-products.timer",
+      "sha256": "389cef58e34dfa2e625bfb6c9066ab532db8c0f6dae516cd487f483ac01587a4",
+      "bytes": 387,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-timex-news.timer",
+      "sha256": "a76339d7f6f3b781f17b7e88fbf14711eb0870345341e01b0bc3338c701fc0e4",
+      "bytes": 464,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-timex-products.timer",
+      "sha256": "6fac0f50b7c9f10eb1d4719f7e40b6a14332bb46a73c9f86fe0512eb16d95305",
+      "bytes": 318,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank-watchtime.timer",
+      "sha256": "fd26811cd8d1a2db825018c0cafe19c405bbcb30ab8d3edb28c9de6444b18b63",
+      "bytes": 190,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "watch-clank",
+      "source_path": "scripts/systemd/watch-clank.timer",
+      "sha256": "0544be10f427c19e6651211bae361ca4f873f00c36529e29d5aa34118233c753",
+      "bytes": 408,
+      "git_sha": "d4fda37085963e6e42fde95c0e19c334c59dd98c"
+    },
+    {
+      "repo": "smartphone-clank",
+      "source_path": "deploy/systemd/README.md",
+      "sha256": "e4954a9e5080f61dd075212fc9cb7cdf611a3e2ced062e4274f68b553cbf94ba",
+      "bytes": 4666,
+      "git_sha": "10906e6813781389ddb862368104b8cd5c61a5f2"
+    },
+    {
+      "repo": "smartphone-clank",
+      "source_path": "deploy/systemd/smartphone-clank-google_store_category_phones.timer",
+      "sha256": "62a398892bfb789a59e04222c09212041a233af8d5c7c9d5ea6fc6cae7bcbf61",
+      "bytes": 222,
+      "git_sha": "10906e6813781389ddb862368104b8cd5c61a5f2"
+    },
+    {
+      "repo": "smartphone-clank",
+      "source_path": "deploy/systemd/smartphone-clank-honor_global_sitemap.timer",
+      "sha256": "9c6f1a2b235d9fcfd9ad8a6ea62fd616b35e80636b1c9925be4244855b50ccd9",
+      "bytes": 211,
+      "git_sha": "10906e6813781389ddb862368104b8cd5c61a5f2"
+    },
+    {
+      "repo": "smartphone-clank",
+      "source_path": "deploy/systemd/smartphone-clank-motorola_regional_sitemap.timer",
+      "sha256": "7b80aed32ea908604a74c56670041397ff736f57781c4ed98765bd1e6e67fef3",
+      "bytes": 218,
+      "git_sha": "10906e6813781389ddb862368104b8cd5c61a5f2"
+    },
+    {
+      "repo": "smartphone-clank",
+      "source_path": "deploy/systemd/smartphone-clank-nothing_products_sitemap.timer",
+      "sha256": "0ed6c89d8663f1885c4242ba9d7757a888cf0a9f9fdbcb19681834e3fe0e02bc",
+      "bytes": 219,
+      "git_sha": "10906e6813781389ddb862368104b8cd5c61a5f2"
+    },
+    {
+      "repo": "smartphone-clank",
+      "source_path": "deploy/systemd/smartphone-clank-oneplus_regional_sitemap.timer",
+      "sha256": "2a851f5f6555b93c356950c2c90725c0d07620ee36c0bac17c4558661ad2447c",
+      "bytes": 219,
+      "git_sha": "10906e6813781389ddb862368104b8cd5c61a5f2"
+    },
+    {
+      "repo": "smartphone-clank",
+      "source_path": "deploy/systemd/smartphone-clank-oppo_global_sitemap.timer",
+      "sha256": "d1f1019fb2d980547d5425af1721cef01c244f3285cdb16f1d423a8cb61786f4",
+      "bytes": 209,
+      "git_sha": "10906e6813781389ddb862368104b8cd5c61a5f2"
+    },
+    {
+      "repo": "smartphone-clank",
+      "source_path": "deploy/systemd/smartphone-clank-realme_regional_sitemap.timer",
+      "sha256": "2200956fe4e1c3feaf39e5e6d5990ebdf632b47814c8b3757ffea96e9ff7655f",
+      "bytes": 215,
+      "git_sha": "10906e6813781389ddb862368104b8cd5c61a5f2"
+    },
+    {
+      "repo": "smartphone-clank",
+      "source_path": "deploy/systemd/smartphone-clank-samsung_us_support_sitemap.timer",
+      "sha256": "81fc6294c2b335ee05da2ccd296473afa40b5182373bb021e94c06a71cf0a05f",
+      "bytes": 217,
+      "git_sha": "10906e6813781389ddb862368104b8cd5c61a5f2"
+    },
+    {
+      "repo": "smartphone-clank",
+      "source_path": "deploy/systemd/smartphone-clank-soak@.service",
+      "sha256": "e712afca3eae2aa07f96c89f65c2a47ba6f96dc2000358a3b130fc6bbe7be9f1",
+      "bytes": 818,
+      "git_sha": "10906e6813781389ddb862368104b8cd5c61a5f2"
+    },
+    {
+      "repo": "smartphone-clank",
+      "source_path": "deploy/systemd/smartphone-clank-soak@samsung_us_owners_product.timer",
+      "sha256": "8d5c8cb0b9912450651f567bc7bc2df40b9355684901b98558999f4979e1ba19",
+      "bytes": 548,
+      "git_sha": "10906e6813781389ddb862368104b8cd5c61a5f2"
+    },
+    {
+      "repo": "smartphone-clank",
+      "source_path": "deploy/systemd/smartphone-clank-source@.service",
+      "sha256": "4ce75d4b828b99950fbad9053a3427e449abf78c1fbda93b621a8a3bf996fa22",
+      "bytes": 343,
+      "git_sha": "10906e6813781389ddb862368104b8cd5c61a5f2"
+    }
+  ]
+}

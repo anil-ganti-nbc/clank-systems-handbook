@@ -1,0 +1,50 @@
+# Watch Clank -- STAGING / SOAK ONLY. Under construction. No production
+# compose file exists for this clank. Isolated named volume, no ports
+# published, no Docker socket mounted, restart disabled (soak runs are
+# launched explicitly), one-shot default command.
+#
+# Dashboard is deliberately NOT included in this compose file (see
+# ai/handoff/SQLITE_COORDINATION.md for the evidence): it is a separate,
+# purely read-only FastAPI service with zero write routes, safe to add
+# later against the same volume without further SQLite coordination work,
+# but not required for unattended soak correctness today.
+services:
+  watch-clank:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        GIT_REVISION: ${GIT_REVISION:-unknown}
+    image: watch-clank:${IMAGE_TAG:?set IMAGE_TAG to a commit SHA, e.g. IMAGE_TAG=$(git rev-parse --short HEAD)}
+    container_name: watch-clank-soak
+    restart: "no"
+    environment:
+      DATABASE_URL: sqlite:////data/watch_clank.db
+      SNAPSHOT_STORAGE_ROOT: /data/snapshots
+      LOG_DIR: /data/logs
+    volumes:
+      - watch_clank_staging_data:/data
+    command: ["python", "-m", "scripts.run_pipeline", "--scheduled"]
+
+  # Explicit, deliberate migration application. Never run by the default
+  # `watch-clank` service. Invoke manually:
+  #   docker compose -f docker-compose.staging.yml run --rm migrate
+  migrate:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        GIT_REVISION: ${GIT_REVISION:-unknown}
+    image: watch-clank:${IMAGE_TAG:?set IMAGE_TAG to a commit SHA, e.g. IMAGE_TAG=$(git rev-parse --short HEAD)}
+    container_name: watch-clank-migrate
+    restart: "no"
+    environment:
+      DATABASE_URL: sqlite:////data/watch_clank.db
+    volumes:
+      - watch_clank_staging_data:/data
+    command: ["python", "-m", "scripts.migrate"]
+    profiles: ["migrate"]
+
+volumes:
+  watch_clank_staging_data:
+    name: watch_clank_staging_data

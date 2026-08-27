@@ -1,0 +1,15 @@
+[Unit]
+Description=Watch Clank scheduled pipeline run (Casio production lane)
+Wants=watch-clank.timer
+
+[Service]
+Type=oneshot
+# EDIT these two paths for your host before installing.
+WorkingDirectory=/opt/watch-clank
+ExecStart=/opt/watch-clank/scripts/run_scheduled.sh
+# Secrets/config come from EnvironmentFile, never from this unit file.
+EnvironmentFile=-/opt/watch-clank/.env
+# Same exit-code contract as Windows Task Scheduler: 0 covers SUCCESS,
+# PARTIAL, ZERO_ITEMS, BLOCKED, SKIPPED_OVERLAP — those are not systemd
+# failures. Only 1 (FAILED)/2 (setup)/3 (migration) should alert.
+SuccessExitStatus=0

@@ -1,0 +1,31 @@
+instance_id: UNKNOWN
+repository: UNKNOWN
+deployment_state: UNKNOWN
+environment: UNKNOWN
+failure_domain: UNKNOWN
+location_type: UNKNOWN  # HETZNER | NAS
+location: UNKNOWN
+host: UNKNOWN
+deployed_commit_sha: UNKNOWN
+artifact_digest: UNKNOWN
+source_branch_or_tag: UNKNOWN
+service_identity: UNKNOWN
+working_directory_or_container: UNKNOWN
+runtime: {implementation: UNKNOWN, version: UNKNOWN}
+dependency_lock: {file: UNKNOWN, digest: UNKNOWN, matches: UNKNOWN}
+database_path: UNKNOWN
+evidence_path: UNKNOWN
+scheduler: {type: UNKNOWN, authority: UNKNOWN, owner: UNKNOWN, enabled: UNKNOWN, schedule: UNKNOWN}
+notification: {authority: UNKNOWN, owner: UNKNOWN, enabled: UNKNOWN, channels: UNKNOWN}
+backup: {location: UNKNOWN, latest_digest: UNKNOWN, last_verified_utc: UNKNOWN, last_restore_test_utc: UNKNOWN}
+health:
+  scheduler_invocation_utc: UNKNOWN
+  application_start_utc: UNKNOWN
+  successful_job_commit_utc: UNKNOWN
+  source_freshness_utc: UNKNOWN
+  last_job_status: UNKNOWN
+  heartbeat_stale_after_seconds: UNKNOWN
+secrets: {owner: UNKNOWN, storage_mechanism: UNKNOWN}
+rollback_artifact: UNKNOWN
+last_operator_verification: {operator: UNKNOWN, observed_at_utc: UNKNOWN, evidence_bundle: UNKNOWN}
+promotion_eligible: false

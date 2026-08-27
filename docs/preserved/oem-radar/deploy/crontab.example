@@ -1,0 +1,5 @@
+# Linux cron alternative to systemd timer (ADR-1: one-shot, not daemon).
+# Adjust paths. Lock file prevents overlap if a run exceeds the interval.
+#
+# m h  dom mon dow  command
+17 * * * *  cd /opt/oem-radar && /usr/bin/python3 -m oem_radar.cli --config config run >> data/crawl-runs.log 2>&1

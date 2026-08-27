@@ -1,0 +1,18 @@
+# Generic "Smartwatch Clank experimental soak" cron entry.
+#
+# One entry, regardless of how many OEM collectors are registered — new
+# OEMs become participants via config/registry, not new scheduled tasks
+# (spec: the soak framework is global, not per-OEM).
+#
+# Matches this fleet's existing convention: deployments live under
+# /home/deploy/staging/<clank>/ and a deploy/run.sh wrapper reads
+# .deployed-id and invokes `docker compose run --rm`. Adjust the path if
+# this Clank's staging directory differs.
+#
+# Deliberately NOT the same :50-past-odd-hours schedule as the existing
+# production cron entry -- this drives EXPERIMENTAL-tier collectors only
+# (see RunScope in core/models.py), a separate schedule from production
+# by design, offset here to avoid the two landing in the same minute.
+#
+# m h  dom mon dow  command
+12 0-22/2 * * *  cd /home/deploy/staging/smartwatch-clank && ./deploy/run.sh >> var/logs/soak-cron.log 2>&1

@@ -1,0 +1,13 @@
+[Unit]
+Description=Tablet Clank production cycle timer (single scheduler authority)
+
+[Timer]
+# Twice daily, offset from other fleet lanes. RandomizedDelaySec prevents
+# thundering-herd starts across co-hosted Clanks.
+OnCalendar=*-*-* 06:20:00
+OnCalendar=*-*-* 18:20:00
+RandomizedDelaySec=90
+Persistent=true
+
+[Install]
+WantedBy=timers.target

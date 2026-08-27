@@ -1,0 +1,17 @@
+# systemd timer — hourly catch-up. Each tick runs the oneshot service once.
+# Overlap is prevented by:
+#   1) Persistent=false + RandomizedDelaySec
+#   2) oem-radar's data/oem-radar.lock (single-instance run lock)
+
+[Unit]
+Description=Hourly OEM Radar catch-up crawl
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=1h
+RandomizedDelaySec=90
+Persistent=true
+Unit=oem-radar-run.service
+
+[Install]
+WantedBy=timers.target

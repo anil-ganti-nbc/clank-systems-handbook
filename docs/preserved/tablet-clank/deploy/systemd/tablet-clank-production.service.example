@@ -1,0 +1,14 @@
+[Unit]
+Description=Tablet Clank production cycle (one-shot)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=deploy
+Group=deploy
+WorkingDirectory=/opt/tablet-clank
+# One-shot: the timer below is the ONLY scheduling authority for this lane.
+ExecStart=/opt/tablet-clank/.venv/bin/python -m tablet_clank.cli production --db /opt/tablet-clank/var/tablet_clank.db
+NoNewPrivileges=true
+PrivateTmp=true

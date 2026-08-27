@@ -1,0 +1,35 @@
+# Chinese Tech Wire — STAGING / SOAK ONLY (Tier B clank).
+# No production compose file exists for this clank in this phase. Distinct
+# volume from any local/dev state, no ports published, no Docker socket
+# mounted, restart disabled (soak runs are launched explicitly, not
+# auto-restarted), default command is a one-shot --full-once (never --gui).
+#
+# Usage: docker compose -f docker-compose.staging.yml build
+#        docker compose -f docker-compose.staging.yml run --rm chinese-tech-wire
+services:
+  chinese-tech-wire:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        GIT_REVISION: ${GIT_REVISION:-unknown}
+    image: chinese-tech-wire:${IMAGE_TAG:-soak-local}
+    container_name: chinese-tech-wire-soak
+    restart: "no"
+    environment:
+      DATABASE_URL: sqlite:////app/data/ctw.db
+      CTW_RELEASE_CHANNEL: soaking
+      # Deliberately empty unless the operator opts in to a distinct
+      # staging-only destination — never the real Discord channel.
+      DISCORD_WEBHOOK_URL: ${CTW_STAGING_DISCORD_WEBHOOK_URL:-}
+      GEMINI_API_KEY: ${CTW_STAGING_GEMINI_API_KEY:-}
+      EMBEDDING_API_KEY: ${CTW_STAGING_EMBEDDING_API_KEY:-}
+      TRANSLATION_API_KEY: ${CTW_STAGING_TRANSLATION_API_KEY:-}
+      LOG_LEVEL: ${CTW_LOG_LEVEL:-INFO}
+    volumes:
+      - ctw_staging_data:/app/data
+    command: ["--full-once"]
+
+volumes:
+  ctw_staging_data:
+    name: ctw_staging_data

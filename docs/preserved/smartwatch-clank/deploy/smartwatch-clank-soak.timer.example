@@ -1,0 +1,31 @@
+# systemd timer — matches the established 2-hour soak cadence
+# (spec: avoid unnecessary changes to cadence; inspect existing fleet
+# timers before picking the exact minute offset to avoid collisions).
+#
+# Fixed-clock OnCalendar (not OnUnitActiveSec) so the schedule is directly
+# auditable against `systemctl list-timers` and the fleet's crontab, the
+# same way every other Clank's timer/cron entry on this host is. Minute
+# :12 at even hours was picked by inspecting the live fleet at deploy time
+# (`systemctl list-timers --all` + `crontab -u deploy -l`): existing
+# offsets in use were :05, :10, :15, :18, :20, :36, :40, and the existing
+# smartwatch-clank PRODUCTION cron itself runs at :50 past ODD hours
+# (`50 1-23/2 * * *`) -- this timer deliberately runs at even hours so the
+# two never fire in the same wall-clock minute.
+#
+# Overlap is prevented by:
+#   1) RandomizedDelaySec
+#   2) the store's own RunLock (<database>.lock, single-instance run lock)
+#      -- shared with the production cron path against the same database,
+#      so even a coincidental overlap just makes one cycle wait, not race.
+
+[Unit]
+Description=Smartwatch Clank experimental soak, every 2 hours
+
+[Timer]
+OnCalendar=*-*-* 00/2:12:00
+RandomizedDelaySec=90
+Persistent=true
+Unit=smartwatch-clank-soak.service
+
+[Install]
+WantedBy=timers.target
