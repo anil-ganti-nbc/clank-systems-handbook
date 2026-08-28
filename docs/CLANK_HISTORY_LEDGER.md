@@ -420,29 +420,33 @@ Count: **27**. Confidence: **27 verified**, **0 inferred**, **0 incomplete**.
 
 **Incidents.** `inc-qc`, `inc-bankai`, `inc-health-honesty`
 
-### 2026-08-21 — Smartwatch dual-lane repaired: failing systemd soak timer retired 2026-08-21T21:06Z; cron kept as sole scheduler.
+### 2026-08-21 — Law 5 specimen: smartwatch dual-lane — competing soak timer retired in the 2026-08-21 law/inventory record.
 
 - **Id:** `h-dual-scheduler`
 - **Period:** 2026-08-21
 - **Phase:** `p-phase0`
 - **Systems:** smartwatch-clank; watch-clank; semiconductor-intelligence
-- **Confidence:** VERIFIED
+- **Confidence:** VERIFIED (failure class + dated recorded retirement) / current scheduler UNKNOWN
 
-**Event.** Smartwatch dual-lane repaired: failing systemd soak timer retired 2026-08-21T21:06Z; cron kept as sole scheduler.
+**Event.** Law 5 specimen: smartwatch dual-lane — competing soak timer retired in the 2026-08-21 law/inventory record.
 
 **Before.** A Clank-lane could have more than one enabled scheduling mechanism. Experimental soaks could reach production collectors.
 
-**Change.** Law 5 specimens: smartwatch dual-lane journals; watch fcb5e91 ghost cron; SemInt wrong-app installer / cron bypassing OperationalScheduler.
+**Change.** FLEET_LAWS.md Law 5 (`d046d54`) records dual scheduling as a named failure class and the smartwatch specimen: systemd soak timer retired 2026-08-21T21:06Z, cron kept. That timestamp is law/inventory text (also `fleet.yaml` soak row `observed_at_utc` 2026-08-21T21:06:00Z), not recovered journalctl. The 2026-08-22 inventory lists `smartwatch-hetzner-soak-timer-retired` as DISABLED (`enabled: false`; files retained unscheduled) beside a cron lane RUNNING staging at `d987b66` — a dated snapshot of what Phase 2A recorded, not a current probe. Git-resident soak unit/crontab examples prove competing-scheduler machinery existed; templates do not prove enablement then or now. Sibling specimens (Watch `fcb5e91` ghost cron; SemInt cron bypassing OperationalScheduler) name the class; the SemInt residual was still OPEN in that inventory. Later repo HEADs stay out of this row. Current enabled scheduler per lane remains UNKNOWN.
 
 **Why.** Two clocks on one notebook double-notify, starve each other, or hide which path actually ran.
 
 **What failed.** Failing timer fired hourly with zero observability (Law 3 specimen). Experimental soak ran production Samsung collectors (e9a897c made scope explicit).
 
+**Verification.** Failure class and dated recorded retirement (Law 5 @ d046d54; 2026-08-22 inventory soak row DISABLED at 21:06Z): VERIFIED. 21:06Z is law/inventory text, not recovered journalctl. Current enabled scheduler per lane: UNKNOWN.
+
+**Residual risk.** Do not teach 'cron is the sole scheduler now'. Git templates ≠ enabled. Watch fcb5e91 and SemInt residuals are the class, not this host action; SemInt was still OPEN in the 22 Aug inventory. Later HEADs (smartwatch a717977) stay out. Live scheduler authority remains UNKNOWN.
+
 **Later consequence.** GIC-24 dual scheduler authority. Tablet later encoded as INTENTIONALLY_DORMANT so a stale unit file is not a second authority.
 
 **Evidence.**
 
-- `ev-law5` (doc, VERIFIED) anil-ganti-nbc/clank-architecture FLEET_LAWS.md @d046d54428b1e9dfdb63b8336959df955dd6820a — Law 5: smartwatch dual-lane (cron kept, systemd retired 2026-08-21T21:06Z).
+- `ev-law5` (doc, VERIFIED) anil-ganti-nbc/clank-architecture FLEET_LAWS.md @d046d54428b1e9dfdb63b8336959df955dd6820a — Law 5: smartwatch dual-lane (cron kept, systemd retired 2026-08-21T21:06Z). Timestamp is law/inventory text, not live journalctl.
 
 **Commit(s).**
 

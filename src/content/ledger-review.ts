@@ -95,12 +95,20 @@ export const LEDGER_REVIEWS: LedgerReview[] = [
   r({
     historyId: "h-dual-scheduler",
     currentConfidence: "verified",
-    supportingArtefacts: ["FLEET_LAWS.md Law 5", "soak timer templates still in smartwatch git"],
-    verifiedClaims: ["Law 5 names the smartwatch dual-lane specimen and 2026-08-21T21:06Z retirement."],
-    inferredClaims: ["The failing timer is still disabled on the live host today."],
-    overreadRisk: "Retirement timestamp is from the law text, not a 2026-08-27 journalctl. Templates still exist in git — existence ≠ enabled.",
+    supportingArtefacts: ["FLEET_LAWS.md Law 5 @ d046d54", "fleet.yaml soak row 2026-08-22", "soak timer templates still in smartwatch git"],
+    verifiedClaims: [
+      "Law 5 names dual scheduling as a failure class and the smartwatch specimen: systemd soak retired 2026-08-21T21:06Z, cron kept.",
+      "2026-08-22 fleet.yaml lists smartwatch-hetzner-soak-timer-retired DISABLED (enabled: false; files retained unscheduled) beside a cron lane RUNNING staging at d987b66.",
+    ],
+    inferredClaims: [
+      "The failing timer is still disabled on the live host today.",
+      "Cron is the sole enabled scheduler on smartwatch now.",
+      "Watch fcb5e91 and SemInt residuals were repaired in the same host action.",
+    ],
+    overreadRisk:
+      "Owner walk 2026-08-28: in-row split applied. Historical scar stays VERIFIED. 21:06Z is law/inventory text, not live journalctl. Templates ≠ enabled. Later HEADs out. Current scheduler authority UNKNOWN. Do not teach 'one clock is authoritative now'.",
     openQuestions: ["What is the single enabled scheduler on smartwatch right now?"],
-    recommendedAction: "await-host-probe",
+    recommendedAction: "keep",
     recommendedConfidence: "verified",
   }),
   r({

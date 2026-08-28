@@ -20,7 +20,7 @@ UI: Handbook **Evidence → Rows awaiting human review**.
 |---|---|---|
 | h-consumer-clanks | await-human | archaeology baseline SHAs not re-hashed this pass |
 | h-portability | keep (split applied in-row) | Owner walk 2026-08-28: machinery-in-git VERIFIED; archaeology SHAs not live; inventory 22 Aug dated; live SHA UNKNOWN |
-| h-dual-scheduler | await-host-probe | 2026-08-21T21:06Z retirement is law text, not 2026-08-27 journal |
+| h-dual-scheduler | keep (split applied in-row) | Owner walk 2026-08-28: Law 5 scar VERIFIED; 21:06Z is law/inventory not live journal; current scheduler UNKNOWN |
 | h-motherclank-born | keep (split applied in-row) | Owner walk 2026-08-28: created ≠ supervising; live SHA/process/timer/var UNKNOWN |
 | h-materialization | keep (split applied in-row) | Owner walk 2026-08-27: mechanism VERIFIED; host timestamps/syslog INCOMPLETE |
 | h-volume-loss | await-host-probe | Motherclank var/ still BLOCKED |
@@ -40,5 +40,6 @@ All other original rows: **keep**, with residual notes. None recommended for del
 - [x] Split h-motherclank-born created ≠ supervising — **in-row split, no new id.** Architectural birth verified; live SHA/process/timer/var UNKNOWN. Do not present M1–M4 as proven live on 22 Aug.
 - [x] Split h-portability machinery-in-git ≠ those archaeology SHAs running — **in-row split, no new id.** Do not put 473931e / 12e8d3e / 938cc62 / f0b327a into commits[]. Live SHA UNKNOWN.
 - [x] Split h-watch-qc-race UNIQUE ≠ operator contract — **in-row split, pin ee3f34d.** Do not narrate a lived host 500. Later HEADs out. Live SHA UNKNOWN.
+- [x] Split h-dual-scheduler recorded retirement ≠ current scheduler authority — **in-row split, pin d046d54.** 21:06Z is law/inventory. Templates ≠ enabled. Live scheduler UNKNOWN.
 - [ ] After operator-reprobe.sh, only then consider upgrading any await-host-probe row
 - [ ] Do not upgrade UNKNOWN to healthy because several docs repeat it
