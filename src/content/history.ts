@@ -412,10 +412,10 @@ export const HISTORY: HistoryEntry[] = [
     period: "2026-08-08 to 2026-08-19",
     phaseId: "p-portability",
     systems: ["Hetzner", "NAS", "Docker", "Windows Task Scheduler"],
-    event: "Collectors gain Docker/runtime identity, host handoffs, and stop being laptop programs.",
+    event: "Collectors gain portable deployment machinery and host handoff support.",
     before: "Local Python CLIs and Windows scheduled tasks.",
     change:
-      "Archaeology §3 portability phase: Docker or external one-shot runners, source/image identity, backup artifacts, scheduler launchers, host-specific handoffs. FGT Hetzner deployment 473931e; Watch Hetzner/user-timers 12e8d3e / 938cc62 / f0b327a.",
+      "Archaeology §3 in the 2026-08-24 report records a portability/deployment phase from 2026-08-08 through 2026-08-19 in which most collector repos gained Docker or external one-shot runners, source/image identity, backup artefacts, scheduler launchers, and host-specific handoff notes. That proves portable deployment machinery entered the git record. It does not prove those exact versions ran on a host then, or run now. FGT 473931e and Watch 12e8d3e / 938cc62 / f0b327a are archaeology-cited commits from that phase, not live deployed SHAs. The 2026-08-22 fleet inventory later recorded Watch f0b327a and FGT cec0346; that is a dated inventory snapshot, not a current runtime probe. Git-resident Docker, unit, and backup templates do not prove timer enablement, a running image, or a live volume. Current deployed SHAs remain UNKNOWN.",
     why: "A newsroom sensor has to run unattended. Moving hosts created the first SHA-vs-runtime and volume-vs-checkout problems.",
     evidence: [
       {
@@ -423,7 +423,7 @@ export const HISTORY: HistoryEntry[] = [
         kind: "report",
         repo: "anil-ganti-nbc/clank-architecture",
         path: "audits/CLANK_FLEET_ARCHAEOLOGY_REPORT_2026-08-24.md",
-        note: "§3 Portability/deployment phase 2026-08-08 through 2026-08-19.",
+        note: "§3 Portability/deployment phase 2026-08-08 through 2026-08-19. Named SHAs in that report are commit citations, not live deployed revisions.",
         status: "verified",
       },
     ],
@@ -433,6 +433,10 @@ export const HISTORY: HistoryEntry[] = [
     incidentIds: ["inc-deployed-sha"],
     whatFailed: "Container host names, lock semantics, duplicate scheduling, stale local DBs mistaken for production.",
     laterConsequence: "Law 6 provenance and Law 9 (deferred) trailing-checkout metric.",
+    verification:
+      "Portable deployment machinery in git / archaeology §3: VERIFIED. Named SHAs are archaeology citations, not live deployed SHAs. 2026-08-22 inventory (Watch f0b327a, FGT cec0346) is a dated snapshot, not a current probe. Live deployed SHA, enabled scheduler, and live volume: UNKNOWN.",
+    residualRisk:
+      "Current deployed SHAs remain UNKNOWN. Do not re-promote FGT 473931e or Watch 12e8d3e / 938cc62 / f0b327a as live. Later repo HEADs (Watch 9d812ed, FGT 45b47a5) stay out of this row.",
     confidence: "verified",
   }),
   e("h-diagnostic-clank", {
@@ -1076,10 +1080,10 @@ export const HISTORY: HistoryEntry[] = [
     period: "2026-08-27",
     phaseId: "p-current",
     systems: ["watch-clank", "human QC queue"],
-    event: "Watch QC recovers from a concurrent double-submit instead of showing the operator a raw IntegrityError/500.",
+    event: "Watch QC recovers from a concurrent double-submit: UNIQUE is not an operator-facing contract.",
     before: "UNIQUE(event_id) already made a duplicate archive row impossible, but two near-simultaneous POSTs could both read 'no existing review' before either committed.",
     change:
-      "ee3f34d 2026-08-27T03:16:34Z: catch the constraint violation, roll back the losing insert, replay the same verdict as a correction against whichever row won. Co-Authored-By: Claude Sonnet 5. Suite: 468 passed, 2 skipped/live.",
+      "watch-clank ee3f34d (2026-08-27T03:16:34Z): UNIQUE(event_id) is the database guarantee. Two near-simultaneous POSTs could both read 'no existing review' before either committed; the losing insert would raise IntegrityError. The commit catches that violation, rolls back the losing insert, and replays the same verdict as a correction against whichever row won — that is the UI/operator contract. The suite can reproduce the race; '468 passed, 2 skipped/live' is that commit's test run, not a host probe. Those are separate facts from a lived host 500, which is not recorded. Later Watch HEADs (d4fda37, 9d812ed) stay out of this incident. Live deployed SHA remains UNKNOWN.",
     why: "A database uniqueness constraint is not an operator-facing contract. The QC button is a writer (Law 7); races must fail closed into the promised behaviour, not a 500.",
     evidence: [
       {
@@ -1087,15 +1091,19 @@ export const HISTORY: HistoryEntry[] = [
         kind: "commit",
         repo: "anil-ganti-nbc/watch-clank",
         sha: "ee3f34d7eba8715838196d59fbf562818349009b",
-        note: "fix(qc): recover gracefully from a concurrent double-QC submission. Idempotent-by-correction.",
+        note: "fix(qc): recover gracefully from a concurrent double-QC submission. Idempotent-by-correction. Git-resident application contract, not a recorded lived host 500.",
         status: "verified",
       },
     ],
-    commits: [{ repo: "anil-ganti-nbc/watch-clank", sha: "ee3f34d7eba8715838196d59fbf562818349009b" }],
+    commits: [{ repo: "anil-ganti-nbc/watch-clank", sha: "ee3f34d7eba8715838196d59fbf562818349009b", note: "QC race recovery, 2026-08-27T03:16:34Z" }],
     conceptIds: ["race-condition", "lock", "operator-role", "implementation-agent"],
     lawIds: ["law-7"],
     incidentIds: ["inc-writer-lock", "inc-qc"],
     laterConsequence: "The uniqueness constraint remains the last line; the application now speaks the same language as the constraint.",
+    verification:
+      "Mechanism (UNIQUE ≠ operator contract under concurrent POSTs; catch/rollback/replay in ee3f34d): VERIFIED from the commit. A lived host 500: not evidenced. Live Watch SHA: UNKNOWN.",
+    residualRisk:
+      "Live Watch deployed SHA remains UNKNOWN. Do not teach ee3f34d, d4fda37, or 9d812ed as production. Green tests on the commit are not a host SHA.",
     confidence: "verified",
   }),
   e("h-tablet-local", {

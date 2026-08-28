@@ -54,11 +54,20 @@ export const LEDGER_REVIEWS: LedgerReview[] = [
     historyId: "h-portability",
     currentConfidence: "verified",
     supportingArtefacts: ["archaeology §3 portability phase", "git-resident Docker/unit templates preserved this campaign"],
-    verifiedClaims: ["Repos gained Docker, backup scripts, unit examples, host handoffs in that window."],
-    inferredClaims: ["FGT Hetzner deployment 473931e; Watch user-timers 12e8d3e / 938cc62 / f0b327a as named in archaeology."],
-    overreadRisk: "Those SHAs are archaeology citations, not 2026-08-27 live checkout HEADs. Unit files in git are templates.",
-    openQuestions: ["Which of those SHAs (if any) is still the running image?"],
-    recommendedAction: "await-host-probe",
+    verifiedClaims: [
+      "Repos gained Docker, backup scripts, unit examples, host handoffs in the 2026-08-08 through 2026-08-19 window (archaeology §3).",
+      "FGT 473931e and Watch 12e8d3e / 938cc62 / f0b327a are named as commit citations in that report.",
+      "2026-08-22 fleet.yaml inventory recorded Watch f0b327a and FGT cec0346.",
+    ],
+    inferredClaims: [
+      "Those archaeology SHAs were the running images during 8–19 Aug.",
+      "Those SHAs (or later HEADs) are the running images now.",
+      "Git-resident Docker/unit/backup templates are enabled on the host.",
+    ],
+    overreadRisk:
+      "Owner walk 2026-08-28: in-row split applied. Machinery-in-git stays VERIFIED. Archaeology-cited SHAs are not live deployed SHAs. Inventory 22 Aug is a dated snapshot, not a current probe. Later HEADs (Watch 9d812ed, FGT 45b47a5) stay out. Live deployed SHA UNKNOWN. Do not put 473931e / 12e8d3e / 938cc62 / f0b327a into commits[].",
+    openQuestions: ["Which SHA (if any) is the running image on the host now?"],
+    recommendedAction: "keep",
     recommendedConfidence: "verified",
   }),
   r({
@@ -293,11 +302,18 @@ export const LEDGER_REVIEWS: LedgerReview[] = [
     historyId: "h-watch-qc-race",
     currentConfidence: "verified",
     supportingArtefacts: ["watch-clank@ee3f34d"],
-    verifiedClaims: ["Commit exists. Unique constraint + application recovery described in the message."],
-    inferredClaims: ["Hetzner is running ee3f34d (or later d4fda37)."],
-    overreadRisk: "Repo HEAD ≠ production. d4fda37 is even newer than ee3f34d and is still not a live SHA.",
-    openQuestions: ["Deployed Watch SHA on 2026-08-27?"],
-    recommendedAction: "await-host-probe",
+    verifiedClaims: [
+      "ee3f34d (2026-08-27T03:16:34Z) exists: catch IntegrityError, rollback losing insert, replay verdict as correction.",
+      "UNIQUE(event_id) is a database guarantee; the application contract is the catch/replay path.",
+    ],
+    inferredClaims: [
+      "An operator saw a raw IntegrityError/500 on the live host.",
+      "Hetzner is running ee3f34d (or later d4fda37 / 9d812ed).",
+    ],
+    overreadRisk:
+      "Owner walk 2026-08-28: in-row split applied. Pin ee3f34d. UNIQUE ≠ operator contract. Do not narrate a lived host 500. Later HEADs (d4fda37, 9d812ed) stay out. Live SHA UNKNOWN.",
+    openQuestions: ["Deployed Watch SHA? Was a concurrent double-submit ever observed on the host?"],
+    recommendedAction: "keep",
     recommendedConfidence: "verified",
   }),
   r({
