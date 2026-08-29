@@ -182,12 +182,21 @@ export const LEDGER_REVIEWS: LedgerReview[] = [
   r({
     historyId: "h-volume-loss",
     currentConfidence: "verified",
-    supportingArtefacts: ["impact map Family B", "continuity seeds", "DATA_SURVIVABILITY §17.1"],
-    verifiedClaims: ["Volume names and UTC destruction/restore instants are in the impact map. Smartwatch restored; FPC new epoch. ACT-011 later verified those RPs on scratch."],
-    inferredClaims: ["Motherclank's own harvest batches from the window (states A–E) — BLOCKED, not verified row-level."],
-    overreadRisk: "Do not upgrade Motherclank var/ confirmation. Earlier '4 days' was corrected to ≈3d13h — keep the correction.",
-    openQuestions: ["Can var/ still be copied? Are the restored volume names still attached?"],
-    recommendedAction: "await-host-probe",
+    supportingArtefacts: ["impact map Family B", "continuity seeds INC-20260823", "DATA_SURVIVABILITY §17.1 on h-act011"],
+    verifiedClaims: [
+      "Two named volumes destroyed (SW 21:22:08Z, FPC 21:22:11Z) as recorded in the impact map and seeds.",
+      "SW RESTORED_HISTORY from 2026-08-18T20:50:37Z backup; FPC NEW_EPOCH fpc-epoch-2 at 21:36:11Z.",
+      "SW ≈3d13h and FPC pre-epoch history are permanently missing. ACT-011 later proved scratch restore of remaining RPs (separate row).",
+    ],
+    inferredClaims: [
+      "The original historical state was fully reconstructed.",
+      "Motherclank var/ batches for states A–E survived.",
+      "Restored volumes are still attached; scratch copies still exist; durable off-host backup exists.",
+    ],
+    overreadRisk:
+      "Owner walk 2026-08-29: in-row split applied. Restore ≠ rewind. Instants are operator-provided, not live logs. ACT-011 stays on h-act011. var/ BLOCKED. Live path/epoch/backup UNKNOWN. Do not re-round 3d13h to 4 days.",
+    openQuestions: ["Can var/ still be copied? Are the restored volume names still attached? Do ACT-011 scratch copies still exist?"],
+    recommendedAction: "keep",
     recommendedConfidence: "verified",
   }),
   r({

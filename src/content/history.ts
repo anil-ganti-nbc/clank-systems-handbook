@@ -723,10 +723,10 @@ export const HISTORY: HistoryEntry[] = [
     period: "2026-08-23",
     phaseId: "p-scars",
     systems: ["smartwatch-clank", "feature-phone-clank", "Docker volumes"],
-    event: "INC-20260823: destructive operator error deleted live volumes.",
+    event: "INC-20260823: two live volumes deleted — Smartwatch restored with a known gap; Feature Phone began a new epoch.",
     before: "Volumes were treated as ordinary containers of files. Feature-phone had no backup. Smartwatch had a 18 Aug backup.",
     change:
-      "smartwatch_clank_staging_data destroyed 21:22:08Z; feature_phone_clank_staging_data 21:22:11Z. FPC fresh DB NEW_EPOCH 21:36:11Z. Smartwatch restored 22:09Z from 2026-08-18T20:50:37Z backup. Missing SW history ≈ 3 days 13 hours (impact map correction; earlier '4 days' was rounded).",
+      "Impact map Family B and continuity seeds record smartwatch_clank_staging_data destroyed 2026-08-23T21:22:08Z and feature_phone_clank_staging_data 21:22:11Z. Those instants are operator-provided evidence, not live logs. Smartwatch was restored 22:09Z from the 2026-08-18T20:50:37Z backup — RESTORED_HISTORY, not a new epoch; observations ≈2026-08-18T20:13Z–2026-08-22T10:00Z (~3d13h) never made it into that backup and are gone. Feature Phone had no backup: fresh DB at 21:36:11Z → NEW_EPOCH fpc-epoch-2; pre-incident history is irrecoverable even on the host. ACT-011 (24 Aug, separate row) proved a disposable-volume restore of the remaining recovery points on temporary_scratch. That is not rewind, not durable off-host backup, and not proof the volumes are still attached. Motherclank var/ for states A–E remains BLOCKED. Live path, epoch, and backup state remain UNKNOWN.",
     why: "Human and agent destructive error is an expected failure mode (DATA_SURVIVABILITY R2).",
     evidence: [
       {
@@ -742,7 +742,7 @@ export const HISTORY: HistoryEntry[] = [
         kind: "report",
         repo: "anil-ganti-nbc/clank-architecture",
         path: "audits/INCIDENT_IMPACT_MAP_2026-08-23.md",
-        note: "Family B states A–E. Artifact-level Motherclank var/ confirmation BLOCKED.",
+        note: "Family B states A–E. Instants are operator-provided evidence, not live logs. Artifact-level Motherclank var/ confirmation BLOCKED.",
         status: "verified",
       },
     ],
@@ -750,11 +750,13 @@ export const HISTORY: HistoryEntry[] = [
     conceptIds: ["epoch", "volume", "rollback", "blast-radius", "authoritative-state"],
     lawIds: ["law-1"],
     incidentIds: ["inc-volume-loss"],
-    whatFailed: "Irreplaceable observational memory. FPC pre-incident history entirely irrecoverable.",
-    diagnosis: "Two families sharing a window must not be conflated. HMD ReadTimeout after FPC repair is an ordinary source failure.",
-    fix: "ContinuityEvent registry; DB-LOSS-RESTORE vs DB-LOSS-NEW-EPOCH golden incidents; ACT-011 restore drills 24 Aug.",
-    verification: "ACT-011 LIVE/VERIFIED integrity + disposable-volume restore. Durable off-host still NO (temporary_scratch).",
-    residualRisk: "Most other lanes still have UNKNOWN backup posture. Feature Phone new epoch has no durable off-host copy.",
+    whatFailed: "Irreplaceable observational memory. FPC pre-incident history entirely irrecoverable. SW ~3d13h never in the 18 Aug backup.",
+    diagnosis: "Two families sharing a window must not be conflated. Restore ≠ rewind. HMD ReadTimeout after FPC repair is an ordinary source failure.",
+    fix: "ContinuityEvent registry; DB-LOSS-RESTORE vs DB-LOSS-NEW-EPOCH golden incidents. ACT-011 (24 Aug) is a later scratch drill, not this incident's closing.",
+    verification:
+      "Named volume loss, SW RESTORED_HISTORY vs FPC NEW_EPOCH, and the irrecoverable windows: VERIFIED from impact map Family B and continuity seeds. Instants are operator-provided, not live logs. ACT-011 is a later scratch restore of remaining RPs (h-act011), not rewind. Motherclank var/ A–E: BLOCKED. Live path/epoch/backup: UNKNOWN.",
+    residualRisk:
+      "Restore ≠ rewind. Do not teach ACT-011 as closing the gap. Durable off-host is NO (temporary_scratch). Live volume attachment UNKNOWN. Do not re-round 3d13h to 4 days. Seeds ≠ missing var/ batches.",
     laterConsequence: "ADR-0007 destructive-operation safety: pattern-derived names never authorize deletion.",
     confidence: "verified",
   }),
