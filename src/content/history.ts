@@ -858,11 +858,11 @@ export const HISTORY: HistoryEntry[] = [
     period: "2026-08-24 to 2026-08-25",
     phaseId: "p-qc-onboard",
     systems: ["chinese-tech-wire", "motherclank", "diagnostic-clank"],
-    event: "CTW onboarding is the first real v0.3 dogfood of the observer playbook.",
+    event: "CTW dogfood (24–25 Aug): the observer playbook passed its own register step on a guessed path.",
     before: "Onboarding.md was a document. No field scorecard.",
     change:
-      "CTW_ONBOARDING_DOGFOOD.md: Motherclank core participant-specific lines 0; 1 generic synthesis passthrough; adapter ~230 LOC. Friction: FGT registry db filename had drifted from live-verified inner name newsroom.db; guessed CTW refresh path never existed.",
-    why: "Using the playbook on a real Clank is how you find the playbook's lies.",
+      "CTW_ONBOARDING_DOGFOOD.md (66cef4c / blob 64f92aa) is a 14-step field scorecard against ONBOARDING.md, not a current host map. It tested whether CTW could join as an observer with zero Motherclank-core participant-specific edits: 0 such lines; adapter ~230 LOC; 38 GICs green. Step 8 was scored PASS on a registry row + guarded refresh line. Scorecard friction is FGT registry filename vs live-verified inner name newsroom.db. The guessed CTW path is not on that card. Anil 7f977d6 (2026-08-25T00:20Z) records the finding: checkout-relative data/ never existed, the live store was a differently-named Docker volume, and refresh silently SKIPs a missing source — caught only by live discovery, not review. That commit is the operator write-up and the playbook patch (ONBOARDING.md step 8 three-way cross-check), not a later code state. The path it happened to find that day is dated evidence, not the thing to memorise. Scorecard steps 2 and 11 stayed LIVE_EVIDENCE_REQUIRED. 2026-08-22 inventory still listed data/ctw.db under checkout. Later repo HEAD 1a47220 stays out. Live CTW volume, deployed SHA, and scheduler remain UNKNOWN.",
+    why: "Dogfooding exposed that the playbook was guessing where the system lived instead of proving it.",
     evidence: [
       {
         id: "ev-ctw-dog",
@@ -870,7 +870,7 @@ export const HISTORY: HistoryEntry[] = [
         repo: "anil-ganti-nbc/clank-architecture",
         path: "CTW_ONBOARDING_DOGFOOD.md",
         sha: "64f92aa42f233ed189c8c6cb10f550b8dfd77b11",
-        note: "First real v0.3 onboarding. Steps 2 and 11 LIVE_EVIDENCE_REQUIRED.",
+        note: "14-step scorecard 2026-08-24. Step 8 PASS. Steps 2 and 11 LIVE_EVIDENCE_REQUIRED. Guessed path is not on this card.",
         status: "verified",
       },
       {
@@ -878,18 +878,23 @@ export const HISTORY: HistoryEntry[] = [
         kind: "commit",
         repo: "anil-ganti-nbc/clank-architecture",
         sha: "7f977d6bc5d4839a6f89c7dc7b87cf5fdefa89a5",
-        note: "Anil: codify registry/refresh-path/live-datastore cross-check after CTW guessed path.",
+        note: "Anil: operator write-up of guessed path + ONBOARDING.md step 8 three-way cross-check.",
         status: "verified",
       },
     ],
     commits: [
       { repo: "anil-ganti-nbc/clank-architecture", sha: "66cef4c89a0f7cd4ddbea10a14149a63835ec4f5", note: "CTW dogfood scorecard" },
-      { repo: "anil-ganti-nbc/clank-architecture", sha: "7f977d6bc5d4839a6f89c7dc7b87cf5fdefa89a5", note: "human operator follow-up" },
+      { repo: "anil-ganti-nbc/clank-architecture", sha: "7f977d6bc5d4839a6f89c7dc7b87cf5fdefa89a5", note: "operator finding + playbook patch" },
     ],
     conceptIds: ["dogfooding", "operator-role", "implementation-agent", "source-adapter"],
     lawIds: ["law-6"],
     incidentIds: ["inc-deployed-sha"],
-    laterConsequence: "ONBOARDING.md step 8 requires cross-checking registry filename, refresh-script source path, and actual deployed datastore.",
+    diagnosis: "A git-visible registry row and refresh line can PASS while the path is a guess. Silent SKIP hides drift from review.",
+    laterConsequence: "ONBOARDING.md step 8 requires cross-checking registry filename, refresh-script source path, and actual deployed datastore. Do not memorise the volume from that day.",
+    verification:
+      "Dogfood run and adapter-thinness: VERIFIED from 66cef4c/64f92aa. Guessed-path finding and playbook patch: VERIFIED from 7f977d6. Dated host topology from that exercise: INCOMPLETE. Live CTW volume/SHA/scheduler: UNKNOWN.",
+    residualRisk:
+      "Do not fossilise the 24–25 Aug path or volume as current production. Inventory data/ctw.db under checkout is the class of claim the trial contradicted. Later repo HEAD 1a47220 is not a deployed SHA.",
     confidence: "verified",
   }),
   e("h-gitignore-runtime", {

@@ -24,7 +24,7 @@ UI: Handbook **Evidence → Rows awaiting human review**.
 | h-motherclank-born | keep (split applied in-row) | Owner walk 2026-08-28: created ≠ supervising; live SHA/process/timer/var UNKNOWN |
 | h-materialization | keep (split applied in-row) | Owner walk 2026-08-27: mechanism VERIFIED; host timestamps/syslog INCOMPLETE |
 | h-volume-loss | keep (split applied in-row) | Owner walk 2026-08-29: restore ≠ rewind; ACT-011 stays on h-act011; var/ BLOCKED; live path UNKNOWN |
-| h-ctw-dogfood | await-host-probe | live volume name as of 27 Aug unknown |
+| h-ctw-dogfood | keep (split applied in-row) | Owner walk 2026-08-30: dogfood VERIFIED; 7f977d6 is the guessed-path finding; dated topology not a map; live volume UNKNOWN |
 | h-watch-qc | keep (SHA pinned, counts dated) | Owner walk 2026-08-27: 5de5329; 639/580/41 are 26 Aug snapshot, not live |
 | h-watch-qc-race | keep (SHA pinned, 500 not lived) | Owner walk 2026-08-28: pin ee3f34d; UNIQUE ≠ operator contract; no lived host 500; later HEADs out |
 
@@ -42,5 +42,6 @@ All other original rows: **keep**, with residual notes. None recommended for del
 - [x] Split h-watch-qc-race UNIQUE ≠ operator contract — **in-row split, pin ee3f34d.** Do not narrate a lived host 500. Later HEADs out. Live SHA UNKNOWN.
 - [x] Split h-dual-scheduler recorded retirement ≠ current scheduler authority — **in-row split, pin d046d54.** 21:06Z is law/inventory. Templates ≠ enabled. Live scheduler UNKNOWN.
 - [x] Split h-volume-loss restore ≠ rewind — **in-row split, no new id.** Loss and two continuity outcomes VERIFIED. ACT-011 is later scratch, not closing. var/ BLOCKED. Live path/epoch/backup UNKNOWN.
+- [x] Split h-ctw-dogfood dogfood ≠ current topology — **in-row split, pin 66cef4c and 7f977d6.** Scorecard did not record the guessed path; 7f977d6 did. Live volume/SHA/scheduler UNKNOWN.
 - [ ] After operator-reprobe.sh, only then consider upgrading any await-host-probe row
 - [ ] Do not upgrade UNKNOWN to healthy because several docs repeat it

@@ -235,12 +235,20 @@ export const LEDGER_REVIEWS: LedgerReview[] = [
   r({
     historyId: "h-ctw-dogfood",
     currentConfidence: "verified",
-    supportingArtefacts: ["CTW_ONBOARDING_DOGFOOD.md @ 64f92aa", "7f977d6 operator follow-up"],
-    verifiedClaims: ["Scorecard exists. Guessed refresh path documented. ONBOARDING.md cross-check added by Anil."],
-    inferredClaims: ["Live store volume name as of 2026-08-27 matches the dogfood finding."],
-    overreadRisk: "Dogfood is 24–25 Aug evidence. Do not treat it as a current host map.",
-    openQuestions: ["What is the CTW volume name right now?"],
-    recommendedAction: "await-host-probe",
+    supportingArtefacts: ["CTW_ONBOARDING_DOGFOOD.md @ 64f92aa / 66cef4c", "7f977d6 operator finding + ONBOARDING.md patch"],
+    verifiedClaims: [
+      "14-step dogfood run against CTW; adapter-thinness (0 participant-specific core lines).",
+      "Scorecard step 8 PASS on registry+refresh; FGT filename friction on the card.",
+      "7f977d6 records the guessed-path finding and the three-way cross-check patch.",
+    ],
+    inferredClaims: [
+      "The 24–25 Aug volume/path layout is still production.",
+      "Live store volume name as of 2026-08-27 matches the dogfood finding.",
+    ],
+    overreadRisk:
+      "Owner walk 2026-08-30: in-row split applied. Dogfooding exposed that the playbook was guessing where the system lived instead of proving it. Dated topology is not a permanent map. Live volume/SHA/scheduler UNKNOWN.",
+    openQuestions: ["What is the CTW volume name right now? Is hourly cron still the live scheduler?"],
+    recommendedAction: "keep",
     recommendedConfidence: "verified",
   }),
   r({

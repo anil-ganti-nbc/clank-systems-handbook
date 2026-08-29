@@ -779,33 +779,39 @@ Count: **27**. Confidence: **27 verified**, **0 inferred**, **0 incomplete**.
 
 **Incidents.** `inc-volume-loss`
 
-### 2026-08-24 — CTW onboarding is the first real v0.3 dogfood of the observer playbook.
+### 2026-08-24 — CTW dogfood (24–25 Aug): the observer playbook passed its own register step on a guessed path.
 
 - **Id:** `h-ctw-dogfood`
 - **Period:** 2026-08-24 to 2026-08-25
 - **Phase:** `p-qc-onboard`
 - **Systems:** chinese-tech-wire; motherclank; diagnostic-clank
-- **Confidence:** VERIFIED
+- **Confidence:** VERIFIED (dogfood run + 7f977d6 finding) / dated topology INCOMPLETE / live volume UNKNOWN
 
-**Event.** CTW onboarding is the first real v0.3 dogfood of the observer playbook.
+**Event.** CTW dogfood (24–25 Aug): the observer playbook passed its own register step on a guessed path.
 
 **Before.** Onboarding.md was a document. No field scorecard.
 
-**Change.** CTW_ONBOARDING_DOGFOOD.md: Motherclank core participant-specific lines 0; 1 generic synthesis passthrough; adapter ~230 LOC. Friction: FGT registry db filename had drifted from live-verified inner name newsroom.db; guessed CTW refresh path never existed.
+**Change.** `CTW_ONBOARDING_DOGFOOD.md` (`66cef4c` / blob `64f92aa`) is a 14-step field scorecard against ONBOARDING.md, not a current host map. It tested whether CTW could join as an observer with zero Motherclank-core participant-specific edits: 0 such lines; adapter ~230 LOC; 38 GICs green. Step 8 was scored PASS on a registry row + guarded refresh line. Scorecard friction is FGT registry filename vs live-verified inner name `newsroom.db`. The guessed CTW path is not on that card. Anil `7f977d6` (2026-08-25T00:20Z) records the finding: checkout-relative `data/` never existed, the live store was a differently-named Docker volume, and refresh silently SKIPs a missing source — caught only by live discovery, not review. That commit is the operator write-up and the playbook patch (ONBOARDING.md step 8 three-way cross-check), not a later code state. The path it happened to find that day is dated evidence, not the thing to memorise. Scorecard steps 2 and 11 stayed LIVE_EVIDENCE_REQUIRED. 2026-08-22 inventory still listed `data/ctw.db` under checkout. Later repo HEAD `1a47220` stays out. Live CTW volume, deployed SHA, and scheduler remain UNKNOWN.
 
-**Why.** Using the playbook on a real Clank is how you find the playbook's lies.
+**Why.** Dogfooding exposed that the playbook was guessing where the system lived instead of proving it.
 
-**Later consequence.** ONBOARDING.md step 8 requires cross-checking registry filename, refresh-script source path, and actual deployed datastore.
+**Diagnosis.** A git-visible registry row and refresh line can PASS while the path is a guess. Silent SKIP hides drift from review.
+
+**Later consequence.** ONBOARDING.md step 8 requires cross-checking registry filename, refresh-script source path, and actual deployed datastore. Do not memorise the volume from that day.
+
+**Verification.** Dogfood run and adapter-thinness: VERIFIED from `66cef4c`/`64f92aa`. Guessed-path finding and playbook patch: VERIFIED from `7f977d6`. Dated host topology from that exercise: INCOMPLETE. Live CTW volume/SHA/scheduler: UNKNOWN.
+
+**Residual risk.** Do not fossilise the 24–25 Aug path or volume as current production. Inventory `data/ctw.db` under checkout is the class of claim the trial contradicted. Later repo HEAD `1a47220` is not a deployed SHA.
 
 **Evidence.**
 
-- `ev-ctw-dog` (doc, VERIFIED) anil-ganti-nbc/clank-architecture CTW_ONBOARDING_DOGFOOD.md @64f92aa42f233ed189c8c6cb10f550b8dfd77b11 — First real v0.3 onboarding. Steps 2 and 11 LIVE_EVIDENCE_REQUIRED.
-- `ev-onboard-crosscheck` (commit, VERIFIED) anil-ganti-nbc/clank-architecture @7f977d6bc5d4839a6f89c7dc7b87cf5fdefa89a5 — Anil: codify registry/refresh-path/live-datastore cross-check after CTW guessed path.
+- `ev-ctw-dog` (doc, VERIFIED) anil-ganti-nbc/clank-architecture CTW_ONBOARDING_DOGFOOD.md @64f92aa42f233ed189c8c6cb10f550b8dfd77b11 — 14-step scorecard 2026-08-24. Step 8 PASS. Steps 2 and 11 LIVE_EVIDENCE_REQUIRED. Guessed path is not on this card.
+- `ev-onboard-crosscheck` (commit, VERIFIED) anil-ganti-nbc/clank-architecture @7f977d6bc5d4839a6f89c7dc7b87cf5fdefa89a5 — Anil: operator write-up of guessed path + ONBOARDING.md step 8 three-way cross-check.
 
 **Commit(s).**
 
 - `anil-ganti-nbc/clank-architecture` `66cef4c89a0f7cd4ddbea10a14149a63835ec4f5` — CTW dogfood scorecard
-- `anil-ganti-nbc/clank-architecture` `7f977d6bc5d4839a6f89c7dc7b87cf5fdefa89a5` — human operator follow-up
+- `anil-ganti-nbc/clank-architecture` `7f977d6bc5d4839a6f89c7dc7b87cf5fdefa89a5` — operator finding + playbook patch
 
 **Concepts taught.** `dogfooding`, `operator-role`, `implementation-agent`, `source-adapter`
 
