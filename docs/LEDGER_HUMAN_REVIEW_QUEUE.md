@@ -1,47 +1,71 @@
 # Ledger Human Review Queue
 
-Do **not** silently rewrite the 27 original rows. This is a walk-one-at-a-time queue.
-
-Machine-readable: `src/content/ledger-review.ts` (one object per `HISTORY` id, including the new `h-evidence-preservation` row).
+Machine-readable: `src/content/ledger-review.ts` (one object per `HISTORY` id, including `h-evidence-preservation`).
 
 UI: Handbook **Evidence → Rows awaiting human review**.
 
-## How to audit a row
+Git/document-backed historical QA is complete. Remaining non-KEEP action is **blocked on live Hetzner evidence**, not another git walk.
 
-1. Open `/history#{id}` and the matching object in `ledger-review.ts`.
-2. Separate **verified claims** (artefact exists) from **inferred claims** (motive, current host state).
-3. Read **over-read risk**. If the wording is stronger than the artefact, split the host-facing clause or mark it incomplete — do not delete the git event.
-4. Answer **open questions** only with new artefacts.
-5. Set recommended action: keep / split / await-host-probe / await-human / downgrade.
+## Final categories (28 rows)
 
-## Flagged first (recommended action ≠ keep)
+### APPROVED (plain keep)
+
+| id | note |
+|---|---|
+| h-github-account | GitHub `created_at` VERIFIED |
+| h-first-repos | Four repos 4 Aug VERIFIED; unification motive inferred |
+| h-sqlite-authoritative | Archaeology “mostly SQLite-backed” VERIFIED; live filenames UNKNOWN |
+| h-diagnostic-clank | Repo/ADR-0001 VERIFIED; not a running supervisor |
+| h-expansion-scars | Named failure classes as documents |
+| h-phase0-freeze | Freeze docs + inventory frozen flag |
+| h-fleet-laws | Eight laws + deferred 9 @ d046d54 |
+| h-def-m15 | DEF-M1.5 CLOSED same day; current harvest UNKNOWN |
+| h-dau-worlds | Repo created; absorption SHA not re-fetched (low risk) |
+| h-archaeology | Report exists; inventory through 22 Aug; did not operate collectors |
+| h-act011 | 24 Aug scratch restore VERIFIED; Layer C DESIGNED; scratch-now UNKNOWN |
+| h-gitignore-runtime | oem-radar@44ce1ac |
+| h-watch-unwired | e7eeb3f VERIFIED; host-finding is commit-message testimony |
+| h-v03-freeze | Matrix freeze 25 Aug; e9c4a2b is later hygiene |
+| h-ai-workflow | Implementation-agent vs operator roles in commit metadata |
+| h-handbook | Repo + content-phase commits |
+| h-tablet-local | a41d1e7; not a Hetzner membership change |
+| h-evidence-preservation | Hashed copies ≠ live host known |
+
+### APPROVED WITH IN-ROW SPLIT
+
+| id | split |
+|---|---|
+| h-consumer-clanks | Independent collectors before supervisor VERIFIED. Archaeology baselines 14712d9 / 4c115ce are recoverability checkpoints, not exam SHAs, not live. |
+| h-portability | Machinery-in-git VERIFIED. Archaeology SHAs not live. Inventory 22 Aug dated. Live SHA UNKNOWN. |
+| h-dual-scheduler | Law 5 scar VERIFIED. 21:06Z is law/inventory not live journal. Current scheduler UNKNOWN. |
+| h-motherclank-born | Architectural birth VERIFIED. Created ≠ supervising. Live SHA/process/timer/var UNKNOWN. |
+| h-materialization | Mechanism VERIFIED. Host timestamps/syslog INCOMPLETE. |
+| h-volume-loss | Loss + two continuity outcomes VERIFIED. Restore ≠ rewind. var/ BLOCKED. Live path UNKNOWN. |
+| h-ctw-dogfood | Dogfood VERIFIED. 7f977d6 is the guessed-path finding. Dated topology not a map. Live volume UNKNOWN. |
+| h-watch-qc | Pin 5de5329. 639/580/41 are 26 Aug snapshot. Live queue UNKNOWN. |
+| h-watch-qc-race | Pin ee3f34d. UNIQUE ≠ operator contract. No lived host 500. Later HEADs out. |
+
+### HUMAN DECISION STILL NEEDED
+
+None. Git/document-backed wording risks were resolved in-row. Do not reopen without a new artefact.
+
+### BLOCKED ON LIVE EVIDENCE
 
 | id | action | why |
 |---|---|---|
-| h-consumer-clanks | await-human | archaeology baseline SHAs not re-hashed this pass |
-| h-portability | keep (split applied in-row) | Owner walk 2026-08-28: machinery-in-git VERIFIED; archaeology SHAs not live; inventory 22 Aug dated; live SHA UNKNOWN |
-| h-dual-scheduler | keep (split applied in-row) | Owner walk 2026-08-28: Law 5 scar VERIFIED; 21:06Z is law/inventory not live journal; current scheduler UNKNOWN |
-| h-motherclank-born | keep (split applied in-row) | Owner walk 2026-08-28: created ≠ supervising; live SHA/process/timer/var UNKNOWN |
-| h-materialization | keep (split applied in-row) | Owner walk 2026-08-27: mechanism VERIFIED; host timestamps/syslog INCOMPLETE |
-| h-volume-loss | keep (split applied in-row) | Owner walk 2026-08-29: restore ≠ rewind; ACT-011 stays on h-act011; var/ BLOCKED; live path UNKNOWN |
-| h-ctw-dogfood | keep (split applied in-row) | Owner walk 2026-08-30: dogfood VERIFIED; 7f977d6 is the guessed-path finding; dated topology not a map; live volume UNKNOWN |
-| h-watch-qc | keep (SHA pinned, counts dated) | Owner walk 2026-08-27: 5de5329; 639/580/41 are 26 Aug snapshot, not live |
-| h-watch-qc-race | keep (SHA pinned, 500 not lived) | Owner walk 2026-08-28: pin ee3f34d; UNIQUE ≠ operator contract; no lived host 500; later HEADs out |
-
-All other original rows: **keep**, with residual notes. None recommended for deletion. None mass-downgraded.
-
-`h-evidence-preservation` (new, 28th): **keep**. Do not read “artefacts preserved” as “live host known”.
+| h-current-gaps | await-host-probe | This row *is* the live-unknown snapshot. SHA/process/scheduler/DB/backup/host stay UNKNOWN until `operator-reprobe.sh`. Historical rows above do not wait on that probe. |
 
 ## Owner checklist
 
-- [ ] Walk flagged rows first
-- [x] Decide whether to split h-materialization host timestamps into an incomplete child claim — **in-row split, no new id.** Mechanism verified; chronology incomplete.
-- [x] Attach a SHA to h-watch-qc if teaching 639/580/41 — **pinned 5de5329; numbers dated as 2026-08-26 snapshot. Live queue UNKNOWN.**
-- [x] Split h-motherclank-born created ≠ supervising — **in-row split, no new id.** Architectural birth verified; live SHA/process/timer/var UNKNOWN. Do not present M1–M4 as proven live on 22 Aug.
-- [x] Split h-portability machinery-in-git ≠ those archaeology SHAs running — **in-row split, no new id.** Do not put 473931e / 12e8d3e / 938cc62 / f0b327a into commits[]. Live SHA UNKNOWN.
-- [x] Split h-watch-qc-race UNIQUE ≠ operator contract — **in-row split, pin ee3f34d.** Do not narrate a lived host 500. Later HEADs out. Live SHA UNKNOWN.
-- [x] Split h-dual-scheduler recorded retirement ≠ current scheduler authority — **in-row split, pin d046d54.** 21:06Z is law/inventory. Templates ≠ enabled. Live scheduler UNKNOWN.
-- [x] Split h-volume-loss restore ≠ rewind — **in-row split, no new id.** Loss and two continuity outcomes VERIFIED. ACT-011 is later scratch, not closing. var/ BLOCKED. Live path/epoch/backup UNKNOWN.
-- [x] Split h-ctw-dogfood dogfood ≠ current topology — **in-row split, pin 66cef4c and 7f977d6.** Scorecard did not record the guessed path; 7f977d6 did. Live volume/SHA/scheduler UNKNOWN.
-- [ ] After operator-reprobe.sh, only then consider upgrading any await-host-probe row
+- [x] Walk flagged rows first
+- [x] Split h-materialization host timestamps — in-row, no new id
+- [x] Pin h-watch-qc 5de5329; 639/580/41 dated 26 Aug
+- [x] Split h-motherclank-born created ≠ supervising
+- [x] Split h-portability machinery-in-git ≠ archaeology SHAs running
+- [x] Split h-watch-qc-race UNIQUE ≠ operator contract
+- [x] Split h-dual-scheduler recorded retirement ≠ current scheduler
+- [x] Split h-volume-loss restore ≠ rewind
+- [x] Split h-ctw-dogfood dogfood ≠ current topology
+- [x] Split h-consumer-clanks phase ≠ exam SHAs
+- [ ] After operator-reprobe.sh, only then consider upgrading live UNKNOWN cells
 - [ ] Do not upgrade UNKNOWN to healthy because several docs repeat it

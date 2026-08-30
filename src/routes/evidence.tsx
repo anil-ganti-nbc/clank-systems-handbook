@@ -137,8 +137,8 @@ function Page() {
       <section>
         <h2 className="font-display text-2xl">Rows awaiting human review</h2>
         <p className="mt-2 max-w-2xl text-sm text-mute">
-          All ledger rows are queued. The list below emphasises recommended action other than keep, then the rest
-          matching the filter.
+          Git/document-backed historical QA is complete. The list emphasises recommended action other than keep
+          (live-host blocks), then the rest matching the filter.
         </p>
         <ol className="mt-4 space-y-3">
           {[...reviews].sort((a, b) => Number(a.recommendedAction === "keep") - Number(b.recommendedAction === "keep")).map((rv) => {

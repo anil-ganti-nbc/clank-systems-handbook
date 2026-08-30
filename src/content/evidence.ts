@@ -1182,13 +1182,13 @@ export const EVIDENCE_GAPS: EvidenceGap[] = [
   },
   {
     id: "gap-ledger-human-review",
-    title: "27 ledger rows queued for human audit; none silently rewritten",
+    title: "Owner ledger walk complete for git/document-backed claims; live Hetzner cells remain UNKNOWN",
     kind: "awaiting-review",
-    status: "inferred",
-    relatedHistoryIds: ["h-github-account", "h-first-repos", "h-consumer-clanks", "h-sqlite-authoritative", "h-portability", "h-diagnostic-clank", "h-expansion-scars", "h-dual-scheduler", "h-phase0-freeze", "h-fleet-laws", "h-motherclank-born", "h-def-m15", "h-materialization", "h-volume-loss", "h-dau-worlds", "h-archaeology", "h-act011", "h-ctw-dogfood", "h-gitignore-runtime", "h-watch-qc", "h-watch-unwired", "h-v03-freeze", "h-ai-workflow", "h-handbook", "h-watch-qc-race", "h-tablet-local", "h-current-gaps"],
+    status: "incomplete",
+    relatedHistoryIds: ["h-current-gaps", "h-evidence-preservation"],
     relatedIncidentIds: [],
-    relatedLawIds: [],
-    whyItMatters: "Several verified rows mix git-verified facts with host-facing clauses that this campaign could not re-probe.",
-    whatWouldCloseIt: "Owner walks docs/LEDGER_HUMAN_REVIEW_QUEUE.md one row at a time.",
+    relatedLawIds: ["law-6"],
+    whyItMatters: "Historical rows are approved with in-row splits. Remaining work is the live host reprobe, not another pass over git facts. Do not close Law 6 cells from GitHub HEAD.",
+    whatWouldCloseIt: "Operator runs docs/scripts/operator-reprobe.sh on the host and commits the redacted transcript.",
   }
 ];
