@@ -5,9 +5,11 @@ import { markVisited } from "@/lib/handbook/state";
 const NAV = [
   { to: "/", label: "Overview", exact: true },
   { to: "/built", label: "How we built it" },
+  { to: "/history", label: "History" },
   { to: "/basics", label: "Development" },
   { to: "/systems", label: "Systems" },
   { to: "/architecture", label: "Architecture" },
+  { to: "/fleet", label: "Fleet" },
   { to: "/incidents", label: "Incidents" },
   { to: "/labs", label: "Labs" },
   { to: "/explain", label: "Explain it back" },

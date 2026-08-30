@@ -1,6 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { MODULES } from "@/content/catalog";
-import { ConceptList } from "@/components/handbook/concept-link";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { LAWS, MODULES, PHASES } from "@/content/catalog";
+import { ConceptList, Epistemic, IncidentLink } from "@/components/handbook/concept-link";
 
 export const Route = createFileRoute("/architecture")({ component: Page });
 
@@ -9,6 +9,10 @@ function Page() {
   return (
     <div className="space-y-10">
       <h1 className="font-display text-4xl tracking-tight">Architecture</h1>
+      <p className="max-w-2xl text-mute">
+        The diagram below is the present tense. It did not exist on 4 August. Scroll for how the
+        layers arrived, and which incident earned each fleet law.
+      </p>
       <svg viewBox="0 0 720 220" className="w-full rounded-xl bg-paper p-4 text-ink" role="img" aria-label="Fleet architecture">
         <rect x="20" y="70" width="150" height="80" rx="8" fill="#1c1f28" stroke="#c4a35a" />
         <text x="95" y="115" textAnchor="middle" fill="#e8e6df" fontSize="14">
@@ -33,6 +37,82 @@ function Page() {
           SQLite stays with Clanks · adapters are read-only · harvest never writes
         </text>
       </svg>
+
+      <section>
+        <h2 className="font-display text-2xl">Evolution — each layer is a scar</h2>
+        <ol className="mt-4 space-y-3">
+          {PHASES.map((p) => (
+            <li key={p.id} className="rounded-xl bg-paper p-4 shadow-[0_0_0_1px_rgba(255,255,255,0.06)]">
+              <div className="flex flex-wrap items-baseline justify-between gap-2">
+                <a href={`/history#${p.id}`} className="font-display text-lg text-ink no-underline hover:text-accent">
+                  {p.title}
+                </a>
+                <span className="font-mono text-xs text-accent">{p.dateRange}</span>
+              </div>
+              <p className="mt-2 text-sm text-mute">{p.whyThisLayer}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section>
+        <h2 className="font-display text-2xl">Law lineage</h2>
+        <p className="mt-2 max-w-2xl text-mute">
+          Fleet Laws v1 (d046d54, 2026-08-21). Eight binding invariants plus deferred Law 9. Each
+          row names the incident that made the rule necessary, what it prevents, and what it cannot
+          prevent.
+        </p>
+        <div className="mt-4 space-y-4">
+          {LAWS.map((law) => (
+            <article
+              key={law.id}
+              id={law.id}
+              className="rounded-xl bg-paper p-5 shadow-[0_0_0_1px_rgba(255,255,255,0.06)]"
+            >
+              <div className="flex flex-wrap items-baseline justify-between gap-2">
+                <h3 className="font-display text-xl">
+                  Law {law.number}
+                  {law.deferred ? " (deferred)" : ""}: {law.title}
+                </h3>
+                {law.deferred && <span className="text-xs uppercase tracking-[0.14em] text-mute">candidate, not binding</span>}
+              </div>
+              <p className="mt-3 text-sm leading-relaxed">{law.plainEnglish}</p>
+              <p className="mt-2 font-mono text-xs text-mute">{law.rule}</p>
+              <p className="mt-3 text-sm">
+                <span className="text-mute">Prevents. </span>
+                {law.prevents}
+              </p>
+              <p className="mt-1 text-sm">
+                <span className="text-mute">Cannot prevent. </span>
+                {law.cannotPrevent}
+              </p>
+              {law.triggeringIncidentIds.length > 0 && (
+                <p className="mt-3 flex flex-wrap gap-2 text-sm">
+                  {law.triggeringIncidentIds.map((id) => (
+                    <IncidentLink key={id} id={id} />
+                  ))}
+                </p>
+              )}
+              {law.triggeringIncidentIds.length === 0 && (
+                <p className="mt-3 text-sm text-mute">
+                  No Handbook lab is pinned as the sole trigger; specimens live in the law text.
+                </p>
+              )}
+              <p className="mt-2 text-xs text-mute">Specimens: {law.specimens.join(" · ")}</p>
+              <ul className="mt-2 space-y-1 text-xs text-mute">
+                {law.evidence.map((e) => (
+                  <li key={e.id}>
+                    <Epistemic status={e.status} /> {e.repo}
+                    {e.path ? `:${e.path}` : ""} — {e.note}
+                  </li>
+                ))}
+              </ul>
+              <ConceptList ids={law.conceptIds} />
+            </article>
+          ))}
+        </div>
+      </section>
+
       {mods.map((m) => (
         <section key={m.id}>
           <h2 className="font-display text-2xl">{m.title}</h2>
@@ -46,6 +126,14 @@ function Page() {
           <ConceptList ids={m.conceptIds} />
         </section>
       ))}
+
+      <p className="text-sm text-mute">
+        Current Clanks, with stale notes:{" "}
+        <Link to="/fleet" className="text-accent">
+          Fleet map
+        </Link>
+        .
+      </p>
     </div>
   );
 }

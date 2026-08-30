@@ -22,7 +22,7 @@ test.describe("Clank Systems Handbook", () => {
     await expect(page.getByRole("img", { name: "Fleet architecture" })).toBeVisible();
 
     await page.getByRole("navigation").getByRole("link", { name: "How we built it" }).click();
-    await expect(page.getByRole("heading", { name: "How we built it" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "How we built it", exact: true })).toBeVisible();
     await expect(page.getByText("Historical timeline")).toBeVisible();
   });
 
@@ -93,5 +93,27 @@ test.describe("Clank Systems Handbook", () => {
     await expect(prompt.getByText("What I said")).toBeVisible();
     await expect(prompt.getByText(/Model explanation \(not an LLM grade\)/)).toBeVisible();
     await prompt.getByRole("button", { name: /Save self-rating/ }).click();
+  });
+
+  test("historical ledger phases and UNKNOWN-honest current fleet", async ({ page }) => {
+    await gotoHydrated(page, "/");
+    await page.getByRole("navigation").getByRole("link", { name: "History" }).click();
+    await expect(page.getByRole("heading", { name: "Historical ledger" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /Origin: independent collectors/i })).toBeVisible();
+    await expect(page.getByText("GitHub account anil-ganti-nbc is created").first()).toBeVisible();
+    await expect(page.getByText("verified historical fact").first()).toBeVisible();
+
+    await page.getByRole("navigation").getByRole("link", { name: "Fleet" }).click();
+    await expect(page.getByRole("heading", { name: "Current fleet" })).toBeVisible();
+    await expect(page.getByText(/UNKNOWN is left visible/i)).toBeVisible();
+    await expect(page.getByText(/INTENTIONALLY_DORMANT/i).first()).toBeVisible();
+  });
+
+  test("architecture law lineage maps a scar to a fleet law", async ({ page }) => {
+    await gotoHydrated(page, "/architecture");
+    await expect(page.getByRole("heading", { name: "Law lineage", exact: true })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /Law 3/ })).toBeVisible();
+    await expect(page.getByText(/HTTP 200 without useful output/i).first()).toBeVisible();
+    await expect(page.getByText(/candidate, not binding/i)).toBeVisible();
   });
 });

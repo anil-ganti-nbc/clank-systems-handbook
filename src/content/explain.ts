@@ -28,10 +28,18 @@ export const EXPLAIN_PROMPTS: ExplainPrompt[] = [
     conceptIds: ["sha", "tests-prove", "provenance"],
   },
   {
-    id: "ex-head",
-    prompt: "Explain HEAD, origin/main, and deployed code to a non-programmer.",
+    id: "ex-sha-not",
+    prompt: "What does a SHA not prove?",
     modelAnswer:
-      "HEAD is the page you have open in your local copy. origin/main is the page the shared library (GitHub) currently calls official. Deployed code is the book actually on the printing press. They can be three different editions on the same afternoon.",
+      "It does not prove production is running it. Watch tissot/timex_uk existed as SHAs in the registry and still could not be scheduled until the production invocation chain was wired (e7eeb3f). A SHA also does not prove tests passed, that SQLite is that epoch, or that recall is non-zero (BANKAI).",
+    checklist: ["Not production", "Not tests", "Not epoch", "Not recall"],
+    conceptIds: ["sha", "head-vs-deployed", "recall"],
+  },
+  {
+    id: "ex-head",
+    prompt: "What is HEAD? Explain HEAD, origin/main, and deployed code to a non-programmer.",
+    modelAnswer:
+      "HEAD is the page you have open in your local copy. origin/main is the page the shared library (GitHub) currently calls official, as of the last time you asked. Deployed code is the book actually on the printing press. They can be three different editions on the same afternoon. The code you were looking at was not necessarily the code the server was actually running.",
     checklist: [
       "Three copies",
       "Human metaphor without claiming they stay in sync",
@@ -40,22 +48,55 @@ export const EXPLAIN_PROMPTS: ExplainPrompt[] = [
     conceptIds: ["head", "main", "origin", "deployment-drift"],
   },
   {
-    id: "ex-mother",
-    prompt: "Why did Motherclank become necessary?",
+    id: "ex-origin-main",
+    prompt: "What is origin/main?",
     modelAnswer:
-      "Collectors lied in different dialects: timers that fired without starting, HTTP 200 with zero items, dual schedulers, FIRST_SEEN floods, soaks with no promotion record. A read-only harvester (ADR-0002) can photocopy fleet evidence without taking Clank locks, writing DBs, or sending alerts. It exists because local dashboards were not a trustworthy picture of the fleet.",
+      "origin is the nickname for the GitHub remote. origin/main is the last-seen position of that remote's main branch after fetch. It is not HEAD (your checkout) and not production (the running artifact). Law 9's first specimen: KTW main lagged production until a Phase 2A merge; the host checkout could still trail after GitHub healed.",
+    checklist: ["Remote nickname", "Not HEAD", "Not production", "Fetch updates the last-seen pointer"],
+    conceptIds: ["origin-main", "origin", "main", "fetch"],
+  },
+  {
+    id: "ex-prov",
+    prompt: "What is provenance and why did this ecosystem need it?",
+    modelAnswer:
+      "Provenance is the footnote: run id, source, code revision. Runtime provenance is how the run was invoked (budget, scheduler, SHA actually loaded). The QC flood happened when people reconstructed intent from result shape. Law 6: missing stays UNKNOWN, it does not become a guessed SHA. CTW dogfood caught a guessed refresh path that review could not see.",
     checklist: [
-      "Read-only / no remediation",
-      "Named at least two failure classes it observes",
-      "Did not describe it as a deployer or a chat bot",
+      "Origin of a fact",
+      "Runtime vs repo",
+      "UNKNOWN is allowed",
+      "Why Clanks specifically (QC flood / CTW / Law 6)",
     ],
-    conceptIds: ["motherclank", "diagnostic-clank", "observability"],
+    conceptIds: ["provenance", "runtime-provenance"],
+  },
+  {
+    id: "ex-regression",
+    prompt: "What is a regression?",
+    modelAnswer:
+      "A behaviour that used to be correct (or a bug that used to be fixed) and is now wrong again. Fleet Laws name specimens that must never recur: FGT DB eradication, Timex FIRST_SEEN flood, dual scheduler lanes. A regression test is a museum label. Loosening the test deletes the memory.",
+    checklist: ["Used to be fixed", "Named a Clank specimen", "Did not confuse it with rollback"],
+    conceptIds: ["regression", "regression-test"],
+  },
+  {
+    id: "ex-rollback",
+    prompt: "What is a rollback?",
+    modelAnswer:
+      "Return an environment to a previous known artifact or data epoch. Motherclank rollback: disable the user timer and delete derived snapshots — Clank DBs stay put. Smartwatch volume restore is RESTORED_HISTORY with a known gap, not a rewind of the world. Feature Phone after total loss is NEW_EPOCH, which is not a rollback because there is nothing to roll back to.",
+    checklist: ["Previous known state", "Not 'delete the crime scene'", "Restore vs new epoch"],
+    conceptIds: ["rollback", "epoch"],
+  },
+  {
+    id: "ex-ci",
+    prompt: "What does CI do?",
+    modelAnswer:
+      "Continuous Integration reruns the project's encoded checks (typecheck, tests, lint, build) on each push or PR so humans do not have to remember. It is a robot exam. It does not deploy, it does not start timers, and it does not prove mission recall. oem-radar adopted the Fleet Laws conformance suite as CI (caf7909) without modifying production collectors.",
+    checklist: ["Automated checks on push/PR", "Not deploy", "Only the questions encoded"],
+    conceptIds: ["ci", "test-suite"],
   },
   {
     id: "ex-600",
-    prompt: "How can 600 passing tests coexist with zero useful recall?",
+    prompt: "What does a passing test suite prove? How can 600 passing tests coexist with zero useful recall?",
     modelAnswer:
-      "Tests prove the assertions they encode. If nobody wrote an assertion that 'the Lenovo soak must recall the story', a green suite is compatible with 6349→0. Health checks that treat HTTP success as HEALTHY make the lie operational. BANKAI is the specimen: machinery ran, mission failed.",
+      "Tests prove the assertions they encode. If nobody wrote an assertion that 'the Lenovo soak must recall the story', a green suite is compatible with 6349→0. Health checks that treat HTTP success as HEALTHY make the lie operational. BANKAI is the specimen: machinery ran, mission failed. Watch's 468 passed on 27 August proves those 468 assertions at that SHA, not that Hetzner is running it.",
     checklist: [
       "Tests answer asked questions only",
       "Mission metrics are a different plane",
@@ -64,22 +105,78 @@ export const EXPLAIN_PROMPTS: ExplainPrompt[] = [
     conceptIds: ["tests-prove", "mission-fail", "health-check"],
   },
   {
-    id: "ex-prov",
-    prompt: "What is provenance and why did this ecosystem need it?",
+    id: "ex-healthy-useless",
+    prompt: "Why can a system be healthy but useless?",
     modelAnswer:
-      "Provenance is the footnote: run id, source, code revision. Runtime provenance is how the run was invoked (budget, scheduler, SHA actually loaded). The QC flood happened when people reconstructed intent from result shape. Law 6: missing stays UNKNOWN, it does not become a guessed SHA.",
+      "Because health was inferred from the wrong plane: transport success, historical success, or a live PID. FGT 200+0=ok, SK hynix HOST-BLOCKED appearing historically healthy, DEF-M1.5 UUID-ordered false-STALE (and the inverse false-HEALTHY risk), BANKAI 6349→0. Dual-plane health: the engine light is green, the newspaper is still blank. Law 3 exists so empty-but-200 cannot keep the dashboard calm.",
+    checklist: ["Wrong plane of health", "Named a Clank specimen", "Did not treat ping as purpose"],
+    conceptIds: ["dual-plane-health", "health-check", "mission-fail"],
+  },
+  {
+    id: "ex-dogfood",
+    prompt: "What is dogfooding?",
+    modelAnswer:
+      "Using a system or tool you built as part of building, testing, operating, or improving that same ecosystem. CTW onboarding was the first real v0.3 dogfood of the observer playbook: live host discovery found a guessed refresh path and a drifted FGT filename that review could not see. DEF-M1.5 is Motherclank dogfooding itself. ACT-011 is the operator dogfooding restore.",
+    checklist: ["Use your own system on purpose", "Named a Clank example", "Caught something review missed"],
+    conceptIds: ["dogfooding", "operator-role"],
+  },
+  {
+    id: "ex-mother",
+    prompt: "Why did Motherclank exist? Why did Motherclank become necessary?",
+    modelAnswer:
+      "Collectors lied in different dialects: timers that fired without starting, HTTP 200 with zero items, dual schedulers, FIRST_SEEN floods, soaks with no promotion record. A read-only harvester (ADR-0002) can photocopy fleet evidence without taking Clank locks, writing DBs, or sending alerts. It exists because local dashboards were not a trustworthy picture of the fleet. M5 mutation is still forbidden.",
     checklist: [
-      "Origin of a fact",
-      "Runtime vs repo",
-      "UNKNOWN is allowed",
+      "Read-only / no remediation",
+      "Named at least two failure classes it observes",
+      "Did not describe it as a deployer or a chat bot",
     ],
-    conceptIds: ["provenance", "runtime-provenance"],
+    conceptIds: ["motherclank", "diagnostic-clank", "observability"],
+  },
+  {
+    id: "ex-diagnostic",
+    prompt: "What problem did Diagnostic Clank solve?",
+    modelAnswer:
+      "Someone had to know which Clanks existed, on which host, at which SHA, without taking their locks. A directory listing is not a fleet (GIC-21 / L-FLEET-001 omitted Tablet). Diagnostic Clank owns fleet.yaml and the adapter plane Motherclank consumes. It is not Motherclank, not a collector, and its default branch is still diagnostic-clank-2026-08.",
+    checklist: ["Inventory/adapters", "Not Motherclank", "Registry not filesystem"],
+    conceptIds: ["diagnostic-clank", "contract"],
+  },
+  {
+    id: "ex-change-to-running",
+    prompt: "How does a code change become a running production change?",
+    modelAnswer:
+      "Edit working tree → stage → commit (SHA) → push to origin → CI → review/PR → merge to main → a human or playbook deploys (pull or image build) → process/timer restarted → the process loads that artifact → you observe it (logs, harvest) → you verify against a named criterion. Stopping after merge leaves production on yesterday's binary. Watch's unwired collectors are the specimen: code and registry without an invocation path.",
+    checklist: ["Named the doors in order", "Deploy is a separate act", "Verify is last, not merge"],
+    conceptIds: ["lifecycle", "deployment", "runtime-provenance"],
+  },
+  {
+    id: "ex-head-vs-deployed",
+    prompt: "Why is deployed code different from repo HEAD?",
+    modelAnswer:
+      "HEAD is the checkout you are looking at. Deployed code is whatever the running image or process loaded, which changes only when someone builds and restarts. They diverge on merge-without-restart, restart-without-pull, dirty-tree builds, and secret host hotfixes. Law 9 is deferred because the fleet could not yet enforce convergence. Law 6: if you cannot evidence the host SHA, write UNKNOWN.",
+    checklist: ["Different objects", "How they diverge", "UNKNOWN not a guessed SHA"],
+    conceptIds: ["head-vs-deployed", "deployment-drift"],
+  },
+  {
+    id: "ex-migration",
+    prompt: "What is a database migration?",
+    modelAnswer:
+      "A versioned, usually irreversible change to schema or stored data so old records fit a new form. Watch QC review-mode is three-valued; historical NULL-mode rows stay unspecified — reclassification requires a separately approved migration, not a silent relabel. Feature Phone after volume loss did not 'migrate'; it started NEW_EPOCH. Alembic revisions (smartphone, watch) are how collectors evolve the notebook's form.",
+    checklist: ["Schema/data change", "Versioned", "Not the same as epoch loss"],
+    conceptIds: ["migration", "schema", "epoch"],
+  },
+  {
+    id: "ex-authoritative",
+    prompt: "What does authoritative state mean?",
+    modelAnswer:
+      "The store whose contents are treated as the truth of a domain. Everything else is a copy or a claim. Clank SQLite is authoritative (ADR-0002). Motherclank snapshots are derived and disposable. Git is the truth of code history, not of what was observed. FGT's checkout newsroom.db is a stale leftover; the container volume is production. If the photocopy disagrees with the notebook, the photocopy is wrong.",
+    checklist: ["Original vs copy", "Clank SQLite vs Motherclank", "Git is not observational truth"],
+    conceptIds: ["authoritative-state", "derived-state", "sqlite-authoritative"],
   },
   {
     id: "ex-incident",
-    prompt: "Describe one incident from symptom through verified repair.",
+    prompt: "Explain a Clank incident from symptom to verified repair.",
     modelAnswer:
-      "Pick one: (1) MATERIALIZATION_GAP — timers elapsed, processes never started, root-owned logs/, ~36h silence, GIC-04/ADR-0008. (2) Watch QC flood — validation runs counted as catalogue passes, FIRST_SEEN ≠ new, 639/580/41. (3) BANKAI — 6349→0 recall with tests/health looking fine, Laws 1 and 8.",
+      "Pick one: (1) MATERIALIZATION_GAP — timers elapsed, processes never started, root-owned logs/, ~36h silence, GIC-04/ADR-0008, later oem-radar gitignore 44ce1ac. (2) Watch QC flood — validation runs counted as catalogue passes, FIRST_SEEN ≠ new, 639/580/41. (3) BANKAI — 6349→0 recall with tests/health looking fine, Laws 1 and 8. (4) Volume loss — SW restored with gap, FPC NEW_EPOCH, ACT-011 verified restore. Name symptom, competing hypotheses, evidence, root vs contributing, verification, residual risk.",
     checklist: [
       "Symptom",
       "Competing hypotheses",
@@ -87,6 +184,19 @@ export const EXPLAIN_PROMPTS: ExplainPrompt[] = [
       "Root vs contributing",
       "What would count as verification",
     ],
-    conceptIds: ["root-cause", "contributing-cause"],
+    conceptIds: ["root-cause", "contributing-cause", "verification"],
+  },
+  {
+    id: "ex-ai",
+    prompt: "How did AI agents participate in the development process? What was your role?",
+    modelAnswer:
+      "I used multiple AI agents in a staged engineering workflow. One would implement (ox-alpha drafting ADRs 0006–0014; Claude co-authoring collector repairs), another would audit or review (AGENT_RULES.md: no silent conflict resolution, UNKNOWN is not healthy, no auto-promote), and I acted as the operator and decision-maker. I carried requirements between them, checked evidence, decided whether fixes matched the actual mission, froze promotion, executed ACT-011, and directed testing and deployment. I did not become a programmer; I did not collapse the process into paste.",
+    checklist: [
+      "Named implementation vs reviewer vs operator",
+      "Did not overstate coding",
+      "Did not understate decisions/evidence",
+      "Tied to a real artefact (ADR, dogfood, ACT-011)",
+    ],
+    conceptIds: ["implementation-agent", "reviewer-agent", "operator-role"],
   },
 ];

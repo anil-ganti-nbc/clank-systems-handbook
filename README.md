@@ -10,6 +10,8 @@ Clank development story, with three layers on every important concept:
 2. Real Clank example (repository / commit / report)
 3. Explain-it-to-a-human sentence
 
+The unacceptable explanation of the fleet is “I pasted one AI output into another.”
+
 ## Epistemic rules
 
 Every historical claim is one of:
@@ -19,7 +21,18 @@ Every historical claim is one of:
 - **incomplete** — evidence missing; we do not invent it
 - **illustrative** — teaching example, not history
 
-Incidents live in `src/content/incidents.ts` as machine-readable manifests.
+UNKNOWN stays UNKNOWN. A commit existing in Git does not prove production is running it.
+
+## Historical ledger
+
+Canonical spine:
+
+- Human-readable: [`docs/CLANK_HISTORY_LEDGER.md`](docs/CLANK_HISTORY_LEDGER.md)
+- Machine-readable: `src/content/history.ts`
+
+Incidents live in `src/content/incidents.ts`. Fleet Laws live in `src/content/laws.ts`.
+Current-state Clank cards live in `src/content/fleet.ts` and are labelled stale where
+live-host evidence was not re-probed.
 
 ## Relationship to Dead Air University
 
@@ -35,23 +48,24 @@ systems. This Handbook’s labs use **historical evidence**, not generated physi
 ```bash
 npm install
 npm run dev         # Vite / TanStack Start at http://localhost:5173
-npm test            # content schema, unique ids, dangling-link checks
+npm test            # content schema, unique ids, dangling-link checks, ledger sync
 npm run typecheck
 npm run build
 npx playwright install chromium
-npm run e2e         # lesson nav, freeze→reveal, evidence, Explain It Back
+npm run e2e         # lesson nav, freeze→reveal, evidence, Explain It Back, history, fleet
 ```
 
 Browser-local state key is `clank-handbook-v1`. The Handbook GUI is this
 repository; it does not depend on Grok App Builder auth, preview bridges, or
 `/__grok` chrome.
 
-## Vertical slice (shipped)
+## Curriculum (content phase)
 
-- Pipeline narrative + timeline
-- Git/HEAD/SHA/provenance lesson
-- Testing vs mission-success lesson
-- Deployment/runtime-state lesson
-- Three investigations: MATERIALIZATION_GAP, Watch QC flood, BANKAI zero-recall
+- Historical ledger: nine phases, 27 artefact-backed entries
+- How-we-built-it chronological narrative + AI-assisted workflow
+- Git/HEAD/SHA/provenance, lifecycle, tests, deploy, ops, SQLite
+- Architecture evolution and Fleet Law lineage (Laws 1–8 + deferred 9)
+- Current fleet map with stale/UNKNOWN notes
+- Nine investigation labs (start with MATERIALIZATION_GAP, Watch QC, BANKAI)
 - Explain-it-back with freeze → reveal + self-rating
-- Searchable glossary
+- Searchable three-layer glossary
