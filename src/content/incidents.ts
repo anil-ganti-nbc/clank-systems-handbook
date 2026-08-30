@@ -11,7 +11,7 @@ export const INCIDENTS: Incident[] = [
     context:
       "Several Clanks are supposed to run on a host schedule (cron or systemd timers). Operators believed 'the timer fired' meant 'the collector ran'. Golden incident GIC-04 exists specifically for this class.",
     symptom:
-      "About 36 hours of silence on oem-radar, smartwatch, and feature-phone even though scheduling still looked populated. Diagnostic incident id 62b03383… is cited in the decision ledger.",
+      "Scheduling still looked populated while collectors produced no work. Diagnostic incident id 62b03383… is cited in the decision ledger. Duration (~36h) is recorded there; raw syslog is not in this Handbook.",
     competingHypotheses: [
       "The collectors ran and found nothing (legitimate NO_WORK_DUE / ZERO_ITEMS).",
       "The timer unit is disabled — scheduling is the root cause.",
@@ -32,7 +32,7 @@ export const INCIDENTS: Incident[] = [
       "logs/ reappeared as root:root.",
       "cron redirect could not write; command failed before exec of the collector.",
       "Timers still elapsed, so dashboards that watched the calendar stayed calm.",
-      "No useful work for ~36 hours.",
+      "No useful work for a multi-hour window (ledger records ~36h; syslog not recovered).",
     ],
     blastRadius:
       "oem-radar, smartwatch-clank, and feature-phone-clank on that host. Not a logic bug inside any one collector.",
@@ -92,7 +92,7 @@ export const INCIDENTS: Incident[] = [
     context:
       "Watch Clank discovers products and stories, then a human QC queue decides what is editorially useful. Novelty, health, and catalogue-pass status are different planes (Laws 1–3, GIC-01).",
     symptom:
-      "The default human-QC FIFO filled with low-value first-sightings and validation runs treated as real catalogue passes. 2026-08-26 accounting: 639 raw unreviewed events; default queue 580 before repair replay, 41 after.",
+      "The default human-QC FIFO filled with low-value first-sightings and validation runs treated as real catalogue passes. 2026-08-26 snapshot in watch-clank 5de5329 / ARCHITECTURE_NOTES_QC_VOLUME.md: 639 raw unreviewed; default queue 580 before repair replay, 41 after. Those are incident values in the notes, not a live queue.",
     competingHypotheses: [
       "Sources suddenly published hundreds of genuinely new watches.",
       "Baseline was empty so first run legally notified everything (Law 1 violator class).",
@@ -120,7 +120,7 @@ export const INCIDENTS: Incident[] = [
     remediation:
       "Qualify catalogue-pass from summary_metadata.max_items (null or ≥ registry default). Weak FIRST_SEEN auto-flagged human_qc_deprioritized. Queue reports now name raw vs default vs background tiers. Review mode is three-valued (individual/bulk/absent).",
     verification:
-      "ARCHITECTURE_NOTES_QC_VOLUME.md (2026-08-26) records the incident values and the _is_catalogue_pass implementation. L-WATCH-001 is CONFIRMED FIXED in the expansion failure corpus. Re-running a bounded validation run must not increment INITIAL_FILL_RUNS — that test lives in watch-clank, not in this Handbook.",
+      "ARCHITECTURE_NOTES_QC_VOLUME.md at watch-clank 5de5329 (2026-08-26T02:01:27Z) records the incident values and the _is_catalogue_pass implementation. L-WATCH-001 is CONFIRMED FIXED in the expansion failure corpus. Re-running a bounded validation run must not increment INITIAL_FILL_RUNS — that test lives in watch-clank, not in this Handbook. Live queue size remains UNKNOWN.",
     residualRisk:
       "Any new collector that infers pass quality from output size will reproduce the flood. Region gaps (L-WATCH-006) remain a separate open class.",
     architecturalLesson:
@@ -131,7 +131,8 @@ export const INCIDENTS: Incident[] = [
         kind: "doc",
         repo: "anil-ganti-nbc/watch-clank",
         path: "ARCHITECTURE_NOTES_QC_VOLUME.md",
-        note: "2026-08-26 notes: catalogue-pass is invocation fact; 639/580/41 queue numbers; weak FIRST_SEEN threshold 15 vs useful ≥ 25.",
+        sha: "5de5329f43adc3fdad0ee797f0e691427f802641",
+        note: "2026-08-26 notes: catalogue-pass is invocation fact; 639/580/41 are snapshot incident values in this commit, not live; weak FIRST_SEEN threshold 15 vs useful ≥ 25.",
         status: "verified",
       },
       {
@@ -158,7 +159,7 @@ export const INCIDENTS: Incident[] = [
     probes: [
       { id: "p-budget", label: "What max_items did the run persist?", finding: "Validation runs were bounded; qualification ignored that and used counts.", status: "verified" },
       { id: "p-fs", label: "Do FIRST_SEEN events carry recency evidence?", finding: "Flood class scored 15; every useful FS in history scored ≥ 25.", status: "verified" },
-      { id: "p-queue", label: "Which queue are we counting?", finding: "Raw 639 ≠ default FIFO 580 ≠ post-repair 41.", status: "verified" },
+      { id: "p-queue", label: "Which queue are we counting?", finding: "In the 2026-08-26 snapshot: raw 639 ≠ default FIFO 580 ≠ post-repair 41. Not a live dashboard.", status: "verified" },
       { id: "p-second", label: "Did the first repair (discovered_count > 1) actually fix it?", finding: "No. Output cardinality again. A bounded run that found 2+ items would have re-exhausted INITIAL_FILL.", status: "verified" },
     ],
   },

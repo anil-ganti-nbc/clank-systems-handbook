@@ -1,6 +1,6 @@
 import type { LedgerReview } from "../lib/handbook/schema.ts";
 
-/** Human-review queue for the 27 history rows. None silently rewritten this campaign. */
+/** Human-review queue for all 28 history rows. Git/document-backed walk complete; live probe deferred. */
 function r(row: LedgerReview): LedgerReview {
   return row;
 }
@@ -31,12 +31,19 @@ export const LEDGER_REVIEWS: LedgerReview[] = [
   r({
     historyId: "h-consumer-clanks",
     currentConfidence: "verified",
-    supportingArtefacts: ["archaeology report §3", "repo created_at 8–10 Aug"],
-    verifiedClaims: ["Named repos exist in that window."],
-    inferredClaims: ["Copying a working SQLite collector was faster than a platform."],
-    overreadRisk: "Git baselines named in archaeology (Watch 14712d9, Smartwatch 4c115ce) were not independently re-hashed this campaign. Dates are still archaeology-backed.",
-    openQuestions: ["Re-confirm those two baseline SHAs if teaching them as exam facts."],
-    recommendedAction: "await-human",
+    supportingArtefacts: ["archaeology report §3", "GitHub created_at re-fetched 2026-08-30: CTW/watch/smartwatch/smartphone/KTW"],
+    verifiedClaims: [
+      "Independent consumer/wire repos existed 8–10 Aug before Diagnostic (17 Aug) or Motherclank (22 Aug).",
+      "GitHub created_at matches the 9–10 Aug window for CTW, smartphone, watch, smartwatch, KTW.",
+    ],
+    inferredClaims: [
+      "Watch 14712d9 / Smartwatch 4c115ce are the identity of those Clanks or were running then.",
+      "Copying a working SQLite collector was faster than a platform (motive).",
+    ],
+    overreadRisk:
+      "Owner walk 2026-08-30: in-row split applied. Phase stays VERIFIED. Archaeology baselines are recoverability checkpoints (“before cloud migration”), not exam SHAs, not GitHub birth, not live. Do not put them in commits[]. Live SHA/host UNKNOWN.",
+    openQuestions: ["Live collector SHA and host layout remain UNKNOWN (deferred reprobe)."],
+    recommendedAction: "keep",
     recommendedConfidence: "verified",
   }),
   r({
@@ -44,8 +51,8 @@ export const LEDGER_REVIEWS: LedgerReview[] = [
     currentConfidence: "verified",
     supportingArtefacts: ["archaeology executive finding", "ADR-0002"],
     verifiedClaims: ["Docs say collectors are mostly SQLite-backed; Motherclank must not centralize DBs."],
-    inferredClaims: ["Every mature Clank persists observations in a local SQLite file."],
-    overreadRisk: "'Every' is an archaeology summary, not a live listing of files on the host.",
+    inferredClaims: ["“Every mature Clank persists observations in a local SQLite file” as a live host listing."],
+    overreadRisk: "Owner walk 2026-08-30: archaeology “mostly SQLite-backed” stays VERIFIED. Do not treat “every” as a live filename census. Live DB filenames UNKNOWN for several lanes.",
     openQuestions: ["Live DB filenames still UNKNOWN for several lanes (Watch path, FGT live volume)."],
     recommendedAction: "keep",
     recommendedConfidence: "verified",
@@ -54,11 +61,20 @@ export const LEDGER_REVIEWS: LedgerReview[] = [
     historyId: "h-portability",
     currentConfidence: "verified",
     supportingArtefacts: ["archaeology §3 portability phase", "git-resident Docker/unit templates preserved this campaign"],
-    verifiedClaims: ["Repos gained Docker, backup scripts, unit examples, host handoffs in that window."],
-    inferredClaims: ["FGT Hetzner deployment 473931e; Watch user-timers 12e8d3e / 938cc62 / f0b327a as named in archaeology."],
-    overreadRisk: "Those SHAs are archaeology citations, not 2026-08-27 live checkout HEADs. Unit files in git are templates.",
-    openQuestions: ["Which of those SHAs (if any) is still the running image?"],
-    recommendedAction: "await-host-probe",
+    verifiedClaims: [
+      "Repos gained Docker, backup scripts, unit examples, host handoffs in the 2026-08-08 through 2026-08-19 window (archaeology §3).",
+      "FGT 473931e and Watch 12e8d3e / 938cc62 / f0b327a are named as commit citations in that report.",
+      "2026-08-22 fleet.yaml inventory recorded Watch f0b327a and FGT cec0346.",
+    ],
+    inferredClaims: [
+      "Those archaeology SHAs were the running images during 8–19 Aug.",
+      "Those SHAs (or later HEADs) are the running images now.",
+      "Git-resident Docker/unit/backup templates are enabled on the host.",
+    ],
+    overreadRisk:
+      "Owner walk 2026-08-28: in-row split applied. Machinery-in-git stays VERIFIED. Archaeology-cited SHAs are not live deployed SHAs. Inventory 22 Aug is a dated snapshot, not a current probe. Later HEADs (Watch 9d812ed, FGT 45b47a5) stay out. Live deployed SHA UNKNOWN. Do not put 473931e / 12e8d3e / 938cc62 / f0b327a into commits[].",
+    openQuestions: ["Which SHA (if any) is the running image on the host now?"],
+    recommendedAction: "keep",
     recommendedConfidence: "verified",
   }),
   r({
@@ -86,12 +102,20 @@ export const LEDGER_REVIEWS: LedgerReview[] = [
   r({
     historyId: "h-dual-scheduler",
     currentConfidence: "verified",
-    supportingArtefacts: ["FLEET_LAWS.md Law 5", "soak timer templates still in smartwatch git"],
-    verifiedClaims: ["Law 5 names the smartwatch dual-lane specimen and 2026-08-21T21:06Z retirement."],
-    inferredClaims: ["The failing timer is still disabled on the live host today."],
-    overreadRisk: "Retirement timestamp is from the law text, not a 2026-08-27 journalctl. Templates still exist in git — existence ≠ enabled.",
+    supportingArtefacts: ["FLEET_LAWS.md Law 5 @ d046d54", "fleet.yaml soak row 2026-08-22", "soak timer templates still in smartwatch git"],
+    verifiedClaims: [
+      "Law 5 names dual scheduling as a failure class and the smartwatch specimen: systemd soak retired 2026-08-21T21:06Z, cron kept.",
+      "2026-08-22 fleet.yaml lists smartwatch-hetzner-soak-timer-retired DISABLED (enabled: false; files retained unscheduled) beside a cron lane RUNNING staging at d987b66.",
+    ],
+    inferredClaims: [
+      "The failing timer is still disabled on the live host today.",
+      "Cron is the sole enabled scheduler on smartwatch now.",
+      "Watch fcb5e91 and SemInt residuals were repaired in the same host action.",
+    ],
+    overreadRisk:
+      "Owner walk 2026-08-28: in-row split applied. Historical scar stays VERIFIED. 21:06Z is law/inventory text, not live journalctl. Templates ≠ enabled. Later HEADs out. Current scheduler authority UNKNOWN. Do not teach 'one clock is authoritative now'.",
     openQuestions: ["What is the single enabled scheduler on smartwatch right now?"],
-    recommendedAction: "await-host-probe",
+    recommendedAction: "keep",
     recommendedConfidence: "verified",
   }),
   r({
@@ -120,11 +144,19 @@ export const LEDGER_REVIEWS: LedgerReview[] = [
     historyId: "h-motherclank-born",
     currentConfidence: "verified",
     supportingArtefacts: ["ADR-0002 @ b341b0f", "motherclank created_at 2026-08-22T06:02:49Z", "install-user-timer.sh preserved"],
-    verifiedClaims: ["ADR and repo exist. M5 forbidden in ADR-0002."],
-    inferredClaims: ["A harvest timer is installed and firing on the host."],
-    overreadRisk: "Timer installer is a template. Live enablement UNKNOWN.",
-    openQuestions: ["Is motherclank-harvest.timer enabled? Last harvest timestamp?"],
-    recommendedAction: "await-host-probe",
+    verifiedClaims: [
+      "ADR-0002 (b341b0f, 2026-08-22T05:52:04Z) established read-only supervisory design; M5 mutation deferred.",
+      "motherclank repository created 2026-08-22T06:02:49Z, initially described as M0 read-only fleet harvester.",
+    ],
+    inferredClaims: [
+      "A harvest timer is installed and firing on the host.",
+      "M1–M4 were live stages on 22 Aug.",
+      "Later repo HEAD is the deployed harvest SHA.",
+    ],
+    overreadRisk:
+      "Owner walk 2026-08-28: in-row split applied. Architectural birth stays VERIFIED. Created ≠ actively supervising. Installer/unit templates ≠ timer enablement. Repo HEAD ≠ deployed SHA. Live SHA, process, timer, and host var/ remain UNKNOWN. Do not present M1–M4 as proven live on the birth date.",
+    openQuestions: ["Is motherclank-harvest.timer enabled? Last harvest timestamp? Deployed Motherclank SHA?"],
+    recommendedAction: "keep",
     recommendedConfidence: "verified",
   }),
   r({
@@ -142,22 +174,36 @@ export const LEDGER_REVIEWS: LedgerReview[] = [
     historyId: "h-materialization",
     currentConfidence: "verified",
     supportingArtefacts: ["DECISION_LEDGER INC-20260822-A", "INCIDENT_IMPACT_MAP Family A", "ADR-0008", "continuity seed INC-20260822-23"],
-    verifiedClaims: ["The incident is documented as stash -u → root:root logs/ → cron pre-exec failure → ~36h silence. OEM Radar lost no DB data (ledger)."],
+    verifiedClaims: [
+      "Incident class MATERIALIZATION_GAP: scheduler activity visible, collector never became a running process.",
+      "Preserved records attribute this to a pre-exec logging/permission failure (stash -u → logs/ root:root → cron redirect).",
+      "OEM Radar lost no DB data (ledger). ADR-0008 + G1–G8 fixtures exist.",
+    ],
     inferredClaims: ["Exact 09:59–10:06Z window and the ~36h duration as lived on the host."],
-    overreadRisk: "Raw syslog is NOT in git and was not recovered this campaign. Verification currently cites the ledger, not journalctl. Host-facing timestamps are operator-verified in Pass 2 addendum — do not invent extra log lines.",
+    overreadRisk:
+      "Owner walk 2026-08-27: in-row split applied. Mechanism stays VERIFIED from git-resident decision/architecture records. Host timestamps/syslog remain INCOMPLETE. Do not re-promote ~09:59–10:06Z or ~36h as independently recovered.",
     openQuestions: ["Does journalctl still contain 2026-08-22 cron failures, or has it rotated?"],
-    recommendedAction: "split",
+    recommendedAction: "keep",
     recommendedConfidence: "verified",
   }),
   r({
     historyId: "h-volume-loss",
     currentConfidence: "verified",
-    supportingArtefacts: ["impact map Family B", "continuity seeds", "DATA_SURVIVABILITY §17.1"],
-    verifiedClaims: ["Volume names and UTC destruction/restore instants are in the impact map. Smartwatch restored; FPC new epoch. ACT-011 later verified those RPs on scratch."],
-    inferredClaims: ["Motherclank's own harvest batches from the window (states A–E) — BLOCKED, not verified row-level."],
-    overreadRisk: "Do not upgrade Motherclank var/ confirmation. Earlier '4 days' was corrected to ≈3d13h — keep the correction.",
-    openQuestions: ["Can var/ still be copied? Are the restored volume names still attached?"],
-    recommendedAction: "await-host-probe",
+    supportingArtefacts: ["impact map Family B", "continuity seeds INC-20260823", "DATA_SURVIVABILITY §17.1 on h-act011"],
+    verifiedClaims: [
+      "Two named volumes destroyed (SW 21:22:08Z, FPC 21:22:11Z) as recorded in the impact map and seeds.",
+      "SW RESTORED_HISTORY from 2026-08-18T20:50:37Z backup; FPC NEW_EPOCH fpc-epoch-2 at 21:36:11Z.",
+      "SW ≈3d13h and FPC pre-epoch history are permanently missing. ACT-011 later proved scratch restore of remaining RPs (separate row).",
+    ],
+    inferredClaims: [
+      "The original historical state was fully reconstructed.",
+      "Motherclank var/ batches for states A–E survived.",
+      "Restored volumes are still attached; scratch copies still exist; durable off-host backup exists.",
+    ],
+    overreadRisk:
+      "Owner walk 2026-08-29: in-row split applied. Restore ≠ rewind. Instants are operator-provided, not live logs. ACT-011 stays on h-act011. var/ BLOCKED. Live path/epoch/backup UNKNOWN. Do not re-round 3d13h to 4 days.",
+    openQuestions: ["Can var/ still be copied? Are the restored volume names still attached? Do ACT-011 scratch copies still exist?"],
+    recommendedAction: "keep",
     recommendedConfidence: "verified",
   }),
   r({
@@ -186,9 +232,9 @@ export const LEDGER_REVIEWS: LedgerReview[] = [
     historyId: "h-act011",
     currentConfidence: "verified",
     supportingArtefacts: ["DATA_SURVIVABILITY.md §17.1", "survivability-ACT011-verified-live.jsonl hash 84149d7c3adc…"],
-    verifiedClaims: ["Two lanes: integrity_check=ok and disposable-volume restore passed. off_host_durable: false. Gate OPEN."],
-    inferredClaims: ["Those scratch copies still exist on 2026-08-27."],
-    overreadRisk: "Do not say 'we have backups'. Say 'we had a restore-verified scratch RP on 24 Aug'. Durable off-host is DESIGNED ONLY.",
+    verifiedClaims: ["Two lanes on 2026-08-24: integrity_check=ok and disposable-volume restore passed. off_host_durable: false. Gate OPEN."],
+    inferredClaims: ["Those scratch copies still exist now. Backup is scheduled. Layer C exists."],
+    overreadRisk: "Owner walk 2026-08-30: dated scratch drill stays VERIFIED. Do not say 'we have backups'. Scratch existence today UNKNOWN. Durable off-host is DESIGNED ONLY.",
     openQuestions: ["Do the scratch files still exist? Any newer RP since 24 Aug?"],
     recommendedAction: "keep",
     recommendedConfidence: "verified",
@@ -196,12 +242,20 @@ export const LEDGER_REVIEWS: LedgerReview[] = [
   r({
     historyId: "h-ctw-dogfood",
     currentConfidence: "verified",
-    supportingArtefacts: ["CTW_ONBOARDING_DOGFOOD.md @ 64f92aa", "7f977d6 operator follow-up"],
-    verifiedClaims: ["Scorecard exists. Guessed refresh path documented. ONBOARDING.md cross-check added by Anil."],
-    inferredClaims: ["Live store volume name as of 2026-08-27 matches the dogfood finding."],
-    overreadRisk: "Dogfood is 24–25 Aug evidence. Do not treat it as a current host map.",
-    openQuestions: ["What is the CTW volume name right now?"],
-    recommendedAction: "await-host-probe",
+    supportingArtefacts: ["CTW_ONBOARDING_DOGFOOD.md @ 64f92aa / 66cef4c", "7f977d6 operator finding + ONBOARDING.md patch"],
+    verifiedClaims: [
+      "14-step dogfood run against CTW; adapter-thinness (0 participant-specific core lines).",
+      "Scorecard step 8 PASS on registry+refresh; FGT filename friction on the card.",
+      "7f977d6 records the guessed-path finding and the three-way cross-check patch.",
+    ],
+    inferredClaims: [
+      "The 24–25 Aug volume/path layout is still production.",
+      "Live store volume name as of 2026-08-27 matches the dogfood finding.",
+    ],
+    overreadRisk:
+      "Owner walk 2026-08-30: in-row split applied. Dogfooding exposed that the playbook was guessing where the system lived instead of proving it. Dated topology is not a permanent map. Live volume/SHA/scheduler UNKNOWN.",
+    openQuestions: ["What is the CTW volume name right now? Is hourly cron still the live scheduler?"],
+    recommendedAction: "keep",
     recommendedConfidence: "verified",
   }),
   r({
@@ -218,12 +272,18 @@ export const LEDGER_REVIEWS: LedgerReview[] = [
   r({
     historyId: "h-watch-qc",
     currentConfidence: "verified",
-    supportingArtefacts: ["ARCHITECTURE_NOTES_QC_VOLUME.md"],
-    verifiedClaims: ["Notes dated 2026-08-26: catalogue-pass is invocation fact; 639 / 580 / 41."],
+    supportingArtefacts: ["ARCHITECTURE_NOTES_QC_VOLUME.md", "watch-clank@5de5329"],
+    verifiedClaims: [
+      "Catalogue-pass is an invocation fact (persisted max_items), never inferred from output cardinality.",
+      "FIRST_SEEN_BY_CLANK is not novelty; weak FS (≤ 15) auto-deprioritized.",
+      "Queue tiers are distinct: raw unreviewed ≠ default FIFO ≠ background.",
+      "2026-08-26 snapshot values 639 / 580 / 41 are recorded in 5de5329 and the notes.",
+    ],
     inferredClaims: ["Those queue counts are still the live queue."],
-    overreadRisk: "No commit SHA on the history row. Counts are a snapshot, not a live dashboard. Recommend attaching a SHA if teaching the numbers.",
-    openQuestions: ["Which commit introduced ARCHITECTURE_NOTES_QC_VOLUME.md? Live queue size?"],
-    recommendedAction: "await-human",
+    overreadRisk:
+      "Owner walk 2026-08-27: SHA pinned, numbers dated. Do not re-promote 639/580/41 as a live dashboard. Later Watch HEADs (ee3f34d, d4fda37, 9d812ed) are out of this incident narrative. Live queue UNKNOWN.",
+    openQuestions: ["Live queue size on the host?"],
+    recommendedAction: "keep",
     recommendedConfidence: "verified",
   }),
   r({
@@ -231,8 +291,8 @@ export const LEDGER_REVIEWS: LedgerReview[] = [
     currentConfidence: "verified",
     supportingArtefacts: ["watch-clank@e7eeb3f", "test_production_wiring.py cited in the message"],
     verifiedClaims: ["Commit wires tissot + timex_uk into production invocation path."],
-    inferredClaims: ["Hetzner deployment finding (Claude, 2026-08-25) as the discovery story."],
-    overreadRisk: "The commit is verified. The 'host deployment found the gap' sentence is commit-message testimony, not a live unit listing.",
+    inferredClaims: ["Hetzner deployment finding (Claude, 2026-08-25) as independently recovered host evidence. tissot/timex_uk timers are enabled now."],
+    overreadRisk: "Owner walk 2026-08-30: commit e7eeb3f verified. 'Host deployment found the gap' is commit-message testimony, not a live unit listing. Live timer enablement UNKNOWN.",
     openQuestions: ["Are tissot/timex_uk timers enabled on the host?"],
     recommendedAction: "keep",
     recommendedConfidence: "verified",
@@ -274,11 +334,18 @@ export const LEDGER_REVIEWS: LedgerReview[] = [
     historyId: "h-watch-qc-race",
     currentConfidence: "verified",
     supportingArtefacts: ["watch-clank@ee3f34d"],
-    verifiedClaims: ["Commit exists. Unique constraint + application recovery described in the message."],
-    inferredClaims: ["Hetzner is running ee3f34d (or later d4fda37)."],
-    overreadRisk: "Repo HEAD ≠ production. d4fda37 is even newer than ee3f34d and is still not a live SHA.",
-    openQuestions: ["Deployed Watch SHA on 2026-08-27?"],
-    recommendedAction: "await-host-probe",
+    verifiedClaims: [
+      "ee3f34d (2026-08-27T03:16:34Z) exists: catch IntegrityError, rollback losing insert, replay verdict as correction.",
+      "UNIQUE(event_id) is a database guarantee; the application contract is the catch/replay path.",
+    ],
+    inferredClaims: [
+      "An operator saw a raw IntegrityError/500 on the live host.",
+      "Hetzner is running ee3f34d (or later d4fda37 / 9d812ed).",
+    ],
+    overreadRisk:
+      "Owner walk 2026-08-28: in-row split applied. Pin ee3f34d. UNIQUE ≠ operator contract. Do not narrate a lived host 500. Later HEADs (d4fda37, 9d812ed) stay out. Live SHA UNKNOWN.",
+    openQuestions: ["Deployed Watch SHA? Was a concurrent double-submit ever observed on the host?"],
+    recommendedAction: "keep",
     recommendedConfidence: "verified",
   }),
   r({
@@ -299,8 +366,8 @@ export const LEDGER_REVIEWS: LedgerReview[] = [
     verifiedClaims: ["Live host SHA/backup cells remain UNKNOWN where not re-probed. This campaign did not close them."],
     inferredClaims: [],
     overreadRisk: "Do not let a prettier Evidence page upgrade this row. The campaign preserved git-resident artefacts; it did not replace a host probe.",
-    openQuestions: ["See EVIDENCE_GAPS."],
-    recommendedAction: "keep",
+    openQuestions: ["See EVIDENCE_GAPS. Operator reprobe still deferred."],
+    recommendedAction: "await-host-probe",
     recommendedConfidence: "verified",
   }),
   r({

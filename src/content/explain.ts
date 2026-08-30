@@ -176,7 +176,7 @@ export const EXPLAIN_PROMPTS: ExplainPrompt[] = [
     id: "ex-incident",
     prompt: "Explain a Clank incident from symptom to verified repair.",
     modelAnswer:
-      "Pick one: (1) MATERIALIZATION_GAP — timers elapsed, processes never started, root-owned logs/, ~36h silence, GIC-04/ADR-0008, later oem-radar gitignore 44ce1ac. (2) Watch QC flood — validation runs counted as catalogue passes, FIRST_SEEN ≠ new, 639/580/41. (3) BANKAI — 6349→0 recall with tests/health looking fine, Laws 1 and 8. (4) Volume loss — SW restored with gap, FPC NEW_EPOCH, ACT-011 verified restore. Name symptom, competing hypotheses, evidence, root vs contributing, verification, residual risk.",
+      "Pick one: (1) MATERIALIZATION_GAP — scheduler activity without a running process, documented as a pre-exec logging/permission failure (GIC-04/ADR-0008); exact host window/syslog remain INCOMPLETE; later oem-radar gitignore 44ce1ac. (2) Watch QC flood — validation runs counted as catalogue passes, FIRST_SEEN ≠ new, 639/580/41 dated 26 Aug at 5de5329. (3) BANKAI — 6349→0 recall with tests/health looking fine, Laws 1 and 8. (4) Volume loss — SW restored with a known gap, FPC NEW_EPOCH; ACT-011 later proved scratch restore, not rewind. Name symptom, competing hypotheses, evidence, root vs contributing, verification, residual risk.",
     checklist: [
       "Symptom",
       "Competing hypotheses",

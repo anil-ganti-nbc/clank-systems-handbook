@@ -351,8 +351,8 @@ export const HISTORY: HistoryEntry[] = [
     event: "Consumer-device Clanks and regional wires proliferate. Many collectors, not yet a supervisor.",
     before: "Two product sensors (OEM Radar, FGT) plus architecture notes.",
     change:
-      "CTW 14:28Z, watch-clank 14:29Z, smartwatch-clank 14:29Z, smartphone-clank 14:28Z, feature-phone + SemInt 15:00Z on 9 Aug; KTW bootstrapped 10 Aug 07:39Z. Archaeology names Git baselines such as Watch 14712d9 (8 Aug) and Smartwatch 4c115ce (9 Aug).",
-    why: "Each product category and language market needed its own source adapters. Copying a working SQLite collector was faster than a platform.",
+      "GitHub created_at places chinese-tech-wire 2026-08-09T14:28:00Z, smartphone-clank 14:28:55Z, watch-clank 14:29:12Z, and smartwatch-clank 14:29:27Z; feature-phone-clank and semiconductor-intelligence appear in the same 9 Aug window; korean-tech-wire is bootstrapped 2026-08-10T07:39:42Z. That is a bag of independent SQLite collectors. There is no fleet supervisor (Diagnostic is 17 Aug; Motherclank is 22 Aug). Archaeology §3 records this as the origin/import phase and names Git recoverability checkpoints such as Watch 14712d9 and Smartwatch 4c115ce. Those objects exist and say “before cloud migration”; they are not the identity of the Clanks, not GitHub birth, and not live SHAs. Do not memorise them. Later HEADs stay out. Live collector SHA and host layout remain UNKNOWN.",
+    why: "Each product category and language market needed its own source adapters. Copying a working SQLite collector was faster than a platform. Fleet supervision is a later layer.",
     evidence: [
       {
         id: "ev-archaeology-origin",
@@ -360,7 +360,7 @@ export const HISTORY: HistoryEntry[] = [
         repo: "anil-ganti-nbc/clank-architecture",
         path: "audits/CLANK_FLEET_ARCHAEOLOGY_REPORT_2026-08-24.md",
         sha: "431ba01efc156729574ffd9a470fb41f0a8aaa62",
-        note: "§3 Origin/import phase: repos imported or bootstrapped 2026-08-04 through 2026-08-10.",
+        note: "§3 Origin/import phase 2026-08-04 through 2026-08-10. Named baselines are recoverability checkpoints, not live SHAs.",
         status: "verified",
       },
     ],
@@ -369,6 +369,10 @@ export const HISTORY: HistoryEntry[] = [
     lawIds: [],
     incidentIds: [],
     laterConsequence: "Heterogeneous semantics become the reason Motherclank must adapt rather than rewrite.",
+    verification:
+      "Independent consumer/wire repos before any supervisor: VERIFIED (GitHub created_at + archaeology §3). Archaeology-cited baselines 14712d9 / 4c115ce exist as recoverability checkpoints, not exam SHAs. Live collector SHA/host: UNKNOWN.",
+    residualRisk:
+      "Do not put Watch 14712d9 or Smartwatch 4c115ce into commits[]. Do not teach them as GitHub birth or as live deploys. Baseline SHA ≠ repo created_at ≠ deployed SHA.",
     confidence: "verified",
   }),
   e("h-sqlite-authoritative", {
@@ -379,7 +383,7 @@ export const HISTORY: HistoryEntry[] = [
     event: "SQLite becomes more than storage: it is the memory of what each collector has already seen.",
     before: "A scraper that printed results could forget yesterday.",
     change:
-      "Every mature Clank persists observations in a local SQLite file. Novelty, baselines, outboxes, and QC all hang off that file. Archaeology: 'independently evolved, mostly SQLite-backed collectors'.",
+      "Archaeology and ADR-0002 record collectors as mostly SQLite-backed; novelty, baselines, outboxes, and QC hang off that local file. “Every mature Clank” is the archaeology summary, not a live listing of host files. Live DB filenames remain UNKNOWN for several lanes.",
     why: "Without durable local state, FIRST_SEEN and baseline are impossible, and a restart looks like the birth of the market.",
     evidence: [
       {
@@ -412,10 +416,10 @@ export const HISTORY: HistoryEntry[] = [
     period: "2026-08-08 to 2026-08-19",
     phaseId: "p-portability",
     systems: ["Hetzner", "NAS", "Docker", "Windows Task Scheduler"],
-    event: "Collectors gain Docker/runtime identity, host handoffs, and stop being laptop programs.",
+    event: "Collectors gain portable deployment machinery and host handoff support.",
     before: "Local Python CLIs and Windows scheduled tasks.",
     change:
-      "Archaeology §3 portability phase: Docker or external one-shot runners, source/image identity, backup artifacts, scheduler launchers, host-specific handoffs. FGT Hetzner deployment 473931e; Watch Hetzner/user-timers 12e8d3e / 938cc62 / f0b327a.",
+      "Archaeology §3 in the 2026-08-24 report records a portability/deployment phase from 2026-08-08 through 2026-08-19 in which most collector repos gained Docker or external one-shot runners, source/image identity, backup artefacts, scheduler launchers, and host-specific handoff notes. That proves portable deployment machinery entered the git record. It does not prove those exact versions ran on a host then, or run now. FGT 473931e and Watch 12e8d3e / 938cc62 / f0b327a are archaeology-cited commits from that phase, not live deployed SHAs. The 2026-08-22 fleet inventory later recorded Watch f0b327a and FGT cec0346; that is a dated inventory snapshot, not a current runtime probe. Git-resident Docker, unit, and backup templates do not prove timer enablement, a running image, or a live volume. Current deployed SHAs remain UNKNOWN.",
     why: "A newsroom sensor has to run unattended. Moving hosts created the first SHA-vs-runtime and volume-vs-checkout problems.",
     evidence: [
       {
@@ -423,7 +427,7 @@ export const HISTORY: HistoryEntry[] = [
         kind: "report",
         repo: "anil-ganti-nbc/clank-architecture",
         path: "audits/CLANK_FLEET_ARCHAEOLOGY_REPORT_2026-08-24.md",
-        note: "§3 Portability/deployment phase 2026-08-08 through 2026-08-19.",
+        note: "§3 Portability/deployment phase 2026-08-08 through 2026-08-19. Named SHAs in that report are commit citations, not live deployed revisions.",
         status: "verified",
       },
     ],
@@ -433,6 +437,10 @@ export const HISTORY: HistoryEntry[] = [
     incidentIds: ["inc-deployed-sha"],
     whatFailed: "Container host names, lock semantics, duplicate scheduling, stale local DBs mistaken for production.",
     laterConsequence: "Law 6 provenance and Law 9 (deferred) trailing-checkout metric.",
+    verification:
+      "Portable deployment machinery in git / archaeology §3: VERIFIED. Named SHAs are archaeology citations, not live deployed SHAs. 2026-08-22 inventory (Watch f0b327a, FGT cec0346) is a dated snapshot, not a current probe. Live deployed SHA, enabled scheduler, and live volume: UNKNOWN.",
+    residualRisk:
+      "Current deployed SHAs remain UNKNOWN. Do not re-promote FGT 473931e or Watch 12e8d3e / 938cc62 / f0b327a as live. Later repo HEADs (Watch 9d812ed, FGT 45b47a5) stay out of this row.",
     confidence: "verified",
   }),
   e("h-diagnostic-clank", {
@@ -510,10 +518,10 @@ export const HISTORY: HistoryEntry[] = [
     period: "2026-08-21",
     phaseId: "p-phase0",
     systems: ["smartwatch-clank", "watch-clank", "semiconductor-intelligence"],
-    event: "Smartwatch dual-lane repaired: failing systemd soak timer retired 2026-08-21T21:06Z; cron kept as sole scheduler.",
+    event: "Law 5 specimen: smartwatch dual-lane — competing soak timer retired in the 2026-08-21 law/inventory record.",
     before: "A Clank-lane could have more than one enabled scheduling mechanism. Experimental soaks could reach production collectors.",
     change:
-      "Law 5 specimens: smartwatch dual-lane journals; watch fcb5e91 ghost cron; SemInt wrong-app installer / cron bypassing OperationalScheduler.",
+      "FLEET_LAWS.md Law 5 (d046d54) records dual scheduling as a named failure class and the smartwatch specimen: systemd soak timer retired 2026-08-21T21:06Z, cron kept. That timestamp is law/inventory text (also fleet.yaml soak row observed_at_utc 2026-08-21T21:06:00Z), not recovered journalctl. The 2026-08-22 inventory lists smartwatch-hetzner-soak-timer-retired as DISABLED (enabled: false; files retained unscheduled) beside a cron lane RUNNING staging at d987b66 — a dated snapshot of what Phase 2A recorded, not a current probe. Git-resident soak unit/crontab examples prove competing-scheduler machinery existed; templates do not prove enablement then or now. Sibling specimens (Watch fcb5e91 ghost cron; SemInt cron bypassing OperationalScheduler) name the class; the SemInt residual was still OPEN in that inventory. Later repo HEADs stay out of this row. Current enabled scheduler per lane remains UNKNOWN.",
     why: "Two clocks on one notebook double-notify, starve each other, or hide which path actually ran.",
     evidence: [
       {
@@ -522,7 +530,7 @@ export const HISTORY: HistoryEntry[] = [
         repo: "anil-ganti-nbc/clank-architecture",
         path: "FLEET_LAWS.md",
         sha: "d046d54428b1e9dfdb63b8336959df955dd6820a",
-        note: "Law 5: smartwatch dual-lane (cron kept, systemd retired 2026-08-21T21:06Z).",
+        note: "Law 5: smartwatch dual-lane (cron kept, systemd retired 2026-08-21T21:06Z). Timestamp is law/inventory text, not live journalctl.",
         status: "verified",
       },
     ],
@@ -532,6 +540,10 @@ export const HISTORY: HistoryEntry[] = [
     incidentIds: ["inc-dual-scheduler"],
     whatFailed: "Failing timer fired hourly with zero observability (Law 3 specimen). Experimental soak ran production Samsung collectors (e9a897c made scope explicit).",
     laterConsequence: "GIC-24 dual scheduler authority. Tablet later encoded as INTENTIONALLY_DORMANT so a stale unit file is not a second authority.",
+    verification:
+      "Failure class and dated recorded retirement (Law 5 @ d046d54; 2026-08-22 inventory soak row DISABLED at 21:06Z): VERIFIED. 21:06Z is law/inventory text, not recovered journalctl. Current enabled scheduler per lane: UNKNOWN.",
+    residualRisk:
+      "Do not teach 'cron is the sole scheduler now'. Git templates ≠ enabled. Watch fcb5e91 and SemInt residuals are the class, not this host action; SemInt was still OPEN in the 22 Aug inventory. Later HEADs (smartwatch a717977) stay out. Live scheduler authority remains UNKNOWN.",
     confidence: "verified",
   }),
   e("h-phase0-freeze", {
@@ -608,7 +620,7 @@ export const HISTORY: HistoryEntry[] = [
     event: "ADR-0002 and the motherclank repository: a camera, not a janitor.",
     before: "Laws existed. Nobody harvested fleet evidence without taking locks or trusting dashboards.",
     change:
-      "ADR-0002 committed b341b0f 2026-08-22T05:52:04Z. motherclank repo created 2026-08-22T06:02:49Z. Stages M0–M4 observe/synthesize/detect/recommend/learn; M5 mutation deferred.",
+      "ADR-0002 (b341b0f, 2026-08-22T05:52:04Z) and creation of the motherclank repository shortly afterward established the design for a read-only supervisory layer over the Clank fleet. The ADR defines Motherclank as an observer/reasoner that may recommend but must not mutate production state; M5 mutation is explicitly deferred. The repository itself was initially described as M0, a read-only fleet harvester. That proves the supervisory architecture was created, not that live supervision was already active: Git-resident installer/unit templates do not prove timer enablement, successful harvests, host var/ snapshots, or a deployed SHA. Those runtime facts remain UNKNOWN.",
     why: "A supervisor that can write is a second Clank with blast radius over the whole fleet.",
     evidence: [
       {
@@ -633,6 +645,10 @@ export const HISTORY: HistoryEntry[] = [
     lawIds: ["law-3", "law-6"],
     incidentIds: [],
     laterConsequence: "ADR-0003 (same day) authorises M3 recommendations into Diagnostic Clank Agent Inbox — still no execution.",
+    verification:
+      "Architectural birth (ADR-0002, repo created_at, read-only intent, M5 deferred): VERIFIED. Do not present M1–M4 as proven live stages on 22 Aug. Live Motherclank SHA, process, timer enablement, harvests, and host var/: UNKNOWN.",
+    residualRisk:
+      "Live Motherclank SHA, process, timer, and host var/ remain UNKNOWN. Git-resident installer/unit templates do not prove enablement. Later repo HEAD (7cee2f8) is not a deployed SHA.",
     confidence: "verified",
   }),
   e("h-def-m15", {
@@ -668,10 +684,11 @@ export const HISTORY: HistoryEntry[] = [
     period: "2026-08-22 to 2026-08-24",
     phaseId: "p-scars",
     systems: ["oem-radar", "smartwatch-clank", "feature-phone-clank", "cron"],
-    event: "INC-20260822-A: scheduler fired, process never started. ~36 hours of silence.",
+    event:
+      "A scheduled Clank outage exposed a materialization gap: scheduler activity was visible, but the collector never successfully became a running process.",
     before: "Health checks that watched the calendar treated elapsed timers as successful work.",
     change:
-      "root git stash -u / stash pop recreated untracked logs/ as root:root. Cron redirects failed pre-exec. Diagnostic incident 62b03383…. Codified MATERIALIZATION_GAP (ADR-0008). OEM Radar lost no DB data.",
+      "Preserved decision/architecture records (DECISION_LEDGER INC-20260822-A, ADR-0008) attribute this to a pre-exec logging/permission failure: stash -u recreated untracked logs/ as root:root, so cron redirects failed before the collector started. Codified as MATERIALIZATION_GAP. OEM Radar lost no DB data. The impact map records a ~09:59–10:06Z window and ~36h silence — those host-level timestamps are operator-addendum in that document, not recovered syslog.",
     why: "Untracked runtime directories lived inside source checkouts, so a Git hygiene command became a production outage.",
     evidence: [
       {
@@ -679,7 +696,7 @@ export const HISTORY: HistoryEntry[] = [
         kind: "doc",
         repo: "anil-ganti-nbc/clank-architecture",
         path: "DECISION_LEDGER.md",
-        note: "INC-20260822-A recorded 2026-08-24.",
+        note: "INC-20260822-A recorded 2026-08-24. Mechanism: stash -u, logs/ root:root, pre-exec failure. Named MATERIALIZATION_GAP.",
         status: "verified",
       },
       {
@@ -687,8 +704,8 @@ export const HISTORY: HistoryEntry[] = [
         kind: "report",
         repo: "anil-ganti-nbc/clank-architecture",
         path: "audits/INCIDENT_IMPACT_MAP_2026-08-23.md",
-        note: "Family A: 2026-08-22 ~09:59–10:06Z stash -u; silent ~36h.",
-        status: "verified",
+        note: "Family A as recorded in the impact map. Host timestamps (~09:59–10:06Z, ~36h) are not independently recovered syslog.",
+        status: "incomplete",
       },
     ],
     commits: [{ repo: "anil-ganti-nbc/clank-architecture", sha: "cd276689a4055436cd974beb1d3272465e3b4145", note: "ADR-0008 + ADR-0009" }],
@@ -698,8 +715,10 @@ export const HISTORY: HistoryEntry[] = [
     whatFailed: "Collectors never became processes. Dashboards that watched invocation stayed calm.",
     diagnosis: "Pre-exec redirect failure, not a collector regression, not a legitimate zero.",
     fix: "Directory ownership; six-stage liveness model; GIC-04; ADR-0009 runtime-state/source-tree separation.",
-    verification: "Decision ledger + ADR-0008 implementation cited motherclank @3558fab + G1–G8 fixtures. Raw syslog not in Handbook checkout.",
-    residualRisk: "Any future redirect, permission, or missing binary reproduces MATERIALIZATION_GAP.",
+    verification:
+      "Incident class and mechanism: VERIFIED from DECISION_LEDGER.md, ADR-0008, G1–G8 fixtures (motherclank @3558fab). Exact host chronology and raw syslog: INCOMPLETE — not recovered this campaign, not in the Handbook checkout.",
+    residualRisk:
+      "Any future redirect, permission, or missing binary reproduces MATERIALIZATION_GAP. Do not re-promote impact-map timestamps as independently re-read journalctl.",
     laterConsequence: "Law 3's invocation≠commit becomes a first-class detection, not a slogan.",
     confidence: "verified",
   }),
@@ -708,10 +727,10 @@ export const HISTORY: HistoryEntry[] = [
     period: "2026-08-23",
     phaseId: "p-scars",
     systems: ["smartwatch-clank", "feature-phone-clank", "Docker volumes"],
-    event: "INC-20260823: destructive operator error deleted live volumes.",
+    event: "INC-20260823: two live volumes deleted — Smartwatch restored with a known gap; Feature Phone began a new epoch.",
     before: "Volumes were treated as ordinary containers of files. Feature-phone had no backup. Smartwatch had a 18 Aug backup.",
     change:
-      "smartwatch_clank_staging_data destroyed 21:22:08Z; feature_phone_clank_staging_data 21:22:11Z. FPC fresh DB NEW_EPOCH 21:36:11Z. Smartwatch restored 22:09Z from 2026-08-18T20:50:37Z backup. Missing SW history ≈ 3 days 13 hours (impact map correction; earlier '4 days' was rounded).",
+      "Impact map Family B and continuity seeds record smartwatch_clank_staging_data destroyed 2026-08-23T21:22:08Z and feature_phone_clank_staging_data 21:22:11Z. Those instants are operator-provided evidence, not live logs. Smartwatch was restored 22:09Z from the 2026-08-18T20:50:37Z backup — RESTORED_HISTORY, not a new epoch; observations ≈2026-08-18T20:13Z–2026-08-22T10:00Z (~3d13h) never made it into that backup and are gone. Feature Phone had no backup: fresh DB at 21:36:11Z → NEW_EPOCH fpc-epoch-2; pre-incident history is irrecoverable even on the host. ACT-011 (24 Aug, separate row) proved a disposable-volume restore of the remaining recovery points on temporary_scratch. That is not rewind, not durable off-host backup, and not proof the volumes are still attached. Motherclank var/ for states A–E remains BLOCKED. Live path, epoch, and backup state remain UNKNOWN.",
     why: "Human and agent destructive error is an expected failure mode (DATA_SURVIVABILITY R2).",
     evidence: [
       {
@@ -727,7 +746,7 @@ export const HISTORY: HistoryEntry[] = [
         kind: "report",
         repo: "anil-ganti-nbc/clank-architecture",
         path: "audits/INCIDENT_IMPACT_MAP_2026-08-23.md",
-        note: "Family B states A–E. Artifact-level Motherclank var/ confirmation BLOCKED.",
+        note: "Family B states A–E. Instants are operator-provided evidence, not live logs. Artifact-level Motherclank var/ confirmation BLOCKED.",
         status: "verified",
       },
     ],
@@ -735,11 +754,13 @@ export const HISTORY: HistoryEntry[] = [
     conceptIds: ["epoch", "volume", "rollback", "blast-radius", "authoritative-state"],
     lawIds: ["law-1"],
     incidentIds: ["inc-volume-loss"],
-    whatFailed: "Irreplaceable observational memory. FPC pre-incident history entirely irrecoverable.",
-    diagnosis: "Two families sharing a window must not be conflated. HMD ReadTimeout after FPC repair is an ordinary source failure.",
-    fix: "ContinuityEvent registry; DB-LOSS-RESTORE vs DB-LOSS-NEW-EPOCH golden incidents; ACT-011 restore drills 24 Aug.",
-    verification: "ACT-011 LIVE/VERIFIED integrity + disposable-volume restore. Durable off-host still NO (temporary_scratch).",
-    residualRisk: "Most other lanes still have UNKNOWN backup posture. Feature Phone new epoch has no durable off-host copy.",
+    whatFailed: "Irreplaceable observational memory. FPC pre-incident history entirely irrecoverable. SW ~3d13h never in the 18 Aug backup.",
+    diagnosis: "Two families sharing a window must not be conflated. Restore ≠ rewind. HMD ReadTimeout after FPC repair is an ordinary source failure.",
+    fix: "ContinuityEvent registry; DB-LOSS-RESTORE vs DB-LOSS-NEW-EPOCH golden incidents. ACT-011 (24 Aug) is a later scratch drill, not this incident's closing.",
+    verification:
+      "Named volume loss, SW RESTORED_HISTORY vs FPC NEW_EPOCH, and the irrecoverable windows: VERIFIED from impact map Family B and continuity seeds. Instants are operator-provided, not live logs. ACT-011 is a later scratch restore of remaining RPs (h-act011), not rewind. Motherclank var/ A–E: BLOCKED. Live path/epoch/backup: UNKNOWN.",
+    residualRisk:
+      "Restore ≠ rewind. Do not teach ACT-011 as closing the gap. Durable off-host is NO (temporary_scratch). Live volume attachment UNKNOWN. Do not re-round 3d13h to 4 days. Seeds ≠ missing var/ batches.",
     laterConsequence: "ADR-0007 destructive-operation safety: pattern-derived names never authorize deletion.",
     confidence: "verified",
   }),
@@ -816,8 +837,8 @@ export const HISTORY: HistoryEntry[] = [
     event: "ACT-011: operator-executed live recovery-point verification.",
     before: "Restored/new-epoch DBs existed; restorability was a story.",
     change:
-      "Smartwatch RP1: 516 runs, 52,126 observations, integrity_check=ok, disposable-volume restore passed. Feature-phone epoch-2 first RP: integrity ok, restore passed. Off-host copies exist only as temporary_scratch. Durable gate OPEN.",
-    why: "A backup that has never been restored is a rumour (GIC-16/17).",
+      "2026-08-24 DATA_SURVIVABILITY §17.1: Smartwatch RP1 516 runs / 52,126 observations, integrity_check=ok, disposable-volume restore passed. Feature-phone epoch-2 first RP: integrity ok, restore passed. Off-host copies existed as temporary_scratch on that date. Durable gate OPEN. That does not prove those scratch files still exist, that backup is scheduled, or that Layer C off-host survivability exists.",
+    why: "A backup that has never been restored is a rumour (GIC-16/17). Restore proves recoverability from what survived that day.",
     evidence: [
       {
         id: "ev-act011",
@@ -832,8 +853,11 @@ export const HISTORY: HistoryEntry[] = [
     conceptIds: ["rollback", "epoch", "volume", "verification"],
     lawIds: [],
     incidentIds: ["inc-volume-loss"],
-    residualRisk: "Durable off-host redundancy DESIGNED ONLY. Least-privilege destructive-capability audit NOT STARTED (ACT-012).",
+    residualRisk:
+      "Durable off-host redundancy DESIGNED ONLY. Scratch-copy existence today UNKNOWN. Least-privilege destructive-capability audit NOT STARTED (ACT-012). Do not say “we have backups.”",
     laterConsequence: "Acceptance test 'Claude deletes the volume again' is still DESIGNED for most lanes.",
+    verification:
+      "24 Aug scratch restore of remaining RPs: VERIFIED. Durable off-host: NO (temporary_scratch). Scratch copies still exist today: UNKNOWN. Layer C DESIGNED ONLY. Current backup schedule: UNKNOWN.",
     confidence: "verified",
   }),
   e("h-ctw-dogfood", {
@@ -841,11 +865,11 @@ export const HISTORY: HistoryEntry[] = [
     period: "2026-08-24 to 2026-08-25",
     phaseId: "p-qc-onboard",
     systems: ["chinese-tech-wire", "motherclank", "diagnostic-clank"],
-    event: "CTW onboarding is the first real v0.3 dogfood of the observer playbook.",
+    event: "CTW dogfood (24–25 Aug): the observer playbook passed its own register step on a guessed path.",
     before: "Onboarding.md was a document. No field scorecard.",
     change:
-      "CTW_ONBOARDING_DOGFOOD.md: Motherclank core participant-specific lines 0; 1 generic synthesis passthrough; adapter ~230 LOC. Friction: FGT registry db filename had drifted from live-verified inner name newsroom.db; guessed CTW refresh path never existed.",
-    why: "Using the playbook on a real Clank is how you find the playbook's lies.",
+      "CTW_ONBOARDING_DOGFOOD.md (66cef4c / blob 64f92aa) is a 14-step field scorecard against ONBOARDING.md, not a current host map. It tested whether CTW could join as an observer with zero Motherclank-core participant-specific edits: 0 such lines; adapter ~230 LOC; 38 GICs green. Step 8 was scored PASS on a registry row + guarded refresh line. Scorecard friction is FGT registry filename vs live-verified inner name newsroom.db. The guessed CTW path is not on that card. Anil 7f977d6 (2026-08-25T00:20Z) records the finding: checkout-relative data/ never existed, the live store was a differently-named Docker volume, and refresh silently SKIPs a missing source — caught only by live discovery, not review. That commit is the operator write-up and the playbook patch (ONBOARDING.md step 8 three-way cross-check), not a later code state. The path it happened to find that day is dated evidence, not the thing to memorise. Scorecard steps 2 and 11 stayed LIVE_EVIDENCE_REQUIRED. 2026-08-22 inventory still listed data/ctw.db under checkout. Later repo HEAD 1a47220 stays out. Live CTW volume, deployed SHA, and scheduler remain UNKNOWN.",
+    why: "Dogfooding exposed that the playbook was guessing where the system lived instead of proving it.",
     evidence: [
       {
         id: "ev-ctw-dog",
@@ -853,7 +877,7 @@ export const HISTORY: HistoryEntry[] = [
         repo: "anil-ganti-nbc/clank-architecture",
         path: "CTW_ONBOARDING_DOGFOOD.md",
         sha: "64f92aa42f233ed189c8c6cb10f550b8dfd77b11",
-        note: "First real v0.3 onboarding. Steps 2 and 11 LIVE_EVIDENCE_REQUIRED.",
+        note: "14-step scorecard 2026-08-24. Step 8 PASS. Steps 2 and 11 LIVE_EVIDENCE_REQUIRED. Guessed path is not on this card.",
         status: "verified",
       },
       {
@@ -861,18 +885,23 @@ export const HISTORY: HistoryEntry[] = [
         kind: "commit",
         repo: "anil-ganti-nbc/clank-architecture",
         sha: "7f977d6bc5d4839a6f89c7dc7b87cf5fdefa89a5",
-        note: "Anil: codify registry/refresh-path/live-datastore cross-check after CTW guessed path.",
+        note: "Anil: operator write-up of guessed path + ONBOARDING.md step 8 three-way cross-check.",
         status: "verified",
       },
     ],
     commits: [
       { repo: "anil-ganti-nbc/clank-architecture", sha: "66cef4c89a0f7cd4ddbea10a14149a63835ec4f5", note: "CTW dogfood scorecard" },
-      { repo: "anil-ganti-nbc/clank-architecture", sha: "7f977d6bc5d4839a6f89c7dc7b87cf5fdefa89a5", note: "human operator follow-up" },
+      { repo: "anil-ganti-nbc/clank-architecture", sha: "7f977d6bc5d4839a6f89c7dc7b87cf5fdefa89a5", note: "operator finding + playbook patch" },
     ],
     conceptIds: ["dogfooding", "operator-role", "implementation-agent", "source-adapter"],
     lawIds: ["law-6"],
     incidentIds: ["inc-deployed-sha"],
-    laterConsequence: "ONBOARDING.md step 8 requires cross-checking registry filename, refresh-script source path, and actual deployed datastore.",
+    diagnosis: "A git-visible registry row and refresh line can PASS while the path is a guess. Silent SKIP hides drift from review.",
+    laterConsequence: "ONBOARDING.md step 8 requires cross-checking registry filename, refresh-script source path, and actual deployed datastore. Do not memorise the volume from that day.",
+    verification:
+      "Dogfood run and adapter-thinness: VERIFIED from 66cef4c/64f92aa. Guessed-path finding and playbook patch: VERIFIED from 7f977d6. Dated host topology from that exercise: INCOMPLETE. Live CTW volume/SHA/scheduler: UNKNOWN.",
+    residualRisk:
+      "Do not fossilise the 24–25 Aug path or volume as current production. Inventory data/ctw.db under checkout is the class of claim the trial contradicted. Later repo HEAD 1a47220 is not a deployed SHA.",
     confidence: "verified",
   }),
   e("h-gitignore-runtime", {
@@ -907,26 +936,29 @@ export const HISTORY: HistoryEntry[] = [
     period: "2026-08-25 to 2026-08-26",
     phaseId: "p-qc-onboard",
     systems: ["watch-clank", "human QC queue"],
-    event: "Watch QC flood: validation runs counted as catalogue passes; weak FIRST_SEEN filled the FIFO.",
+    event:
+      "Watch QC filled with low-value first-sightings because qualification treated smoke/validation runs as real catalogue passes.",
     before: "Qualification inferred 'real pass' from successful-run count, then from discovered_count > 1.",
     change:
-      "ARCHITECTURE_NOTES_QC_VOLUME.md 2026-08-26: catalogue-pass is invocation fact (persisted max_items). Queue 639 raw / 580 default / 41 after repair. Weak FIRST_SEEN (score ≤ 15) auto-deprioritized; useful FS in history scored ≥ 25.",
+      "watch-clank 5de5329 (2026-08-26T02:01:27Z) and ARCHITECTURE_NOTES_QC_VOLUME.md: catalogue-pass is an invocation fact (persisted max_items), never inferred from output size. Weak FIRST_SEEN (score ≤ 15) auto-deprioritized; useful FS in history scored ≥ 25. Queue accounting in that 2026-08-26 snapshot was 639 raw unreviewed / 580 default FIFO before repair replay / 41 after. Those counts are the incident values in the notes, not a live queue.",
     why: "Human attention is the scarce resource. A filter that treats smoke as harvest hides launches.",
     evidence: [
       {
         id: "ev-qc-vol-h",
-        kind: "doc",
+        kind: "commit",
         repo: "anil-ganti-nbc/watch-clank",
         path: "ARCHITECTURE_NOTES_QC_VOLUME.md",
-        note: "Incident-driven clarifications 2026-08-26.",
+        sha: "5de5329f43adc3fdad0ee797f0e691427f802641",
+        note: "2026-08-26 notes + repair: invocation provenance, weak-FS deprioritization, three-tier queue accounting. Snapshot 639/580/41 is in this commit, not a live dashboard.",
         status: "verified",
       },
     ],
-    commits: [],
+    commits: [{ repo: "anil-ganti-nbc/watch-clank", sha: "5de5329f43adc3fdad0ee797f0e691427f802641", note: "QC-volume notes and repair, 2026-08-26T02:01:27Z" }],
     conceptIds: ["qc-flood", "runtime-provenance", "first-seen", "initial-fill", "editorial-eligibility"],
     lawIds: ["law-2"],
     incidentIds: ["inc-qc"],
-    laterConsequence: "L-WATCH-009: execution provenance is part of data provenance.",
+    laterConsequence: "L-WATCH-009: execution provenance is part of data provenance. Later Watch HEADs are a different story and not this incident.",
+    residualRisk: "Live Watch QC queue size remains UNKNOWN. Do not teach 639/580/41 as current.",
     confidence: "verified",
   }),
   e("h-watch-unwired", {
@@ -938,7 +970,7 @@ export const HISTORY: HistoryEntry[] = [
     before: "Implementation plus a registry row were treated as 'the collector is in production.'",
     change:
       "e7eeb3f (2026-08-25T00:18:48Z): KNOWN_COLLECTORS, collector_registry, run_pipeline argparse, and render_units.py wired tissot_sitemap and timex_uk_products. test_production_wiring.py: every EXPERIMENTAL_READY_FOR_HETZNER collector must be mechanically invokable. Delivery-silence canonized as a promotion privilege.",
-    why: "A host deployment found the gap. Code on GitHub is not the same as a unit file the timer can start.",
+    why: "Code on GitHub is not the same as a unit file the timer can start. The commit message records a 2026-08-25 Hetzner deployment finding; that is commit-message testimony, not a live unit listing. Live timer enablement for tissot/timex_uk remains UNKNOWN.",
     evidence: [
       {
         id: "ev-watch-unwired",
@@ -1066,10 +1098,10 @@ export const HISTORY: HistoryEntry[] = [
     period: "2026-08-27",
     phaseId: "p-current",
     systems: ["watch-clank", "human QC queue"],
-    event: "Watch QC recovers from a concurrent double-submit instead of showing the operator a raw IntegrityError/500.",
+    event: "Watch QC recovers from a concurrent double-submit: UNIQUE is not an operator-facing contract.",
     before: "UNIQUE(event_id) already made a duplicate archive row impossible, but two near-simultaneous POSTs could both read 'no existing review' before either committed.",
     change:
-      "ee3f34d 2026-08-27T03:16:34Z: catch the constraint violation, roll back the losing insert, replay the same verdict as a correction against whichever row won. Co-Authored-By: Claude Sonnet 5. Suite: 468 passed, 2 skipped/live.",
+      "watch-clank ee3f34d (2026-08-27T03:16:34Z): UNIQUE(event_id) is the database guarantee. Two near-simultaneous POSTs could both read 'no existing review' before either committed; the losing insert would raise IntegrityError. The commit catches that violation, rolls back the losing insert, and replays the same verdict as a correction against whichever row won — that is the UI/operator contract. The suite can reproduce the race; '468 passed, 2 skipped/live' is that commit's test run, not a host probe. Those are separate facts from a lived host 500, which is not recorded. Later Watch HEADs (d4fda37, 9d812ed) stay out of this incident. Live deployed SHA remains UNKNOWN.",
     why: "A database uniqueness constraint is not an operator-facing contract. The QC button is a writer (Law 7); races must fail closed into the promised behaviour, not a 500.",
     evidence: [
       {
@@ -1077,15 +1109,19 @@ export const HISTORY: HistoryEntry[] = [
         kind: "commit",
         repo: "anil-ganti-nbc/watch-clank",
         sha: "ee3f34d7eba8715838196d59fbf562818349009b",
-        note: "fix(qc): recover gracefully from a concurrent double-QC submission. Idempotent-by-correction.",
+        note: "fix(qc): recover gracefully from a concurrent double-QC submission. Idempotent-by-correction. Git-resident application contract, not a recorded lived host 500.",
         status: "verified",
       },
     ],
-    commits: [{ repo: "anil-ganti-nbc/watch-clank", sha: "ee3f34d7eba8715838196d59fbf562818349009b" }],
+    commits: [{ repo: "anil-ganti-nbc/watch-clank", sha: "ee3f34d7eba8715838196d59fbf562818349009b", note: "QC race recovery, 2026-08-27T03:16:34Z" }],
     conceptIds: ["race-condition", "lock", "operator-role", "implementation-agent"],
     lawIds: ["law-7"],
     incidentIds: ["inc-writer-lock", "inc-qc"],
     laterConsequence: "The uniqueness constraint remains the last line; the application now speaks the same language as the constraint.",
+    verification:
+      "Mechanism (UNIQUE ≠ operator contract under concurrent POSTs; catch/rollback/replay in ee3f34d): VERIFIED from the commit. A lived host 500: not evidenced. Live Watch SHA: UNKNOWN.",
+    residualRisk:
+      "Live Watch deployed SHA remains UNKNOWN. Do not teach ee3f34d, d4fda37, or 9d812ed as production. Green tests on the commit are not a host SHA.",
     confidence: "verified",
   }),
   e("h-tablet-local", {
