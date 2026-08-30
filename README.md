@@ -12,6 +12,22 @@ Clank development story, with three layers on every important concept:
 
 The unacceptable explanation of the fleet is “I pasted one AI output into another.”
 
+## v0.1 — first usable curriculum (feature-frozen)
+
+`v0.1` is the first usable curriculum. Feature development is **frozen** pending
+owner study and learning validation.
+
+- Live host provenance remains **incomplete by design**. Law 6 cells stay UNKNOWN
+  until an operator re-probe lands. GitHub HEAD is not deployed SHA.
+- Further content expansion (new modules, labs, routes, major UI, LLM grading,
+  architecture redesign) is deferred until after the owner studies this Handbook
+  and a real gap appears.
+- Allowed after this freeze: bug fixes, broken-link fixes, evidence/factual
+  corrections, merge-conflict repairs, accessibility defects, test/CI repairs.
+
+PR `integrate-cvc-clank` (#5) is unrelated and stays open for later rebase onto
+this tag. It is not part of v0.1.
+
 ## Epistemic rules
 
 Every historical claim is one of:
