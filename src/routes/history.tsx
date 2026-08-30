@@ -1,9 +1,18 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { HISTORY, LAWS, PHASES } from "@/content/catalog";
+import { FAILURE_CLASS_OPTIONS, HISTORY, historyMatchesFailureClass, LAWS, PHASES } from "@/content/catalog";
 import { ConceptList, Epistemic, IncidentLink, LawLink } from "@/components/handbook/concept-link";
+import type { EpistemicStatus } from "@/lib/handbook/schema.ts";
 
 export const Route = createFileRoute("/history")({ component: Page });
+
+const EPISTEMIC_OPTIONS: { id: "all" | EpistemicStatus; label: string }[] = [
+  { id: "all", label: "all" },
+  { id: "verified", label: "verified" },
+  { id: "inferred", label: "inferred" },
+  { id: "incomplete", label: "incomplete" },
+  { id: "illustrative", label: "illustrative" },
+];
 
 function Page() {
   const [q, setQ] = useState("");
@@ -11,6 +20,8 @@ function Page() {
   const [system, setSystem] = useState("all");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
+  const [epistemic, setEpistemic] = useState<(typeof EPISTEMIC_OPTIONS)[number]["id"]>("all");
+  const [failure, setFailure] = useState("all");
   const systems = useMemo(() => Array.from(new Set(HISTORY.flatMap((h) => h.systems))).sort(), []);
   const filtered = useMemo(() => {
     const needle = q.trim().toLowerCase();
@@ -19,11 +30,13 @@ function Page() {
       if (system !== "all" && !h.systems.some((s) => s === system)) return false;
       if (from && h.date < from) return false;
       if (to && h.date > to) return false;
+      if (epistemic !== "all" && h.confidence !== epistemic) return false;
+      if (failure !== "all" && !historyMatchesFailureClass(h, failure)) return false;
       if (!needle) return true;
       const blob = [h.event, h.change, h.why, h.systems.join(" "), h.conceptIds.join(" "), h.id].join(" ").toLowerCase();
       return blob.includes(needle);
     });
-  }, [q, law, system, from, to]);
+  }, [q, law, system, from, to, epistemic, failure]);
 
   return (
     <div className="space-y-10">
@@ -32,8 +45,8 @@ function Page() {
         <p className="mt-3 text-mute leading-relaxed">
           The spine of this handbook. Every entry is labelled. UNKNOWN stays UNKNOWN. The
           machine-readable copy lives next to the lessons; the long-form ledger is the same facts in
-          document form. Filter by concept, Clank, date, or law — filtering does not rewrite the
-          record.
+          document form. Filter by concept, Clank, date, law, epistemic status, or failure class —
+          filtering does not rewrite the record.
         </p>
       </header>
 
@@ -49,6 +62,40 @@ function Page() {
               <h3 className="mt-1 font-display text-xl">{p.title}</h3>
               <p className="mt-2 text-sm leading-relaxed">{p.summary}</p>
               <p className="mt-3 text-sm text-accent">Why this layer. {p.whyThisLayer}</p>
+              {(p.before || p.failurePressure) && (
+                <dl className="mt-3 grid gap-2 text-sm sm:grid-cols-2">
+                  {p.before && (
+                    <div>
+                      <dt className="text-xs uppercase tracking-[0.14em] text-mute">Before</dt>
+                      <dd className="text-mute">{p.before}</dd>
+                    </div>
+                  )}
+                  {p.failurePressure && (
+                    <div>
+                      <dt className="text-xs uppercase tracking-[0.14em] text-mute">Pressure</dt>
+                      <dd className="text-mute">{p.failurePressure}</dd>
+                    </div>
+                  )}
+                  {p.newAbstraction && (
+                    <div>
+                      <dt className="text-xs uppercase tracking-[0.14em] text-mute">New abstraction</dt>
+                      <dd className="text-mute">{p.newAbstraction}</dd>
+                    </div>
+                  )}
+                  {p.newRule && (
+                    <div>
+                      <dt className="text-xs uppercase tracking-[0.14em] text-mute">New rule</dt>
+                      <dd className="text-mute">{p.newRule}</dd>
+                    </div>
+                  )}
+                  {p.unresolvedLimitations && (
+                    <div className="sm:col-span-2">
+                      <dt className="text-xs uppercase tracking-[0.14em] text-mute">Still unsolved</dt>
+                      <dd className="text-mute">{p.unresolvedLimitations}</dd>
+                    </div>
+                  )}
+                </dl>
+              )}
               <dl className="mt-3 grid gap-2 text-sm sm:grid-cols-2">
                 <div>
                   <dt className="text-xs uppercase tracking-[0.14em] text-mute">Components</dt>
@@ -82,7 +129,7 @@ function Page() {
             className="w-full rounded-md bg-bg px-3 py-3"
             aria-label="Search ledger"
           />
-          <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
             <label className="text-sm">
               <span className="text-xs uppercase tracking-[0.14em] text-mute">Clank</span>
               <select value={system} onChange={(e) => setSystem(e.target.value)} className="mt-1 w-full rounded-md bg-bg px-3 py-3">
@@ -101,6 +148,32 @@ function Page() {
                 {LAWS.map((l) => (
                   <option key={l.id} value={l.id}>
                     Law {l.number}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="text-sm">
+              <span className="text-xs uppercase tracking-[0.14em] text-mute">Failure class</span>
+              <select value={failure} onChange={(e) => setFailure(e.target.value)} className="mt-1 w-full rounded-md bg-bg px-3 py-3" aria-label="Failure class">
+                <option value="all">all</option>
+                {FAILURE_CLASS_OPTIONS.map((f) => (
+                  <option key={f.id} value={f.id}>
+                    {f.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="text-sm">
+              <span className="text-xs uppercase tracking-[0.14em] text-mute">Epistemic</span>
+              <select
+                value={epistemic}
+                onChange={(e) => setEpistemic(e.target.value as (typeof EPISTEMIC_OPTIONS)[number]["id"])}
+                className="mt-1 w-full rounded-md bg-bg px-3 py-3"
+                aria-label="Epistemic status"
+              >
+                {EPISTEMIC_OPTIONS.map((o) => (
+                  <option key={o.id} value={o.id}>
+                    {o.label}
                   </option>
                 ))}
               </select>

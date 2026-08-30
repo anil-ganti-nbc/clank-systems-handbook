@@ -33,7 +33,7 @@ function Home() {
         <Card to="/evidence" title="Confidence audit" body="Filter by verified, inferred, incomplete. Gaps, missing artefacts, rows awaiting a human, live UNKNOWNs." />
         <Card to="/labs" title="Investigate a real incident" body="Freeze a hypothesis before the archive speaks. Start with the materialization gap — a timer that rang while nobody got out of bed." />
         <Card to="/architecture" title="Law lineage" body="Each Fleet Law mapped to the scar that wrote it. What it prevents, and what it cannot." />
-        <Card to="/fleet" title="Current fleet map" body="Purpose, host, limitation, unresolved failure class. Stale notes are the honest part." />
+        <Card to="/fleet" title="Current fleet map" body="Three SHA columns: 2026-08-22 inventory, GitHub HEAD, live UNKNOWN. Stale notes are the honest part." />
         <Card to="/explain" title="Explain it back" body="Oral-explanation prompts. Freeze, then compare to a model answer. You grade yourself." />
         <Card to="/built" title="How we built it" body="Chronological narrative plus the AI-assisted workflow: implement, review, operator decides." />
       </section>

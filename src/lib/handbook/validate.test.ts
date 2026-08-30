@@ -166,4 +166,41 @@ describe("handbook content integrity", () => {
     assert.ok(HANDBOOK.modules.some((m) => m.id === "mod-motherclank-stages"));
     assert.ok(HANDBOOK.modules.some((m) => m.id === "mod-diagnostic-inventory"));
   });
+
+  it("architecture phases carry before/pressure/abstraction/rule/result/unresolved", () => {
+    for (const p of PHASES) {
+      assert.ok((p.before ?? "").length > 20, `${p.id} before`);
+      assert.ok((p.failurePressure ?? "").length > 20, `${p.id} pressure`);
+      assert.ok((p.newAbstraction ?? "").length > 20, `${p.id} abstraction`);
+      assert.ok((p.newRule ?? "").length > 20, `${p.id} rule`);
+      assert.ok((p.resultingArchitecture ?? "").length > 20, `${p.id} result`);
+      assert.ok((p.unresolvedLimitations ?? "").length > 20, `${p.id} unresolved`);
+    }
+  });
+
+  it("fleet teaching snapshot keeps live SHA UNKNOWN and does not copy repo HEAD", () => {
+    for (const cl of FLEET) {
+      assert.ok(cl.inventorySha, `${cl.id} inventorySha`);
+      assert.ok(cl.repoHead, `${cl.id} repoHead`);
+      assert.match(cl.liveDeployedSha, /UNKNOWN/i, `${cl.id} live SHA filled`);
+      assert.notEqual(cl.liveDeployedSha, cl.repoHead, `${cl.id} copied HEAD into live`);
+      assert.ok(cl.inventoryAsOf.startsWith("2026-08-22"), `${cl.id} inventory date`);
+    }
+    assert.ok(FLEET.some((c) => c.inventorySha !== c.repoHead && c.inventorySha !== "UNKNOWN"));
+  });
+
+  it("deep teaching modules and explain prompts cover Motherclank, Diagnostic, and AI roles", () => {
+    const mother = HANDBOOK.modules.find((m) => m.id === "mod-motherclank-stages");
+    const diag = HANDBOOK.modules.find((m) => m.id === "mod-diagnostic-inventory");
+    const ai = HANDBOOK.modules.find((m) => m.id === "mod-ai");
+    assert.ok(mother && mother.sections.length >= 8, "motherclank module still thin");
+    assert.ok(diag && diag.sections.length >= 6, "diagnostic module still thin");
+    assert.ok(ai && ai.sections.length >= 6, "AI module still thin");
+    const promptIds = new Set(HANDBOOK.prompts.map((p) => p.id));
+    for (const id of ["ex-mother-stages", "ex-diagnostic-vs-mother", "ex-ai-roles", "ex-three-shas", "ex-arch-evolution"]) {
+      assert.ok(promptIds.has(id), `missing prompt ${id}`);
+    }
+    assert.ok(CONCEPTS.some((c) => c.id === "research-agent"));
+    assert.ok(CONCEPTS.some((c) => c.id === "miss"));
+  });
 });

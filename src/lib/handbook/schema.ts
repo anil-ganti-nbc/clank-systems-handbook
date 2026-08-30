@@ -121,6 +121,12 @@ export const historyPhaseSchema = z.object({
   fleetSupervision: z.string(),
   whyThisLayer: z.string(),
   confidence: epistemicStatus,
+  before: z.string().optional(),
+  failurePressure: z.string().optional(),
+  newAbstraction: z.string().optional(),
+  newRule: z.string().optional(),
+  resultingArchitecture: z.string().optional(),
+  unresolvedLimitations: z.string().optional(),
 });
 export type HistoryPhase = z.infer<typeof historyPhaseSchema>;
 
@@ -181,6 +187,13 @@ export const fleetClankSchema = z.object({
   asOf: z.string(),
   confidence: epistemicStatus,
   staleNote: z.string().optional(),
+  inventorySha: z.string().min(1),
+  inventoryAsOf: z.string().min(1),
+  inventoryNote: z.string().optional(),
+  repoHead: z.string().min(1),
+  repoHeadAsOf: z.string().min(1),
+  repoHeadNote: z.string().min(1),
+  liveDeployedSha: z.string().min(1),
 });
 export type FleetClank = z.infer<typeof fleetClankSchema>;
 

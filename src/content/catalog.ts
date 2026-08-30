@@ -1,3 +1,4 @@
+import type { HistoryEntry } from "../lib/handbook/schema.ts";
 import { CONCEPTS } from "./concepts.ts";
 import { MODULES } from "./modules.ts";
 import { INCIDENTS } from "./incidents.ts";
@@ -84,3 +85,23 @@ export function artefactById(id: string) {
 }
 
 export const HISTORY_SYSTEMS = Array.from(new Set(HISTORY.flatMap((h) => h.systems))).sort();
+
+export const FAILURE_CLASS_OPTIONS = [
+  { id: "materialization", label: "Materialization gap", incidentIds: ["inc-materialization"] },
+  { id: "qc-masking", label: "Human QC masking automation failure", incidentIds: ["inc-qc"] },
+  { id: "recall", label: "Coverage / recall (BANKAI)", incidentIds: ["inc-bankai"] },
+  { id: "volume-loss", label: "Volume / database loss", incidentIds: ["inc-volume-loss"] },
+  { id: "dual-scheduler", label: "Dual scheduler / stale launcher", incidentIds: ["inc-dual-scheduler"] },
+  { id: "health-honesty", label: "Health honesty", incidentIds: ["inc-health-honesty"] },
+  { id: "deployed-sha", label: "Deployed SHA mismatch", incidentIds: ["inc-deployed-sha"] },
+  { id: "writer-lock", label: "Writer lock", incidentIds: ["inc-writer-lock"] },
+  { id: "directory-sweep", label: "Directory sweep blast radius", incidentIds: ["inc-directory-sweep"] },
+] as const;
+
+export type FailureClassId = (typeof FAILURE_CLASS_OPTIONS)[number]["id"];
+
+export function historyMatchesFailureClass(h: HistoryEntry, classId: string): boolean {
+  const opt = FAILURE_CLASS_OPTIONS.find((o) => o.id === classId);
+  if (!opt) return false;
+  return h.incidentIds.some((id) => (opt.incidentIds as readonly string[]).includes(id));
+}
