@@ -1,0 +1,9 @@
+# Linux cron lane for Semiconductor Intelligence (Hetzner staging).
+#
+# Phase 2B/2C: the scheduled path MUST go through the OperationalScheduler
+# (`semintel automation cycle`) so that scheduler invocation and successful
+# work are recorded separately (Fleet Law 3; migration a0b1c2d3e404).
+# Direct `pipeline run` invocations bypass scheduler evidence entirely.
+#
+# m h  dom mon dow  command
+40 * * * *  cd /home/deploy/staging/semiconductor-intelligence && ./deploy_run.sh >> logs/cron-$(date +\%Y\%m\%d).log 2>&1

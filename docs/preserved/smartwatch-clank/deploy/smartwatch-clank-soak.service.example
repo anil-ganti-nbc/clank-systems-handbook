@@ -1,0 +1,39 @@
+# systemd oneshot unit — one "Smartwatch Clank experimental soak" cycle.
+# Alternative to deploy/crontab.example; pick one, not both.
+# Pair with smartwatch-clank-soak.timer.example for unattended cadence.
+#
+# Install (example):
+#   sudo cp deploy/smartwatch-clank-soak.service.example /etc/systemd/system/smartwatch-clank-soak.service
+#   sudo cp deploy/smartwatch-clank-soak.timer.example   /etc/systemd/system/smartwatch-clank-soak.timer
+#   # Edit WorkingDirectory first.
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now smartwatch-clank-soak.timer
+#
+# One unit for the whole soak — new OEM collectors register into the same
+# run via config, not a new scheduled unit per OEM.
+
+# User=deploy/Group=deploy and StandardOutput/Error=journal match this
+# host's existing convention (see korean-tech-wire-soak.service,
+# oem-radar-experimental-sitemap-soak.service) -- deploy owns the staging
+# checkout and is in the docker group.
+
+[Unit]
+Description=Smartwatch Clank experimental soak (one cycle)
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=deploy
+Group=deploy
+WorkingDirectory=/home/deploy/staging/smartwatch-clank
+ExecStart=/home/deploy/staging/smartwatch-clank/deploy/run.sh
+Nice=10
+TimeoutStartSec=1800
+StandardOutput=journal
+StandardError=journal
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

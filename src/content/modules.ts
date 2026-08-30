@@ -304,4 +304,49 @@ export const MODULES: Module[] = [
       },
     ],
   },
+  {
+    id: "mod-motherclank-stages",
+    area: "architecture",
+    title: "Motherclank M0–M4 — a camera that cannot hold the keys",
+    summary:
+      "Verified structure for a later teaching pass, not a new giant curriculum. Stages, triggering scars, and which artefacts exist versus which are still missing on the host.",
+    conceptIds: ["motherclank", "observability", "derived-state", "execution-liveness", "epoch"],
+    sections: [
+      {
+        heading: "Why a supervisor that cannot write",
+        body: "ADR-0002 (b341b0f, 2026-08-22): observe, synthesize, detect, recommend, learn. M5 mutation is forbidden until a future ADR. A supervisor that can write is a second Clank with blast radius over the whole fleet. Clank SQLite stays authoritative; snapshots in var/ are derived and disposable.",
+        conceptIds: ["motherclank", "derived-state", "sqlite-authoritative"],
+      },
+      {
+        heading: "Stages mapped to scars",
+        body: "M0 harvest (adapters, hash-chained JSONL) exists as code plus install-user-timer.sh — live timer enablement UNKNOWN. M1 synthesis: DEF-M1.5 (UUID order, never-upgrade) is the first self-dogfood. M2 detect: MATERIALIZATION_GAP and continuity states A–E are encoded in seeds, not in recovered var/ batches (those remain BLOCKED). M3 recommend: ADR-0003 authorises inbox proposals, not execution. M4 may ingest QC dispositions read-only. Triggering incidents: inc-materialization, inc-volume-loss, inc-health-honesty, inc-deployed-sha. Laws 3 and 6 are the binding ones.",
+        conceptIds: ["execution-liveness", "materialization-gap", "epoch"],
+      },
+      {
+        heading: "What this campaign could and could not preserve",
+        body: "Preserved: continuity seeds (INC-20260822-23, INC-20260823, ACT-011, execution-expectations), the timer installer, DATA_SURVIVABILITY.md. Not preserved: host var/, last harvest timestamp, whether 06:15 UTC timer is enabled. Do not teach 'Motherclank is healthy' from repo HEAD 7cee2f8.",
+        conceptIds: ["runtime-provenance", "head-vs-deployed"],
+      },
+    ],
+  },
+  {
+    id: "mod-diagnostic-inventory",
+    area: "architecture",
+    title: "Diagnostic Clank — registry, not a folder listing",
+    summary:
+      "Membership is fleet.yaml. A directory sweep omitted Tablet (L-FLEET-001). Adapters are the translation plane Motherclank consumes. Enough structure for a later teaching pass.",
+    conceptIds: ["diagnostic-clank", "contract", "source-adapter", "head-vs-deployed"],
+    sections: [
+      {
+        heading: "Inventory is a document with a date",
+        body: "Preserved fleet.yaml: schema 2.0, as_of 2026-08-22T22:30:00Z, inventory_status INVENTORY_INCOMPLETE, promotion frozen. Host ubuntu-4gb-hel1-1. Deployed SHAs in that file are 2026-08-22 inventory, not a 2026-08-27 probe. Two instance_ids are UNKNOWN (likely Diagnostic/Motherclank themselves).",
+        conceptIds: ["diagnostic-clank", "provenance"],
+      },
+      {
+        heading: "Adapters and the Tablet trap",
+        body: "The 2026-08-27 Tablet observer adapter (3667af0) is a control-plane commit. It does not make Tablet production. INTENTIONALLY_DORMANT remains the controlling liveness output for a stale soak unit. Onboarding a new Clank is adding an adapter plus a registry row that survives a live-datastore cross-check (7f977d6 after CTW).",
+        conceptIds: ["source-adapter", "head-vs-deployed"],
+      },
+    ],
+  },
 ];

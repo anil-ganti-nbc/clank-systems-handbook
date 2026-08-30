@@ -1,0 +1,758 @@
+schema_version: '2.0'
+as_of: '2026-08-22T22:30:00Z'
+inventory_status: INVENTORY_INCOMPLETE
+authority:
+  status: ACTIVE
+  control_plane_repository: https://github.com/anil-ganti-nbc/diagnostic-clank
+  governance_repository: https://github.com/anil-ganti-nbc/clank-architecture
+promotion_policy:
+  frozen: true
+  reason: Phase 0 engineering and operator gates are incomplete
+  policy: https://github.com/anil-ganti-nbc/clank-architecture/blob/main/NO_PROMOTION_POLICY.md
+expected_repositories:
+- watch-clank
+- diagnostic-clank
+- clank-architecture
+- smartwatch-clank
+- korean-tech-wire
+- feature-phone-clank
+- unified-clank-platform
+- tablet-clank
+- chinese-tech-wire
+- smartphone-clank
+- semiconductor-intelligence
+- free-game-tracker
+- oem-radar
+repositories:
+- name: watch-clank
+  canonical_url: https://github.com/anil-ganti-nbc/watch-clank
+  classification: CLANK
+  deployment_state: RUNNING
+- name: diagnostic-clank
+  canonical_url: https://github.com/anil-ganti-nbc/diagnostic-clank
+  classification: SUPPORTING_SYSTEM
+  deployment_state: UNKNOWN
+- name: clank-architecture
+  canonical_url: https://github.com/anil-ganti-nbc/clank-architecture
+  classification: GOVERNANCE
+  deployment_state: NOT_APPLICABLE
+- name: smartwatch-clank
+  canonical_url: https://github.com/anil-ganti-nbc/smartwatch-clank
+  classification: CLANK
+  deployment_state: RUNNING
+- name: korean-tech-wire
+  canonical_url: https://github.com/anil-ganti-nbc/korean-tech-wire
+  classification: CLANK
+  deployment_state: RUNNING
+- name: feature-phone-clank
+  canonical_url: https://github.com/anil-ganti-nbc/feature-phone-clank
+  classification: CLANK
+  deployment_state: RUNNING
+- name: unified-clank-platform
+  canonical_url: https://github.com/anil-ganti-nbc/unified-clank-platform
+  classification: SUPERSEDED_CANDIDATE
+  deployment_state: UNKNOWN
+- name: tablet-clank
+  canonical_url: https://github.com/anil-ganti-nbc/tablet-clank
+  classification: CLANK
+  deployment_state: RUNNING
+- name: chinese-tech-wire
+  canonical_url: https://github.com/anil-ganti-nbc/chinese-tech-wire
+  classification: CLANK
+  deployment_state: RUNNING
+- name: smartphone-clank
+  canonical_url: https://github.com/anil-ganti-nbc/smartphone-clank
+  classification: CLANK
+  deployment_state: RUNNING
+- name: semiconductor-intelligence
+  canonical_url: https://github.com/anil-ganti-nbc/semiconductor-intelligence
+  classification: CLANK
+  deployment_state: RUNNING
+- name: free-game-tracker
+  canonical_url: https://github.com/anil-ganti-nbc/free-game-tracker
+  classification: CLANK
+  deployment_state: RUNNING
+- name: oem-radar
+  canonical_url: https://github.com/anil-ganti-nbc/oem-radar
+  classification: CLANK
+  deployment_state: RUNNING
+deployments:
+- failure_domain: hetzner-fleet
+  location_type: HETZNER
+  location: hel1
+  host: ubuntu-4gb-hel1-1
+  artifact_digest: UNKNOWN
+  runtime:
+    implementation: CPython
+    version: UNKNOWN
+  dependency_lock:
+    file: uv.lock
+    digest: UNKNOWN
+    matches: UNKNOWN
+  evidence_path: clank-architecture/audits/2026-08-phase1/
+  secrets:
+    owner: anilganti
+    storage_mechanism: machine-local ~/.config/watch-clank/secrets.env
+  last_operator_verification:
+    operator: phase2a-read-only-inspection
+    observed_at_utc: '2026-08-21T21:05:00Z'
+  promotion_eligible: false
+  instance_id: watch-hetzner-user-timers-01
+  repository: watch-clank
+  deployment_state: RUNNING
+  environment: production
+  deployed_commit_sha: f0b327acc9970221de230c68d4bc03480d853a46
+  source_branch_or_tag: main
+  service_identity: systemd --user watch-clank-*.timer x19 (owner anilganti)
+  working_directory_or_container: /home/anilganti/watch-clank + image watch-clank:f0b327a
+  database_path: UNKNOWN-host-path-under-anilganti
+  scheduler:
+    type: systemd-user-timers
+    authority: watch-hetzner-scheduler-f0b327a
+    owner: anilganti
+    enabled: true
+  notification:
+    authority: watch-discord-editorial-and-health-secrets-env
+    owner: anilganti
+    enabled: true
+  backup:
+    location: docker image lineage f0b327a..938cc62 retained on host
+    last_verified_utc: UNKNOWN
+  health:
+    scheduler_invocation_utc: '2026-08-21T19:43:47Z'
+    application_start_utc: UNKNOWN
+    successful_job_commit_utc: '2026-08-21T19:43:47Z'
+    source_freshness_utc: UNKNOWN
+    last_job_status: SUCCESSFUL
+    heartbeat_stale_after_seconds: UNKNOWN
+  rollback_artifact: prior image tags retained on host
+  adapter_onboarding: 'Phase 2C: WatchClankAdapter onboarded (read-only). Exposed: last_run(status/started/completed), telemetry(observation_count,is_baseline), event_summary(events_total/by_status), QC
+    dispositions(event+lead reviews), schema revision. delivery_accounting=False (not persisted by Watch -> null).'
+- failure_domain: hetzner-fleet
+  location_type: HETZNER
+  location: hel1
+  host: ubuntu-4gb-hel1-1
+  artifact_digest: UNKNOWN
+  runtime:
+    implementation: CPython
+    version: UNKNOWN
+  dependency_lock:
+    file: requirements.container.lock
+    digest: UNKNOWN
+    matches: UNKNOWN
+  evidence_path: clank-architecture/audits/2026-08-phase1/
+  secrets:
+    owner: deploy
+    storage_mechanism: /opt/smartphone-clank/.env presence-only
+  last_operator_verification:
+    operator: phase2a-read-only-inspection
+    observed_at_utc: '2026-08-21T21:05:00Z'
+  promotion_eligible: false
+  instance_id: smartphone-hetzner-opt-timers-01
+  repository: smartphone-clank
+  deployment_state: RUNNING
+  environment: production
+  deployed_commit_sha: b8b89885e5229cb36dbc47e78cd1ef4fd1b32937
+  source_branch_or_tag: detached-at-PR3-merge
+  service_identity: smartphone-clank-source@.timer x8 + backup.timer + dashboard.service
+  working_directory_or_container: /opt/smartphone-clank bare venv
+  database_path: /opt/smartphone-clank/data
+  scheduler:
+    type: systemd-system-timers
+    authority: smartphone-hetzner-source-timers-b8b89885
+    owner: root
+    enabled: true
+  notification:
+    authority: smartphone-discord-webhook-opt-env
+    owner: deploy
+    enabled: true
+  backup:
+    location: /opt/smartphone-clank/scripts_backup.sh via smartphone-clank-backup.timer
+    last_verified_utc: '2026-08-21T02:34:12Z'
+  health:
+    scheduler_invocation_utc: '2026-08-21T20:19:13Z'
+    application_start_utc: UNKNOWN
+    successful_job_commit_utc: '2026-08-21T18:58:36Z'
+    source_freshness_utc: UNKNOWN
+    last_job_status: SUCCESSFUL
+    heartbeat_stale_after_seconds: UNKNOWN
+  rollback_artifact: UNKNOWN
+  adapter_onboarding: 'Phase 2C: SmartphoneClankAdapter onboarded. Exposed: collector_run_metrics health substrate, timeline taxonomy, webhook_deliveries vs alerts (generation-vs-delivery), rejected_candidates/confidence_ledger/analyst_actions
+    QC counts, alembic revision.'
+- failure_domain: hetzner-fleet
+  location_type: HETZNER
+  location: hel1
+  host: ubuntu-4gb-hel1-1
+  artifact_digest: UNKNOWN
+  runtime:
+    implementation: CPython
+    version: UNKNOWN
+  dependency_lock:
+    file: uv.lock
+    digest: UNKNOWN
+    matches: UNKNOWN
+  evidence_path: clank-architecture/audits/2026-08-phase1/HOST_EVIDENCE_smartwatch_dualscheduler_20260822.txt
+  secrets:
+    owner: UNKNOWN
+    storage_mechanism: none-found
+  last_operator_verification:
+    operator: phase2a-read-only-inspection
+    observed_at_utc: '2026-08-21T21:05:00Z'
+  promotion_eligible: false
+  instance_id: smartwatch-hetzner-cron-lane-01
+  repository: smartwatch-clank
+  deployment_state: RUNNING
+  environment: staging
+  deployed_commit_sha: d987b66ad3b6f96575ddf1c04f8a76833a837026
+  source_branch_or_tag: detached-stage-c-merge
+  service_identity: deploy-crontab '50 1-23/2 * * *' deploy_run.sh (SOLE scheduler after Phase 2A repair)
+  working_directory_or_container: /home/deploy/staging/smartwatch-clank
+  database_path: /home/deploy/staging/smartwatch-clank/var
+  scheduler:
+    type: cron-deploy-user
+    authority: smartwatch-cron-lane-d987b66
+    owner: deploy
+    enabled: true
+  notification:
+    authority: NONE-implemented
+    owner: UNKNOWN
+    enabled: false
+  backup:
+    location: backups/smartwatch-clank-20260818T123556Z.sqlite3 and T205037Z-pre-stage-c.sqlite3
+    last_verified_utc: '2026-08-18T20:50:37Z'
+  health:
+    scheduler_invocation_utc: '2026-08-21T19:50:27Z'
+    application_start_utc: UNKNOWN
+    successful_job_commit_utc: '2026-08-21T19:50:27Z'
+    source_freshness_utc: UNKNOWN
+    last_job_status: SUCCESSFUL
+    heartbeat_stale_after_seconds: UNKNOWN
+  rollback_artifact: images smartwatch-clank:d987b66 and soak-local retained
+- failure_domain: hetzner-fleet
+  location_type: HETZNER
+  location: hel1
+  host: ubuntu-4gb-hel1-1
+  artifact_digest: UNKNOWN
+  runtime:
+    implementation: CPython
+    version: UNKNOWN
+  dependency_lock:
+    file: uv.lock
+    digest: UNKNOWN
+    matches: UNKNOWN
+  evidence_path: journal exit-code 2026-08-21T20:12:44Z plus HOST_EVIDENCE file
+  secrets:
+    owner: UNKNOWN
+    storage_mechanism: none
+  last_operator_verification:
+    operator: phase2a-repair-executor
+    observed_at_utc: '2026-08-21T21:06:00Z'
+  promotion_eligible: false
+  instance_id: smartwatch-hetzner-soak-timer-retired
+  repository: smartwatch-clank
+  deployment_state: DISABLED
+  environment: staging
+  deployed_commit_sha: d987b66ad3b6f96575ddf1c04f8a76833a837026
+  source_branch_or_tag: detached-stage-c-merge
+  service_identity: smartwatch-clank-soak.timer FAILED status=1 every fire; disabled 2026-08-21T21:06Z Phase 2A
+  working_directory_or_container: /etc/systemd/system/smartwatch-clank-soak.service+timer files retained unscheduled
+  database_path: same-as-cron-lane
+  scheduler:
+    type: systemd-system-timer
+    authority: RETIRED-smartwatch-soak-timer
+    owner: root
+    enabled: false
+  notification:
+    authority: NONE-implemented
+    owner: UNKNOWN
+    enabled: false
+  backup:
+    location: UNKNOWN
+    last_verified_utc: UNKNOWN
+  health:
+    scheduler_invocation_utc: '2026-08-21T20:12:44Z'
+    application_start_utc: UNKNOWN
+    successful_job_commit_utc: UNKNOWN
+    source_freshness_utc: UNKNOWN
+    last_job_status: FAILED
+    heartbeat_stale_after_seconds: UNKNOWN
+  rollback_artifact: systemctl enable --now smartwatch-clank-soak.timer - do NOT re-enable while cron lane lives (Law 5)
+- failure_domain: hetzner-fleet
+  location_type: HETZNER
+  location: hel1
+  host: ubuntu-4gb-hel1-1
+  artifact_digest: UNKNOWN
+  runtime:
+    implementation: CPython
+    version: UNKNOWN
+  dependency_lock:
+    file: requirements.container.lock
+    digest: UNKNOWN
+    matches: UNKNOWN
+  evidence_path: clank-architecture/audits/2026-08-phase1/
+  secrets:
+    owner: UNKNOWN
+    storage_mechanism: none-found-on-host
+  last_operator_verification:
+    operator: phase2a-read-only-inspection
+    observed_at_utc: '2026-08-21T21:05:00Z'
+  promotion_eligible: false
+  instance_id: fpc-hetzner-prod-cron-01
+  repository: feature-phone-clank
+  deployment_state: RUNNING
+  environment: production
+  deployed_commit_sha: c749df33c11b1d8283a3fe48026c6bac6ca4da7e
+  source_branch_or_tag: main-pinned-pre-phase0 (4 behind 201ddf9)
+  service_identity: deploy-crontab '15 1,7,13,17 * * *' deploy_run.sh
+  working_directory_or_container: /home/deploy/staging/feature-phone-clank
+  database_path: docker named volume (prod)
+  scheduler:
+    type: cron-deploy-user
+    authority: fpc-prod-cron-c749df3
+    owner: deploy
+    enabled: true
+  notification:
+    authority: NONE-implemented-on-deployed-revision
+    owner: UNKNOWN
+    enabled: false
+  backup:
+    location: UNKNOWN
+    last_verified_utc: UNKNOWN
+  health:
+    scheduler_invocation_utc: '2026-08-21T17:15:19Z'
+    application_start_utc: UNKNOWN
+    successful_job_commit_utc: '2026-08-21T17:15:19Z'
+    source_freshness_utc: UNKNOWN
+    last_job_status: SUCCESSFUL
+    heartbeat_stale_after_seconds: UNKNOWN
+  rollback_artifact: .deployed-id mechanism documented in repo README
+  adapter_onboarding: FeaturePhoneAdapter present since Stage 1A; Phase 2C revalidated against real staging-volume DB copy.
+- failure_domain: hetzner-fleet
+  location_type: HETZNER
+  location: hel1
+  host: ubuntu-4gb-hel1-1
+  artifact_digest: UNKNOWN
+  runtime:
+    implementation: CPython + Playwright/Chromium
+    version: UNKNOWN
+  dependency_lock:
+    file: uv.lock
+    digest: UNKNOWN
+    matches: UNKNOWN
+  evidence_path: clank-architecture/audits/2026-08-phase1/
+  secrets:
+    owner: UNKNOWN
+    storage_mechanism: none-found-on-host
+  last_operator_verification:
+    operator: phase2a-read-only-inspection
+    observed_at_utc: '2026-08-21T21:05:00Z'
+  promotion_eligible: false
+  instance_id: fpc-hetzner-experimental-cron-01
+  repository: feature-phone-clank
+  deployment_state: RUNNING
+  environment: experimental
+  deployed_commit_sha: 49eab2570fad4b92092c56c8fc5b9a635a5d107d
+  source_branch_or_tag: expansion/itel-lava (unmerged; behind main)
+  service_identity: anilganti-crontab itel '0 2,10,18' and lava '30 1,7,13,19'
+  working_directory_or_container: /home/anilganti/feature-phone-clank-experimental + image tag 49eab25
+  database_path: separate experimental volume (SHA-256 isolation proof on record)
+  scheduler:
+    type: cron-anilganti-user
+    authority: fpc-exp-cron-49eab25
+    owner: anilganti
+    enabled: true
+  notification:
+    authority: NONE-implemented
+    owner: UNKNOWN
+    enabled: false
+  backup:
+    location: UNKNOWN
+    last_verified_utc: UNKNOWN
+  health:
+    scheduler_invocation_utc: UNKNOWN-pre-2A
+    application_start_utc: UNKNOWN
+    successful_job_commit_utc: UNKNOWN
+    source_freshness_utc: UNKNOWN
+    last_job_status: SUCCESS-per-repo-docs
+    heartbeat_stale_after_seconds: UNKNOWN
+  rollback_artifact: delete 2 crontab lines (documented)
+- failure_domain: hetzner-fleet
+  location_type: HETZNER
+  location: hel1
+  host: ubuntu-4gb-hel1-1
+  artifact_digest: UNKNOWN
+  runtime:
+    implementation: CPython
+    version: UNKNOWN
+  dependency_lock:
+    file: uv.lock
+    digest: UNKNOWN
+    matches: UNKNOWN
+  evidence_path: clank-architecture/audits/2026-08-phase1/
+  secrets:
+    owner: UNKNOWN
+    storage_mechanism: none-found-on-host
+  last_operator_verification:
+    operator: phase2a-read-only-inspection
+    observed_at_utc: '2026-08-21T21:05:00Z'
+  promotion_eligible: false
+  instance_id: tablet-hetzner-idle-checkout-01
+  repository: tablet-clank
+  deployment_state: DISABLED
+  environment: experimental
+  deployed_commit_sha: 1d3509b3cd042b0b55701d072512f5255f62a7df
+  source_branch_or_tag: main-at-1d3509b (2 behind current)
+  service_identity: NONE scheduled; tablet-clank-soak.service installed disabled+inactive
+  working_directory_or_container: /home/deploy/experimental/tablet-clank
+  database_path: var/tablet_clank.db (mtime 2026-08-17)
+  scheduler:
+    type: none
+    authority: NONE
+    owner: UNKNOWN
+    enabled: false
+  notification:
+    authority: NONE-implemented
+    owner: UNKNOWN
+    enabled: false
+  backup:
+    location: UNKNOWN
+    last_verified_utc: UNKNOWN
+  health:
+    scheduler_invocation_utc: UNKNOWN
+    application_start_utc: UNKNOWN
+    successful_job_commit_utc: UNKNOWN
+    source_freshness_utc: '2026-08-17T06:24:00Z'
+    last_job_status: UNKNOWN
+    heartbeat_stale_after_seconds: UNKNOWN
+  rollback_artifact: UNKNOWN
+- failure_domain: hetzner-fleet
+  location_type: HETZNER
+  location: hel1
+  host: ubuntu-4gb-hel1-1
+  artifact_digest: UNKNOWN
+  runtime:
+    implementation: CPython
+    version: UNKNOWN
+  dependency_lock:
+    file: uv.lock
+    digest: UNKNOWN
+    matches: UNKNOWN
+  evidence_path: clank-architecture/audits/2026-08-phase1/
+  secrets:
+    owner: UNKNOWN
+    storage_mechanism: none-found-on-host
+  last_operator_verification:
+    operator: phase2a-read-only-inspection
+    observed_at_utc: '2026-08-21T21:05:00Z'
+  promotion_eligible: false
+  instance_id: ktw-hetzner-soak-timer-01
+  repository: korean-tech-wire
+  deployment_state: RUNNING
+  environment: staging
+  deployed_commit_sha: 262c36dc7eae2d9e8ba3fdfeabc3a002e5cb5577
+  source_branch_or_tag: main (converged on host 2026-08-21T21:33Z Phase 2B)
+  service_identity: korean-tech-wire-soak.timer OnBootSec=5m OnUnitActiveSec=30m if-due
+  working_directory_or_container: /opt/korean-tech-wire venv
+  database_path: /opt/korean-tech-wire/var/korean_tech_wire.db (mtime 2026-08-21T20:14Z)
+  scheduler:
+    type: systemd-system-timer
+    authority: ktw-soak-timer-262c36d
+    owner: root
+    enabled: true
+  notification:
+    authority: NONE-by-policy
+    owner: UNKNOWN
+    enabled: false
+  backup:
+    location: SQLite online-backup API in app; host backup dir UNKNOWN
+    last_verified_utc: UNKNOWN
+  health:
+    scheduler_invocation_utc: '2026-08-21T20:14:54Z'
+    application_start_utc: UNKNOWN
+    successful_job_commit_utc: '2026-08-21T20:14:54Z'
+    source_freshness_utc: '2026-08-21T20:14:54Z'
+    last_job_status: SUCCESSFUL
+    heartbeat_stale_after_seconds: UNKNOWN
+  rollback_artifact: UNKNOWN
+  adapter_onboarding: 'Phase 2C: KoreanTechWireAdapter onboarded. Exposed: source lifecycle (EXPERIMENTAL/PRODUCTION), per-source run-health with recency-honest mapping (blocked streak != healthy-by-history),
+    article throughput + feedback rows. Event/delivery capabilities unsupported BY POLICY.'
+- failure_domain: hetzner-fleet
+  location_type: HETZNER
+  location: hel1
+  host: ubuntu-4gb-hel1-1
+  artifact_digest: sha256:3893581ed8ddb2e89c5fbf4a1569b404c16e37ac99eb070ff0a6ff728c2fa81b
+  runtime:
+    implementation: CPython
+    version: UNKNOWN
+  dependency_lock:
+    file: uv.lock
+    digest: UNKNOWN
+    matches: UNKNOWN
+  evidence_path: clank-architecture/audits/2026-08-phase1/
+  secrets:
+    owner: UNKNOWN
+    storage_mechanism: only .env.example found
+  last_operator_verification:
+    operator: phase2b-deploy-executor
+    observed_at_utc: '2026-08-21T21:40:00Z'
+  promotion_eligible: false
+  instance_id: ctw-hetzner-hourly-cron-01
+  repository: chinese-tech-wire
+  deployment_state: RUNNING
+  environment: staging
+  deployed_commit_sha: c1b3a415a07bc5b58f4237268aff03ee2fb82ff1
+  source_branch_or_tag: main (converged Phase 2B incl Dockerfile security/ COPY fix c1b3a41)
+  service_identity: deploy-crontab '5 * * * *' deploy_run.sh
+  working_directory_or_container: /home/deploy/staging/chinese-tech-wire
+  database_path: data/ctw.db under checkout
+  scheduler:
+    type: cron-deploy-user
+    authority: ctw-hourly-cron-c1b3a41
+    owner: deploy
+    enabled: true
+  notification:
+    authority: NONE-no-env-on-host
+    owner: UNKNOWN
+    enabled: false
+  backup:
+    location: scripts/backup present; verification UNKNOWN
+    last_verified_utc: UNKNOWN
+  health:
+    scheduler_invocation_utc: '2026-08-21T21:39:52Z'
+    application_start_utc: UNKNOWN
+    successful_job_commit_utc: '2026-08-21T21:39:52Z'
+    source_freshness_utc: '2026-08-21T21:39:52Z'
+    last_job_status: SUCCESSFUL
+    heartbeat_stale_after_seconds: UNKNOWN
+  rollback_artifact: prior image chinese-tech-wire:552ffff retained + archived pre-convergence .deployed-id at /home/deploy/archives/ctw-deployed-id-pre-convergence.txt
+- failure_domain: hetzner-fleet
+  location_type: HETZNER
+  location: hel1
+  host: ubuntu-4gb-hel1-1
+  artifact_digest: sha256:113f2bb5d22aa602225a85b82203436b69306244226e5796e2caf8d9010684ca
+  runtime:
+    implementation: CPython
+    version: UNKNOWN
+  dependency_lock:
+    file: requirements.container.lock
+    digest: UNKNOWN
+    matches: UNKNOWN
+  evidence_path: clank-architecture/audits/2026-08-phase1/
+  secrets:
+    owner: deploy
+    storage_mechanism: .env presence-only
+  last_operator_verification:
+    operator: phase2b-deploy-executor
+    observed_at_utc: '2026-08-21T21:42:00Z'
+  promotion_eligible: false
+  instance_id: oem-radar-hetzner-staging-cron-01
+  repository: oem-radar
+  deployment_state: RUNNING
+  environment: staging
+  deployed_commit_sha: 410313b64b41e430e408c344382720c2e8a04f47
+  source_branch_or_tag: main (converged Phase 2B)
+  service_identity: deploy-crontab '20 * * * *' deploy/run.sh
+  working_directory_or_container: /home/deploy/staging/oem-radar
+  database_path: data/ under checkout (WAL)
+  scheduler:
+    type: cron-deploy-user
+    authority: oem-staging-cron-410313b
+    owner: deploy
+    enabled: true
+  notification:
+    authority: oem-discord-webhook-env-present-148B
+    owner: deploy
+    enabled: true
+  backup:
+    location: UNKNOWN
+    last_verified_utc: UNKNOWN
+  health:
+    scheduler_invocation_utc: '2026-08-21T21:42:00Z'
+    application_start_utc: UNKNOWN
+    successful_job_commit_utc: '2026-08-21T21:42:00Z'
+    source_freshness_utc: '2026-08-21T21:42:00Z'
+    last_job_status: SUCCESSFUL
+    heartbeat_stale_after_seconds: UNKNOWN
+  rollback_artifact: images oem-radar:578aef9/fe2dc60/0ceb001 retained + archived .deployed-id at /home/deploy/archives/oem-radar-deployed-id-pre.txt
+- failure_domain: hetzner-fleet
+  location_type: HETZNER
+  location: hel1
+  host: ubuntu-4gb-hel1-1
+  artifact_digest: UNKNOWN
+  runtime:
+    implementation: CPython
+    version: UNKNOWN
+  dependency_lock:
+    file: uv.lock
+    digest: UNKNOWN
+    matches: UNKNOWN
+  evidence_path: clank-architecture/audits/2026-08-phase1/
+  secrets:
+    owner: UNKNOWN
+    storage_mechanism: none-found-on-host
+  last_operator_verification:
+    operator: phase2a-read-only-inspection
+    observed_at_utc: '2026-08-21T21:05:00Z'
+  promotion_eligible: false
+  instance_id: oem-radar-hetzner-bankai-exp-timer-01
+  repository: oem-radar
+  deployment_state: RUNNING
+  environment: experimental
+  deployed_commit_sha: 31fc46be895664865ab23bcc6b10a370559b766a
+  source_branch_or_tag: codex/bankai-config-availability tip (merged to main 410313b Phase 2A)
+  service_identity: oem-radar-experimental-sitemap-soak.timer OnCalendar=00/6:05 flock-guarded
+  working_directory_or_container: /home/deploy/experimental/oem-radar-bankai venv
+  database_path: data/experimental store adjacent to .soak.lock
+  scheduler:
+    type: systemd-system-timer
+    authority: oem-bankai-exp-timer-31fc46b
+    owner: root
+    enabled: true
+  notification:
+    authority: NONE-experimental-lane-no-send-evidence
+    owner: UNKNOWN
+    enabled: false
+  backup:
+    location: UNKNOWN
+    last_verified_utc: UNKNOWN
+  health:
+    scheduler_invocation_utc: '2026-08-21T18:06:44Z'
+    application_start_utc: UNKNOWN
+    successful_job_commit_utc: '2026-08-21T18:06:44Z'
+    source_freshness_utc: UNKNOWN
+    last_job_status: SUCCESSFUL
+    heartbeat_stale_after_seconds: UNKNOWN
+  rollback_artifact: systemctl disable --now oem-radar-experimental-sitemap-soak.timer
+- failure_domain: hetzner-fleet
+  location_type: HETZNER
+  location: hel1
+  host: ubuntu-4gb-hel1-1
+  artifact_digest: sha256:3a4983cb773b185d6a11d0f2a51e3101b881ee7963de41c0089d26b407a264fa
+  runtime:
+    implementation: CPython
+    version: UNKNOWN
+  dependency_lock:
+    file: uv.lock
+    digest: UNKNOWN
+    matches: UNKNOWN
+  evidence_path: clank-architecture/audits/2026-08-phase1/
+  secrets:
+    owner: UNKNOWN
+    storage_mechanism: none-found-on-host
+  last_operator_verification:
+    operator: phase2b-deploy-executor
+    observed_at_utc: '2026-08-21T21:56:00Z'
+  promotion_eligible: false
+  instance_id: semint-hetzner-hourly-cron-01
+  repository: semiconductor-intelligence
+  deployment_state: RUNNING
+  environment: staging
+  deployed_commit_sha: 9dbf06d11cff23961fb11f240b2f2ea94c728777
+  source_branch_or_tag: 'main (converged Phase 2B; heartbeat migration a0b1c2d3e404 applied and PROVEN: invocation 2026-08-21T21:53:08Z != commit 2026-08-21T21:55:12Z)'
+  service_identity: deploy-crontab '40 * * * *' deploy_run.sh
+  working_directory_or_container: /home/deploy/staging/semiconductor-intelligence
+  database_path: /var/lib/docker/volumes/semintel_staging_data/_data/semi_intel.db
+  scheduler:
+    type: cron-deploy-user
+    authority: semint-hourly-cron-0538644
+    owner: deploy
+    enabled: true
+  notification:
+    authority: NONE-found-on-host
+    owner: UNKNOWN
+    enabled: false
+  backup:
+    location: BackupService in app; host evidence UNKNOWN
+    last_verified_utc: UNKNOWN
+  health:
+    scheduler_invocation_utc: '2026-08-21T19:42:06Z'
+    application_start_utc: UNKNOWN
+    successful_job_commit_utc: '2026-08-21T19:42:06Z'
+    source_freshness_utc: UNKNOWN
+    last_job_status: SUCCESSFUL
+    heartbeat_stale_after_seconds: UNKNOWN
+    last_scheduler_invocation_note: OperationalScheduler automation enabled and exercised; hourly cron lane still invokes 'pipeline run' directly bypassing the scheduler - Law 3/5 residual flagged for operator
+      decision
+  rollback_artifact: archived DB snapshot /home/deploy/archives/semintel-pre-heartbeat-*.db + archived .deployed-id 0538644; semintel automation disable supported
+- failure_domain: hetzner-fleet
+  location_type: HETZNER
+  location: hel1
+  host: ubuntu-4gb-hel1-1
+  artifact_digest: UNKNOWN
+  runtime:
+    implementation: docker-container
+    version: image per compose
+  dependency_lock:
+    file: uv.lock
+    digest: UNKNOWN
+    matches: UNKNOWN
+  evidence_path: clank-architecture/audits/2026-08-phase1/
+  secrets:
+    owner: deploy
+    storage_mechanism: .env presence-only (rotation still OPEN per D-25)
+  last_operator_verification:
+    operator: phase2a-read-only-inspection
+    observed_at_utc: '2026-08-21T21:05:00Z'
+  promotion_eligible: false
+  instance_id: fgt-hetzner-hourly-cron-01
+  repository: free-game-tracker
+  deployment_state: RUNNING
+  environment: production
+  deployed_commit_sha: cec034695d52affc284701fe93966dd7c59c5bcd
+  source_branch_or_tag: ledger-pinned (matches ai/handoff/DEPLOYMENT_LEDGER.md 2026-08-16 entry of 2026-08-16)
+  service_identity: deploy-crontab '0 * * * *' deploy/run.sh docker-compose one-shot
+  working_directory_or_container: /home/deploy/free-game-tracker (deploy dir, not a git checkout)
+  database_path: container volume (repo-dir newsroom.db is STALE legacy copy mtime 2026-08-09)
+  scheduler:
+    type: cron-deploy-user
+    authority: fgt-hourly-cron-cec0346
+    owner: deploy
+    enabled: true
+  notification:
+    authority: fgt-discord-webhook-env-present-151B
+    owner: deploy
+    enabled: true
+  backup:
+    location: UNKNOWN
+    last_verified_utc: UNKNOWN
+  health:
+    scheduler_invocation_utc: '2026-08-21T20:00:40Z'
+    application_start_utc: UNKNOWN
+    successful_job_commit_utc: '2026-08-21T20:00:40Z'
+    source_freshness_utc: '2026-08-21T20:00:03Z'
+    last_job_status: SUCCESSFUL
+    heartbeat_stale_after_seconds: UNKNOWN
+  rollback_artifact: .deployed-id = cec0346
+deployment_facts:
+- location_type: HETZNER
+  deployment_state: UNKNOWN
+  instance_id: UNKNOWN
+  failure_domain: UNKNOWN
+  location: UNKNOWN
+  host: UNKNOWN
+  deployed_commit_sha: UNKNOWN
+  artifact_digest: UNKNOWN
+  scheduler: UNKNOWN
+  database_path: UNKNOWN
+  evidence_path: UNKNOWN
+  backup_verification: UNKNOWN
+  heartbeat_freshness: UNKNOWN
+  rollback_artifact: UNKNOWN
+  evidence_bundle: UNKNOWN
+  promotion_eligible: false
+- location_type: NAS
+  deployment_state: UNKNOWN
+  instance_id: UNKNOWN
+  failure_domain: UNKNOWN
+  location: UNKNOWN
+  host: UNKNOWN
+  deployed_commit_sha: UNKNOWN
+  artifact_digest: UNKNOWN
+  scheduler: UNKNOWN
+  database_path: UNKNOWN
+  evidence_path: UNKNOWN
+  backup_verification: UNKNOWN
+  heartbeat_freshness: UNKNOWN
+  rollback_artifact: UNKNOWN
+  evidence_bundle: UNKNOWN
+  promotion_eligible: false

@@ -6,9 +6,31 @@ import { EXPLAIN_PROMPTS } from "./explain.ts";
 import { HISTORY, PHASES } from "./history.ts";
 import { LAWS } from "./laws.ts";
 import { FLEET } from "./fleet.ts";
+import { ARTEFACTS, EVIDENCE_GAPS, EVIDENCE_CAPTURE_UTC, LIVE_HOST_PROBE } from "./evidence.ts";
+import { PROVENANCE } from "./provenance.ts";
+import { LEDGER_REVIEWS } from "./ledger-review.ts";
+import { NEXT_STEPS, DO_NOT_DO_YET } from "./next-steps.ts";
 import { validateHandbook } from "../lib/handbook/validate.ts";
 
-export { CONCEPTS, MODULES, INCIDENTS, TIMELINE, EXPLAIN_PROMPTS, HISTORY, PHASES, LAWS, FLEET };
+export {
+  CONCEPTS,
+  MODULES,
+  INCIDENTS,
+  TIMELINE,
+  EXPLAIN_PROMPTS,
+  HISTORY,
+  PHASES,
+  LAWS,
+  FLEET,
+  ARTEFACTS,
+  EVIDENCE_GAPS,
+  EVIDENCE_CAPTURE_UTC,
+  LIVE_HOST_PROBE,
+  PROVENANCE,
+  LEDGER_REVIEWS,
+  NEXT_STEPS,
+  DO_NOT_DO_YET,
+};
 
 export const HANDBOOK = {
   concepts: CONCEPTS,
@@ -20,6 +42,11 @@ export const HANDBOOK = {
   history: HISTORY,
   laws: LAWS,
   fleet: FLEET,
+  artefacts: ARTEFACTS,
+  gaps: EVIDENCE_GAPS,
+  provenance: PROVENANCE,
+  reviews: LEDGER_REVIEWS,
+  nextSteps: NEXT_STEPS,
 };
 
 export const HANDBOOK_ISSUES = validateHandbook(HANDBOOK);
@@ -51,3 +78,9 @@ export function lawById(id: string) {
 export function fleetById(id: string) {
   return FLEET.find((c) => c.id === id);
 }
+
+export function artefactById(id: string) {
+  return ARTEFACTS.find((a) => a.id === id);
+}
+
+export const HISTORY_SYSTEMS = Array.from(new Set(HISTORY.flatMap((h) => h.systems))).sort();

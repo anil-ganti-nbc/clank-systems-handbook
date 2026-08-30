@@ -1,0 +1,19 @@
+[Unit]
+Description=Smartphone Clank SOAK source %i (staging-labelled DB only)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=smartphone-clank
+Group=smartphone-clank
+WorkingDirectory=/opt/smartphone-clank
+# Points at the isolated staging configuration (clank-staging.db). Combined
+# with --environment staging this is fail-closed: runtime/environment.py
+# refuses to open a production DB under staging, and the soak source stays
+# notification-suppressed by alerts/source_maturity.py. This unit is OPT-IN:
+# it has no [Install] section and is therefore NOT enabled by timers.target.
+Environment=CLANK_CONFIG=config/config.staging.yaml
+ExecStart=/opt/smartphone-clank/.venv/bin/python -u -m runtime.run_once --environment staging --collector %i
+NoNewPrivileges=true
+PrivateTmp=true

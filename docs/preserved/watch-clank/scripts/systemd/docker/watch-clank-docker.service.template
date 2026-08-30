@@ -1,0 +1,20 @@
+[Unit]
+Description=Watch Clank ({DISPLAY_NAME}) -- containerized run against the shared data volume
+
+[Service]
+Type=oneshot
+EnvironmentFile=-%h/.config/watch-clank/docker.env
+EnvironmentFile=-%h/.config/watch-clank/secrets.env
+ExecStart=/usr/bin/docker run --rm \
+  --name watch-clank-{SLUG}-run \
+  -e DATABASE_URL=sqlite:////data/watch_clank.db \
+  -e SNAPSHOT_STORAGE_ROOT=/data/snapshots \
+  -e LOG_DIR=/data/logs \
+  -e DISCORD_EDITORIAL_WEBHOOK_URL \
+  -e DISCORD_HEALTH_WEBHOOK_URL \
+  -e EDITORIAL_NOTIFICATIONS_ENABLED \
+  -e WATCH_CLANK_INSTANCE=HETZNER \
+  -v watch_clank_staging_data:/data \
+  ${{WATCH_CLANK_IMAGE}} \
+  python -m scripts.run_pipeline {ARGS}
+SuccessExitStatus=0

@@ -1,0 +1,43 @@
+# Free Game Tracker — production. One-shot job, no public ports, no Docker
+# socket. Invoke with: docker compose run --rm free-game-tracker run
+# IMAGE_TAG must be an immutable deployment identifier - never rely on a bare
+# `:latest` as the only deployable reference. As of the provenance hardening
+# pass, IMAGE_TAG is the short Git SHA the image was built from (see
+# ai/handoff/RELEASE_RUNBOOK.md); GIT_REVISION below is the full SHA baked
+# into org.opencontainers.image.revision and NEWSROOM_SOURCE_REVISION.
+# Deployments made before this pass used a date-stamped snapshot identifier
+# instead (e.g. free-game-tracker_2026-08-12_hetzner-03) - see DECISIONS.md.
+services:
+  free-game-tracker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        GIT_REVISION: ${GIT_REVISION:-unknown}
+    image: free-game-tracker:${IMAGE_TAG:?set IMAGE_TAG to a deployment identifier, e.g. a short Git SHA}
+    container_name: free-game-tracker-production
+    restart: "no"
+    environment:
+      NEWSROOM_DATABASE_PATH: /app/data/newsroom.db
+      NEWSROOM_REPORTS_DIR: /app/data/reports
+      # Not enforced with `:?` here on purpose - that syntax is interpolated
+      # per-file before the staging overlay's merge, so it fires even when
+      # docker-compose.staging.yml is about to override this key to "".
+      # Enforcement lives in RELEASE_RUNBOOK.md's promotion checklist instead.
+      NEWSROOM_DISCORD_WEBHOOK_URL: ${NEWSROOM_DISCORD_WEBHOOK_URL:-}
+      NEWSROOM_RELEASE_CHANNEL: production
+      NEWSROOM_MIN_CONFIDENCE: ${NEWSROOM_MIN_CONFIDENCE:-0}
+      NEWSROOM_REQUIRE_KNOWN_PRICE: ${NEWSROOM_REQUIRE_KNOWN_PRICE:-false}
+      NEWSROOM_MIN_PRICE: ${NEWSROOM_MIN_PRICE:-0}
+    volumes:
+      - fgt_data:/app/data
+    healthcheck:
+      test: ["CMD", "newsroom", "health"]
+      interval: 60s
+      timeout: 20s
+      retries: 3
+      start_period: 15s
+
+volumes:
+  fgt_data:
+    name: fgt_production_data

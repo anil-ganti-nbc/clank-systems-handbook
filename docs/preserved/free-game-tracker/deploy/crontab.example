@@ -1,0 +1,10 @@
+# Free Game Tracker — external hourly schedule (replaces Windows Task
+# Scheduler). Install with: crontab -e (as the deploy user, not root).
+# Preserves the existing hourly cadence from Install-HourlyTask.ps1.
+#
+# Requires IMAGE_TAG and NEWSROOM_DISCORD_WEBHOOK_URL to be available to the
+# invoking shell/user (e.g. via an env file sourced from a wrapper script) —
+# do not hard-code secrets into this crontab file.
+
+0 * * * * /opt/free-game-tracker/deploy/run.sh \
+  >> /opt/free-game-tracker/logs/cron-$(date -u +\%Y\%m\%d).log 2>&1

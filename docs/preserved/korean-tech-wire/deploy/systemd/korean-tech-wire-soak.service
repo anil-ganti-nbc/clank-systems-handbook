@@ -1,0 +1,16 @@
+[Unit]
+Description=Korean Tech Wire due-aware soak cycle
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=korean-tech-wire
+Group=korean-tech-wire
+WorkingDirectory=/opt/korean-tech-wire
+EnvironmentFile=-/etc/korean-tech-wire.env
+ExecStart=/opt/korean-tech-wire/.venv/bin/python -m korean_tech_wire.cli soak --cycles 1 --interval-seconds 7200 --if-due
+StandardOutput=journal
+StandardError=journal
+NoNewPrivileges=true
+PrivateTmp=true

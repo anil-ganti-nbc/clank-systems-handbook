@@ -183,3 +183,114 @@ export const fleetClankSchema = z.object({
   staleNote: z.string().optional(),
 });
 export type FleetClank = z.infer<typeof fleetClankSchema>;
+
+export const artefactTypeSchema = z.enum([
+  "systemd-unit",
+  "systemd-timer",
+  "cron",
+  "docker-compose",
+  "dockerfile",
+  "backup-script",
+  "restore-script",
+  "inventory",
+  "continuity-seed",
+  "survivability-doc",
+  "incident-report",
+  "fleet-law-doc",
+  "deployment-template",
+  "host-runtime-state",
+  "syslog",
+  "motherclank-var",
+  "db-file",
+  "operator-script",
+]);
+export type ArtefactType = z.infer<typeof artefactTypeSchema>;
+
+export const retentionRiskSchema = z.enum(["low", "medium", "high", "rotating", "irrecoverable"]);
+export const offHostCopySchema = z.enum(["yes", "no", "partial", "unknown"]);
+
+export const evidenceArtefactSchema = z.object({
+  id: z.string().min(1),
+  system: z.string().min(1),
+  artefact: z.string().min(1),
+  artefactType: artefactTypeSchema,
+  sourceLocation: z.string().min(1),
+  preservedLocation: z.string().min(1),
+  host: z.string().min(1),
+  captureAt: z.string().min(1),
+  hash: z.string().optional(),
+  gitSha: z.string().optional(),
+  evidencePeriod: z.string().min(1),
+  relatedIncidentIds: z.array(z.string()),
+  relatedLawIds: z.array(z.string()),
+  retentionRisk: retentionRiskSchema,
+  offHostCopy: offHostCopySchema,
+  verification: epistemicStatus,
+  notes: z.string().min(1),
+});
+export type EvidenceArtefact = z.infer<typeof evidenceArtefactSchema>;
+
+export const evidenceGapSchema = z.object({
+  id: z.string().min(1),
+  title: z.string().min(1),
+  kind: z.enum(["missing-artefact", "live-unknown", "awaiting-review", "partial-incident", "irrecoverable"]),
+  status: epistemicStatus,
+  relatedHistoryIds: z.array(z.string()),
+  relatedIncidentIds: z.array(z.string()),
+  relatedLawIds: z.array(z.string()),
+  whyItMatters: z.string().min(1),
+  whatWouldCloseIt: z.string().min(1),
+});
+export type EvidenceGap = z.infer<typeof evidenceGapSchema>;
+
+export const provenanceCellSchema = z.object({
+  id: z.string().min(1),
+  system: z.string().min(1),
+  checkoutHead: z.string().min(1),
+  originMain: z.string().min(1),
+  deployedSha: z.string().min(1),
+  runningState: z.string().min(1),
+  schedulerState: z.string().min(1),
+  authoritativeDb: z.string().min(1),
+  dbEpoch: z.string().min(1),
+  hostIdentity: z.string().min(1),
+  backupState: z.string().min(1),
+  confidence: epistemicStatus,
+  asOf: z.string().min(1),
+  notes: z.string().min(1),
+});
+export type ProvenanceCell = z.infer<typeof provenanceCellSchema>;
+
+export const ledgerReviewActionSchema = z.enum([
+  "keep",
+  "downgrade",
+  "split",
+  "await-host-probe",
+  "await-human",
+]);
+
+export const ledgerReviewSchema = z.object({
+  historyId: z.string().min(1),
+  currentConfidence: epistemicStatus,
+  supportingArtefacts: z.array(z.string()),
+  verifiedClaims: z.array(z.string()),
+  inferredClaims: z.array(z.string()),
+  overreadRisk: z.string().min(1),
+  openQuestions: z.array(z.string()),
+  recommendedAction: ledgerReviewActionSchema,
+  recommendedConfidence: epistemicStatus,
+});
+export type LedgerReview = z.infer<typeof ledgerReviewSchema>;
+
+export const nextStepSchema = z.object({
+  id: z.string().min(1),
+  title: z.string().min(1),
+  impact: z.enum(["high", "medium", "low"]),
+  urgency: z.enum(["now", "soon", "later"]),
+  confidence: epistemicStatus,
+  dependency: z.string().min(1),
+  scope: z.enum(["small", "medium", "large"]),
+  doNow: z.boolean(),
+  body: z.string().min(1),
+});
+export type NextStep = z.infer<typeof nextStepSchema>;

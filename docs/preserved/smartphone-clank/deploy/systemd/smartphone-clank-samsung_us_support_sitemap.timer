@@ -1,0 +1,11 @@
+[Unit]
+Description=Schedule Smartphone Clank Samsung source
+
+[Timer]
+OnActiveSec=30s
+OnUnitActiveSec=3h
+AccuracySec=1s
+Unit=smartphone-clank-source@samsung_us_support_sitemap.service
+
+[Install]
+WantedBy=timers.target

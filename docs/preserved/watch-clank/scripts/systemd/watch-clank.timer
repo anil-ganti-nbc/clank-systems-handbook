@@ -1,0 +1,13 @@
+[Unit]
+Description=Run Watch Clank's Casio production pipeline every 90 minutes
+
+[Timer]
+# Matches the Windows Task Scheduler default (SCHEDULE_INTERVAL_MINUTES=90).
+# Keep these in sync manually if you change one — there is no shared config
+# file between the two schedulers by design (see scripts/systemd/README.md).
+OnBootSec=5min
+OnUnitActiveSec=90min
+Persistent=true
+
+[Install]
+WantedBy=timers.target

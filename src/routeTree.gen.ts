@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ArchitectureRouteImport } from './routes/architecture'
 import { Route as BasicsRouteImport } from './routes/basics'
 import { Route as BuiltRouteImport } from './routes/built'
+import { Route as EvidenceRouteImport } from './routes/evidence'
 import { Route as ExplainRouteImport } from './routes/explain'
 import { Route as FleetRouteImport } from './routes/fleet'
 import { Route as GlossaryRouteImport } from './routes/glossary'
@@ -41,6 +42,11 @@ const BasicsRoute = BasicsRouteImport.update({
 const BuiltRoute = BuiltRouteImport.update({
   id: '/built',
   path: '/built',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EvidenceRoute = EvidenceRouteImport.update({
+  id: '/evidence',
+  path: '/evidence',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExplainRoute = ExplainRouteImport.update({
@@ -94,6 +100,7 @@ export interface FileRoutesByFullPath {
   '/architecture': typeof ArchitectureRoute
   '/basics': typeof BasicsRoute
   '/built': typeof BuiltRoute
+  '/evidence': typeof EvidenceRoute
   '/explain': typeof ExplainRoute
   '/fleet': typeof FleetRoute
   '/glossary': typeof GlossaryRoute
@@ -109,6 +116,7 @@ export interface FileRoutesByTo {
   '/architecture': typeof ArchitectureRoute
   '/basics': typeof BasicsRoute
   '/built': typeof BuiltRoute
+  '/evidence': typeof EvidenceRoute
   '/explain': typeof ExplainRoute
   '/fleet': typeof FleetRoute
   '/glossary': typeof GlossaryRoute
@@ -124,6 +132,7 @@ export interface FileRoutesById {
   '/architecture': typeof ArchitectureRoute
   '/basics': typeof BasicsRoute
   '/built': typeof BuiltRoute
+  '/evidence': typeof EvidenceRoute
   '/explain': typeof ExplainRoute
   '/fleet': typeof FleetRoute
   '/glossary': typeof GlossaryRoute
@@ -141,6 +150,7 @@ export interface FileRouteTypes {
     | '/architecture'
     | '/basics'
     | '/built'
+    | '/evidence'
     | '/explain'
     | '/fleet'
     | '/glossary'
@@ -156,6 +166,7 @@ export interface FileRouteTypes {
     | '/architecture'
     | '/basics'
     | '/built'
+    | '/evidence'
     | '/explain'
     | '/fleet'
     | '/glossary'
@@ -170,6 +181,7 @@ export interface FileRouteTypes {
     | '/architecture'
     | '/basics'
     | '/built'
+    | '/evidence'
     | '/explain'
     | '/fleet'
     | '/glossary'
@@ -186,6 +198,7 @@ export interface RootRouteChildren {
   ArchitectureRoute: typeof ArchitectureRoute
   BasicsRoute: typeof BasicsRoute
   BuiltRoute: typeof BuiltRoute
+  EvidenceRoute: typeof EvidenceRoute
   ExplainRoute: typeof ExplainRoute
   FleetRoute: typeof FleetRoute
   GlossaryRoute: typeof GlossaryRoute
@@ -223,6 +236,13 @@ declare module '@tanstack/react-router' {
       path: '/built'
       fullPath: '/built'
       preLoaderRoute: typeof BuiltRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/evidence': {
+      id: '/evidence'
+      path: '/evidence'
+      fullPath: '/evidence'
+      preLoaderRoute: typeof EvidenceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/explain': {
@@ -308,6 +328,7 @@ const rootRouteChildren: RootRouteChildren = {
   ArchitectureRoute: ArchitectureRoute,
   BasicsRoute: BasicsRoute,
   BuiltRoute: BuiltRoute,
+  EvidenceRoute: EvidenceRoute,
   ExplainRoute: ExplainRoute,
   FleetRoute: FleetRoute,
   GlossaryRoute: GlossaryRoute,

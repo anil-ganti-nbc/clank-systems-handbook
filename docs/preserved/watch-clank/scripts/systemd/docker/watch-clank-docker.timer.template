@@ -1,0 +1,10 @@
+[Unit]
+Description=Run Watch Clank ({DISPLAY_NAME}) every {CADENCE_HUMAN}
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec={CADENCE_SEC}
+Persistent=true
+
+[Install]
+WantedBy=timers.target

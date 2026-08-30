@@ -1,0 +1,13 @@
+[Unit]
+Description=Smartphone Clank one-shot source %i
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=smartphone-clank
+Group=smartphone-clank
+WorkingDirectory=/opt/smartphone-clank
+ExecStart=/opt/smartphone-clank/.venv/bin/python -u -m runtime.run_once --collector %i
+NoNewPrivileges=true
+PrivateTmp=true

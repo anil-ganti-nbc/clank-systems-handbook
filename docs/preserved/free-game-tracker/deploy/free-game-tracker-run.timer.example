@@ -1,0 +1,12 @@
+[Unit]
+Description=Run Free Game Tracker hourly (preserves prior Windows Task Scheduler cadence)
+
+[Timer]
+OnCalendar=hourly
+Persistent=true
+# Preventing duplicate/overlapping runs during a slow crawl or an upgrade is
+# handled by systemd itself: a oneshot service's timer will not start a new
+# instance while the previous ExecStart is still running.
+
+[Install]
+WantedBy=timers.target

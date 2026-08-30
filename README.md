@@ -52,20 +52,27 @@ npm test            # content schema, unique ids, dangling-link checks, ledger s
 npm run typecheck
 npm run build
 npx playwright install chromium
-npm run e2e         # lesson nav, freeze→reveal, evidence, Explain It Back, history, fleet
+npm run e2e         # lesson nav, freeze→reveal, evidence locker, Explain It Back, history, fleet, confidence audit
 ```
 
 Browser-local state key is `clank-handbook-v1`. The Handbook GUI is this
 repository; it does not depend on Grok App Builder auth, preview bridges, or
 `/__grok` chrome.
 
-## Curriculum (content phase)
+## Curriculum
 
-- Historical ledger: nine phases, 27 artefact-backed entries
+- Historical ledger: nine phases, artefact-backed entries (content phase 27; evidence phase adds `h-evidence-preservation`)
+- Evidence preservation manifest + hashed git-resident unit/compose/backup/seed copies (`docs/preserved/`)
+- Live provenance report: Law 6 cells remain UNKNOWN (no SSH this campaign)
+- Ledger human-review queue (rows not silently rewritten)
+- Confidence audit UI (`/evidence`): filter by verified / inferred / incomplete
+- History search/filter by concept, Clank, date, law
 - How-we-built-it chronological narrative + AI-assisted workflow
 - Git/HEAD/SHA/provenance, lifecycle, tests, deploy, ops, SQLite
-- Architecture evolution and Fleet Law lineage (Laws 1–8 + deferred 9)
+- Architecture evolution, Fleet Law lineage, Motherclank M0–M4 / Diagnostic inventory structure
 - Current fleet map with stale/UNKNOWN notes
 - Nine investigation labs (start with MATERIALIZATION_GAP, Watch QC, BANKAI)
 - Explain-it-back with freeze → reveal + self-rating
 - Searchable three-layer glossary
+
+UNKNOWN stays UNKNOWN. GitHub HEAD is not deployed SHA.

@@ -1,9 +1,10 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { existsSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, it } from "node:test";
-import { HANDBOOK, HANDBOOK_ISSUES, CONCEPTS, INCIDENTS, HISTORY, LAWS, PHASES, FLEET } from "../../content/catalog.ts";
+import { HANDBOOK, HANDBOOK_ISSUES, CONCEPTS, INCIDENTS, HISTORY, LAWS, PHASES, FLEET, ARTEFACTS, EVIDENCE_GAPS, PROVENANCE, LEDGER_REVIEWS, LIVE_HOST_PROBE } from "../../content/catalog.ts";
 import { validateHandbook } from "./validate.ts";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "../../..");
@@ -90,5 +91,79 @@ describe("handbook content integrity", () => {
       ],
     });
     assert.ok(issues.some((i) => i.code === "dangling"));
+  });
+
+  it("evidence artefacts have unique ids, required fields, and valid epistemic states", () => {
+    const ids = new Set<string>();
+    const allowed = new Set(["verified", "inferred", "incomplete", "illustrative"]);
+    assert.ok(ARTEFACTS.length >= 40, `manifest too small: ${ARTEFACTS.length}`);
+    for (const a of ARTEFACTS) {
+      assert.ok(a.id && a.system && a.artefact && a.artefactType && a.sourceLocation && a.preservedLocation && a.captureAt && a.notes);
+      assert.ok(allowed.has(a.verification), `${a.id} bad verification`);
+      assert.equal(ids.has(a.id), false, `duplicate artefact ${a.id}`);
+      ids.add(a.id);
+      if (a.hash) assert.match(a.hash, /^[0-9a-f]{64}$/);
+    }
+    for (const g of EVIDENCE_GAPS) {
+      assert.ok(allowed.has(g.status), `${g.id} bad status`);
+      assert.ok(g.whyItMatters.length > 10);
+    }
+  });
+
+  it("ledger review queue covers every history row and does not invent ids", () => {
+    const reviewIds = new Set(LEDGER_REVIEWS.map((r) => r.historyId));
+    assert.equal(LEDGER_REVIEWS.length, HISTORY.length);
+    for (const h of HISTORY) {
+      assert.ok(reviewIds.has(h.id), `missing review ${h.id}`);
+    }
+    for (const r of LEDGER_REVIEWS) {
+      assert.ok(["keep", "downgrade", "split", "await-host-probe", "await-human"].includes(r.recommendedAction));
+    }
+  });
+
+  it("live provenance cells keep deployed SHA UNKNOWN for collectors", () => {
+    const collectors = new Set([
+      "watch-clank",
+      "smartwatch-clank",
+      "smartphone-clank",
+      "feature-phone-clank",
+      "tablet-clank",
+      "oem-radar",
+      "free-game-tracker",
+      "chinese-tech-wire",
+      "korean-tech-wire",
+      "semiconductor-intelligence",
+      "motherclank",
+      "diagnostic-clank",
+    ]);
+    for (const p of PROVENANCE) {
+      if (!collectors.has(p.system)) continue;
+      assert.match(p.deployedSha, /UNKNOWN/i, `${p.id} filled a live SHA`);
+      assert.notEqual(p.confidence, "verified", `${p.id} must not claim live verification`);
+    }
+    assert.equal(LIVE_HOST_PROBE, "INCOMPLETE");
+  });
+
+  it("preserved copies match recorded sha256", () => {
+    let checked = 0;
+    for (const a of ARTEFACTS) {
+      if (!a.hash) continue;
+      if (!a.preservedLocation.startsWith("docs/preserved/")) continue;
+      const fp = join(root, a.preservedLocation);
+      assert.ok(existsSync(fp), `missing preserved file ${a.preservedLocation}`);
+      const digest = createHash("sha256").update(readFileSync(fp)).digest("hex");
+      assert.equal(digest, a.hash, `hash mismatch ${a.id}`);
+      checked += 1;
+    }
+    assert.ok(checked >= 40, `too few hashed copies: ${checked}`);
+  });
+
+  it("confidence-audit view has gaps, reviews, and a live-incomplete marker", () => {
+    assert.ok(EVIDENCE_GAPS.some((g) => g.kind === "live-unknown"));
+    assert.ok(EVIDENCE_GAPS.some((g) => g.kind === "irrecoverable"));
+    assert.ok(EVIDENCE_GAPS.some((g) => g.kind === "awaiting-review"));
+    assert.ok(LEDGER_REVIEWS.some((r) => r.recommendedAction !== "keep"));
+    assert.ok(HANDBOOK.modules.some((m) => m.id === "mod-motherclank-stages"));
+    assert.ok(HANDBOOK.modules.some((m) => m.id === "mod-diagnostic-inventory"));
   });
 });

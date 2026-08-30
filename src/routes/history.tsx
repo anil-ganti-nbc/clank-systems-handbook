@@ -1,10 +1,30 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { HISTORY, PHASES } from "@/content/catalog";
+import { useMemo, useState } from "react";
+import { HISTORY, LAWS, PHASES } from "@/content/catalog";
 import { ConceptList, Epistemic, IncidentLink, LawLink } from "@/components/handbook/concept-link";
 
 export const Route = createFileRoute("/history")({ component: Page });
 
 function Page() {
+  const [q, setQ] = useState("");
+  const [law, setLaw] = useState("all");
+  const [system, setSystem] = useState("all");
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
+  const systems = useMemo(() => Array.from(new Set(HISTORY.flatMap((h) => h.systems))).sort(), []);
+  const filtered = useMemo(() => {
+    const needle = q.trim().toLowerCase();
+    return HISTORY.filter((h) => {
+      if (law !== "all" && !h.lawIds.includes(law)) return false;
+      if (system !== "all" && !h.systems.some((s) => s === system)) return false;
+      if (from && h.date < from) return false;
+      if (to && h.date > to) return false;
+      if (!needle) return true;
+      const blob = [h.event, h.change, h.why, h.systems.join(" "), h.conceptIds.join(" "), h.id].join(" ").toLowerCase();
+      return blob.includes(needle);
+    });
+  }, [q, law, system, from, to]);
+
   return (
     <div className="space-y-10">
       <header className="max-w-2xl">
@@ -12,7 +32,8 @@ function Page() {
         <p className="mt-3 text-mute leading-relaxed">
           The spine of this handbook. Every entry is labelled. UNKNOWN stays UNKNOWN. The
           machine-readable copy lives next to the lessons; the long-form ledger is the same facts in
-          document form.
+          document form. Filter by concept, Clank, date, or law — filtering does not rewrite the
+          record.
         </p>
       </header>
 
@@ -53,8 +74,52 @@ function Page() {
 
       <section>
         <h2 className="font-display text-2xl">Ledger entries</h2>
+        <div className="mt-4 space-y-3 rounded-xl bg-paper p-4 shadow-[0_0_0_1px_rgba(255,255,255,0.06)]">
+          <input
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+            placeholder="Search events, concepts, Clanks"
+            className="w-full rounded-md bg-bg px-3 py-3"
+            aria-label="Search ledger"
+          />
+          <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+            <label className="text-sm">
+              <span className="text-xs uppercase tracking-[0.14em] text-mute">Clank</span>
+              <select value={system} onChange={(e) => setSystem(e.target.value)} className="mt-1 w-full rounded-md bg-bg px-3 py-3">
+                <option value="all">all</option>
+                {systems.map((s) => (
+                  <option key={s} value={s}>
+                    {s}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="text-sm">
+              <span className="text-xs uppercase tracking-[0.14em] text-mute">Law</span>
+              <select value={law} onChange={(e) => setLaw(e.target.value)} className="mt-1 w-full rounded-md bg-bg px-3 py-3">
+                <option value="all">all</option>
+                {LAWS.map((l) => (
+                  <option key={l.id} value={l.id}>
+                    Law {l.number}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="text-sm">
+              <span className="text-xs uppercase tracking-[0.14em] text-mute">From date</span>
+              <input value={from} onChange={(e) => setFrom(e.target.value)} placeholder="2026-08-03" className="mt-1 w-full rounded-md bg-bg px-3 py-3" />
+            </label>
+            <label className="text-sm">
+              <span className="text-xs uppercase tracking-[0.14em] text-mute">To date</span>
+              <input value={to} onChange={(e) => setTo(e.target.value)} placeholder="2026-08-27" className="mt-1 w-full rounded-md bg-bg px-3 py-3" />
+            </label>
+          </div>
+          <p className="text-xs text-mute">
+            Showing {filtered.length} of {HISTORY.length} rows
+          </p>
+        </div>
         <ol className="mt-4 space-y-4">
-          {HISTORY.map((h) => (
+          {filtered.map((h) => (
             <li key={h.id} id={h.id} className="rounded-xl bg-paper p-5 shadow-[0_0_0_1px_rgba(255,255,255,0.06)]">
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <span className="font-mono text-xs text-accent">{h.date}</span>
@@ -150,6 +215,10 @@ function Page() {
         page. Current Clanks:{" "}
         <Link to="/fleet" className="text-accent">
           Fleet
+        </Link>
+        . Confidence gaps:{" "}
+        <Link to="/evidence" className="text-accent">
+          Evidence
         </Link>
         .
       </p>

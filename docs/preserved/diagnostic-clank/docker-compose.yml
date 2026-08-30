@@ -1,0 +1,34 @@
+# Diagnostic Clank — generic/local container definition. Loopback-only
+# publish and a named volume here, matching the fleet's Tier C convention
+# for the repo's own docker-compose.yml (see oem-radar/docker-compose.yml).
+# A real deployment target (e.g. a NAS) uses its own compose file with a
+# bind-mounted state path and whatever network bind that host needs --
+# that is deployment configuration, not part of this repo.
+services:
+  diagnostic-clank:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        GIT_REVISION: ${GIT_REVISION:-unknown}
+    image: diagnostic-clank:${IMAGE_TAG:?set IMAGE_TAG to a commit SHA}
+    container_name: diagnostic-clank-local
+    restart: unless-stopped
+    environment:
+      # No host port is published in Phase 0, so the application can remain
+      # loopback-only inside the container and serve only its own healthcheck.
+      # An authenticated container access profile does not yet exist.
+      DIAGNOSTIC_CLANK_BIND_HOST: 127.0.0.1
+      DIAGNOSTIC_CLANK_PORT: "8420"
+    volumes:
+      - diagnostic_clank_data:/app/data
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import os,urllib.request; urllib.request.urlopen(f'http://127.0.0.1:{os.environ[\"DIAGNOSTIC_CLANK_PORT\"]}/healthz', timeout=5)"]
+      interval: 60s
+      timeout: 15s
+      retries: 3
+      start_period: 20s
+
+volumes:
+  diagnostic_clank_data:
+    name: diagnostic_clank_local_data

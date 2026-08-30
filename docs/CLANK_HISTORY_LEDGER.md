@@ -1096,6 +1096,36 @@ Count: **27**. Confidence: **27 verified**, **0 inferred**, **0 incomplete**.
 
 **Incidents.** (none)
 
+### Evidence-preservation campaign hashes git-resident artefacts; live probe INCOMPLETE
+
+- **Id:** `h-evidence-preservation`
+- **Date:** 2026-08-27
+- **Period:** 2026-08-27
+- **Phase:** `p-current`
+- **Systems:** clank-systems-handbook; fleet
+- **Confidence:** VERIFIED (git-resident copies). Live host cells remain INCOMPLETE.
+
+**Event.** Evidence-preservation campaign: git-resident deployment artefacts hashed into the Handbook; live host re-probe recorded INCOMPLETE.
+
+**Before.** Content-phase ledger (27 rows) cited archaeology and ADRs. Unit files, backup scripts, continuity seeds, and fleet.yaml lived only in collector repos.
+
+**Change.** `docs/preserved/` copies of fleet.yaml, unit/timer/cron templates, compose files, backup/restore scripts, Motherclank continuity seeds, DATA_SURVIVABILITY.md, and the Aug 22–23 impact map, each with SHA-256. Operator re-probe script authored, not executed (no SSH). Google Drive empty of Clank dumps. Durable off-host backup remains DESIGNED. The original 27 ledger rows were queued for human review, not silently rewritten.
+
+**Why.** Templates and seeds can rotate. Syslog and Motherclank var/ already might have. A prettier present must not be invented from GitHub HEAD.
+
+**Residual risk.** Syslog and Motherclank var/ still unpreserved. ACT-011 scratch is not Layer C. Repo HEADs from 2026-08-27 must not be taught as production.
+
+**Evidence.**
+
+- `ev-preserved-fleet-yaml` (file, VERIFIED) diagnostic-clank fleet.yaml @ 3667af0 — preserved sha256:9d8d950b53cdc72ed61cdd477690d938b939a3787b8aeea0023ed53240d71ca5. Inventory as_of 2026-08-22T22:30:00Z.
+- `ev-live-probe-incomplete` (deployment, INCOMPLETE) docs/LIVE_PROVENANCE_REPORT.md — this campaign could not SSH to Hetzner.
+
+**Concepts taught.** `provenance`, `runtime-provenance`, `head-vs-deployed`, `untracked`
+
+**Laws.** `law-6`, `law-3`, `law-5`
+
+**Incidents.** `inc-deployed-sha`, `inc-materialization`, `inc-volume-loss`
+
 ## Current-state residual (do not upgrade)
 
 As of 2026-08-27:
@@ -1105,9 +1135,10 @@ As of 2026-08-27:
 - Durable off-host backups still a blocker except two ACT-011 recovery points on temporary scratch.
 - Scheduler-trace capability remains supported_unconfigured fleet-wide.
 - Tablet Clank a41d1e7 is a repository change (QC + Windows local launcher). Live host membership remains UNKNOWN / INTENTIONALLY_DORMANT until inventory says otherwise.
-- Watch ee3f34d (QC race) and e7eeb3f (tissot/timex_uk wiring) are repo HEAD. Production SHA UNKNOWN unless re-probed.
+- Watch repo HEAD d4fda37 (and earlier ee3f34d QC race, e7eeb3f wiring) are **repo HEAD**. Production SHA UNKNOWN unless re-probed.
+- Evidence-preservation campaign preserved git-resident templates; it did **not** close Law 6 live cells.
 - This Handbook must not invent a healthier present than the artefacts support.
 
 ---
 
-Generated from `src/content/history.ts` for the CONTENT phase of the Clank Systems Handbook. Regeneration: re-run the generator against that file; do not hand-edit facts here without also editing the TypeScript twin.
+Generated from `src/content/history.ts`. Regeneration: re-run against that file; do not hand-edit facts here without also editing the TypeScript twin.
