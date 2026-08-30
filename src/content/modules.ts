@@ -110,7 +110,7 @@ export const MODULES: Module[] = [
     title: "Why the architecture looks like this",
     summary: "Motherclank, Diagnostic Clank, fleet laws, contracts, allowlists, blast radius — laws that were written in blood, not taste.",
     conceptIds: [
-      "motherclank", "diagnostic-clank", "invariant", "contract", "allowlist", "dogfooding",
+      "motherclank", "diagnostic-clank", "cvc-clank", "invariant", "contract", "allowlist", "dogfooding",
       "blast-radius", "graceful-degradation", "sqlite-authoritative",
     ],
     sections: [
