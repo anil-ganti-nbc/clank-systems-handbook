@@ -351,8 +351,8 @@ export const HISTORY: HistoryEntry[] = [
     event: "Consumer-device Clanks and regional wires proliferate. Many collectors, not yet a supervisor.",
     before: "Two product sensors (OEM Radar, FGT) plus architecture notes.",
     change:
-      "CTW 14:28Z, watch-clank 14:29Z, smartwatch-clank 14:29Z, smartphone-clank 14:28Z, feature-phone + SemInt 15:00Z on 9 Aug; KTW bootstrapped 10 Aug 07:39Z. Archaeology names Git baselines such as Watch 14712d9 (8 Aug) and Smartwatch 4c115ce (9 Aug).",
-    why: "Each product category and language market needed its own source adapters. Copying a working SQLite collector was faster than a platform.",
+      "GitHub created_at places chinese-tech-wire 2026-08-09T14:28:00Z, smartphone-clank 14:28:55Z, watch-clank 14:29:12Z, and smartwatch-clank 14:29:27Z; feature-phone-clank and semiconductor-intelligence appear in the same 9 Aug window; korean-tech-wire is bootstrapped 2026-08-10T07:39:42Z. That is a bag of independent SQLite collectors. There is no fleet supervisor (Diagnostic is 17 Aug; Motherclank is 22 Aug). Archaeology §3 records this as the origin/import phase and names Git recoverability checkpoints such as Watch 14712d9 and Smartwatch 4c115ce. Those objects exist and say “before cloud migration”; they are not the identity of the Clanks, not GitHub birth, and not live SHAs. Do not memorise them. Later HEADs stay out. Live collector SHA and host layout remain UNKNOWN.",
+    why: "Each product category and language market needed its own source adapters. Copying a working SQLite collector was faster than a platform. Fleet supervision is a later layer.",
     evidence: [
       {
         id: "ev-archaeology-origin",
@@ -360,7 +360,7 @@ export const HISTORY: HistoryEntry[] = [
         repo: "anil-ganti-nbc/clank-architecture",
         path: "audits/CLANK_FLEET_ARCHAEOLOGY_REPORT_2026-08-24.md",
         sha: "431ba01efc156729574ffd9a470fb41f0a8aaa62",
-        note: "§3 Origin/import phase: repos imported or bootstrapped 2026-08-04 through 2026-08-10.",
+        note: "§3 Origin/import phase 2026-08-04 through 2026-08-10. Named baselines are recoverability checkpoints, not live SHAs.",
         status: "verified",
       },
     ],
@@ -369,6 +369,10 @@ export const HISTORY: HistoryEntry[] = [
     lawIds: [],
     incidentIds: [],
     laterConsequence: "Heterogeneous semantics become the reason Motherclank must adapt rather than rewrite.",
+    verification:
+      "Independent consumer/wire repos before any supervisor: VERIFIED (GitHub created_at + archaeology §3). Archaeology-cited baselines 14712d9 / 4c115ce exist as recoverability checkpoints, not exam SHAs. Live collector SHA/host: UNKNOWN.",
+    residualRisk:
+      "Do not put Watch 14712d9 or Smartwatch 4c115ce into commits[]. Do not teach them as GitHub birth or as live deploys. Baseline SHA ≠ repo created_at ≠ deployed SHA.",
     confidence: "verified",
   }),
   e("h-sqlite-authoritative", {
@@ -379,7 +383,7 @@ export const HISTORY: HistoryEntry[] = [
     event: "SQLite becomes more than storage: it is the memory of what each collector has already seen.",
     before: "A scraper that printed results could forget yesterday.",
     change:
-      "Every mature Clank persists observations in a local SQLite file. Novelty, baselines, outboxes, and QC all hang off that file. Archaeology: 'independently evolved, mostly SQLite-backed collectors'.",
+      "Archaeology and ADR-0002 record collectors as mostly SQLite-backed; novelty, baselines, outboxes, and QC hang off that local file. “Every mature Clank” is the archaeology summary, not a live listing of host files. Live DB filenames remain UNKNOWN for several lanes.",
     why: "Without durable local state, FIRST_SEEN and baseline are impossible, and a restart looks like the birth of the market.",
     evidence: [
       {
@@ -833,8 +837,8 @@ export const HISTORY: HistoryEntry[] = [
     event: "ACT-011: operator-executed live recovery-point verification.",
     before: "Restored/new-epoch DBs existed; restorability was a story.",
     change:
-      "Smartwatch RP1: 516 runs, 52,126 observations, integrity_check=ok, disposable-volume restore passed. Feature-phone epoch-2 first RP: integrity ok, restore passed. Off-host copies exist only as temporary_scratch. Durable gate OPEN.",
-    why: "A backup that has never been restored is a rumour (GIC-16/17).",
+      "2026-08-24 DATA_SURVIVABILITY §17.1: Smartwatch RP1 516 runs / 52,126 observations, integrity_check=ok, disposable-volume restore passed. Feature-phone epoch-2 first RP: integrity ok, restore passed. Off-host copies existed as temporary_scratch on that date. Durable gate OPEN. That does not prove those scratch files still exist, that backup is scheduled, or that Layer C off-host survivability exists.",
+    why: "A backup that has never been restored is a rumour (GIC-16/17). Restore proves recoverability from what survived that day.",
     evidence: [
       {
         id: "ev-act011",
@@ -849,8 +853,11 @@ export const HISTORY: HistoryEntry[] = [
     conceptIds: ["rollback", "epoch", "volume", "verification"],
     lawIds: [],
     incidentIds: ["inc-volume-loss"],
-    residualRisk: "Durable off-host redundancy DESIGNED ONLY. Least-privilege destructive-capability audit NOT STARTED (ACT-012).",
+    residualRisk:
+      "Durable off-host redundancy DESIGNED ONLY. Scratch-copy existence today UNKNOWN. Least-privilege destructive-capability audit NOT STARTED (ACT-012). Do not say “we have backups.”",
     laterConsequence: "Acceptance test 'Claude deletes the volume again' is still DESIGNED for most lanes.",
+    verification:
+      "24 Aug scratch restore of remaining RPs: VERIFIED. Durable off-host: NO (temporary_scratch). Scratch copies still exist today: UNKNOWN. Layer C DESIGNED ONLY. Current backup schedule: UNKNOWN.",
     confidence: "verified",
   }),
   e("h-ctw-dogfood", {
@@ -963,7 +970,7 @@ export const HISTORY: HistoryEntry[] = [
     before: "Implementation plus a registry row were treated as 'the collector is in production.'",
     change:
       "e7eeb3f (2026-08-25T00:18:48Z): KNOWN_COLLECTORS, collector_registry, run_pipeline argparse, and render_units.py wired tissot_sitemap and timex_uk_products. test_production_wiring.py: every EXPERIMENTAL_READY_FOR_HETZNER collector must be mechanically invokable. Delivery-silence canonized as a promotion privilege.",
-    why: "A host deployment found the gap. Code on GitHub is not the same as a unit file the timer can start.",
+    why: "Code on GitHub is not the same as a unit file the timer can start. The commit message records a 2026-08-25 Hetzner deployment finding; that is commit-message testimony, not a live unit listing. Live timer enablement for tissot/timex_uk remains UNKNOWN.",
     evidence: [
       {
         id: "ev-watch-unwired",

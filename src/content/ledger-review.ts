@@ -1,6 +1,6 @@
 import type { LedgerReview } from "../lib/handbook/schema.ts";
 
-/** Human-review queue for the 27 history rows. None silently rewritten this campaign. */
+/** Human-review queue for all 28 history rows. Git/document-backed walk complete; live probe deferred. */
 function r(row: LedgerReview): LedgerReview {
   return row;
 }
@@ -31,12 +31,19 @@ export const LEDGER_REVIEWS: LedgerReview[] = [
   r({
     historyId: "h-consumer-clanks",
     currentConfidence: "verified",
-    supportingArtefacts: ["archaeology report §3", "repo created_at 8–10 Aug"],
-    verifiedClaims: ["Named repos exist in that window."],
-    inferredClaims: ["Copying a working SQLite collector was faster than a platform."],
-    overreadRisk: "Git baselines named in archaeology (Watch 14712d9, Smartwatch 4c115ce) were not independently re-hashed this campaign. Dates are still archaeology-backed.",
-    openQuestions: ["Re-confirm those two baseline SHAs if teaching them as exam facts."],
-    recommendedAction: "await-human",
+    supportingArtefacts: ["archaeology report §3", "GitHub created_at re-fetched 2026-08-30: CTW/watch/smartwatch/smartphone/KTW"],
+    verifiedClaims: [
+      "Independent consumer/wire repos existed 8–10 Aug before Diagnostic (17 Aug) or Motherclank (22 Aug).",
+      "GitHub created_at matches the 9–10 Aug window for CTW, smartphone, watch, smartwatch, KTW.",
+    ],
+    inferredClaims: [
+      "Watch 14712d9 / Smartwatch 4c115ce are the identity of those Clanks or were running then.",
+      "Copying a working SQLite collector was faster than a platform (motive).",
+    ],
+    overreadRisk:
+      "Owner walk 2026-08-30: in-row split applied. Phase stays VERIFIED. Archaeology baselines are recoverability checkpoints (“before cloud migration”), not exam SHAs, not GitHub birth, not live. Do not put them in commits[]. Live SHA/host UNKNOWN.",
+    openQuestions: ["Live collector SHA and host layout remain UNKNOWN (deferred reprobe)."],
+    recommendedAction: "keep",
     recommendedConfidence: "verified",
   }),
   r({
@@ -44,8 +51,8 @@ export const LEDGER_REVIEWS: LedgerReview[] = [
     currentConfidence: "verified",
     supportingArtefacts: ["archaeology executive finding", "ADR-0002"],
     verifiedClaims: ["Docs say collectors are mostly SQLite-backed; Motherclank must not centralize DBs."],
-    inferredClaims: ["Every mature Clank persists observations in a local SQLite file."],
-    overreadRisk: "'Every' is an archaeology summary, not a live listing of files on the host.",
+    inferredClaims: ["“Every mature Clank persists observations in a local SQLite file” as a live host listing."],
+    overreadRisk: "Owner walk 2026-08-30: archaeology “mostly SQLite-backed” stays VERIFIED. Do not treat “every” as a live filename census. Live DB filenames UNKNOWN for several lanes.",
     openQuestions: ["Live DB filenames still UNKNOWN for several lanes (Watch path, FGT live volume)."],
     recommendedAction: "keep",
     recommendedConfidence: "verified",
@@ -225,9 +232,9 @@ export const LEDGER_REVIEWS: LedgerReview[] = [
     historyId: "h-act011",
     currentConfidence: "verified",
     supportingArtefacts: ["DATA_SURVIVABILITY.md §17.1", "survivability-ACT011-verified-live.jsonl hash 84149d7c3adc…"],
-    verifiedClaims: ["Two lanes: integrity_check=ok and disposable-volume restore passed. off_host_durable: false. Gate OPEN."],
-    inferredClaims: ["Those scratch copies still exist on 2026-08-27."],
-    overreadRisk: "Do not say 'we have backups'. Say 'we had a restore-verified scratch RP on 24 Aug'. Durable off-host is DESIGNED ONLY.",
+    verifiedClaims: ["Two lanes on 2026-08-24: integrity_check=ok and disposable-volume restore passed. off_host_durable: false. Gate OPEN."],
+    inferredClaims: ["Those scratch copies still exist now. Backup is scheduled. Layer C exists."],
+    overreadRisk: "Owner walk 2026-08-30: dated scratch drill stays VERIFIED. Do not say 'we have backups'. Scratch existence today UNKNOWN. Durable off-host is DESIGNED ONLY.",
     openQuestions: ["Do the scratch files still exist? Any newer RP since 24 Aug?"],
     recommendedAction: "keep",
     recommendedConfidence: "verified",
@@ -284,8 +291,8 @@ export const LEDGER_REVIEWS: LedgerReview[] = [
     currentConfidence: "verified",
     supportingArtefacts: ["watch-clank@e7eeb3f", "test_production_wiring.py cited in the message"],
     verifiedClaims: ["Commit wires tissot + timex_uk into production invocation path."],
-    inferredClaims: ["Hetzner deployment finding (Claude, 2026-08-25) as the discovery story."],
-    overreadRisk: "The commit is verified. The 'host deployment found the gap' sentence is commit-message testimony, not a live unit listing.",
+    inferredClaims: ["Hetzner deployment finding (Claude, 2026-08-25) as independently recovered host evidence. tissot/timex_uk timers are enabled now."],
+    overreadRisk: "Owner walk 2026-08-30: commit e7eeb3f verified. 'Host deployment found the gap' is commit-message testimony, not a live unit listing. Live timer enablement UNKNOWN.",
     openQuestions: ["Are tissot/timex_uk timers enabled on the host?"],
     recommendedAction: "keep",
     recommendedConfidence: "verified",
@@ -359,8 +366,8 @@ export const LEDGER_REVIEWS: LedgerReview[] = [
     verifiedClaims: ["Live host SHA/backup cells remain UNKNOWN where not re-probed. This campaign did not close them."],
     inferredClaims: [],
     overreadRisk: "Do not let a prettier Evidence page upgrade this row. The campaign preserved git-resident artefacts; it did not replace a host probe.",
-    openQuestions: ["See EVIDENCE_GAPS."],
-    recommendedAction: "keep",
+    openQuestions: ["See EVIDENCE_GAPS. Operator reprobe still deferred."],
+    recommendedAction: "await-host-probe",
     recommendedConfidence: "verified",
   }),
   r({
