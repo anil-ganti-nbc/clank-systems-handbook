@@ -119,6 +119,11 @@ export const MODULES: Module[] = [
         body: "Clanks own mutable state. Diagnostic Clank owns adapters. Motherclank photocopies. DAU owns mastery. Worlds own simulators. The Clank Systems Handbook owns historical evidence, not SRS. Mixing those on purpose is how a QC flood or a false mastery score happens.",
         conceptIds: ["contract", "blast-radius"],
       },
+      {
+        heading: "CVC is evidence memory, not policy enforcement",
+        body: "Collectors and operators provide evidence to Diagnostic Clank. An operator may create an explicit Diagnostic → CVC handoff package; CVC then exposes bounded lessons, support-board state, and future-evidence triggers. Motherclank may summarize CVC's integrity and evidence state read-only, but RATIFIED_E4 is not a fleet mandate. A future Standards Clank could consume CVC evidence to define normative contracts; Standards remains unstarted. The editorial Context + Verification + Coverage Workbench is a separate future tool and is not a fleet member.",
+        conceptIds: ["cvc-clank", "diagnostic-clank", "motherclank"],
+      },
     ],
   },
 ];
