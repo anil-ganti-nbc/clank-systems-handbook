@@ -10,8 +10,11 @@ function Page() {
     <div className="space-y-10">
       <h1 className="font-display text-4xl tracking-tight">Architecture</h1>
       <p className="max-w-2xl text-mute">
-        The diagram below is the present tense. It did not exist on 4 August. Each layer arrived as
-        incident → lesson → rule → implementation. Unresolved limitations stay visible on purpose.
+        The first diagram is the v0.1 present tense: Clanks write, Diagnostic translates,
+        Motherclank photocopies, operators read. The second is the second-act split: those
+        four remain, and they are no longer asked to also be law, development state, quota,
+        editorial usefulness, or evidence validation. Unresolved limitations stay visible
+        on purpose.
       </p>
       <svg viewBox="0 0 720 220" className="w-full rounded-xl bg-paper p-4 text-ink" role="img" aria-label="Fleet architecture">
         <rect x="20" y="70" width="150" height="80" rx="8" fill="#1c1f28" stroke="#c4a35a" />
@@ -38,11 +41,71 @@ function Page() {
         </text>
       </svg>
 
+      <svg viewBox="0 0 720 280" className="w-full rounded-xl bg-paper p-4 text-ink" role="img" aria-label="Second-act control planes">
+        <text x="360" y="24" textAnchor="middle" fill="#9a9588" fontSize="12">
+          Second act — federated planes, not one control plane
+        </text>
+        <rect x="20" y="48" width="130" height="56" rx="8" fill="#1c1f28" stroke="#c4a35a" />
+        <text x="85" y="80" textAnchor="middle" fill="#e8e6df" fontSize="12">
+          Participants
+        </text>
+        <rect x="165" y="48" width="130" height="56" rx="8" fill="#1c1f28" stroke="#7f93b0" />
+        <text x="230" y="80" textAnchor="middle" fill="#e8e6df" fontSize="12">
+          Diagnostic
+        </text>
+        <rect x="310" y="48" width="130" height="56" rx="8" fill="#1c1f28" stroke="#7d9a78" />
+        <text x="375" y="80" textAnchor="middle" fill="#e8e6df" fontSize="12">
+          Motherclank
+        </text>
+        <rect x="455" y="48" width="115" height="56" rx="8" fill="#1c1f28" stroke="#c4a35a" />
+        <text x="512" y="80" textAnchor="middle" fill="#e8e6df" fontSize="12">
+          Standards
+        </text>
+        <rect x="585" y="48" width="115" height="56" rx="8" fill="#1c1f28" stroke="#9a9588" />
+        <text x="642" y="80" textAnchor="middle" fill="#e8e6df" fontSize="12">
+          Architecture
+        </text>
+        <rect x="20" y="140" width="130" height="56" rx="8" fill="#1c1f28" stroke="#c4a35a" />
+        <text x="85" y="172" textAnchor="middle" fill="#e8e6df" fontSize="12">
+          ClankOps
+        </text>
+        <rect x="165" y="140" width="130" height="56" rx="8" fill="#1c1f28" stroke="#7f93b0" />
+        <text x="230" y="172" textAnchor="middle" fill="#e8e6df" fontSize="12">
+          Quartermaster
+        </text>
+        <rect x="310" y="140" width="130" height="56" rx="8" fill="#1c1f28" stroke="#7d9a78" />
+        <text x="375" y="172" textAnchor="middle" fill="#e8e6df" fontSize="12">
+          Ledger
+        </text>
+        <rect x="455" y="140" width="115" height="56" rx="8" fill="#1c1f28" stroke="#c4a35a" />
+        <text x="512" y="172" textAnchor="middle" fill="#e8e6df" fontSize="12">
+          CVC
+        </text>
+        <rect x="585" y="140" width="115" height="56" rx="8" fill="#1c1f28" stroke="#9a9588" />
+        <text x="642" y="172" textAnchor="middle" fill="#e8e6df" fontSize="12">
+          Handbook
+        </text>
+        <text x="360" y="230" textAnchor="middle" fill="#9a9588" fontSize="12">
+          law ≠ harvest ≠ development state ≠ quota ≠ HIT/MISS ≠ frozen evidence ≠ teaching
+        </text>
+        <text x="360" y="252" textAnchor="middle" fill="#9a9588" fontSize="11">
+          Reddit is a source, not a box. Unified Clank Platform is historical.
+        </text>
+      </svg>
+      <p className="text-sm text-mute">
+        Full boundary text lives on{" "}
+        <Link to="/responsibilities" className="text-accent">
+          System responsibilities
+        </Link>
+        .
+      </p>
+
       <section>
         <h2 className="font-display text-2xl">Evolution — before, pressure, rule, leftover</h2>
         <p className="mt-2 max-w-2xl text-mute">
           Compact timeline, not a second giant diagram. Each phase is a scar with a leftover
-          limitation. Linked evidence lives on the ledger row for that phase.
+          limitation. Linked evidence lives on the ledger row for that phase. Phases 1–9 are
+          the v0.1 freeze; 10–12 are the second act.
         </p>
         <ol className="mt-4 space-y-3">
           {PHASES.map((p, i) => (
@@ -73,7 +136,8 @@ function Page() {
         <p className="mt-2 max-w-2xl text-mute">
           Fleet Laws v1 (d046d54, 2026-08-21). Eight binding invariants plus deferred Law 9. Each
           row names the incident that made the rule necessary, what it prevents, and what it cannot
-          prevent.
+          prevent. Standards Clank later ratified a larger corpus; that corpus is not these eight
+          laws, and this Handbook is not a ninth.
         </p>
         <div className="mt-4 space-y-4">
           {LAWS.map((law) => (
@@ -141,7 +205,7 @@ function Page() {
       ))}
 
       <p className="text-sm text-mute">
-        Current Clanks, with inventory vs HEAD vs live UNKNOWN:{" "}
+        Current Clanks, with inventory vs HEAD vs historically proven vs live UNKNOWN:{" "}
         <Link to="/fleet" className="text-accent">
           Fleet map
         </Link>

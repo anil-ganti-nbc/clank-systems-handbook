@@ -1,0 +1,126 @@
+import type { ThenNow } from "../../lib/handbook/schema.ts";
+
+export const THEN_NOW: ThenNow[] = [
+  {
+    id: "tn-fleet-size",
+    topic: "How many systems the teaching map admits",
+    then: "v0.1 taught 12 fleet cards: ten collectors plus Motherclank and Diagnostic. Unified-clank-platform was origin history, not a current card.",
+    now: "Same 12, plus five major post-v0.1 planes: Standards, CVC, Ledger, ClankOps, Quartermaster. Reddit is still not a card. Duplicate folders are still not extra Clanks.",
+    pressure: "New GitHub repos and a reconstructed census made the 12-card map look like a directory sweep of the present.",
+    stillUnknown:
+      "Live membership on the host. Census 63 candidates is reconstructed, not a live probe. Quartermaster remains local-only incomplete.",
+    conceptIds: ["collector", "system-identity", "census-identity"],
+    historyIds: ["h-handbook", "h-clankops-census", "h-handbook-v02"],
+    confidence: "verified",
+  },
+  {
+    id: "tn-control-planes",
+    topic: "Where authority actually sits",
+    then: "v0.1: Fleet Laws in clank-architecture plus Motherclank as the camera. One doctrine notebook, one read-only harvester.",
+    now: "Split planes: Standards (ratified law), ClankOps (development control), Quartermaster (model/quota), Ledger (editorial usefulness), Motherclank still the runtime camera. Federated, not a single hierarchy.",
+    pressure: "Development memory, editorial outcomes, and token budget were being stuffed into 'the supervisor' or into chat transcripts.",
+    stillUnknown:
+      "None of the new planes is production-deployed as a fleet controller. ClankOps has no prod. Quartermaster was not inspected. Do not collapse ClankOps into Motherclank.",
+    conceptIds: ["motherclank", "clankops", "standards-clank", "clank-ledger", "quartermaster"],
+    historyIds: ["h-v01-freeze", "h-standards-ratified", "h-ledger-m0", "h-clankops-f10", "h-quartermaster"],
+    confidence: "verified",
+  },
+  {
+    id: "tn-standards",
+    topic: "Whether the fleet has ratified law beyond Fleet Laws",
+    then: "Standards Clank existed around the v0.1 boundary but was not taught as one of the 12 current fleet/system cards. Fleet Laws v1 (d046d54) plus deferred Law 9 were the binding text the Handbook taught. CVC, not Standards, was the system explicitly excluded from v0.1.",
+    now: "7c821ea: 26/26 RATIFIED, 0 PROPOSED, five frozen domains. Most of the 26/26-ratified system taught by v0.2 emerged after that teaching freeze. Agents cannot self-ratify. Tests guard files; they are not the law. Ratification does not authorize live remediation by itself.",
+    pressure: "Hard-won scars lived as tribal notes and incident files. Without ratification they could not be audited as obligations.",
+    stillUnknown:
+      "Which live checkouts currently conform. COM-001/COM-002 facts are dated. Live SHA remains UNKNOWN, so current conformance is not a live claim.",
+    conceptIds: ["standards-clank", "ratification", "normative-spec", "conformance"],
+    historyIds: ["h-v01-freeze", "h-standards-ratified", "h-promotions-sep5"],
+    confidence: "verified",
+  },
+  {
+    id: "tn-cvc",
+    topic: "CVC as institutional memory",
+    then: "v0.1 freeze excluded handbook PR #5 (Document CVC observer-tier topology). CVC was not part of the frozen curriculum.",
+    now: "cvc-clank exists on GitHub at 5328a3c with a frozen closeout corpus. It validates packages; it does not collect. Observer PRs (cvc-clank #1, handbook #5) remain unmerged and are not current architecture. Local CVC may be ahead; uninspected.",
+    pressure: "Evidence packages needed a home that was neither Diagnostic nor Standards nor a collector.",
+    stillUnknown:
+      "Whether the Windows CVC checkout is ahead of 5328a3c. Unmerged observer surfaces are proposals. Frozen corpus is still unintegrated into live harvest.",
+    conceptIds: ["cvc-clank", "frozen-corpus", "evidence-package"],
+    historyIds: ["h-v01-freeze", "h-cvc-github", "h-handbook-v02"],
+    confidence: "incomplete",
+  },
+  {
+    id: "tn-live-sha",
+    topic: "Live deployed SHA",
+    then: "UNKNOWN as of the 2026-08-27 teaching capture. No SSH. Law 6 cells left visible. Inventory SHAs were dated 2026-08-22, not live.",
+    now: "UNKNOWN as of 2026-09-14. Still no SSH. COM-001 historical proofs (Watch d03bc4b on 2026-09-01, and eight peers) exist and must not be copied into liveDeployedSha. Honesty that did not 'get fixed'.",
+    pressure: "A greener present is always available if you fill UNKNOWN from HEAD or from last month's live proof.",
+    stillUnknown:
+      "The actual host SHA, running process, scheduler enablement, and backup cadence. That is the same UNKNOWN, not a new one.",
+    conceptIds: ["historically-proven-deploy", "current-conformance", "head-vs-deployed", "provenance"],
+    historyIds: ["h-current-gaps", "h-evidence-preservation", "h-com001-proof", "h-handbook-v02"],
+    confidence: "verified",
+  },
+  {
+    id: "tn-reddit",
+    topic: "Reddit",
+    then: "Nothing. No Reddit source, no admission experiment, no temptation to count a feed as a Clank.",
+    now: "SI a9a202a r/hardware muted experimental RSS admission into an owner Clank. Polling off, unmute-alone fail-closed, no production registration. Census: _RedditAdmission is SUPPORT_COMPONENT. Reddit is not a Clank.",
+    pressure: "Discovery wanted a social surface. The wrong abstraction is a new top-level identity.",
+    stillUnknown:
+      "Whether the muted source has ever been unmuted on a host. Live SI deployed SHA remains UNKNOWN. Do not count Reddit in fleet size.",
+    conceptIds: ["reddit-admission", "source-admission", "experimental-vs-production"],
+    historyIds: ["h-reddit-pilot", "h-clankops-census"],
+    confidence: "verified",
+  },
+  {
+    id: "tn-freeze",
+    topic: "Handbook freeze vs v0.2 commission",
+    then: "v0.1 feature-frozen at 1803f317 pending owner study and learning validation. Allowed: bug fixes, evidence corrections — not new modules or architecture redesign. v0.3 architecture freeze already forbade speculative core redesign.",
+    now: "v0.2 commissioned as a teaching pass for the planes that grew after the freeze. v0.1 facts are not rewritten. Live UNKNOWN is not 'solved' by adding cards.",
+    pressure: "Standards, Ledger, CVC, ClankOps, and Quartermaster arrived after the freeze. Teaching them is not un-freezing promotion.",
+    stillUnknown:
+      "Whether the owner studied v0.1. M5 still forbidden. Mastery still not assigned here. Promotion freeze in architecture still controlling.",
+    conceptIds: ["frozen-corpus", "operator-role", "architecture-critic"],
+    historyIds: ["h-v03-freeze", "h-v01-freeze", "h-handbook", "h-handbook-v02"],
+    confidence: "verified",
+  },
+  {
+    id: "tn-identity",
+    topic: "How membership is named",
+    then: "v0.1 already taught that a directory listing is not a fleet (Tablet omitted). Membership was fleet.yaml — a registry — plus 12 teaching cards.",
+    now: "ClankOps census adds vocabulary: VERIFIED / PROBABLE / UNKNOWN / SUPPORT_COMPONENT / NOT_A_CLANK / NEEDS_RECONSTRUCTION. 63 candidates, 8 duplicate groups. Duplicate folders are extra refs. Census is reconstructed, not live history.",
+    pressure: "Windows Desktop + Documents + Clanks-root produced lookalike trees. Counting folders would invent Clanks.",
+    stillUnknown:
+      "Which census PROBABLE rows (Quartermaster, CVC Workbench, editorial-assist) become identities. Live Diagnostic registry SHA still UNKNOWN.",
+    conceptIds: ["census-identity", "checkout-vs-identity", "system-identity"],
+    historyIds: ["h-v01-freeze", "h-clankops-census", "h-handbook-v02"],
+    confidence: "verified",
+  },
+  {
+    id: "tn-conformance",
+    topic: "Historical vs current conformance vs live UNKNOWN",
+    then: "v0.1 had no historical-vs-current split. Inventory SHA, repo HEAD, and live UNKNOWN were the three columns. Fleet Laws specimens lived in tests.",
+    now: "Standards admit dated COM-001 closures (nine targets, e.g. Watch d03bc4b 2026-09-01) as historical live proofs, distinct from current canonical live state (asserted for no target on 2026-09-14) and from liveDeployedSha UNKNOWN. Schema barrier (FPC b60e881) is fail-closed current law, not a silent migrate.",
+    pressure: "Having real live proofs made it tempting to treat last week's SHA as this week's production.",
+    stillUnknown:
+      "Current live SHA on every host. COM-001 proofs must not overwrite that UNKNOWN. Collector-UI, watch-sentinel, discord-delivery, CTW-manual, OEM git-revision are later history rows, not a 2026-09-14 probe.",
+    conceptIds: [
+      "historical-conformance",
+      "current-conformance",
+      "historically-proven-deploy",
+      "schema-compatibility",
+    ],
+    historyIds: [
+      "h-com001-proof",
+      "h-schema-barrier",
+      "h-collector-ui",
+      "h-watch-sentinel",
+      "h-discord-delivery",
+      "h-ctw-manual",
+      "h-oem-git-revision",
+      "h-current-gaps",
+    ],
+    confidence: "verified",
+  },
+];

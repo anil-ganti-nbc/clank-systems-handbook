@@ -12,6 +12,8 @@ import type {
   Module,
   NextStep,
   ProvenanceCell,
+  Responsibility,
+  ThenNow,
   TimelineEvent,
 } from "./schema.ts";
 import {
@@ -28,6 +30,8 @@ import {
   moduleSchema,
   nextStepSchema,
   provenanceCellSchema,
+  responsibilitySchema,
+  thenNowSchema,
   timelineEventSchema,
 } from "./schema.ts";
 
@@ -51,6 +55,8 @@ export function validateHandbook(input: {
   provenance?: ProvenanceCell[];
   reviews?: LedgerReview[];
   nextSteps?: NextStep[];
+  responsibilities?: Responsibility[];
+  thenNow?: ThenNow[];
 }): ValidationIssue[] {
   const issues: ValidationIssue[] = [];
   const conceptIds = new Set<string>();
@@ -235,9 +241,12 @@ export function validateHandbook(input: {
     }
   }
 
+  const fleetIds = new Set<string>();
   for (const cl of input.fleet ?? []) {
     const p = fleetClankSchema.safeParse(cl);
     if (!p.success) issues.push({ code: "schema", message: `fleet ${cl.id}: ${p.error.message}` });
+    if (fleetIds.has(cl.id)) issues.push({ code: "duplicate", message: `duplicate fleet ${cl.id}` });
+    fleetIds.add(cl.id);
     if (!cl.confidence) issues.push({ code: "epistemic", message: `fleet ${cl.id} missing confidence` });
     if (cl.liveDeployedSha && !/UNKNOWN/i.test(cl.liveDeployedSha)) {
       issues.push({
@@ -251,6 +260,37 @@ export function validateHandbook(input: {
         message: `fleet ${cl.id} copied repo HEAD into live deployed SHA`,
       });
     }
+    if (
+      cl.historicallyProvenDeployedSha &&
+      cl.liveDeployedSha &&
+      cl.historicallyProvenDeployedSha === cl.liveDeployedSha &&
+      !/UNKNOWN/i.test(cl.liveDeployedSha)
+    ) {
+      issues.push({
+        code: "overread",
+        message: `fleet ${cl.id} copied historicallyProvenDeployedSha into liveDeployedSha`,
+      });
+    }
+    if (cl.historicallyProvenDeployedSha && /UNKNOWN/i.test(cl.historicallyProvenDeployedSha) === false) {
+      if (!cl.historicallyProvenDeployedNote || cl.historicallyProvenDeployedNote.length < 20) {
+        issues.push({
+          code: "malformed",
+          message: `fleet ${cl.id} historically proven SHA needs a note that it is not current live`,
+        });
+      }
+    }
+    if (cl.inventoryAsOf && !cl.inventoryAsOf.startsWith("2026-08-22")) {
+      issues.push({
+        code: "overread",
+        message: `fleet ${cl.id} moved inventoryAsOf off the 2026-08-22 inventory document`,
+      });
+    }
+  }
+  if (fleetIds.has("reddit") || fleetIds.has("reddit-clank")) {
+    issues.push({
+      code: "overread",
+      message: "Reddit is a source-admission experiment, not a top-level Clank identity",
+    });
   }
 
   const artefactIds = new Set<string>();
@@ -346,6 +386,33 @@ export function validateHandbook(input: {
     if (!p.success) issues.push({ code: "schema", message: `next-step ${s.id}: ${p.error.message}` });
     if (stepIds.has(s.id)) issues.push({ code: "duplicate", message: `duplicate next-step ${s.id}` });
     stepIds.add(s.id);
+  }
+
+  const respIds = new Set<string>();
+  for (const r of input.responsibilities ?? []) {
+    const p = responsibilitySchema.safeParse(r);
+    if (!p.success) issues.push({ code: "schema", message: `responsibility ${r.id}: ${p.error.message}` });
+    if (respIds.has(r.id)) issues.push({ code: "duplicate", message: `duplicate responsibility ${r.id}` });
+    respIds.add(r.id);
+    for (const id of r.conceptIds) {
+      if (!conceptIds.has(id)) issues.push({ code: "dangling", message: `responsibility ${r.id} unknown concept ${id}` });
+    }
+  }
+
+  const thenNowIds = new Set<string>();
+  for (const row of input.thenNow ?? []) {
+    const p = thenNowSchema.safeParse(row);
+    if (!p.success) issues.push({ code: "schema", message: `then-now ${row.id}: ${p.error.message}` });
+    if (thenNowIds.has(row.id)) issues.push({ code: "duplicate", message: `duplicate then-now ${row.id}` });
+    thenNowIds.add(row.id);
+    for (const id of row.conceptIds) {
+      if (!conceptIds.has(id)) issues.push({ code: "dangling", message: `then-now ${row.id} unknown concept ${id}` });
+    }
+    for (const id of row.historyIds) {
+      if (historyIds.size && !historyIds.has(id)) {
+        issues.push({ code: "dangling", message: `then-now ${row.id} unknown history ${id}` });
+      }
+    }
   }
 
   return issues;

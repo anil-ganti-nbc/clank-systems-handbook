@@ -172,6 +172,30 @@ export const fleetLawSchema = z.object({
 });
 export type FleetLaw = z.infer<typeof fleetLawSchema>;
 
+export const fleetLayerSchema = z.enum([
+  "participant",
+  "observation",
+  "governance",
+  "standards",
+  "development-control",
+  "resource",
+  "editorial",
+  "evidence-validation",
+  "teaching",
+  "historical",
+  "local-probable",
+]);
+export type FleetLayer = z.infer<typeof fleetLayerSchema>;
+
+export const fleetPresenceSchema = z.enum([
+  "github",
+  "local-only",
+  "github-and-local",
+  "historical",
+  "absent-from-inventory",
+]);
+export type FleetPresence = z.infer<typeof fleetPresenceSchema>;
+
 export const fleetClankSchema = z.object({
   id: z.string().min(1),
   name: z.string(),
@@ -194,6 +218,15 @@ export const fleetClankSchema = z.object({
   repoHeadAsOf: z.string().min(1),
   repoHeadNote: z.string().min(1),
   liveDeployedSha: z.string().min(1),
+  historicallyProvenDeployedSha: z.string().optional(),
+  historicallyProvenDeployedAsOf: z.string().optional(),
+  historicallyProvenDeployedNote: z.string().optional(),
+  layer: fleetLayerSchema.optional(),
+  presence: fleetPresenceSchema.optional(),
+  postV01: z.boolean().optional(),
+  ownsQuestion: z.string().optional(),
+  doesNotOwn: z.string().optional(),
+  evolution: z.string().optional(),
 });
 export type FleetClank = z.infer<typeof fleetClankSchema>;
 
@@ -307,3 +340,33 @@ export const nextStepSchema = z.object({
   body: z.string().min(1),
 });
 export type NextStep = z.infer<typeof nextStepSchema>;
+
+export const responsibilitySchema = z.object({
+  id: z.string().min(1),
+  name: z.string().min(1),
+  layer: fleetLayerSchema,
+  ownsQuestion: z.string().min(1),
+  ownsState: z.string().min(1),
+  observes: z.string().min(1),
+  doesNotOwn: z.string().min(1),
+  handsOffTo: z.string().min(1),
+  forbidden: z.string().min(1),
+  relatedFleetIds: z.array(z.string()),
+  conceptIds: z.array(z.string()),
+  confidence: epistemicStatus,
+  asOf: z.string().min(1),
+});
+export type Responsibility = z.infer<typeof responsibilitySchema>;
+
+export const thenNowSchema = z.object({
+  id: z.string().min(1),
+  topic: z.string().min(1),
+  then: z.string().min(1),
+  now: z.string().min(1),
+  pressure: z.string().min(1),
+  stillUnknown: z.string().min(1),
+  conceptIds: z.array(z.string()),
+  historyIds: z.array(z.string()),
+  confidence: epistemicStatus,
+});
+export type ThenNow = z.infer<typeof thenNowSchema>;

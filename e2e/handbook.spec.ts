@@ -122,6 +122,7 @@ test.describe("Clank Systems Handbook", () => {
     await expect(page.getByText("Failure / pressure").first()).toBeVisible();
     await expect(page.getByText("Still unsolved").first()).toBeVisible();
     await expect(page.getByRole("heading", { name: /Motherclank M0–M4/i })).toBeVisible();
+    await expect(page.getByRole("img", { name: "Second-act control planes" })).toBeVisible();
   });
 
   test("confidence audit exposes gaps and keeps live UNKNOWN", async ({ page }) => {
@@ -140,5 +141,18 @@ test.describe("Clank Systems Handbook", () => {
     await expect(page.getByLabel("Search ledger")).toBeVisible();
     await expect(page.getByLabel("Epistemic status")).toBeVisible();
     await expect(page.getByLabel("Failure class")).toBeVisible();
+  });
+
+  test("then vs now and responsibilities teaching surfaces", async ({ page }) => {
+    await gotoHydrated(page, "/");
+    await page.getByRole("navigation").getByRole("link", { name: "Then vs now" }).click();
+    await expect(page.getByRole("heading", { name: "Then vs now" })).toBeVisible();
+    await expect(page.getByText(/strict post-v0.1 logical births/i)).toBeVisible();
+    await expect(page.getByText(/Reddit is a source-admission/i)).toBeVisible();
+
+    await page.getByRole("navigation").getByRole("link", { name: "Responsibilities" }).click();
+    await expect(page.getByRole("heading", { name: "System responsibilities" })).toBeVisible();
+    await expect(page.getByText(/Federated, not a pyramid/i)).toBeVisible();
+    await expect(page.getByText(/ClankOps/i).first()).toBeVisible();
   });
 });

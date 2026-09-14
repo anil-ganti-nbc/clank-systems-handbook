@@ -8,7 +8,7 @@ function Home() {
   return (
     <div className="space-y-10">
       <header className="max-w-2xl">
-        <p className="text-xs tracking-[0.2em] text-mute uppercase">Clank ecosystem · evidence-backed literacy</p>
+        <p className="text-xs tracking-[0.2em] text-mute uppercase">Clank ecosystem · v0.2 · evidence-backed literacy</p>
         <h1 className="mt-3 font-display text-4xl leading-tight tracking-tight sm:text-5xl">
           Enough literacy to explain how this was actually built.
         </h1>
@@ -17,6 +17,11 @@ function Home() {
           deployment, state, and failure using real Clank artefacts. Historical claims are labelled
           verified, inferred, or incomplete. Nothing here assigns mastery — Dead Air University owns
           that. The unacceptable explanation is &ldquo;I pasted one AI output into another.&rdquo;
+        </p>
+        <p className="mt-3 text-sm text-accent">
+          v0.1 froze on 30 August 2026. That freeze was real. v0.2 is a commissioned update covering
+          the second act — Standards, CVC, Ledger, ClankOps, Quartermaster, and the collector work
+          that followed — without filling UNKNOWN.
         </p>
       </header>
       <Pipeline />
@@ -29,11 +34,13 @@ function Home() {
         <Stat n={HANDBOOK_ISSUES.length} label="content validation issues (must be 0)" />
       </section>
       <section className="grid gap-4 md:grid-cols-2">
-        <Card to="/history" title="Read the historical ledger" body="Phases, dates, artefacts, SHAs. Why each architectural layer appeared. UNKNOWN stays visible." />
+        <Card to="/then-now" title="Then vs now" body="What existed on 30 August, what exists now, which systems are genuinely new, and which UNKNOWNs refused to become facts." />
+        <Card to="/responsibilities" title="Who owns which question" body="Motherclank is not ClankOps. Standards is not a pile of tests. Ledger cares about usefulness, not collector ping." />
+        <Card to="/history" title="Read the historical ledger" body="Phases, dates, artefacts, SHAs. Why each architectural layer appeared. UNKNOWN stays visible. v0.1 phases are preserved; three were appended." />
         <Card to="/evidence" title="Confidence audit" body="Filter by verified, inferred, incomplete. Gaps, missing artefacts, rows awaiting a human, live UNKNOWNs." />
-        <Card to="/labs" title="Investigate a real incident" body="Freeze a hypothesis before the archive speaks. Start with the materialization gap — a timer that rang while nobody got out of bed." />
+        <Card to="/labs" title="Investigate a real incident" body="Freeze a hypothesis before the archive speaks. Start with the materialization gap — or the second-act labs on historical conformance and process-exit-vs-handoff." />
         <Card to="/architecture" title="Law lineage" body="Each Fleet Law mapped to the scar that wrote it. What it prevents, and what it cannot." />
-        <Card to="/fleet" title="Current fleet map" body="Three SHA columns: 2026-08-22 inventory, GitHub HEAD, live UNKNOWN. Stale notes are the honest part." />
+        <Card to="/fleet" title="Current fleet map" body="Four SHA columns: 2026-08-22 inventory, GitHub HEAD, historically proven live, live UNKNOWN. Stale notes are the honest part." />
         <Card to="/explain" title="Explain it back" body="Oral-explanation prompts. Freeze, then compare to a model answer. You grade yourself." />
         <Card to="/built" title="How we built it" body="Chronological narrative plus the AI-assisted workflow: implement, review, operator decides." />
       </section>
