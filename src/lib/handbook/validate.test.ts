@@ -286,4 +286,78 @@ describe("handbook content integrity", () => {
     assert.ok(CONCEPTS.some((c) => c.id === "historically-proven-deploy"));
     assert.ok(CONCEPTS.some((c) => c.id === "process-exit-vs-handoff"));
   });
+
+  it("uses ClankOps canonical Foundation numbers, not a parallel Handbook sequence", () => {
+    const ops = HANDBOOK.modules.find((m) => m.id === "mod-clankops");
+    assert.ok(ops, "mod-clankops missing");
+    const headings = ops.sections.map((s) => s.heading);
+    const required: Array<[RegExp, RegExp]> = [
+      [/Foundation 0\b/, /ledger/i],
+      [/Foundation 0\.1\b/, /harden/i],
+      [/Foundation 1\b/, /mission|session|handoff/i],
+      [/Foundation 2\b/, /fleet|terminal/i],
+      [/Foundation 3\b/, /git/i],
+      [/Foundation 4\b/, /ci/i],
+      [/Foundation 5\b/, /artefact|artifact/i],
+      [/Foundation 6\b/, /deploy|runtime|provenance/i],
+      [/Foundation 7\b/, /attention/i],
+      [/Foundation 8\b/, /resume/i],
+      [/Foundation 9\b/, /launcher|admission/i],
+      [/Foundation 10\b/, /exit/i],
+    ];
+    for (const [num, topic] of required) {
+      assert.ok(
+        headings.some((h) => num.test(h) && topic.test(h)),
+        `missing canonical ClankOps heading matching ${num} / ${topic}: ${headings.join(" | ")}`,
+      );
+    }
+    const corpus = [
+      ...ops.sections.map((s) => `${s.heading}\n${s.body}`),
+      ...HANDBOOK.modules.flatMap((m) => m.sections.map((s) => `${s.heading}\n${s.body}`)),
+    ].join("\n");
+    const forbidden = [
+      /keeps Mission as F2/,
+      /F2 — Mission/,
+      /F1 — census/i,
+      /F3 — Session/,
+      /F4 — fleet adoption/,
+      /F5 — read-only Terminal/,
+      /F6 — Git/,
+      /F8 — deployment/,
+      /ClankOps F8 can record/,
+      /Foundations 4–5 \(repo numbering\)/,
+    ];
+    for (const re of forbidden) {
+      assert.equal(re.test(corpus), false, `parallel Foundation numbering leaked: ${re}`);
+    }
+  });
+
+  it("does not claim Quartermaster has no git", () => {
+    const card = FLEET.find((c) => c.id === "quartermaster");
+    assert.ok(card);
+    assert.equal(card.confidence, "incomplete");
+    assert.equal(card.presence, "local-only");
+    assert.doesNotMatch(card.scheduling, /No git\./);
+    assert.doesNotMatch(card.repoHeadNote, /folder with no git/);
+    assert.match(card.repoHeadNote, /not 'no git'/);
+    assert.match(`${card.repoHeadNote} ${card.scheduling}`, /token-stats|dirty|31 August|2026-08-31/);
+
+    const mod = HANDBOOK.modules.find((m) => m.id === "mod-quartermaster");
+    assert.ok(mod);
+    const blob = [mod.summary, ...mod.sections.map((s) => s.body)].join("\n");
+    assert.match(blob, /dirty=true|dirty_count=4/);
+    assert.match(blob, /2026-08-31/);
+    assert.match(blob, /is_git=false/);
+    assert.doesNotMatch(blob, /listed a probable local folder with no git/i);
+
+    const hist = HISTORY.find((h) => h.id === "h-quartermaster");
+    assert.ok(hist);
+    assert.doesNotMatch(hist.event, /no git,/);
+    assert.match(hist.change, /dirty=true|dirty_count=4/);
+
+    const standards = THEN_NOW.find((row) => row.id === "tn-standards");
+    assert.ok(standards);
+    assert.doesNotMatch(standards.then, /absent or explicitly excluded/);
+    assert.match(standards.then, /existed around the v0\.1 boundary/);
+  });
 });

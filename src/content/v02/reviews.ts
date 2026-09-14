@@ -180,12 +180,13 @@ export const REVIEWS_V02: LedgerReview[] = [
     historyId: "h-quartermaster",
     currentConfidence: "incomplete",
     supportingArtefacts: [
-      "clankops docs/CLANK_CENSUS.md PROBABLE quartermaster-clank",
+      "clankops docs/CLANK_CENSUS.md PROBABLE quartermaster-clank (remote `-` / branch `-`)",
+      "clankops data/bootstrap/clank_census.json nested token-stats dirty=4 / 2026-08-31 commit",
       "Desktop\\Quartermaster Clank path (uninspected)",
     ],
     verifiedClaims: [
-      "The reconstructed census lists quartermaster-clank as PROBABLE local-only with no git remote.",
-      "Nested token-stats is SUPPORT_COMPONENT (Annihilater/token-stats), not a Clank.",
+      "The reconstructed census lists quartermaster-clank as PROBABLE local-only with no GitHub remote (condensed remote `-` / branch `-`, not 'no git').",
+      "Nested token-stats is SUPPORT_COMPONENT (Annihilater/token-stats), not a Clank, observed dirty=4 with latest commit 2026-08-31T09:02:30+05:30.",
     ],
     inferredClaims: [
       "The desktop wrapper is a functioning resource/quota plane.",

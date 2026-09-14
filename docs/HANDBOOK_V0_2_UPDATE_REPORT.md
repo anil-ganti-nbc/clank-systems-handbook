@@ -88,7 +88,7 @@ Seventeen history rows `h-v01-freeze` … `h-handbook-v02`. Each has a ledger re
 - `/responsibilities` — federated questions (Motherclank ≠ ClankOps ≠ Standards ≠ Ledger ≠ Quartermaster ≠ CVC)
 - Eight second-act labs
 - Twelve explain-it-back prompts
-- Modules: standards, ClankOps (F0–F10), ledger, quartermaster, CVC, Reddit admission, second act, responsibilities
+- Modules: standards, ClankOps (Foundations 0–10, ClankOps numbering), ledger, quartermaster, CVC, Reddit admission, second act, responsibilities
 - 40 new three-layer concepts
 
 ## UNKNOWNs retained (deliberate)
@@ -105,7 +105,7 @@ Seventeen history rows `h-v01-freeze` … `h-handbook-v02`. Each has a ledger re
 
 ## Local-only evidence
 
-- Quartermaster: census PROBABLE, path `C:\Users\anil\Desktop\Quartermaster Clank`, no git, GitHub search empty. **Not inspected here.**
+- Quartermaster: census PROBABLE, path `C:\Users\anil\Desktop\Quartermaster Clank`, no GitHub remote (condensed remote `-` / branch `-` is **not** "no git"). Nested `token-stats` SUPPORT_COMPONENT observed `dirty=true`, `dirty_count=4`, latest commit `2026-08-31T09:02:30+05:30` `fix: render recommendation fit percentages`. The `quartermaster-clank` candidate itself records `is_git=false` at the folder root. GitHub search empty. **Windows path not inspected here.** Do not copy the token-stats SHA as Quartermaster HEAD. Stay PROBABLE / incomplete.
 - Editorial Assist / Story Intelligence: census PROBABLE local, not counted as a birth Clank.
 - CVC Workbench: separate from `cvc-clank`.
 - CVC Desktop: NEEDS_RECONSTRUCTION in census; GitHub `5328a3c` is what we have.
@@ -128,6 +128,14 @@ Ran against this working tree on 2026-09-14, before the PR commit:
 Live SHA still UNKNOWN. Inventory as-of still 2026-08-22. The freeze commit `1803f31` remains the parent of this branch.
 
 Playwright note: this sandbox's Handbook `node_modules` is a symlink onto the workspace install, which did not originally expose `@playwright/test`. That package was installed into the shared workspace modules for this run only; it is **not** a Handbook source change and is not part of this PR.
+
+## Correction pass (same branch, unmerged)
+
+Narrow factual repairs after PR #6 opened. Curriculum not redesigned.
+
+1. **Quartermaster is not "no git".** Condensed census remote `-` / branch `-` means no GitHub remote evidenced. `clank_census.json` observed nested token-stats as a git checkout (`dirty=4`, 31 August 2026 commit). Folder-root candidate `is_git=false`. Stay PROBABLE / incomplete. Do not invent a remote or copy the token-stats SHA.
+2. **ClankOps Foundation numbers** now mirror ClankOps docs: 0 ledger (+ census bootstrap), 0.1 hardening, 1 Mission/Session/handoff, 2 fleet + Terminal, 3 Git/GitHub, 4 CI evidence, 5 CI artefacts, 6 deployment/runtime, 7 attention, 8 resume packets, 9 launcher admission, 10 process-exit. Parallel Handbook F-sequence removed.
+3. **Then-vs-now Standards wording:** existed around the v0.1 boundary but was not one of the 12 taught cards; CVC was the explicit exclusion. Counts unchanged (12 / 3 / 2 / 5).
 
 
 ## Remaining content debt

@@ -23,7 +23,7 @@ export const GAPS_V02: EvidenceGap[] = [
     relatedIncidentIds: ["inc-quartermaster-boundary"],
     relatedLawIds: [],
     whyItMatters:
-      "Census lists Quartermaster PROBABLE at C:\\Users\\anil\\Desktop\\Quartermaster Clank, local-only, no GitHub repo. Without a read of that path we cannot record a checkout SHA, only LOCAL-ONLY.",
+      "Census lists Quartermaster PROBABLE at C:\\Users\\anil\\Desktop\\Quartermaster Clank, local-only, no GitHub remote. Nested token-stats was observed as dirty git; the folder-root candidate records is_git=false. Without a read of that path we cannot record Quartermaster's own checkout SHA, only LOCAL-ONLY / INCOMPLETE.",
     whatWouldCloseIt:
       "Operator listing of that directory (HEAD if git, README purpose, token-stats relationship) copied off-host. Do not invent a GitHub remote.",
   },

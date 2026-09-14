@@ -25,7 +25,7 @@ What v0.2 adds, without becoming governance:
 - CVC Clank (GitHub `5328a3c`) — frozen evidence validation; still not a collector
 - Clank Ledger M0 (Jules `2c31787`, **no main**) — HIT/MISS / editorial usefulness
 - ClankOps Foundations 0–10 (`4467c13`) — Mission ≠ Session ≠ process ≠ handoff
-- Quartermaster Clank — local-only **incomplete**; no GitHub repo found
+- Quartermaster Clank — local-only **incomplete**; no GitHub remote evidenced; nested token-stats observed as dirty git
 - Then vs now, system-responsibility map, second-act labs
 - Fleet cards refreshed to 14 September GitHub HEADs, with COM-001 historically
   proven live SHAs as a **separate** column. Live deployed SHA stays UNKNOWN.

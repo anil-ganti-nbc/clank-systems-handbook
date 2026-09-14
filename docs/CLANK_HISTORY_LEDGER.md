@@ -1269,7 +1269,7 @@ Handbook v0.1 freeze; CVC GitHub excluded-then-taught; collector UI family; 2026
 - **Id:** `h-quartermaster`
 - **Phase:** `p-control-planes`
 - **Confidence:** INCOMPLETE
-- **Event.** Census PROBABLE local folder, no git, no GitHub. Windows path not inspectable from this campaign. Resource/quota, not fleet health.
+- **Event.** Census PROBABLE local folder, no GitHub remote (condensed remote `-` / branch `-` is not 'no git'). Nested token-stats observed dirty with a 31 August 2026 commit. Windows path not inspectable from this campaign. Resource/quota, not fleet health.
 
 ### 2026-09-09 — Reddit admission pilot (not a Clank)
 

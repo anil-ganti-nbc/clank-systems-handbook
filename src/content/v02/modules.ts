@@ -98,68 +98,73 @@ export const MODULES_V02: Module[] = [
     sections: [
       {
         heading: "Why ClankOps exists even though the others exist",
-        body: "Motherclank answers what the fleet is doing (derived snapshots; never remediates). Diagnostic answers what failed and how to classify it. Standards answers what is law. Quartermaster answers model/resource/quota. Ledger answers whether editors found the output useful. None of them store development state: which Clank you were in the middle of changing, which Mission is unfinished, where the last checkpoint stopped, whether CI at a SHA was captured, whether a managed agent process exited with the Session still open. Development jumps, gets interrupted, and is resumed months later by a different agent with no original chat. ClankOps is that logbook. It must not absorb the others. Integration is future work; absorbing them would recreate a supervisor that writes.",
+        body: "Motherclank answers what the fleet is doing (derived snapshots; never remediates). Diagnostic answers what failed and how to classify it. Standards answers what is law. Quartermaster answers model/resource/quota. Ledger answers whether editors found the output useful. None of them store development state: which Clank you were in the middle of changing, which Mission is unfinished, where the last checkpoint stopped, whether CI at a SHA was captured, whether a managed agent process exited with the Session still open. Development jumps, gets interrupted, and is resumed months later by a different agent with no original chat. ClankOps is that logbook. It must not absorb the others. Integration is future work; absorbing them would recreate a supervisor that writes. Foundation numbers below are ClankOps' own (ARCHITECTURE.md = Foundation 0; docs/FOUNDATION_1.md through FOUNDATION_10.md). Census is Foundation 0 bootstrap, not a separate Foundation. Mission, Session, and handoff live inside Foundation 1. This Handbook does not keep a parallel F-sequence.",
         conceptIds: ["clankops", "motherclank", "diagnostic-clank", "standards-clank", "quartermaster"],
       },
       {
-        heading: "F0 — append-only development ledger",
+        heading: "Foundation 0 — append-only development ledger",
         body: "Current state is a projection of immutable history. Mutations append events; corrections append compensating events. Projection tables exist only for query convenience and must be rebuildable from events ordered by ledger_seq. Primary keys are UUIDv7 (Python 3.14+; UUID4 fallback forbidden). Mission display ids (COPS-000123) are reseeded from MISSION_CREATED events on rebuild. Event source is typed: USER, AGENT_REPORT, LOCAL_GIT, GITHUB, CI, DEPLOYMENT, SYSTEM, RECONSTRUCTED. An agent claiming a push that GitHub cannot corroborate stays AGENT_REPORT; it is not rewritten as GITHUB. Default DB: %USERPROFILE%\\.clankops\\clankops.db. No production deployment. No Kafka, no cloud database, no LLM summaries in Foundation 0.",
         conceptIds: ["append-only-ledger", "clankops", "authoritative-state", "derived-state"],
       },
       {
-        heading: "F0.1 — ledger hardening",
+        heading: "Foundation 0.1 — ledger hardening",
         body: "events has SQL triggers forbidding UPDATE and DELETE. WAL + foreign_keys=ON + busy_timeout. SQLite must not live on a network share with concurrent remote writers. Projection rebuild is an acceptance test: a fresh database containing only the event rows must reconstruct identical projection state. Unknown timestamps stay unknown; event ts_utc is when ClankOps recorded the fact, not a fabricated historical time. Reconstructed census facts must remain RECONSTRUCTED. Hardening is how the logbook refuses to become a CRUD app that quietly edits yesterday.",
         conceptIds: ["append-only-ledger", "sqlite", "lock"],
       },
       {
-        heading: "F1 — census and identity",
-        body: "Census discovers candidates. It never mutates other repositories. Dirty trees are evidence. The 2026-09-09T23:09:03Z artefact scanned Windows roots (Clanks, Desktop, Documents\\Default Project, dau-ecosystem, Clank Base, chudbox) and is a reconstruction, not live ClankOps history — import with source=RECONSTRUCTED. Counts: 63 candidates, VERIFIED 17, PROBABLE 5, UNKNOWN 13, SUPPORT_COMPONENT 13, NOT_A_CLANK 14, NEEDS_RECONSTRUCTION 1; local_only 25; 8 duplicate identity groups. Logical identity ≠ repo ≠ checkout ≠ deploy lane. Duplicate folders (Documents copies lagging Clanks-root HEAD; Desktop\\Watch clank on a different branch) are extra refs, not extra Clanks. DAU/chudbox are NOT_A_CLANK. Quartermaster is PROBABLE. Local CVC is NEEDS_RECONSTRUCTION.",
+        heading: "Foundation 0 census — identity bootstrap",
+        body: "Census is Foundation 0 bootstrap (docs/CLANK_CENSUS.md), not Foundation 1. It discovers candidates. It never mutates other repositories. Dirty trees are evidence. The 2026-09-09T23:09:03Z artefact scanned Windows roots (Clanks, Desktop, Documents\\Default Project, dau-ecosystem, Clank Base, chudbox) and is a reconstruction, not live ClankOps history — import with source=RECONSTRUCTED. Counts: 63 candidates, VERIFIED 17, PROBABLE 5, UNKNOWN 13, SUPPORT_COMPONENT 13, NOT_A_CLANK 14, NEEDS_RECONSTRUCTION 1; local_only 25; 8 duplicate identity groups. Logical identity ≠ repo ≠ checkout ≠ deploy lane. Duplicate folders (Documents copies lagging Clanks-root HEAD; Desktop\\Watch clank on a different branch) are extra refs, not extra Clanks. DAU/chudbox are NOT_A_CLANK. Quartermaster is PROBABLE. Local CVC is NEEDS_RECONSTRUCTION.",
         conceptIds: ["census-identity", "system-identity", "checkout-vs-identity"],
       },
       {
-        heading: "F2 — Mission",
-        body: "A Mission is a coherent development objective that survives handoff. work resume reuses an unfinished Mission; it does not invent a new COPS id by launching software. Admission never creates a Mission. clankctl brief oem-radar should answer what this Clank is, which mission is unfinished, where development stopped, what remains, and — only if someone recorded it — what to do next. Repo docs call Mission adoption Foundation 1; this Handbook keeps Mission as F2 so census/identity stay visible as their own layer. A Mission is not a chat transcript, not a Session, and not a running process.",
-        conceptIds: ["mission-lifecycle", "resumable-development", "lifecycle"],
+        heading: "Foundation 1 — Mission, Session, checkpoint, handoff",
+        body: "Foundation 1 is the adoption / Mission-Session-handoff foundation. A Mission is a coherent development objective that survives handoff. work resume reuses an unfinished Mission; it does not invent a new COPS id by launching software. Admission never creates a Mission. clankctl brief oem-radar should answer what this Clank is, which mission is unfinished, where development stopped, what remains, and — only if someone recorded it — what to do next. A Session is one actor working a Mission. Checkpoint + git capture + Mission state is a handoff. sessions stale --older-than 24h is an observation, not a close. An open Session after a managed child returns still needs handoff — Foundation 10 is explicit. Session ≠ process: a running python is PROCESS_STARTED evidence, not a development Session. Collapsing those words is how 'the agent is still running' gets mistaken for 'we handed the work over'. A Mission is not a chat transcript, not a Session, and not a running process.",
+        conceptIds: ["mission-lifecycle", "session-lifecycle", "process-vs-session", "process-exit-vs-handoff", "resumable-development", "lifecycle"],
       },
       {
-        heading: "F3 — Session, checkpoint, handoff",
-        body: "A Session is one actor working a Mission. Checkpoint + git capture + Mission state is a handoff (Foundation 1 in repo docs). sessions stale --older-than 24h is an observation, not a close. An open Session after a managed child returns still needs handoff — Foundation 10 is explicit. Session ≠ process: a running python is PROCESS_STARTED evidence, not a development Session. Collapsing those words is how 'the agent is still running' gets mistaken for 'we handed the work over'.",
-        conceptIds: ["session-lifecycle", "process-vs-session", "process-exit-vs-handoff"],
+        heading: "Foundation 2 — fleet coverage + read-only Terminal",
+        body: "Foundation 2 puts VERIFIED census identities into the ledger and puts a read-only Terminal in front of the projections. fleet-adopt-verified reads the census file and registers VERIFIED identities. Duplicate checkouts become extra refs, not second Clanks. Coverage is a query over adopted identities, not a health score. ClankOps does not replace fleet.yaml (Diagnostic) or Motherclank harvest. Adoption is 'this logical Clank is in the development ledger'; it is not 'this Clank is production', not 'this checkout is the running image', and not a promotion decision. PROBABLE and UNKNOWN stay classified; they are not auto-promoted to VERIFIED to make coverage prettier. The Terminal is localhost-only and read-only. It does not schedule collection, deploy anything, take Clank locks, or send Discord. Dossier views (text plus icon/shape) may show process facts once Foundation 10 records them. Display age does not churn context_fingerprint; a real new observation does. A GUI that can only look is the same safety idea as Motherclank's camera: a supervisor that can write is a second Clank. ClankOps Terminal is not Motherclank harvest and not DiagnosticBench.",
+        conceptIds: ["census-identity", "checkout-vs-identity", "system-identity", "clankops", "operator-role"],
       },
       {
-        heading: "F4 — fleet adoption",
-        body: "fleet-adopt-verified reads the census file and registers VERIFIED identities. Duplicate checkouts become extra refs, not second Clanks. Coverage is a query over adopted identities, not a health score. ClankOps does not replace fleet.yaml (Diagnostic) or Motherclank harvest. Adoption is 'this logical Clank is in the development ledger'; it is not 'this Clank is production', not 'this checkout is the running image', and not a promotion decision. PROBABLE and UNKNOWN stay classified; they are not auto-promoted to VERIFIED to make coverage prettier.",
-        conceptIds: ["census-identity", "checkout-vs-identity", "system-identity"],
-      },
-      {
-        heading: "F5 — read-only Terminal",
-        body: "The Terminal is localhost-only and read-only. It does not schedule collection, deploy anything, take Clank locks, or send Discord. Dossier views (text plus icon/shape) may show process facts once Foundation 10 records them. Display age does not churn context_fingerprint; a real new observation does. A GUI that can only look is the same safety idea as Motherclank's camera: a supervisor that can write is a second Clank. ClankOps Terminal is not Motherclank harvest and not DiagnosticBench.",
-        conceptIds: ["clankops", "operator-role"],
-      },
-      {
-        heading: "F6 — Git / GitHub reconciliation",
-        body: "Reconcile stays read-only. Local git inspection is stored as git_evidence.source=LOCAL_GIT on a checkpoint; it does not convert surrounding development claims into LOCAL_GIT. GitHub corroboration is its own source. Agent statements are not automatically GitHub facts. Dirty repositories observed during census were not cleaned. Source HEAD is not deployed HEAD — that sentence is the hinge into F7/F8. ClankOps observing that origin/main moved is not a host pull and not a restart.",
+        heading: "Foundation 3 — Git / GitHub reconciliation",
+        body: "Foundation 3 observes what is actually on disk and on GitHub, then compares. Reconcile stays read-only. Local git inspection is stored as git_evidence.source=LOCAL_GIT on a checkpoint; it does not convert surrounding development claims into LOCAL_GIT. GitHub corroboration is its own source. Agent statements are not automatically GitHub facts. Dirty repositories observed during census were not cleaned. Source HEAD is not deployed HEAD — that sentence is the hinge into Foundation 6. ClankOps observing that origin/main moved is not a host pull and not a restart.",
         conceptIds: ["git", "github", "head-vs-deployed", "origin"],
       },
       {
-        heading: "F7 — CI evidence and artefact attachment",
-        body: "CI green ≠ deployed. Foundations 4–5 (repo numbering) capture GitHub Actions at an exact head and may attach that observation to the open Mission as an artefact. Exact-head Actions on PR #11 (run 34797842854, head f62e85f) proved that PR's 297 tests — not that ClankOps is running in production (it has no production deploy), not that oem-radar's drain restarted, and not that a host SHA changed. Attaching a CI artefact is ledger evidence. It is not a deployment.",
+        heading: "Foundation 4 — GitHub CI evidence",
+        body: "Foundation 4 observes GitHub check-runs and status contexts for a SHA. CI green ≠ deployed. Observer ok=True is not git corroboration and does not rewrite Foundation 3 aligned/partial/drift. Exact-head Actions on PR #11 (run 34797842854, head f62e85f) proved that PR's 297 tests — not that ClankOps is running in production (it has no production deploy), not that oem-radar's drain restarted, and not that a host SHA changed. Empty CI is none only when both observers succeeded and returned no check-runs and no status contexts. Unknown stays unknown. Foundation 4 does not write that observation into the ledger; that write is Foundation 5.",
         conceptIds: ["ci-vs-deployment", "ci", "tests-prove"],
       },
       {
-        heading: "F8 — deployment / runtime provenance",
-        body: "Foundation 6 in repo docs records deployed/runtime observations as their own evidence. Source HEAD is not deployed HEAD. CI success is not deployment success. Running is not authoritative. Capture is explicit; Foundation 6 does not live-SSH. OEM Radar 24d61dd is the specimen outside ClankOps: GIT_REVISION baked in as OEM_RADAR_GIT_SHA because discord_runtime showed git_sha=unknown inside containers (no .git in the image; build-arg never reached the environment). ClankOps can record that someone captured a runtime identity; it cannot invent a live SHA for this Handbook.",
+        heading: "Foundation 5 — CI artefacts attached to Mission",
+        body: "Foundation 5 is the explicit write: clankctl ci capture attaches the current GitHub CI observation to an unfinished Mission as an artefact (kind=github_ci, source=CI). Reconcile stays read-only. Capture is a separate command. Attaching a CI artefact is ledger evidence. It is not a deployment, not a host pull, and not a timer restart. It does not rewrite checkpoints or Foundation 3 git comparison. A later reader can explain the stored CI state from artefact metadata without a live GitHub fetch.",
+        conceptIds: ["ci-vs-deployment", "ci", "tests-prove"],
+      },
+      {
+        heading: "Foundation 6 — deployment / runtime provenance",
+        body: "Foundation 6 records deployed/runtime observations as their own evidence. Source HEAD is not deployed HEAD. CI success is not deployment success. Running is not authoritative. Capture is explicit; Foundation 6 does not live-SSH. OEM Radar 24d61dd is the specimen outside ClankOps: GIT_REVISION baked in as OEM_RADAR_GIT_SHA because discord_runtime showed git_sha=unknown inside containers (no .git in the image; build-arg never reached the environment). ClankOps can record that someone captured a runtime identity; it cannot invent a live SHA for this Handbook.",
         conceptIds: ["runtime-identity", "runtime-provenance", "ci-vs-deployment", "head-vs-deployed"],
       },
       {
-        heading: "F9 — attention, freshness, resume packets",
-        body: "Attention is a derived queue of what you are in danger of forgetting, and why. Freshness is metadata, not truth. Attention writes zero ledger events. It is not a health score, not Motherclank synthesis, not Ledger usefulness. Resume packet (repo Foundation 8) is derived so any development agent can enter an existing Clank without the original chat. It is not an LLM summary. If next_action was not recorded, the packet must not invent one. clankctl resume-packet / attention --no-github are how you ask the logbook without pretending GitHub is the host.",
-        conceptIds: ["attention-queue", "resume-packet", "context-recovery", "resumable-development"],
+        heading: "Foundation 7 — attention queue / freshness",
+        body: "Foundation 7 derives an attention queue of what you are in danger of forgetting, and why. Freshness is metadata, not truth. Attention writes zero ledger events. It is not a health score, not Motherclank synthesis, not Ledger usefulness. clankctl attention / attention --no-github ask the logbook without pretending GitHub is the host. MANAGED_PROCESS_EXITED_WITH_OPEN_SESSION is derived only while that Session remains open; Foundation 1 handoff/end removes it.",
+        conceptIds: ["attention-queue", "clankops"],
       },
       {
-        heading: "F10 — admission, launcher provenance, process-exit observability",
-        body: "Prepare, admit, then spawn. Actor and launcher names are provenance, not permission. Observation of a Cursor launch does not authorize writing Clank DBs or ratifying a standard. PR #11 merged to main 4467c13 (2026-09-14): AGENT_PROCESS_EXITED after a managed Foundation 9 child returns; AGENT_PROCESS_START_FAILED when the subprocess cannot be created. Process exit is evidence, not handoff: Session stays OPEN, Mission unchanged, no invented checkpoint/next_action. Attention derives MANAGED_PROCESS_EXITED_WITH_OPEN_SESSION only while that Session remains open; Foundation 1 handoff/end removes it. Missing process evidence stays UNKNOWN, never RUNNING. launch_agent() exposes executable / argv_count / argv_redacted — raw child argv is execution input, not output evidence.",
-        conceptIds: ["managed-agent-provenance", "launcher-provenance", "process-exit-vs-handoff", "process-vs-session"],
+        heading: "Foundation 8 — resume packets",
+        body: "Foundation 8 emits a derived resume packet so any development agent can enter an existing Clank without the original chat. Admission never creates a Mission. The packet is not an LLM summary. If next_action was not recorded, the packet must not invent one. Display age does not churn context_fingerprint; a real new observation does. clankctl resume-packet --no-github is how you ask the logbook. Packet generation writes zero ledger events.",
+        conceptIds: ["resume-packet", "context-recovery", "resumable-development"],
+      },
+      {
+        heading: "Foundation 9 — launcher admission",
+        body: "Foundation 9 makes the prepare/admit contract the managed agent launch gate. Prepare, admit, then spawn. Actor and launcher names are provenance, not permission. Observation of a Cursor launch does not authorize writing Clank DBs or ratifying a standard. --actor cursor --launcher cursor are provenance fields. Fail closed before spawning when prepare fails, admission is AMBIGUOUS without an explicit Mission, or there is no unfinished Mission.",
+        conceptIds: ["managed-agent-provenance", "launcher-provenance", "operator-role"],
+      },
+      {
+        heading: "Foundation 10 — managed process-exit observability",
+        body: "Foundation 10 records managed process exit as immutable evidence. PR #11 merged to main 4467c13 (2026-09-14): AGENT_PROCESS_EXITED after a managed Foundation 9 child returns; AGENT_PROCESS_START_FAILED when the subprocess cannot be created. Process exit is evidence, not handoff: Session stays OPEN, Mission unchanged, no invented checkpoint/next_action. An open Session after the child returns still needs Foundation 1 handoff. Missing process evidence stays UNKNOWN, never RUNNING. launch_agent() exposes executable / argv_count / argv_redacted — raw child argv is execution input, not output evidence.",
+        conceptIds: ["process-exit-vs-handoff", "process-vs-session", "managed-agent-provenance"],
       },
       {
         heading: "Distinctions that must not collapse",
@@ -221,7 +226,7 @@ export const MODULES_V02: Module[] = [
     sections: [
       {
         heading: "What the census actually saw",
-        body: "ClankOps census 2026-09-09 classified quartermaster-clank PROBABLE (medium) at C:\\Users\\anil\\Desktop\\Quartermaster Clank, evidence 'desktop Quartermaster wrapper (launcher + token-stats)'. Nested token-stats is SUPPORT_COMPONENT with remote https://github.com/Annihilater/token-stats.git — not a Clank repo, not anil-ganti-nbc. No GitHub repository named Quartermaster was found under the operator account. ClankOps ARCHITECTURE.md lists Quartermaster as the owner of model/resource/quota decisions in the authority table. That is a boundary claim, not a deployment claim.",
+        body: "ClankOps census 2026-09-09 classified quartermaster-clank PROBABLE (medium) at C:\\Users\\anil\\Desktop\\Quartermaster Clank, evidence 'desktop Quartermaster wrapper (launcher + token-stats)'. Condensed census lists remote `-` and branch `-`; that is not 'no git'. Nested token-stats is SUPPORT_COMPONENT with remote https://github.com/Annihilater/token-stats.git — not a Clank repo, not anil-ganti-nbc — and the census observed it as a git checkout: dirty=true, dirty_count=4, latest commit 2026-08-31T09:02:30+05:30 'fix: render recommendation fit percentages'. The quartermaster-clank candidate itself records is_git=false at the folder root. No GitHub repository named Quartermaster was found under the operator account. This campaign did not inspect the Windows checkout, so Quartermaster's own current branch, architecture and runtime remain INCOMPLETE. ClankOps ARCHITECTURE.md lists Quartermaster as the owner of model/resource/quota decisions in the authority table. That is a boundary claim, not a deployment claim.",
         conceptIds: ["quartermaster", "census-identity"],
       },
       {
@@ -330,7 +335,7 @@ export const MODULES_V02: Module[] = [
     area: "history",
     title: "Second act — after the 30 August freeze",
     summary:
-      "Handbook v0.1 freeze was real. v0.2 is a commissioned update, not a rewrite of August. After 30 Aug: Standards closure, Ledger M0, ClankOps F0–10, Quartermaster local-only, collector UI family, 2026-09-05 COM-001 historical proofs, schema-compatibility barriers, Discord-delivery discipline, Horology Sentinel/casio_multi work, Reddit admission experiment, CTW translation/topology. GitHub HEAD is still not deployed SHA.",
+      "Handbook v0.1 freeze was real. v0.2 is a commissioned update, not a rewrite of August. After 30 Aug: Standards closure, Ledger M0, ClankOps Foundations 0–10, Quartermaster local-only, collector UI family, 2026-09-05 COM-001 historical proofs, schema-compatibility barriers, Discord-delivery discipline, Horology Sentinel/casio_multi work, Reddit admission experiment, CTW translation/topology. GitHub HEAD is still not deployed SHA.",
     conceptIds: [
       "standards-clank",
       "clankops",
@@ -355,7 +360,7 @@ export const MODULES_V02: Module[] = [
         conceptIds: ["standards-clank", "ratification", "historically-proven-deploy"],
       },
       {
-        heading: "Ledger M0 and ClankOps F0–10",
+        heading: "Ledger M0 and ClankOps Foundations 0–10",
         body: "31 Aug: clank-ledger Jules branch 2c31787 ships M0 HIT/MISS/QC/outcome — no main. 9 Sep: ClankOps census reconstruction (63 candidates, not live history) and GitHub repo created. 14 Sep: main 4467c13 after PR #11 Foundation 10 managed-agent exit observability. Python 3.14+, local SQLite, no production deploy. The development control plane arrived because unfinished work was being resumed from chat memory, which is not a ledger.",
         conceptIds: ["clank-ledger", "clankops", "process-exit-vs-handoff"],
       },
@@ -422,7 +427,7 @@ export const MODULES_V02: Module[] = [
       },
       {
         heading: "What is running — runtime provenance, not HEAD",
-        body: "Host-evidenced SHA, image digest, baked GIT_REVISION (OEM Radar OEM_RADAR_GIT_SHA after 24d61dd). Motherclank may later photocopy adapter identity if harvest actually ran — live harvest remains UNKNOWN. ClankOps F8 can record an explicit deployment capture; it does not SSH. GitHub HEAD is not the answer. COM-001 9/9 is historical. Live deployed SHA in this Handbook stays UNKNOWN. A new agent that copies origin/main into the live cell has repeated Law 6's forbidden guess.",
+        body: "Host-evidenced SHA, image digest, baked GIT_REVISION (OEM Radar OEM_RADAR_GIT_SHA after 24d61dd). Motherclank may later photocopy adapter identity if harvest actually ran — live harvest remains UNKNOWN. ClankOps Foundation 6 can record an explicit deployment capture; it does not SSH. GitHub HEAD is not the answer. COM-001 9/9 is historical. Live deployed SHA in this Handbook stays UNKNOWN. A new agent that copies origin/main into the live cell has repeated Law 6's forbidden guess.",
         conceptIds: ["runtime-identity", "head-vs-deployed", "historically-proven-deploy", "motherclank"],
       },
       {

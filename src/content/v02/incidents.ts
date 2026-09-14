@@ -734,7 +734,7 @@ export const INCIDENTS_V02: Incident[] = [
       "The folder name plus token-stats means we can document a complete Quartermaster architecture.",
       "Model/quota recommendations belong in ClankOps (development state) or Motherclank (fleet harvest).",
       "This campaign inspected C:\\Users\\anil\\Desktop\\Quartermaster Clank and found a GitHub SHA.",
-      "Census listed it PROBABLE, local-only, no git, wrapper around Annihilater/token-stats. No GitHub repo found. Incomplete. Resource recommendation ≠ fleet health ≠ development state.",
+      "Census listed it PROBABLE, local-only, no GitHub remote. Nested token-stats was observed as a dirty git checkout (31 August commit, four dirty files). Incomplete. Resource recommendation ≠ fleet health ≠ development state.",
     ],
     diagnosis:
       "Authority boundaries were being collapsed across three planes. Evidence for Quartermaster internals is local-Windows and unavailable here. Honesty is PROBABLE + incomplete, not a invented design.",
@@ -746,8 +746,8 @@ export const INCIDENTS_V02: Incident[] = [
       "Linux campaign cannot read that NTFS path; guessing fills the gap.",
     ],
     causalChain: [
-      "Census 2026-09-09T23:09:03Z lists C:\\Users\\anil\\Desktop\\Quartermaster Clank, classification PROBABLE, is_git false, no remote, evidence 'desktop Quartermaster wrapper (launcher + token-stats)'.",
-      "Nested token-stats is SUPPORT_COMPONENT; remote Annihilater/token-stats, not a Clank repo.",
+      "Census 2026-09-09T23:09:03Z lists C:\\Users\\anil\\Desktop\\Quartermaster Clank, classification PROBABLE, condensed remote `-` / branch `-` (not 'no git'), evidence 'desktop Quartermaster wrapper (launcher + token-stats)'. The JSON candidate records is_git=false at the folder root.",
+      "Nested token-stats is SUPPORT_COMPONENT; remote Annihilater/token-stats, not a Clank repo. Census observed it as git: dirty=true, dirty_count=4, latest commit 2026-08-31T09:02:30+05:30 'fix: render recommendation fit percentages'.",
       "This Linux campaign could not inspect that Windows path. No anil-ganti-nbc GitHub repo found.",
       "Do not invent completeness. Model/quota stays outside ClankOps and Motherclank.",
     ],
@@ -756,7 +756,7 @@ export const INCIDENTS_V02: Incident[] = [
     remediation:
       "Keep Quartermaster PROBABLE/local-only/incomplete. Census as the evidence. token-stats as support substrate. Resource recommendation remains its own layer.",
     verification:
-      "CLANK_CENSUS.md quartermaster-clank PROBABLE (medium), no git. token-stats SUPPORT_COMPONENT. ClankOps ARCHITECTURE.md / README.md / FUTURE_SCOPE.md name the boundary. Path contents: not inspected this campaign.",
+      "CLANK_CENSUS.md quartermaster-clank PROBABLE (medium), remote `-` branch `-` (not 'no git'). clank_census.json nested token-stats dirty=4 / 31 August commit. token-stats SUPPORT_COMPONENT. ClankOps ARCHITECTURE.md / README.md / FUTURE_SCOPE.md name the boundary. Path contents: not inspected this campaign.",
     residualRisk:
       "A later Windows probe may confirm, split, or reject the identity. Until then UNKNOWN internals. Do not backfill SHAs.",
     architecturalLesson:
@@ -767,7 +767,15 @@ export const INCIDENTS_V02: Incident[] = [
         kind: "doc",
         repo: "anil-ganti-nbc/clankops",
         path: "docs/CLANK_CENSUS.md",
-        note: "quartermaster-clank PROBABLE (medium), path C:\\Users\\anil\\Desktop\\Quartermaster Clank, no git, wrapper around launcher + token-stats. Nested token-stats SUPPORT_COMPONENT (Annihilater/token-stats).",
+        note: "quartermaster-clank PROBABLE (medium), path C:\\Users\\anil\\Desktop\\Quartermaster Clank, remote `-` branch `-` (not 'no git'), wrapper around launcher + token-stats.",
+        status: "verified",
+      },
+      {
+        id: "ev-v02-qm-census-json",
+        kind: "doc",
+        repo: "anil-ganti-nbc/clankops",
+        path: "data/bootstrap/clank_census.json",
+        note: "quartermaster-clank candidate is_git=false at folder root. Nested token-stats SUPPORT_COMPONENT: is_git=true, dirty=true, dirty_count=4, files claude.rs / tui/app.rs / tui/ui/quartermaster.rs / TELEMETRY_MATRIX.md, latest commit 2026-08-31T09:02:30+05:30 'fix: render recommendation fit percentages', remote Annihilater/token-stats.",
         status: "verified",
       },
       {

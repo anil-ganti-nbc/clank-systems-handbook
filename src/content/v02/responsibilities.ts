@@ -104,7 +104,7 @@ export const RESPONSIBILITIES: Responsibility[] = [
     layer: "development-control",
     ownsQuestion: "What development work is open, where did the last agent stop, and what CI/deploy evidence was recorded?",
     ownsState: "Local events + projections SQLite. Missions, sessions, checkpoints, census imports (RECONSTRUCTED).",
-    observes: "Development state: git, GitHub, CI, explicit deploy captures, managed process exit (F10 4467c13).",
+    observes: "Development state: git, GitHub, CI, explicit deploy captures, managed process exit (Foundation 10 / 4467c13).",
     doesNotOwn: "Fleet runtime health, Fleet Laws, ratification, editorial HIT/MISS, or model quota. No production deploy.",
     handsOffTo: "Resume packets admit a new agent; Foundation 1 handoff still closes work. Process exit is not that handoff.",
     forbidden:
@@ -119,7 +119,7 @@ export const RESPONSIBILITIES: Responsibility[] = [
     name: "Quartermaster",
     layer: "resource",
     ownsQuestion: "Which model, quota, and local token budget should this work use?",
-    ownsState: "Local-only desktop wrapper (census PROBABLE). Not inspected this campaign.",
+    ownsState: "Local-only desktop wrapper (census PROBABLE). Nested token-stats observed as dirty git; Quartermaster's own current branch was not inspected this campaign.",
     observes: "Token/resource usage via token-stats substrate — not fleet health, not Clank identity.",
     doesNotOwn: "Fleet scoring, missions, ratification, observational SQLite, or a GitHub repo (there isn't one).",
     handsOffTo: "A future ClankOps link from quota spend to Missions. Not implemented.",

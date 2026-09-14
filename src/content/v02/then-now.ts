@@ -28,8 +28,8 @@ export const THEN_NOW: ThenNow[] = [
   {
     id: "tn-standards",
     topic: "Whether the fleet has ratified law beyond Fleet Laws",
-    then: "Standards Clank was absent or explicitly excluded from v0.1. Fleet Laws v1 (d046d54) plus deferred Law 9 were the binding text.",
-    now: "7c821ea: 26/26 RATIFIED, 0 PROPOSED, five frozen domains. Agents cannot self-ratify. Tests guard files; they are not the law. Ratification does not authorize live remediation by itself.",
+    then: "Standards Clank existed around the v0.1 boundary but was not taught as one of the 12 current fleet/system cards. Fleet Laws v1 (d046d54) plus deferred Law 9 were the binding text the Handbook taught. CVC, not Standards, was the system explicitly excluded from v0.1.",
+    now: "7c821ea: 26/26 RATIFIED, 0 PROPOSED, five frozen domains. Most of the 26/26-ratified system taught by v0.2 emerged after that teaching freeze. Agents cannot self-ratify. Tests guard files; they are not the law. Ratification does not authorize live remediation by itself.",
     pressure: "Hard-won scars lived as tribal notes and incident files. Without ratification they could not be audited as obligations.",
     stillUnknown:
       "Which live checkouts currently conform. COM-001/COM-002 facts are dated. Live SHA remains UNKNOWN, so current conformance is not a live claim.",

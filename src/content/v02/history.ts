@@ -536,12 +536,12 @@ export const HISTORY_V02: HistoryEntry[] = [
     phaseId: "p-control-planes",
     systems: ["quartermaster"],
     event:
-      "Census PROBABLE local-only Quartermaster. Path not inspectable. No GitHub. confidence incomplete.",
+      "Census PROBABLE local-only Quartermaster. No GitHub remote evidenced. Nested token-stats observed as dirty git. Path not inspectable. confidence incomplete.",
     before:
       "Model/quota/resource spend was not a named plane. Motherclank did not own it; nothing else claimed it in git.",
     change:
-      "ClankOps census 2026-09-09T23:09:03Z source=RECONSTRUCTED lists quartermaster-clank as PROBABLE (medium) at C:\\Users\\anil\\Desktop\\Quartermaster Clank, evidence 'desktop Quartermaster wrapper (launcher + token-stats)', no git remote. Nested token-stats is SUPPORT_COMPONENT (upstream Annihilater/token-stats, not a Clank repo). This campaign cannot inspect the path. There is no GitHub repository. Existence is inferred from the reconstructed census only.",
-    why: "A resource/quota tool that is not in git is still a plane if the operator uses it — but this Handbook cannot pretend it audited the code.",
+      "ClankOps census 2026-09-09T23:09:03Z source=RECONSTRUCTED lists quartermaster-clank as PROBABLE (medium) at C:\\Users\\anil\\Desktop\\Quartermaster Clank, evidence 'desktop Quartermaster wrapper (launcher + token-stats)'. Condensed census: remote `-`, branch `-` — not 'no git'. Nested token-stats (SUPPORT_COMPONENT, upstream Annihilater/token-stats, not a Clank repo) was observed as a git checkout: dirty=true, dirty_count=4, latest commit 2026-08-31T09:02:30+05:30 'fix: render recommendation fit percentages'. The quartermaster-clank candidate itself records is_git=false at the folder root. This campaign cannot inspect the path. There is no canonical GitHub repository for Quartermaster. Existence is inferred from the reconstructed census only.",
+    why: "A resource/quota tool without a GitHub remote is still a plane if the operator uses it — but this Handbook cannot pretend it audited the code, and 'no GitHub remote' is not 'no git'.",
     evidence: [
       {
         id: "ev-v02h-qm-census",
@@ -549,7 +549,7 @@ export const HISTORY_V02: HistoryEntry[] = [
         repo: "anil-ganti-nbc/clankops",
         path: "docs/CLANK_CENSUS.md",
         sha: "4467c137f5c5db1a10ee29484628677bcd3c3284",
-        note: "PROBABLE local-only Quartermaster Clank. Path not inspectable this campaign. No GitHub.",
+        note: "PROBABLE local-only Quartermaster Clank. Path not inspectable this campaign. No GitHub remote. Nested token-stats observed as dirty git on 31 August.",
         status: "incomplete",
       },
     ],

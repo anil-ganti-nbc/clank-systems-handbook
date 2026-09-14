@@ -81,7 +81,7 @@ export const PROVENANCE_V02: ProvenanceCell[] = [
     confidence: "incomplete",
     asOf: AS_OF,
     notes:
-      "F10 4467c13: process exit ≠ handoff. Census 63/8 is reconstructed. ClankOps observes development; it does not replace Motherclank, Standards, or Quartermaster. Do not collapse it into the fleet camera.",
+      "Foundation 10 at 4467c13: process exit ≠ handoff. Census 63/8 is reconstructed. ClankOps observes development; it does not replace Motherclank, Standards, or Quartermaster. Do not collapse it into the fleet camera.",
   }),
   cell({
     id: "prov-quartermaster",
@@ -89,15 +89,15 @@ export const PROVENANCE_V02: ProvenanceCell[] = [
     checkoutHead: "LOCAL-ONLY — Windows path C:\\Users\\anil\\Desktop\\Quartermaster Clank not inspected this campaign",
     originMain: "NONE — no GitHub repository. Do not invent one.",
     deployedSha: "UNKNOWN — local-only incomplete. Not a fleet-health runtime.",
-    runningState: "UNKNOWN. Census PROBABLE (medium): desktop wrapper around token-stats (Annihilater/token-stats, not a Clank repo).",
+    runningState: "UNKNOWN. Census PROBABLE (medium): desktop wrapper around token-stats. Nested token-stats SUPPORT_COMPONENT observed dirty with a 31 August commit; Annihilater/token-stats is not a Clank repo. Quartermaster's own current branch is INCOMPLETE.",
     schedulerState: "UNKNOWN / not a collector scheduler. Recommends model and quota only.",
     authoritativeDb: "n/a — resource recommendation, not observational memory.",
     dbEpoch: "n/a",
-    hostIdentity: "Windows desktop LOCAL-ONLY. No GitHub. token-stats is SUPPORT_COMPONENT, not a Clank.",
+    hostIdentity: "Windows desktop LOCAL-ONLY. No GitHub remote evidenced. Nested token-stats is SUPPORT_COMPONENT, not a Clank. Condensed remote `-` / branch `-` is not 'no git'.",
     backupState: "UNKNOWN. Path unavailable.",
     confidence: "incomplete",
     asOf: AS_OF,
     notes:
-      "Quartermaster recommends model/quota. It does not score fleet health. LOCAL-ONLY incomplete. Do not invent a GitHub repo. Do not treat token-stats as Quartermaster identity.",
+      "Quartermaster recommends model/quota. It does not score fleet health. LOCAL-ONLY incomplete. No GitHub remote evidenced; nested token-stats was observed as dirty git. Do not invent a GitHub repo. Do not treat token-stats as Quartermaster identity.",
   }),
 ];

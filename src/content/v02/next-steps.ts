@@ -21,7 +21,7 @@ export const NEXT_V02: NextStep[] = [
     dependency: "Windows path C:\\Users\\anil\\Desktop\\Quartermaster Clank. Not reachable from this campaign.",
     scope: "small",
     doNow: false,
-    body: "Census lists it PROBABLE, local-only, wrapper around token-stats. Record checkout HEAD, whether it is git, and that it does not score fleet health. Do not invent a GitHub repo.",
+    body: "Census lists it PROBABLE, local-only, wrapper around token-stats, no GitHub remote. Nested token-stats was already observed as dirty git (31 August commit, four files). Record whether Quartermaster has its own git besides that nested checkout, and that it does not score fleet health. Do not invent a GitHub repo. Do not copy the token-stats SHA as Quartermaster HEAD.",
   },
   {
     id: "ns-v02-cvc-local",

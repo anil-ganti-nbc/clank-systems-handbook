@@ -54,7 +54,7 @@ export const EXPLAIN_V02: ExplainPrompt[] = [
       "No. ClankOps Foundation 10 (4467c137f5c5db1a10ee29484628677bcd3c3284) records managed process exit as immutable evidence. Process exit is not handoff. Exit 0 is not Mission completed. Exit non-zero is not Mission failed. An open Session after the child returns still needs Foundation 1 `handoff`. Missing process evidence is UNKNOWN, not 'still running'. ClankOps never auto-closes a Session because a subprocess returned.",
     checklist: [
       "Process exit ≠ handoff",
-      "Cited ClankOps F10 / 4467c13",
+      "Cited ClankOps Foundation 10 / 4467c13",
       "Exit code is not Mission success or failure",
       "Did not invent a health score from the exit",
     ],
@@ -64,7 +64,7 @@ export const EXPLAIN_V02: ExplainPrompt[] = [
     id: "ex-quartermaster-not-health",
     prompt: "What does Quartermaster decide, and what must it never be mistaken for?",
     modelAnswer:
-      "Quartermaster recommends model, resource, and quota — which LLM, how much budget, which local wrapper around token-stats. It does not score fleet health, does not own Fleet Laws, and does not say whether a collector is CURRENT. The census lists it PROBABLE at C:\\Users\\anil\\Desktop\\Quartermaster Clank, local-only, no GitHub repo. Do not invent one. This campaign did not inspect that Windows path, so its checkout remains LOCAL-ONLY / incomplete. A quota recommendation is not a Motherclank harvest.",
+      "Quartermaster recommends model, resource, and quota — which LLM, how much budget, which local wrapper around token-stats. It does not score fleet health, does not own Fleet Laws, and does not say whether a collector is CURRENT. The census lists it PROBABLE at C:\\Users\\anil\\Desktop\\Quartermaster Clank, local-only, no GitHub remote. Condensed remote `-` / branch `-` is not 'no git': nested token-stats was observed dirty with a 31 August commit. Do not invent a Quartermaster GitHub repo. This campaign did not inspect that Windows path, so Quartermaster's own current branch, architecture and runtime remain LOCAL-ONLY / incomplete. A quota recommendation is not a Motherclank harvest.",
     checklist: [
       "Model / quota / resource only",
       "Does not score fleet health",
