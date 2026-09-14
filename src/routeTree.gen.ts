@@ -20,7 +20,9 @@ import { Route as GlossaryRouteImport } from './routes/glossary'
 import { Route as HistoryRouteImport } from './routes/history'
 import { Route as IncidentsRouteImport } from './routes/incidents'
 import { Route as LabsRouteImport } from './routes/labs'
+import { Route as ResponsibilitiesRouteImport } from './routes/responsibilities'
 import { Route as SystemsRouteImport } from './routes/systems'
+import { Route as ThenNowRouteImport } from './routes/then-now'
 import { Route as LabsIndexRouteImport } from './routes/labs.index'
 import { Route as LabsIncidentIdRouteImport } from './routes/labs.$incidentId'
 
@@ -79,9 +81,19 @@ const LabsRoute = LabsRouteImport.update({
   path: '/labs',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResponsibilitiesRoute = ResponsibilitiesRouteImport.update({
+  id: '/responsibilities',
+  path: '/responsibilities',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SystemsRoute = SystemsRouteImport.update({
   id: '/systems',
   path: '/systems',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ThenNowRoute = ThenNowRouteImport.update({
+  id: '/then-now',
+  path: '/then-now',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LabsIndexRoute = LabsIndexRouteImport.update({
@@ -107,7 +119,9 @@ export interface FileRoutesByFullPath {
   '/history': typeof HistoryRoute
   '/incidents': typeof IncidentsRoute
   '/labs': typeof LabsRouteWithChildren
+  '/responsibilities': typeof ResponsibilitiesRoute
   '/systems': typeof SystemsRoute
+  '/then-now': typeof ThenNowRoute
   '/labs/$incidentId': typeof LabsIncidentIdRoute
   '/labs/': typeof LabsIndexRoute
 }
@@ -122,7 +136,9 @@ export interface FileRoutesByTo {
   '/glossary': typeof GlossaryRoute
   '/history': typeof HistoryRoute
   '/incidents': typeof IncidentsRoute
+  '/responsibilities': typeof ResponsibilitiesRoute
   '/systems': typeof SystemsRoute
+  '/then-now': typeof ThenNowRoute
   '/labs/$incidentId': typeof LabsIncidentIdRoute
   '/labs': typeof LabsIndexRoute
 }
@@ -139,7 +155,9 @@ export interface FileRoutesById {
   '/history': typeof HistoryRoute
   '/incidents': typeof IncidentsRoute
   '/labs': typeof LabsRouteWithChildren
+  '/responsibilities': typeof ResponsibilitiesRoute
   '/systems': typeof SystemsRoute
+  '/then-now': typeof ThenNowRoute
   '/labs/$incidentId': typeof LabsIncidentIdRoute
   '/labs/': typeof LabsIndexRoute
 }
@@ -157,7 +175,9 @@ export interface FileRouteTypes {
     | '/history'
     | '/incidents'
     | '/labs'
+    | '/responsibilities'
     | '/systems'
+    | '/then-now'
     | '/labs/$incidentId'
     | '/labs/'
   fileRoutesByTo: FileRoutesByTo
@@ -172,7 +192,9 @@ export interface FileRouteTypes {
     | '/glossary'
     | '/history'
     | '/incidents'
+    | '/responsibilities'
     | '/systems'
+    | '/then-now'
     | '/labs/$incidentId'
     | '/labs'
   id:
@@ -188,7 +210,9 @@ export interface FileRouteTypes {
     | '/history'
     | '/incidents'
     | '/labs'
+    | '/responsibilities'
     | '/systems'
+    | '/then-now'
     | '/labs/$incidentId'
     | '/labs/'
   fileRoutesById: FileRoutesById
@@ -205,7 +229,9 @@ export interface RootRouteChildren {
   HistoryRoute: typeof HistoryRoute
   IncidentsRoute: typeof IncidentsRoute
   LabsRoute: typeof LabsRouteWithChildren
+  ResponsibilitiesRoute: typeof ResponsibilitiesRoute
   SystemsRoute: typeof SystemsRoute
+  ThenNowRoute: typeof ThenNowRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -287,11 +313,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LabsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/responsibilities': {
+      id: '/responsibilities'
+      path: '/responsibilities'
+      fullPath: '/responsibilities'
+      preLoaderRoute: typeof ResponsibilitiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/systems': {
       id: '/systems'
       path: '/systems'
       fullPath: '/systems'
       preLoaderRoute: typeof SystemsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/then-now': {
+      id: '/then-now'
+      path: '/then-now'
+      fullPath: '/then-now'
+      preLoaderRoute: typeof ThenNowRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/labs/': {
@@ -335,7 +375,9 @@ const rootRouteChildren: RootRouteChildren = {
   HistoryRoute: HistoryRoute,
   IncidentsRoute: IncidentsRoute,
   LabsRoute: LabsRouteWithChildren,
+  ResponsibilitiesRoute: ResponsibilitiesRoute,
   SystemsRoute: SystemsRoute,
+  ThenNowRoute: ThenNowRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

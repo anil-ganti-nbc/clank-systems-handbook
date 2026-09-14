@@ -4,7 +4,24 @@ import { existsSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, it } from "node:test";
-import { HANDBOOK, HANDBOOK_ISSUES, CONCEPTS, INCIDENTS, HISTORY, LAWS, PHASES, FLEET, ARTEFACTS, EVIDENCE_GAPS, PROVENANCE, LEDGER_REVIEWS, LIVE_HOST_PROBE } from "../../content/catalog.ts";
+import {
+  HANDBOOK,
+  HANDBOOK_ISSUES,
+  CONCEPTS,
+  INCIDENTS,
+  HISTORY,
+  LAWS,
+  PHASES,
+  FLEET,
+  ARTEFACTS,
+  EVIDENCE_GAPS,
+  PROVENANCE,
+  LEDGER_REVIEWS,
+  LIVE_HOST_PROBE,
+  V01_PHASE_IDS,
+  RESPONSIBILITIES,
+  THEN_NOW,
+} from "../../content/catalog.ts";
 import { validateHandbook } from "./validate.ts";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "../../..");
@@ -23,7 +40,10 @@ describe("handbook content integrity", () => {
     assert.ok(HANDBOOK.prompts.length >= 18, `explain-it-back expanded, got ${HANDBOOK.prompts.length}`);
     assert.ok(HANDBOOK.timeline.length >= 10);
     assert.ok(HISTORY.length >= 20, `ledger entries, got ${HISTORY.length}`);
-    assert.equal(PHASES.length, 9);
+    assert.ok(PHASES.length >= 12, `second-act phases appended, got ${PHASES.length}`);
+    for (const id of V01_PHASE_IDS) {
+      assert.ok(PHASES.some((p) => p.id === id), `v0.1 phase ${id} must remain`);
+    }
     assert.equal(LAWS.length, 9);
     assert.ok(LAWS.some((l) => l.deferred));
     assert.ok(FLEET.length >= 10);
@@ -185,6 +205,17 @@ describe("handbook content integrity", () => {
       assert.match(cl.liveDeployedSha, /UNKNOWN/i, `${cl.id} live SHA filled`);
       assert.notEqual(cl.liveDeployedSha, cl.repoHead, `${cl.id} copied HEAD into live`);
       assert.ok(cl.inventoryAsOf.startsWith("2026-08-22"), `${cl.id} inventory date`);
+      if (cl.historicallyProvenDeployedSha) {
+        assert.notEqual(
+          cl.historicallyProvenDeployedSha,
+          cl.liveDeployedSha,
+          `${cl.id} copied historically proven SHA into live`,
+        );
+        assert.ok(
+          (cl.historicallyProvenDeployedNote ?? "").length > 20,
+          `${cl.id} historically proven SHA needs a not-current note`,
+        );
+      }
     }
     assert.ok(FLEET.some((c) => c.inventorySha !== c.repoHead && c.inventorySha !== "UNKNOWN"));
   });
@@ -202,5 +233,57 @@ describe("handbook content integrity", () => {
     }
     assert.ok(CONCEPTS.some((c) => c.id === "research-agent"));
     assert.ok(CONCEPTS.some((c) => c.id === "miss"));
+  });
+
+  it("v0.2 second-act systems, counts, and teaching surfaces", () => {
+    const fleetIds = new Set(FLEET.map((c) => c.id));
+    for (const id of ["standards-clank", "cvc-clank", "clank-ledger", "clankops", "quartermaster"]) {
+      assert.ok(fleetIds.has(id), `missing fleet card ${id}`);
+    }
+    assert.equal(fleetIds.has("reddit"), false, "Reddit must not be a top-level Clank");
+    assert.equal(fleetIds.has("reddit-clank"), false);
+
+    const births = ["clank-ledger", "clankops", "quartermaster"];
+    assert.equal(births.filter((id) => fleetIds.has(id)).length, 3, "strict post-v0.1 logical births");
+    assert.ok(FLEET.find((c) => c.id === "clank-ledger")?.repoHeadNote.includes("no main") || FLEET.find((c) => c.id === "clank-ledger")?.repoHeadNote.includes("Jules"));
+    assert.equal(FLEET.find((c) => c.id === "quartermaster")?.presence, "local-only");
+    assert.equal(FLEET.find((c) => c.id === "quartermaster")?.confidence, "incomplete");
+
+    const moduleIds = new Set(HANDBOOK.modules.map((m) => m.id));
+    for (const id of ["mod-standards", "mod-clankops", "mod-ledger", "mod-quartermaster", "mod-cvc", "mod-reddit-admission"]) {
+      assert.ok(moduleIds.has(id), `missing module ${id}`);
+    }
+    const mother = HANDBOOK.modules.find((m) => m.id === "mod-standards");
+    const ops = HANDBOOK.modules.find((m) => m.id === "mod-clankops");
+    assert.ok(mother && mother.sections.length >= 8, "standards module still thin");
+    assert.ok(ops && ops.sections.length >= 8, "clankops module still thin");
+
+    const incidentIds = new Set(INCIDENTS.map((i) => i.id));
+    for (const id of [
+      "inc-historical-conformance",
+      "inc-live-deployment-proof",
+      "inc-process-exit-handoff",
+      "inc-duplicate-checkout",
+      "inc-reddit-admission",
+      "inc-ledger-usefulness",
+      "inc-schema-barrier",
+      "inc-quartermaster-boundary",
+    ]) {
+      assert.ok(incidentIds.has(id), `missing lab ${id}`);
+    }
+
+    const promptIds = new Set(HANDBOOK.prompts.map((p) => p.id));
+    for (const id of ["ex-mother-vs-clankops", "ex-historical-vs-current", "ex-reddit-not-clank", "ex-unknown-is-information"]) {
+      assert.ok(promptIds.has(id), `missing prompt ${id}`);
+    }
+
+    assert.ok(RESPONSIBILITIES.length >= 10, `responsibility map too small: ${RESPONSIBILITIES.length}`);
+    assert.ok(THEN_NOW.length >= 7, `then-now too small: ${THEN_NOW.length}`);
+    assert.ok(PHASES.some((p) => p.id === "p-standards"));
+    assert.ok(PHASES.some((p) => p.id === "p-control-planes"));
+    assert.ok(PHASES.some((p) => p.id === "p-second-act"));
+    assert.ok(CONCEPTS.some((c) => c.id === "standards-clank"));
+    assert.ok(CONCEPTS.some((c) => c.id === "historically-proven-deploy"));
+    assert.ok(CONCEPTS.some((c) => c.id === "process-exit-vs-handoff"));
   });
 });

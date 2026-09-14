@@ -6,10 +6,12 @@ const NAV = [
   { to: "/", label: "Overview", exact: true },
   { to: "/built", label: "How we built it" },
   { to: "/history", label: "History" },
+  { to: "/then-now", label: "Then vs now" },
   { to: "/evidence", label: "Evidence" },
   { to: "/basics", label: "Development" },
   { to: "/systems", label: "Systems" },
   { to: "/architecture", label: "Architecture" },
+  { to: "/responsibilities", label: "Responsibilities" },
   { to: "/fleet", label: "Fleet" },
   { to: "/incidents", label: "Incidents" },
   { to: "/labs", label: "Labs" },
@@ -32,7 +34,7 @@ export function HandbookShell({ children }: { children: ReactNode }) {
           <Link to="/" className="font-display text-lg tracking-tight text-ink no-underline">
             Clank Systems Handbook
           </Link>
-          <p className="hidden text-xs text-mute sm:block">Evidence-backed literacy · not a glossary with a GUI</p>
+          <p className="hidden text-xs text-mute sm:block">v0.2 · evidence-backed literacy · not a glossary with a GUI</p>
         </div>
         <nav className="mx-auto flex max-w-6xl gap-1 overflow-x-auto px-3 pb-2">
           {NAV.map((item) => {

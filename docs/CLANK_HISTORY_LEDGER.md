@@ -1172,3 +1172,173 @@ As of 2026-08-27:
 ---
 
 Generated from `src/content/history.ts`. Regeneration: re-run against that file; do not hand-edit facts here without also editing the TypeScript twin.
+
+## v0.2 second act (30 August – 14 September 2026)
+
+The v0.1 freeze at `1803f317` was real. The rows below are **appended**. They do not rewrite 3–27 August. Live SHA cells remain UNKNOWN. GitHub HEAD is not deployed SHA. Census is RECONSTRUCTED. Quartermaster is local-only incomplete. Reddit is not a Clank.
+
+Strict counts for this interval (do not conflate):
+
+- Logical systems Handbook v0.1 knew about (fleet map): **12**
+- Strict post-v0.1 logical births: **3** (Quartermaster, Clank Ledger, ClankOps)
+- New GitHub repos after the freeze: **2** (clank-ledger, clankops)
+- Major systems absent from v0.1 now incorporated: **5** (CVC, Standards, Quartermaster, Ledger, ClankOps)
+
+### Standards Clank and historical conformance
+
+- **Id:** `p-standards`
+- **Date range:** 2026-08-28 to 2026-09-05
+- **Confidence:** VERIFIED
+
+26 standards, 26 RATIFIED, 0 PROPOSED, five frozen domains (UI, Data/Ontology, Operations, Deployment, Collector UI Design). Closure `7c821ea` 2026-09-05, verdict `STANDARDS_CLANK_COMPLETE_WITH_NON_BLOCKING_DEBT`. Agents cannot self-ratify. COM-001 9/9 historical live proofs are dated receipts, not current live. Front-door README still saying 12/3 is stale.
+
+### Control planes split: Ledger, Quartermaster, ClankOps
+
+- **Id:** `p-control-planes`
+- **Date range:** 2026-08-31 to 2026-09-14
+- **Confidence:** VERIFIED (Ledger, ClankOps GitHub) / INCOMPLETE (Quartermaster local)
+
+Motherclank remains the fleet camera. ClankOps is development state (Foundations 0–10, `4467c13`). Ledger is editorial HIT/MISS (Jules M0 `2c31787`, no main). Quartermaster is local-only PROBABLE resource/quota — Windows path not inspected.
+
+### Second act: collectors, admission, freeze lifted
+
+- **Id:** `p-second-act`
+- **Date range:** 2026-08-30 to 2026-09-14
+- **Confidence:** VERIFIED
+
+Handbook v0.1 freeze; CVC GitHub excluded-then-taught; collector UI family; 2026-09-05 promotions; Discord delivery; casio_multi; SI Reddit pilot (not a Clank); CTW manual-run/DB-race; schema compatibility barriers; OEM `GIT_REVISION`; commissioned Handbook v0.2.
+
+### 2026-08-30 — Handbook v0.1 freeze
+
+- **Id:** `h-v01-freeze`
+- **Phase:** `p-second-act`
+- **Confidence:** VERIFIED
+- **Event.** Feature freeze at `1803f31749dc219d0662085d6e6b2fb3efc03267` pending owner study. CVC PR #5 excluded. Epistemic firewall retained.
+
+### 2026-08-30 — CVC on GitHub, still not a collector
+
+- **Id:** `h-cvc-github`
+- **Phase:** `p-second-act`
+- **Confidence:** VERIFIED
+- **Event.** `cvc-clank` HEAD `5328a3cd4e06e1b9fd6ecf56250b4b5d8022d1e4`. Frozen corpus. Does not collect/promote/enforce. Unmerged observer PRs are not current architecture. CVC Workbench is a separate local tool.
+
+### 2026-08-31 — Clank Ledger M0
+
+- **Id:** `h-ledger-m0`
+- **Phase:** `p-control-planes`
+- **Confidence:** VERIFIED
+- **Event.** `2c31787904c270f9423dd22de4c95e669ba26a67` on Jules branch `jules-m0-foundation-9044736841197359665`. No main. HIT/MISS/QC/editorial. AST-guarded.
+
+### 2026-09-01 — Persistent-state compatibility barrier
+
+- **Id:** `h-schema-barrier`
+- **Phase:** `p-standards`
+- **Confidence:** VERIFIED
+- **Event.** STD-DEPLOY-COM-002 fail-closed stores: Feature Phone `b60e881`, Tablet `b3088ebc`, Smartwatch `a933554`. UNKNOWN/CORRUPT/NEWER refuse; file left byte-identical.
+
+### 2026-09-04 — Collector UI family
+
+- **Id:** `h-collector-ui`
+- **Phase:** `p-second-act`
+- **Confidence:** VERIFIED
+- **Event.** Collector UI Design System convergence (OEM `070914c` among the family). Shared shell is not a new Clank and is not a live SHA.
+
+### 2026-09-05 — Standards 26/26 RATIFIED
+
+- **Id:** `h-standards-ratified`
+- **Phase:** `p-standards`
+- **Confidence:** VERIFIED
+- **Event.** `7c821ea974d8a58e7b049b1bee538a64cca43dc2` M58 independent whole-project closure audit. Agents cannot self-ratify.
+
+### 2026-09-05 — COM-001 historical live proofs
+
+- **Id:** `h-com001-proof`
+- **Phase:** `p-standards`
+- **Confidence:** VERIFIED (as history) / INCOMPLETE (as current live)
+- **Event.** Nine dated live proofs. Do not copy into `liveDeployedSha`. Source canon later advanced.
+
+### 2026-09-05 — Smartphone canary promotion
+
+- **Id:** `h-promotions-sep5`
+- **Phase:** `p-second-act`
+- **Confidence:** VERIFIED (git) / INCOMPLETE (host)
+- **Event.** `60bc5f5` promotes `samsung_us_owners_product` CANARY→production maturity. `samsung_support` stays soak AND disabled.
+
+### 2026-09-09 — Quartermaster (local-only, incomplete)
+
+- **Id:** `h-quartermaster`
+- **Phase:** `p-control-planes`
+- **Confidence:** INCOMPLETE
+- **Event.** Census PROBABLE local folder, no git, no GitHub. Windows path not inspectable from this campaign. Resource/quota, not fleet health.
+
+### 2026-09-09 — Reddit admission pilot (not a Clank)
+
+- **Id:** `h-reddit-pilot`
+- **Phase:** `p-second-act`
+- **Confidence:** VERIFIED
+- **Event.** Semiconductor Intelligence `a9a202a` silent experimental r/hardware RSS, muted, polling off. `admit_source_for_delivery` is the only authority grant.
+
+### 2026-09-09 — ClankOps census (reconstructed)
+
+- **Id:** `h-clankops-census`
+- **Phase:** `p-control-planes`
+- **Confidence:** VERIFIED (as a reconstructed artefact)
+- **Event.** Scanned `2026-09-09T23:09:03Z`, source=RECONSTRUCTED. 63 candidates; VERIFIED 17; PROBABLE 5; UNKNOWN 13; SUPPORT_COMPONENT 13; NOT_A_CLANK 14; NEEDS_RECONSTRUCTION 1; local_only 25; 8 duplicate identity groups.
+
+### 2026-09-10 — Watch casio_multi / Sentinel window
+
+- **Id:** `h-watch-sentinel`
+- **Phase:** `p-second-act`
+- **Confidence:** VERIFIED (repo HEAD) / INCOMPLETE (live)
+- **Event.** Watch `930aef1` casio_multi JP component on official sitemap lane. HEAD is not live.
+
+### 2026-09-10 — Smartwatch Discord delivery
+
+- **Id:** `h-discord-delivery`
+- **Phase:** `p-second-act`
+- **Confidence:** VERIFIED (git) / INCOMPLETE (host activation)
+- **Event.** Smartwatch `9d85f92` persistence-first Discord outbox, activation cutoff, editorial gate.
+
+### 2026-09-10 — CTW manual-run / KTW members-only / FPC .env
+
+- **Id:** `h-ctw-manual`
+- **Phase:** `p-second-act`
+- **Confidence:** VERIFIED (git)
+- **Event.** CTW `e7f10f8` DB-race-safe manual run and Health UI without stale scheduler block. KTW `c80a696` The Elec members-only filter. FPC `c376801` gitignore compose `.env`.
+
+### 2026-09-10 — OEM Radar runtime identity
+
+- **Id:** `h-oem-git-revision`
+- **Phase:** `p-second-act`
+- **Confidence:** VERIFIED (git) / INCOMPLETE (which image is running)
+- **Event.** OEM `24d61dd` exports baked `GIT_REVISION` as `OEM_RADAR_GIT_SHA` so container logs stop saying `git_sha=unknown`.
+
+### 2026-09-14 — ClankOps Foundation 10
+
+- **Id:** `h-clankops-f10`
+- **Phase:** `p-control-planes`
+- **Confidence:** VERIFIED
+- **Event.** `4467c137f5c5db1a10ee29484628677bcd3c3284` PR #11 managed agent exit observability. Process exit ≠ handoff. Local SQLite. No production deploy.
+
+### 2026-09-14 — Handbook v0.2 commissioned
+
+- **Id:** `h-handbook-v02`
+- **Phase:** `p-second-act`
+- **Confidence:** VERIFIED
+- **Event.** Operator-authorised freeze lift. Teaching surfaces for the second act. Live SHA still UNKNOWN. v0.1 history preserved.
+
+## Current-state residual as of 2026-09-14 (do not upgrade)
+
+- Every live Law 6 cell remains **UNKNOWN**. This campaign did not SSH.
+- COM-001 historical proofs are **not** current live SHAs.
+- Motherclank / Diagnostic default branches **unchanged** since late August (`7cee2f8`, `3667af0`).
+- Clank Ledger has **no main**.
+- Quartermaster remains **local-only incomplete**.
+- CVC local Windows tree may be ahead of GitHub `5328a3c` — **not inspected**.
+- ClankOps has **no production deploy**.
+- Reddit is **not** a Clank.
+- Later git promotions (e.g. smartphone canary) are **repo facts**, not host facts.
+- Durable off-host backups still OPEN except two ACT-011 scratch recovery points.
+- This Handbook is still not Standards, not Motherclank, not ClankOps, and not a mastery engine.
+
+Generated from `src/content/history.ts` plus `src/content/v02/history.ts`. If they disagree, the TypeScript files win.
